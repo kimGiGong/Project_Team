@@ -13,7 +13,8 @@ import lombok.extern.log4j.Log4j;
 public class memberServiceImpl implements memberService{
 	
 	
-	@Autowired MemberMapper mapper;
+	@Autowired 
+	private MemberMapper mapper;
 
 	@Override	
 	public int addMember(MemberVO member) {
