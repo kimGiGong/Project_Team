@@ -14,7 +14,7 @@ create table member(
 );
 -- 시퀀스
 create sequence member_seq nocache;
---수정
+
 
 -- 주소 테이블
 create table address(
@@ -30,7 +30,7 @@ create table address(
 -- 시퀀스
 create sequence address_seq nocache;
 
-
+--범석
 -- 리뷰 테이블
 create table review(
 	r_no number primary key,
