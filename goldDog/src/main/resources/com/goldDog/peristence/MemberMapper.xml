@@ -8,8 +8,15 @@
 	<insert id="addMember">
 		insert into member(member_seq.nextval, pw, name, email, gender) 
 		values (#{id},#{pw},#{name},#{email},#{gender})
+
 	</insert>
 	
+
+	
+	<update id="updateMember">
+		update member set m_nick=#{m_nick}, m_email=#{m_email}, m_phone=#{m_phone}
+		where m_id=#{m_id}
+	</update>
 
 
 </mapper>
