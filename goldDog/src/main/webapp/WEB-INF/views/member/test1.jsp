@@ -15,8 +15,9 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
+  
   <link rel="shortcut icon" href="/resources/feane/images/favicon.png" type="">
-
+	
   <title> Feane </title>
 
   <!-- bootstrap core css -->
@@ -40,7 +41,7 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="images/hero-bg.jpg" alt="">
+      <img src="/resources/feane/images/hero-bg.jpg" alt="">
     </div>
     <!-- header section strats -->
     <header class="header_section">
@@ -233,7 +234,7 @@
           <div class="col-md-6  ">
             <div class="box ">
               <div class="img-box">
-                <img src="images/o1.jpg" alt="">
+                <img src="/resources/feane/images/o1.jpg" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -302,7 +303,7 @@
           <div class="col-md-6  ">
             <div class="box ">
               <div class="img-box">
-                <img src="images/o2.jpg" alt="">
+                <img src="/resources/feane/images/o2.jpg" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -399,7 +400,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f1.png" alt="">
+                  <img src="/resources/feane/images/f1.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -475,7 +476,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f2.png" alt="">
+                  <img src="/resources/feane/images/f2.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -551,7 +552,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f3.png" alt="">
+                  <img src="/resources/feane/images/f3.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -627,7 +628,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f4.png" alt="">
+                  <img src="/resources/feane/images/f4.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -703,7 +704,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f5.png" alt="">
+                  <img src="/resources/feane/images/f5.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -779,7 +780,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f6.png" alt="">
+                  <img src="/resources/feane/images/f6.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -855,7 +856,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f7.png" alt="">
+                  <img src="/resources/feane/images/f7.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -931,7 +932,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f8.png" alt="">
+                  <img src="/resources/feane/images/f8.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -1007,7 +1008,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f9.png" alt="">
+                  <img src="/resources/feane/images/f9.png" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -1099,7 +1100,7 @@
       <div class="row">
         <div class="col-md-6 ">
           <div class="img-box">
-            <img src="images/about-img.png" alt="">
+            <img src="/resources/feane/images/about-img.png" alt="">
           </div>
         </div>
         <div class="col-md-6">
@@ -1212,7 +1213,7 @@
                 </p>
               </div>
               <div class="img-box">
-                <img src="images/client1.jpg" alt="" class="box-img">
+                <img src="/resources/feane/images/client1.jpg" alt="" class="box-img">
               </div>
             </div>
           </div>
@@ -1230,7 +1231,7 @@
                 </p>
               </div>
               <div class="img-box">
-                <img src="images/client2.jpg" alt="" class="box-img">
+                <img src="/resources/feane/images/client2.jpg" alt="" class="box-img">
               </div>
             </div>
           </div>
@@ -1324,12 +1325,12 @@
   <!-- footer section -->
 
   <!-- jQery -->
-  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="/resources/feane/js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
   </script>
   <!-- bootstrap js -->
-  <script src="js/bootstrap.js"></script>
+  <script src="/resources/feane/js/bootstrap.js"></script>
   <!-- owl slider -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   </script>
@@ -1338,7 +1339,7 @@
   <!-- nice select -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
   <!-- custom js -->
-  <script src="js/custom.js"></script>
+  <script src="/resources/feane/js/custom.js"></script>
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
