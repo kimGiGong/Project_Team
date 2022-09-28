@@ -14,7 +14,7 @@ create table member(
 );
 -- 시퀀스
 create sequence member_seq nocache;
-
+--수정
 
 -- 주소 테이블
 create table address(
