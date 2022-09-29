@@ -16,13 +16,18 @@ public class memberController {
 	
 	@GetMapping("test1")
 	public void test() {
-		
-		
+		log.info("************ test1 ************");
 	}
 
+	@GetMapping("login")
+	public void login() {
+		log.info("************ login ************");
+	}
 	
-	
-	
+	@GetMapping("signup")
+	public void signup() {
+		log.info("************ signup ************");
+	}
 	
 	
 	
