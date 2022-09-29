@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldDog.domain.Criteria;
@@ -21,6 +22,10 @@ public class mainController {
 	private MainService service;
 	
 	
+	@RequestMapping("test01")
+	public void test() {
+		
+	}
 	
 	@GetMapping("premain")
 	public void premain() {
@@ -31,18 +36,31 @@ public class mainController {
 	public void main() {
 		
 	}
+	//메인올때 훈련사도 가져온다.
 	@RequestMapping("tmain")
-	public void tmain(Model model,Criteria cri ) {
+	public void tmain(Model model,Criteria cri) {
 		model.addAttribute("member",service.getMember(cri));
-		
-		
-		
-		
-		
+		model.addAttribute("review",service.getReview());
+		model.addAttribute("trainer",service.getTrainer(1));
 	}
+	
+	
 	@RequestMapping("hmain")
 	public void hmain() {
 		
 		
 	}
+	
+	
+	@GetMapping("detailForm")
+	public void detailForm(int m_no) {
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 }

@@ -9,6 +9,7 @@ import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
+import com.goldDog.domain.TrainerVO;
 import com.goldDog.persistence.MainMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -28,9 +29,16 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
+	public TrainerVO getTrainer(int m_no) {
+		log.info("트레이너 정보 가져오니?");
+		return mapper.getTrainer(m_no);
+	}
+	
+	
+	@Override
 	public List<ReviewVO> getReview() {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("리뷰정보 가져왔떠");
+		return mapper.getReview(); 
 	}
 
 	@Override
@@ -38,5 +46,7 @@ public class MainServiceImpl implements MainService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

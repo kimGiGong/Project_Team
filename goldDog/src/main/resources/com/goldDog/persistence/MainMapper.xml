@@ -7,9 +7,16 @@
 	<select id="getMember" resultType="com.goldDog.domain.MemberVO">
 		select * from member
 	</select>
+	
+	<select id="getTrainer" resultType="com.goldDog.domain.TrainerVO">
+		select * from trainer where m_no=#{m_no}
+	</select>
 
 
-
+	<!-- 최신 평점순으로 5개만 가져오는걸로 수정해야함 -->
+	<select id="getReview" resultType="com.goldDog.domain.ReviewVO">
+		select * from Review 
+	</select>
 
 
 
