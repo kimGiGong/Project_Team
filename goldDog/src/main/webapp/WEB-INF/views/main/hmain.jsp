@@ -1,13 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-
+ 
 <head>
-  	<!-- Basic -->
+  <!-- Basic -->
   <meta charset="utf-8" />
-  
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -34,21 +34,21 @@
   <link href="/resources/feane/css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="/resources/feane/css/responsive.css" rel="stylesheet" />
-  	
-  
 
 </head>
 
 <body>
 
   <div class="hero_area">
-	<div class="bg-box">
-		<img src="/resources/feane/images/hero-bg.jpg" alt="">
+    <div class="bg-box">
+      <img src="/resources/feane/images/hero-bg.jpg" alt="">
     </div>
     
+
     <!-- 헤더 시작 -->
 	<jsp:include page="../header.jsp"/>
     <!-- 헤더 END -->
+
     
     <!-- slider section -->
     <section class="slider_section ">
