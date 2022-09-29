@@ -4,25 +4,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@RequestMapping("/member/*")
+@RequestMapping("/main/*")
 @Log4j
-public class memberController {
+public class mainController {
+
+	@GetMapping("premain")
+	public void premain() {
+		
+	}
 	
-	
-	
-	@GetMapping("test1")
-	public void test() {
+	@RequestMapping("main")
+	public void main() {
+		
+	}
+	@RequestMapping("tmain")
+	public void tmain() {
 		
 		
 	}
-
-	
-	
-	
+	@RequestMapping("hmain")
+	public void hmain() {
+		
+		
+	}
 	
 	
 	
