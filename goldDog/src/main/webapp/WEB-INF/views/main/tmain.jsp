@@ -18,7 +18,7 @@
   
   <link rel="shortcut icon" href="/resources/feane/images/favicon.png" type="">
 	
-  <title> 금댕이 </title>
+  <title> Feane </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="/resources/feane/css/bootstrap.css" />
@@ -41,13 +41,13 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="/resources/feane/images/hero-bg.jpg" alt="">
+      <img src="/resources/feane/images/roto.jpg" alt="">
     </div>
     <!-- header section strats -->
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="tmain">
+          <a class="navbar-brand" href="index.html">
             <span>
               금댕이
             </span>
@@ -130,13 +130,14 @@
                   </g>
                 </svg>
               </a>
+              
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
               <a href="" class="order_online">
-                Order Online
+                로그인
               </a>
             </div>
           </div>
@@ -153,16 +154,20 @@
               <div class="row">
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
+                  
                     <h1>
-                      Fast Food Restaurant
+                      쉽다쉬워
                     </h1>
                     <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                      우리 금댕이를 위해서라면 모든지 할 수 있어!
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn1">
-                        Order Now
+                        구매하기
                       </a>
+                    <div class="bg-box">
+      					<img src="/resources/feane/images/f1.png" alt="">
+    				</div>
                     </div>
                   </div>
                 </div>
@@ -175,14 +180,14 @@
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
                     <h1>
-                      Fast Food Restaurant
+                      두번쨰 광고
                     </h1>
                     <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                      두번쨰 광고 입니도
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn1">
-                        Order Now
+                        구매하기
                       </a>
                     </div>
                   </div>
@@ -196,14 +201,14 @@
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
                     <h1>
-                      Fast Food Restaurant
+                      세번째 광고
                     </h1>
                     <p>
-                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                      세번째 광고입니다.
                     </p>
                     <div class="btn-box">
                       <a href="" class="btn1">
-                        Order Now
+                        구매하기
                       </a>
                     </div>
                   </div>
@@ -238,7 +243,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Tasty Thursdays
+                  베스트 회원
                 </h5>
                 <h6>
                   <span>20%</span> Off
@@ -307,7 +312,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Pizza Days
+                  베스트 회원
                 </h5>
                 <h6>
                   <span>15%</span> Off
@@ -388,10 +393,10 @@
 
       <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
-        <li data-filter=".pizza">Pizza</li>
-        <li data-filter=".pasta">Pasta</li>
-        <li data-filter=".fries">Fries</li>
+        <li data-filter=".burger">훈련사</li>
+        <li data-filter=".pizza">미용사</li>
+        <li data-filter=".pasta">마포구</li>
+        <li data-filter=".fries">고양시</li>
       </ul>
 
       <div class="filters-content">
