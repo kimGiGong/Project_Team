@@ -18,7 +18,7 @@
   
   <link rel="shortcut icon" href="/resources/feane/images/favicon.png" type="">
 	
-  <title> Feane </title>
+  <title> 금댕이 </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="/resources/feane/css/bootstrap.css" />
@@ -47,9 +47,9 @@
     <header class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="tmain">
             <span>
-              Feane
+              금댕이
             </span>
           </a>
 
