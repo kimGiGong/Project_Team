@@ -44,8 +44,11 @@
       <img src="/resources/feane/images/hero-bg.jpg" alt="">
     </div>
     
-	  
-    
+
+    <!-- 헤더 시작 -->
+	<jsp:include page="../header.jsp"/>
+    <!-- 헤더 END -->
+
     
     <!-- slider section -->
     <section class="slider_section ">
