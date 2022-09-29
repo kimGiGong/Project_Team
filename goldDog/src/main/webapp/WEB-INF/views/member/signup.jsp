@@ -20,7 +20,23 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/bum/css/sb-admin-2.min.css" rel="stylesheet">
-
+	<style type="text/css">
+		#button {
+			position : relative;
+			width: 70px;
+			height: 5px;
+			top: 0;
+			bottom: 0;
+			right: 10px;
+			margin: auto 0;
+			border-radius: 24px;
+		}
+		#m_id {
+			position: relative;
+		}
+		
+	</style>
+	
 </head>
 
 <body class="bg-gradient-primary">
@@ -39,18 +55,11 @@
                             </div>
                             <form class="user">
                             	<div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="m_id"
-                                        placeholder="아이디" >
+                                    <input type="text" class="form-control form-control-user" id="m_id"
+                                        placeholder="아이디">
+                                  	<input type="button" class="form-control form-control-user" id="button" value="중복확인" >
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="m_pw"
-                                            placeholder="아이디">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <button> 중복 확인 </button>
-                                    </div>
-                                </div>
+                               
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user" id="m_pw"
@@ -93,7 +102,25 @@
 	                                    <input type="text" class="form-control form-control-user" id="m_phone"
 	                                        placeholder="상세주소">
 	                                </div>
-	                           	<!--  --> 
+	                            <!--  -->    
+								<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+									<input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
+									<label class="btn btn-primary" for="btnradio1">
+										<i class="fas fa-search fa-sm"></i>훈련 매니저
+									</label>
+								
+									<input type="radio" class="btn-check" name="btnradio" id="btnradio2" >
+									<label class="btn btn-outline-primary" for="btnradio2">미용 매니저</label>
+								</div>  
+									<a href="#" class="btn btn-info btn-circle">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>                               
+                                <div class="form-check form-switch">
+									<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+									<a class="form-check-label" for="flexSwitchCheckDefault">이용 약관 및 개인 정보 동의</a>
+								</div>
+
+	                           	 
                                 
                                 <hr>
                                 <a href="login.html" class="btn btn-primary btn-user btn-block">

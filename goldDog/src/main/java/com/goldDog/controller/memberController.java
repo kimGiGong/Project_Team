@@ -29,6 +29,16 @@ public class memberController {
 		log.info("************ signup ************");
 	}
 	
+	@GetMapping("idFind")
+	public void idFind() {
+		log.info("************ idFind ************");
+	}
+	
+	@GetMapping("pwFind")
+	public void pwFind() {
+		log.info("************ pwFind ************");
+	}
+	
 	
 	
 }
