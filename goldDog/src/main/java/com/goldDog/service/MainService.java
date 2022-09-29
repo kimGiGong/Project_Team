@@ -1,4 +1,4 @@
-package com.goldDog.serivece;
+package com.goldDog.service;
 
 import java.util.List;
 
