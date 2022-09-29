@@ -1,8 +1,13 @@
 package com.goldDog.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.goldDog.domain.Criteria;
+import com.goldDog.service.MainService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -11,6 +16,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class mainController {
 
+	
+	@Autowired
+	private MainService service;
+	
+	
+	
 	@GetMapping("premain")
 	public void premain() {
 		
@@ -21,7 +32,11 @@ public class mainController {
 		
 	}
 	@RequestMapping("tmain")
-	public void tmain() {
+	public void tmain(Model model,Criteria cri ) {
+		model.addAttribute("member",service.getMember(cri));
+		
+		
+		
 		
 		
 	}
@@ -30,7 +45,4 @@ public class mainController {
 		
 		
 	}
-	
-	
-	
 }
