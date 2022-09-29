@@ -29,7 +29,7 @@ public class memberServiceImpl implements memberService{
 	}
 
 	@Override
-	public MemberVO getMember(String id) {
+	public MemberVO getMember(String m_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
