@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldDog.domain.Criteria;
-import com.goldDog.serivece.MainService;
+import com.goldDog.service.MainService;
 
 import lombok.extern.log4j.Log4j;
 
