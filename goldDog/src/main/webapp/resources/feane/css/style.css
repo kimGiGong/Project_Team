@@ -153,8 +153,9 @@ a:focus {
 
 .navbar-brand span {
   font-weight: bold;
-  font-size: 32px;
-  color: #ffffff;
+  font-size: 48px;
+  color: #000000;
+  text-align: left;
 }
 
 .custom_nav-container {
@@ -167,7 +168,7 @@ a:focus {
 
 .custom_nav-container .navbar-nav .nav-item .nav-link {
   padding: 5px 20px;
-  color: #ffffff;
+  color: #1a1818;
   text-align: center;
   text-transform: uppercase;
   border-radius: 5px;
@@ -238,13 +239,15 @@ a:focus {
 
 .user_option .order_online {
   display: inline-block;
-  padding: 8px 30px;
+  padding: 8px 10px;
   background-color: #ffbe33;
   color: #ffffff;
   border-radius: 45px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: none;
+  width: 140;
+  text-align: center
 }
 
 .user_option .order_online:hover {
