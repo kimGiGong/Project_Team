@@ -12,9 +12,10 @@
 	<h1>detail 페이지 입니다.</h1>
 	
 	
-	<form action="">
-	<table>
+	
+	<table width="680" height="500">
 		<tr>
+			<td>사진</td>
 			<td>이름</td>
 			<td>${member.m_nick}</td>
 		</tr>
@@ -34,16 +35,47 @@
 			<td >${trainer.t_self}</td>
 		</tr>
 		<tr>
-			<td> 특이사항</td>	
-			<td> 특이사항</td>	
+			<td> 판매정보</td>	
+			<td> ${trainer.t_sel}</td>	
 		</tr>
 		<tr>
-			<td> 설명</td>	
+			<td> 리뷰</td>	
+			<td> 평균 평점 ${review.r_text}</td>
+		</tr>
+		<tr>
+			<td> 리뷰</td>	
 			<td> ${review.r_text}</td>
 		</tr>
 		
+		
 	</table> 
-	</form>
+	
+	<table width="680" height="500">
+		<tr>
+			<td>완료</td>
+		</tr>
+		<tr>
+			<td>기본금액</td>
+			<td>${trainer.t_price}</td>
+		</tr>
+		<tr>
+			<td>가능한 날짜</td>
+			<td>api 올 곳</td>
+		</tr>
+		<tr>
+			<td>보유 자격증</td>
+			<td>${trainer.t_license}</td>
+		</tr>
+		<tr>
+			<td>경력</td>
+			<td>${trainer.t_career}</td>
+		</tr>
+		<tr>
+			<td> <button onclick="window.location='addPetInfo'">협의하기</button>  </td>
+		</tr>
+		
+	</table>
+
 
 
 

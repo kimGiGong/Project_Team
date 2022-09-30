@@ -11,6 +11,7 @@ public class TrainerVO {
 	private int a_no; 
 	private long t_price;
 	private String t_self;
+	private String t_sel;
 	private String t_license;
 	private int t_businessNo;
 	private int t_best;

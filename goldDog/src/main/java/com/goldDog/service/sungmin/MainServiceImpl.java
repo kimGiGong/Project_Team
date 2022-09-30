@@ -51,6 +51,20 @@ public class MainServiceImpl implements MainService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	//트레이너 판매정보 등록
+	@Override
+	public int addTinfo(TrainerVO trainer) {
+		
+		return mapper.addTinfo(trainer);
+	}
+	
+	//훈련사 한명에 해당하는 모든 리뷰 가져오기
+	@Override
+	public List<ReviewVO> getAllReview(int t_no) {
+		
+		return mapper.getAllReview(t_no);
+	}
 
 
 	
