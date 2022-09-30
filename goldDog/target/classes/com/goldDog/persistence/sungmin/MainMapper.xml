@@ -22,7 +22,20 @@
 	<select id="getReview" resultType="com.goldDog.domain.ReviewVO">
 		select * from Review where m_no=#{m_no} 
 	</select>
+	
+	<!-- 훈련사 한명에 해당하는 모든 리뷰 가져오기 -->
+	<select id="getAllReview" resultType="com.goldDog.domain.ReviewVO">
+		select * from Review where t_no=#{t_no} 
+	</select>
 
+	<!-- 판매자 추가정보 등록하기 -->
+	<update id="addTinfo">
+		update trainer set 
+		t_self=#{t_self}, t_sel=#{t_sel}, t_license=#{t_license}, t_price=#{t_price}, t_career=#{t_career}  
+		where m_no = #{m_no}
+	</update>
+		
+	
 
 
 
