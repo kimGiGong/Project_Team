@@ -298,12 +298,20 @@ textarea {
   overflow: auto;
   resize: vertical;
 }
-
 fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
-  border: 0;
+	width: 100%;
+	
+}
+.grid {
+	padding-left: 40px;
+	width : 90%;
+	display: grid;
+	grid-template-rows: auto auto;
+	grid-template-columns: auto auto;
+}
+#mapage_container {
+	display: flex;
+
 }
 
 legend {
@@ -317,6 +325,7 @@ legend {
   color: inherit;
   white-space: normal;
 }
+
 
 progress {
   vertical-align: baseline;
@@ -345,10 +354,34 @@ output {
   display: inline-block;
 }
 
-summary {
-  display: list-item;
-  cursor: pointer;
+.details{
+	margin-bottom:15px; 
+	margin-top: 15px;
 }
+
+details {
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    padding: .5em .5em 0;
+    width: 92%;
+}
+
+summary {
+    font-weight: bold;
+    margin: -.5em -.5em 0;
+    padding: .5em;
+    width: 92%;
+}
+
+details[open] {
+    padding: .5em;
+}
+
+details[open] summary {
+    border-bottom: 1px solid #aaa;
+    margin-bottom: .5em;
+}
+
 
 template {
   display: none;
@@ -596,8 +629,6 @@ pre code {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
 }
 
 .no-gutters {
