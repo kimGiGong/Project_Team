@@ -1,4 +1,4 @@
-package com.goldDog.service;
+package com.goldDog.service.bum;
 
 import com.goldDog.domain.MemberVO;
 

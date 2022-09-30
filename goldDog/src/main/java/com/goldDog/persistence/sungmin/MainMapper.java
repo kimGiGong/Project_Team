@@ -1,4 +1,4 @@
-package com.goldDog.persistence;
+package com.goldDog.persistence.sungmin;
 
 import java.util.List;
 

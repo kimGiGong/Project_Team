@@ -1,10 +1,10 @@
-package com.goldDog.service;
+package com.goldDog.service.bum;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.goldDog.domain.MemberVO;
-import com.goldDog.persistence.MemberMapper;
+import com.goldDog.persistence.bum.MemberMapper;
 
 import lombok.extern.log4j.Log4j;
 

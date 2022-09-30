@@ -1,4 +1,4 @@
-package com.goldDog.persistence;
+package com.goldDog.persistence.bum;
 
 import com.goldDog.domain.MemberVO;
 

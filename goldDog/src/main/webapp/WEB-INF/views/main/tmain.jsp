@@ -287,7 +287,7 @@
            
       <div class="filters-content">
         <div class="row grid">
-          <div class="col-sm-6 col-lg-4 all pizza">
+          <div class="col-sm-6 col-lg-6 all pizza">
             <div class="box">
               <div>
                 <div class="img-box">
