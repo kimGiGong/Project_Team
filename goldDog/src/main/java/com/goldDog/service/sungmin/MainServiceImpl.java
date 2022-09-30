@@ -1,4 +1,4 @@
-package com.goldDog.service;
+package com.goldDog.service.sungmin;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.goldDog.domain.Criteria;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
-import com.goldDog.persistence.MainMapper;
+import com.goldDog.persistence.sungmin.MainMapper;
 
 import lombok.extern.log4j.Log4j;
 
