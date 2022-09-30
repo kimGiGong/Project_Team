@@ -1,4 +1,4 @@
-package com.goldDog.controller;
+package com.goldDog.controller.sungmin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldDog.domain.Criteria;
-import com.goldDog.service.MainService;
+import com.goldDog.service.bum.memberService;
+import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -20,6 +21,9 @@ public class mainController {
 	
 	@Autowired
 	private MainService service;
+	
+	@Autowired
+	private memberService service1;
 	
 	
 	@RequestMapping("test01")
@@ -53,7 +57,7 @@ public class mainController {
 	
 	
 	@GetMapping("detailForm")
-	public void detailForm(int m_no) {
+	public void detailForm() {
 		
 		
 		

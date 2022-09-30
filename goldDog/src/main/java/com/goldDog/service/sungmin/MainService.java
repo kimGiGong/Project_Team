@@ -1,4 +1,4 @@
-package com.goldDog.service;
+package com.goldDog.service.sungmin;
 
 import java.util.List;
 
