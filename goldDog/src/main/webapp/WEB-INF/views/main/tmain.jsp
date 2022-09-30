@@ -542,13 +542,13 @@
             <div class="box">
               <div class="detail-box">
                 <p>
-                  ${review[0].r_text}
+                  ${review.r_text}
                 </p>
                 <h6>
                 범석스
                 </h6>
                 <p>
-                  ${review[0].r_date}
+                  ${review.r_date}
                 </p>
               </div>
               <div class="img-box">
@@ -562,13 +562,13 @@
             <div class="box">
               <div class="detail-box">
                 <p>
-                   ${review[1].r_text}
+                   ${review.r_text}
                 </p>
                 <h6>
                   성민쓰
                 </h6>
                 <p>
-                  ${review[1].r_date}
+                  ${review.r_date}
                 </p>
               </div>
               <div class="img-box">
@@ -582,13 +582,13 @@
             <div class="box">
               <div class="detail-box">
                 <p>
-                  ${review[2].r_text} 
+                  ${review.r_text} 
                 </p>
                 <h6>
                   영준쓰
                 </h6>
                 <p>
-                  ${review[2].r_date}
+                  ${review.r_date}
                 </p>
               </div>
               <div class="img-box">
