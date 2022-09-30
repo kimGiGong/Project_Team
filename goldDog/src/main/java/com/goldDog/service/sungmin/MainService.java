@@ -19,13 +19,21 @@ public interface MainService {
 	//훈련사 정보 하나 가져오기
 	public TrainerVO getTrainer(int m_no);
 	
-	//리뷰정보 가져오기
+	//맴버 한명의 리뷰 가져오기
 	public ReviewVO getReview(int m_no);
+	
+	//리뷰정보 여러개 가져오기(훈련사용)
+	public List<ReviewVO> getAllReview(int t_no);
+	
 	
 	//지역정보 가져오기
 	public AddressVO address();
 	
-	//관리자가 변경한 이미지 가져와서 띄우기
+	//훈련사 판매등록
+	public int addTinfo(TrainerVO trainer);	
+	 
+	  
+	 
 	
 
 	

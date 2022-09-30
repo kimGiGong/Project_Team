@@ -53,7 +53,7 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	//트레이너 판매정보 등록
-	@Override
+	@Override 
 	public int addTinfo(TrainerVO trainer) {
 		
 		return mapper.addTinfo(trainer);

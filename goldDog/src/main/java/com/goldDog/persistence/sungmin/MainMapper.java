@@ -22,6 +22,13 @@ public interface MainMapper {
 	//모든리뷰 가져오기 
 	public ReviewVO getReview(int m_no);
 	
+	//트레이너 판매정보 등록
+	public int addTinfo(TrainerVO trainer);
+
+	//훈련사 한명에 해당하는 모든 리뷰 가져오기
+	public List<ReviewVO> getAllReview(int t_no);
+	
+	
 	
 	
 }
