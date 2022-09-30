@@ -13,11 +13,14 @@ public interface MainMapper {
 	// 맴버 정보 가져오기 페이징 처리 된 버젼
 	public List<MemberVO> getMember(Criteria cri); 
 	
+	// 맴버 한명의 정보 가져오기
+	public MemberVO getOneMember(int m_no);
+	
 	//맴버 번호 받아서 맞는 트레이너 가져오기
 	public TrainerVO getTrainer(int m_no);
 	
 	//모든리뷰 가져오기 
-	public List<ReviewVO> getReview();
+	public ReviewVO getReview(int m_no);
 	
 	
 	
