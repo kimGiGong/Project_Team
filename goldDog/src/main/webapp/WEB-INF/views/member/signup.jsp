@@ -55,51 +55,50 @@
                             </div>
                             <form class="user">
                             	<div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="m_id"
+                                    <input type="text" class="form-control form-control-user" name="m_id"
                                         placeholder="아이디">
-                                  	<input type="button" class="form-control form-control-user" id="button" value="중복확인" >
                                 </div>
                                
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user" id="m_pw"
+                                        <input type="password" class="form-control form-control-user" name="m_pw"
                                             placeholder="비밀번호">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user" id="m_pwch"
+                                        <input type="password" class="form-control form-control-user" name="m_pwch"
                                             placeholder="비밀번호 확인">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="m_name"
+                                        <input type="text" class="form-control form-control-user" name="m_name"
                                             placeholder="이름">
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="m_nickname"
+                                        <input type="text" class="form-control form-control-user" name="m_nick"
                                             placeholder="닉네임">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="m_email"
+                                    <input type="text" class="form-control form-control-user" name="m_email"
                                         placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="m_phone"
+                                    <input type="text" class="form-control form-control-user" name="m_phone"
                                         placeholder="전화번호">
                                 </div>
                                 
                                 <!-- address -->
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control form-control-user" id="m_phone"
+	                                    <input type="text" class="form-control form-control-user" name="a_zonecode"
 	                                        placeholder="우편번호">
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control form-control-user" id="m_phone"
+	                                    <input type="text" class="form-control form-control-user" name="a_road"
 	                                        placeholder="도로명">
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control form-control-user" id="m_phone"
+	                                    <input type="text" class="form-control form-control-user" name="a_details"
 	                                        placeholder="상세주소">
 	                                </div>
 	                            <!--  -->    
@@ -124,7 +123,7 @@
                                 
                                 <hr>
                                 <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                    Register Account
+                                    가입하기
                                 </a>
                                 <hr>
                             </form>
