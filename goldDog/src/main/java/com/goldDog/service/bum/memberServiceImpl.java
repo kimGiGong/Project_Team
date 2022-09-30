@@ -12,7 +12,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class memberServiceImpl implements memberService{
 	
-	
+	 
 	@Autowired 
 	private MemberMapper mapper;
 
@@ -27,9 +27,14 @@ public class memberServiceImpl implements memberService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	@Override
-	public MemberVO getMember(String id) {
+	public int idPwCheck(MemberVO member) {
+		int result = mapper.idPwCheck(member);	//mapper 메서드 실행시키고
+		return result;
+	}
+	@Override
+	public MemberVO getMember(String m_no) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -45,5 +50,7 @@ public class memberServiceImpl implements memberService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 }

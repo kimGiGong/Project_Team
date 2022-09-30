@@ -6,12 +6,19 @@
 
 	<!--회원 정보 추가  -->
 	<insert id="addMember">
-		insert into member(m_no, m_id, m_pw, m_name, m_email, m_phone, m_nick, m_manager, m_status, m_img, m_date) 
-		values(member_seq.nextval,#{m_id},#{m_pw},#{m_name},#{m_email},#{m_phone},#{m_nick},0,#{m_status},'null',sysdate)
+		insert into member(m_no, m_id, m_pw, m_name, m_email, m_phone, m_nick, m_type, m_status, m_img, m_date) 
+		values(member_seq.nextval,#{m_id},#{m_pw},#{m_name},#{m_email},#{m_phone},#{m_nick},#{m_type},#{m_status},'null',sysdate)
 
 	</insert>
 	
-
+	<!-- 로그인 처리  -->
+	<select id="idPwCheck" resultType="int">
+ 		select count(*) from member where m_id=#{m_id} 
+ 		<if test="m_pw != null">
+	 		and m_pw=#{m_pw}
+ 		</if>
+ 	</select>
+	
 	
 	<update id="updateMember">
 		update member set m_nick=#{m_nick}, m_email=#{m_email}, m_phone=#{m_phone}

@@ -14,7 +14,7 @@ public class MemberVO {
 	private String m_email;
 	private String m_phone;
 	private String m_nick;
-	private int m_manager;
+	private String m_type;
 	private int m_status;
 	private String m_img;
 	private Timestamp m_date;
