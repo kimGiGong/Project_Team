@@ -13,10 +13,14 @@ public interface MainService {
 	//정렬 후 맴버정보 가져오기 페이징 처리
 	public List<MemberVO> getMember(Criteria cri);
 	
+	//맴버 한명의 정보 가져오기
+	public MemberVO getOneMember(int m_no); 
+	
+	//훈련사 정보 하나 가져오기
 	public TrainerVO getTrainer(int m_no);
 	
 	//리뷰정보 가져오기
-	public List<ReviewVO> getReview();
+	public ReviewVO getReview(int m_no);
 	
 	//지역정보 가져오기
 	public AddressVO address();

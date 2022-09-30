@@ -62,11 +62,7 @@
 	</bean>
 	
 	<!-- Mapper 스캔하도록 설정 -->
-<<<<<<< HEAD
-	<mybatis-spring:scan base-package="com.goldDog.persistence"/>
-	
-	<context:component-scan base-package="com.goldDog.service" />
-=======
+
 	<mybatis-spring:scan base-package="com.goldDog.persistence.sungmin"/>
 	<mybatis-spring:scan base-package="com.goldDog.persistence.bum"/>
 	<mybatis-spring:scan base-package="com.goldDog.persistence.instance"/>
@@ -76,7 +72,7 @@
 	<context:component-scan base-package="com.goldDog.service.bum" />
 	<context:component-scan base-package="com.goldDog.service.instance" />
 	
->>>>>>> branch 'main' of https://github.com/kimGiGong/Project_Team
+
 	<!-- @service, @controller, @component 이런태그 붙은애들 스프링빈으로 등록 해준다 -->
 	
 		

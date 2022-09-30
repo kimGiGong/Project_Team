@@ -12,23 +12,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class memberController {
 	
-<<<<<<< HEAD
-	
-	
-	@GetMapping("test1")
-	public void test() {
-		log.info("************ test1 ************");
-	}
 
-	@GetMapping("login")
-	public void login() {
-		log.info("************ login ************");
-	}
-	
-	@GetMapping("signup")
-	public void signup() {
-		log.info("************ signup ************");
-=======
 	@RequestMapping("mypage")
 	public String a123444() {
 		
@@ -64,7 +48,6 @@ public class memberController {
 	@GetMapping("pwFind")
 	public void pwFind() {
 		log.info("************ pwFind ************");
->>>>>>> branch 'main' of https://github.com/kimGiGong/Project_Team
 	}
 	
 	
