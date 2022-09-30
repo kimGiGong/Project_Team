@@ -32,10 +32,10 @@
                 <a class="nav-link" href="tmain">Home </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="tmain">훈련<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="main/hmain">훈련<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="hmain">미용</a>
+                <a class="nav-link" href="main/hmain">미용</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/member/login">로그인</a>
