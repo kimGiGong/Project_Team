@@ -24,8 +24,13 @@ public class MainServiceImpl implements MainService {
 	
 	@Override
 	public List<MemberVO> getMember(Criteria cri) {
-		log.info("하나 가져온다.");
+		log.info("맴버 여러명 가져온다.");
 		return mapper.getMember(cri);
+	}
+	@Override
+	public MemberVO getOneMember(int m_no) {
+		log.info("맴버 한명만 가져온다.");
+		return mapper.getOneMember(m_no);
 	}
 
 	@Override
@@ -36,9 +41,9 @@ public class MainServiceImpl implements MainService {
 	
 	
 	@Override
-	public List<ReviewVO> getReview() {
+	public ReviewVO getReview(int m_no) {
 		log.info("리뷰정보 가져왔떠");
-		return mapper.getReview(); 
+		return mapper.getReview(m_no); 
 	}
 
 	@Override
@@ -46,6 +51,7 @@ public class MainServiceImpl implements MainService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	
 

@@ -285,13 +285,14 @@
            
            
            
+           ${trainer.m_no}
       <div class="filters-content">
         <div class="row grid">
           <div class="col-sm-6 col-lg-4 all pizza">
             <div class="box">
               <div>
                 <div class="img-box">
-                  <a href="detailForm"><img src="/resources/feane/images/Michaela.png" width="300" height="200px"></a> 
+                  <a class="move" href="detailForm?m_no=${trainer.m_no}"><img src="/resources/feane/images/Michaela.png" width="300" height="200px"></a> 
                 </div>
                 <div class="detail-box">
                   <h5>
@@ -517,7 +518,7 @@
           </div>
          
        
-    <div class="col-sm-6 col-lg-4 all pasta">
+    <div class="col-sm-6 col-lg-12 all pasta">
       <div class="btn-box">
         <a href="">더보기</a>
       </div>
@@ -687,6 +688,31 @@
     </div>
   </footer>
   <!-- footer section -->
+
+	<script type="text/javascript">
+	
+		// 제목클릭시 detailForm로 넘어가는 처리 
+		$(".move").on("click", function(e){
+			e.preventDefault(); 
+			console.log("detail!!!");
+			// pagingForm에 히든input으로 bno값 추가하기 (태그 동적 생성) 
+			let m_no = $(this).attr("href");
+			pagingForm.append("<input type='hidden' name='m_no' value='" +m_no+ "' />"); 
+			// pagingForm의 action 속성값을 /board/read로 변경
+			pagingForm.attr("action", "/main/detailForm"); 
+			// read로 이동하기(form으로 요청) 
+			pagingForm.submit(); 
+		});
+		
+	
+	</script>
+
+
+
+
+
+
+
 
   <!-- jQery -->
   <script src="/resources/feane/js/jquery-3.4.1.min.js"></script>
