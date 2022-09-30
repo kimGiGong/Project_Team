@@ -1,11 +1,15 @@
 package com.goldDog.service.bum;
 
+import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.MemberVO;
 
 public interface memberService {
 
-		// 회원 가입 (추가)
+		//회원 가입 (추가)
 		public int addMember(MemberVO member);
+		
+		//회원가입 (주소)
+		public int addaddress(AddressVO address);
 		
 		//id, pw 확인
 		public int idPwCheck(MemberVO member);

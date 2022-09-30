@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.service.bum.memberService;
 
@@ -60,13 +61,13 @@ public class memberController {
 		}
 	}
 	
-	
+	//회원가입
 	@GetMapping("signup")
 	public void signup() {
 		log.info("************ signup ************");
 	}
 	@PostMapping("signup")
-	public String signupPro(MemberVO member, RedirectAttributes rttr) {
+	public String signup(MemberVO member, RedirectAttributes rttr) {
 		log.info("********************** signupPro MemberVO : " + member);
 		
 		int result = service.addMember(member); //회원 추가
@@ -74,6 +75,21 @@ public class memberController {
 			rttr.addFlashAttribute("msg", "success");
 		}
 		
+		return "redirect:/member/login";
+	}
+	//회원가입(주소)
+	@GetMapping("address")
+	public void address() {
+		log.info("************ address ************");
+	}
+	@PostMapping("address")
+	public String address(AddressVO address, RedirectAttributes rttr) {
+		log.info("********************** address AddressVO : " + address);
+		
+		int result = service.addaddress(address); //주소 추가
+		if(result == 1) {
+			rttr.addFlashAttribute("msg", "success");
+		}
 		return "redirect:/member/login";
 	}
 	
