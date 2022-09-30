@@ -170,12 +170,14 @@ a:focus {
 
 .navbar-brand {
   @include second-font();
-
-  span {
+    span {
     font-weight: bold;
-    font-size: 32px;
-    color: $white;
-  }
+    font-size: 48px;
+    color: #000000;
+    }
+}
+#banner {
+    color: black;
 }
 
 .custom_nav-container {
@@ -187,8 +189,8 @@ a:focus {
     .nav-item {
       .nav-link {
         padding: 5px 20px;
-        color: $white;
         text-align: center;
+        color: black important;
         text-transform: uppercase;
         border-radius: 5px;
         transition: all 0.3s;
@@ -197,7 +199,7 @@ a:focus {
       &:hover,
       &.active {
         .nav-link {
-          color: $primary1;
+          color: darkgoldenrod;
         }
       }
     }
@@ -209,7 +211,7 @@ a:focus {
   height: auto;
   padding: 0;
   border: none;
-  color: $white;
+  color: #222831;
   margin: 0 10px;
 
   &:hover {

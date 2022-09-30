@@ -46,7 +46,9 @@
     
 
     <!-- 헤더 시작 -->
-	<jsp:include page="../header.jsp"/> 
+
+	<jsp:include page="../header.jsp"/>
+
     <!-- 헤더 END -->
 
     
