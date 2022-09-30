@@ -14,9 +14,11 @@
 
     <!-- Custom fonts for this template-->
     <link href="/resources/bum/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom styles for this template-->
     <link href="/resources/bum/css/sb-admin-2.min.css" rel="stylesheet">
@@ -67,7 +69,7 @@
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control form-control-user" name="m_email" placeholder="Email">
+	                                    <input type="email" class="form-control form-control-user" name="m_email" aria-describedby="emailHelp" placeholder="Email">
 	                                </div>
 	                                <div class="form-group">
 	                                    <input type="text" class="form-control form-control-user" name="m_phone" placeholder="전화번호">
@@ -90,17 +92,19 @@
 		                                </div>
 		                            <!--  -->    
 									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-										<input type="radio" class="btn-check" name="btnradio" id="btnradio1" checked>
-										<label class="btn btn-primary" for="btnradio1">
-											<i class="fas fa-search fa-sm"></i>훈련 매니저
-										</label>
-									
-										<input type="radio" class="btn-check" name="btnradio" id="btnradio2" >
-										<label class="btn btn-outline-primary" for="btnradio2">미용 매니저</label>
-									</div>  
-										<a href="#" class="btn btn-info btn-circle">
-	                                        <i class="fas fa-info-circle"></i>
-	                                    </a>                               
+								      <input type="radio" class="btn-check" name="m_type" id="btnradio1" autocomplete="off" value="owner" checked="" >
+								      <label class="btn btn-outline-primary" for="btnradio1">견주</label>
+								    
+								      <input type="radio" class="btn-check" name="m_type" id="btnradio2" autocomplete="off" value="trainer">
+								      <label class="btn btn-outline-primary" for="btnradio2">훈련매니저</label>
+								    
+								      <input type="radio" class="btn-check" name="m_type" id="btnradio3" autocomplete="off" value="hairstylist">
+								      <label class="btn btn-outline-primary" for="btnradio3">미용매니저</label>
+								      
+								      <input type="radio" class="btn-check" name="m_type" id="btnradio4" autocomplete="off" value="manager">
+								      <label class="btn btn-outline-primary" for="btnradio4">통합매니저</label>
+								    </div>
+										                           
 	                                <div class="form-check form-switch">
 										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
 										<a class="form-check-label" for="flexSwitchCheckDefault">이용 약관 및 개인 정보 동의</a>

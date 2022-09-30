@@ -1,7 +1,10 @@
 package com.goldDog.controller.bum;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +45,21 @@ public class memberController {
 	public void login() {
 		log.info("************ login ************");
 	}
+	@PostMapping("login")
+	public String loginPro(MemberVO member, String auto, Model model, HttpSession session) {
+		log.info(member);
+		log.info(auto);
+		//비지니스 로직 처리
+		int result = service.idPwCheck(member);
+		if(result == 1) { //로그인 성공
+			session.setAttribute("memId", member.getM_id());
+			return "redirect:/main/tmain";	//컨트롤러에 재요청하여 메인으로 바로 이동
+		}else {
+			model.addAttribute("result",result); //결과 pro페이지로 전달
+			return "/member/loginPro";
+		}
+	}
+	
 	
 	@GetMapping("signup")
 	public void signup() {

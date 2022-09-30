@@ -7,11 +7,14 @@ public interface memberService {
 		// 회원 가입 (추가)
 		public int addMember(MemberVO member);
 		
+		//id, pw 확인
+		public int idPwCheck(MemberVO member);
+		
 		// 권한 추가
 		public int addAuth(String auth, String id);
 		
 		// 회원 정보 가져오기
-		public MemberVO getMember(String id);
+		public MemberVO getMember(String m_no);
 		
 		// 회원 정보 수정 처리
 		public int ModifyMember(MemberVO member);
