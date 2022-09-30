@@ -21,143 +21,167 @@
 	<!--  헤더 END -->
 	
 <div class="bodymain"><!-- 바디메인 -->
-<div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-04.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-03.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-02.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-01.jpg"></div>    
-    <div class="container-fluid" >
-        <div class="row">
-            <!-- Leftside bar -->
-            <div id="tm-sidebar" class="tm-sidebar" >  <!-- 접기 -->
-                <nav class="tm-nav">
-                    <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div><%-- 
-                        <div class="tm-brand-box">
-                            <h1 class="tm-brand">Upright</h1>
-                        </div> --%>                
-                        <ul id="tm-main-nav">
-                            <li class="nav-item">                                
-                                <a href="#home" class="nav-link current">
-                                    <div class="triangle-right"></div>
-                                    <i class="fas fa-home nav-icon"></i>
-                                    My Page
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#gallery" class="nav-link">
-                                    <div class="triangle-right"></div>
-                                    <i class="fas fa-images nav-icon"></i>
-                                    Gallery
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#about" class="nav-link">
-                                    <div class="triangle-right"></div>
-                                    <i class="fas fa-user-friends nav-icon"></i>
-                                    About
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#contact" class="nav-link">
-                                    <div class="triangle-right"></div>
-                                    <i class="fas fa-envelope nav-icon"></i>
-                                    Contact
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://paypal.me/templatemo" class="nav-link external" target="_parent" rel="sponsored">
-                                    <div class="triangle-right"></div>
-                                    <i class="fas fa-external-link-alt nav-icon"></i>
-                                    External
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+	<div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-04.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-03.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-02.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-01.jpg"></div>    
+	    <div class="container-fluid" >
+	        <div class="row">
+	            <!-- Leftside bar -->
+	            <div id="tm-sidebar" class="tm-sidebar" >  <!-- 접기 -->
+	                <nav class="tm-nav">
+	                    <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+	                        <i class="fas fa-bars"></i>
+	                    </button>
+	                    <div><%-- 
+	                        <div class="tm-brand-box">
+	                            <h1 class="tm-brand">Upright</h1>
+	                        </div> --%>                
+	                        <ul id="tm-main-nav">
+	                            <li class="nav-item">                                
+	                                <a href="#home" class="nav-link current">
+	                                    <div class="triangle-right"></div>
+	                                    <i class="fas fa-home nav-icon"></i>
+	                                    My Page
+	                                </a>
+	                            </li>
+	                            <li class="nav-item">
+	                                <a href="#gallery" class="nav-link">
+	                                    <div class="triangle-right"></div>
+	                                    <i class="fas fa-images nav-icon"></i>
+	                                    Gallery
+	                                </a>
+	                            </li>
+	                            <li class="nav-item">
+	                                <a href="#about" class="nav-link">
+	                                    <div class="triangle-right"></div>
+	                                    <i class="fas fa-user-friends nav-icon"></i>
+	                                    About
+	                                </a>
+	                            </li>
+	                            <li class="nav-item">
+	                                <a href="#contact" class="nav-link">
+	                                    <div class="triangle-right"></div>
+	                                    <i class="fas fa-envelope nav-icon"></i>
+	                                    Contact
+	                                </a>
+	                            </li>
+	                            <li class="nav-item">
+	                                <a href="https://paypal.me/templatemo" class="nav-link external" target="_parent" rel="sponsored">
+	                                    <div class="triangle-right"></div>
+	                                    <i class="fas fa-external-link-alt nav-icon"></i>
+	                                    External
+	                                </a>
+	                            </li>
+	                        </ul>
+	                    </div>
+	                </nav>
+	            </div>
             
-            <div class="tm-main">
+			<div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
                     <section id="mypage" class="tm-section">
                         <h3 class="tm-text-primary">${member.m_name}</h3>
                         <hr class="mb-5">
                         <div class="row">
-                            아몰랑
+                        	<fieldset id="mapage_container">
+                        		<div class="item"> <img src="">이미지 </div>
+	                        		<div class="grid">
+									  <div class="item">1</div>
+									  <div class="item">2</div>
+									  <div class="item">3</div>
+									  <div class="item">4</div>
+									  <div class="item">5</div>
+									  <div class="item">6</div>
+									</div>
+                        		</table>
+                        	</fieldset>
                         </div>
-                <!-- Contact section -->
-                <div class="tm-section-wrap" id = "contact">
-                    <div id="contact" class="tm-section">
-                        <h2 class="tm-text-primary">Contact Upright</h2>
-                        <hr class="mb-5">
-                        <div class="row">
-                            <div class="col-xl-6 tm-contact-col-l mb-4">
-                                <form id="contact-form" action="" method="POST" class="tm-contact-form">
-                                    <div class="form-group">
-                                        <input type="text" name="name" class="form-control rounded-0" placeholder="Name" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <select class="form-control" id="contact-select" name="inquiry">
-                                            <option value="-">Subject</option>
-                                            <option value="sales">Sales &amp; Marketing</option>
-                                            <option value="creative">Creative Design</option>
-                                            <option value="uiux">UI / UX</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea rows="8" name="message" class="form-control rounded-0" placeholder="Message" required=""></textarea>
-                                    </div>
-            
-                                    <div class="form-group tm-text-right">
-                                        <button type="submit" class="btn btn-primary">Send</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-xl-6 tm-contact-col-r">
-                                <!-- Map -->
-                                <div class="mapouter mb-4">
-                                    <div class="gmap_canvas">
-                                        <iframe width="100%" height="520" id="gmap_canvas" src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-                                    </div>
-                                </div>
-            
-                                <!-- Address -->
-                                <address class="mb-4">
-                                    120-240 eget purus luctus sodales. Sed<br>
-                                    auctor odio quis ligula dignissim efficitur<br>
-                                    vitae vitae quam 16502
-                                </address>
-            
-                                <!-- Links -->
-                                <ul class="tm-contact-links mb-4">
-                                    <li class="mb-2">
-                                        <a href="tel:0100200340">
-                                            <i class="fas fa-phone mr-2 tm-contact-link-icon"></i>
-                                            Tel: 010-020-0340
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="mailto:info@company.com">
-                                            <i class="fas fa-at mr-2 tm-contact-link-icon"></i>
-                                            Email: info@company.com
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul class="tm-contact-social">
-                                    <li><a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook"></i></a></li>
-                                    <li><a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram"></i></a></li>
-                                    <li><a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                    </section>
+                    
+                    <div>
+                    	<div class="details">
+	                    	<details>
+	    						<summary>오늘의 환율</summary>
+	    						<p>나닛!</p>
+	                    	</details>
+                    	</div>
                     </div>
-                </div>
-            </div> <!-- .tm-main -->                      
-        </div> <!-- .row -->
-    </div> <!-- .container-fluid -->
+                    
+                    
+                	<!-- Contact section -->
+	                <div class="tm-section-wrap" id = "contact">
+	                    <div id="contact" class="tm-section">
+	                        <h2 class="tm-text-primary">Contact Upright</h2>
+	                        <hr class="mb-5">
+							<div class="row">
+	                            <div class="col-xl-6 tm-contact-col-l mb-4">
+	                                <form id="contact-form" action="" method="POST" class="tm-contact-form">
+	                                    <div class="form-group">
+	                                        <input type="text" name="name" class="form-control rounded-0" placeholder="Name" required="">
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required="">
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <select class="form-control" id="contact-select" name="inquiry">
+	                                            <option value="-">Subject</option>
+	                                            <option value="sales">Sales &amp; Marketing</option>
+	                                            <option value="creative">Creative Design</option>
+	                                            <option value="uiux">UI / UX</option>
+	                                        </select>
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <textarea rows="8" name="message" class="form-control rounded-0" placeholder="Message" required=""></textarea>
+	                                    </div>
+	            
+	                                    <div class="form-group tm-text-right">
+	                                        <button type="submit" class="btn btn-primary">Send</button>
+	                                    </div>
+	                                </form>
+	                            </div>
+	                            <div class="col-xl-6 tm-contact-col-r">
+	                                <!-- Map -->
+	                                <div class="mapouter mb-4">
+	                                    <div class="gmap_canvas">
+	                                        <iframe width="100%" height="520" id="gmap_canvas" src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+	                                    </div>
+	                                </div>
+	            
+	                                <!-- Address -->
+	                                <address class="mb-4">
+	                                    120-240 eget purus luctus sodales. Sed<br>
+	                                    auctor odio quis ligula dignissim efficitur<br>
+	                                    vitae vitae quam 16502
+	                                </address>
+	            
+	                                <!-- Links -->
+	                                <ul class="tm-contact-links mb-4">
+	                                    <li class="mb-2">
+	                                        <a href="tel:0100200340">
+	                                            <i class="fas fa-phone mr-2 tm-contact-link-icon"></i>
+	                                            Tel: 010-020-0340
+	                                        </a>
+	                                    </li>
+	                                    <li>
+	                                        <a href="mailto:info@company.com">
+	                                            <i class="fas fa-at mr-2 tm-contact-link-icon"></i>
+	                                            Email: info@company.com
+	                                        </a>
+	                                    </li>
+	                                </ul>
+	                                <ul class="tm-contact-social">
+	                                    <li><a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook"></i></a></li>
+	                                    <li><a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter"></i></a></li>
+	                                    <li><a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram"></i></a></li>
+	                                    <li><a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube"></i></a></li>
+	                                </ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- .tm-main -->                      
+		</div> <!-- .row -->
+	</div> <!-- .container-fluid -->
 </div><!-- 바디메인 END -->
     <script src="js/jquery-3.4.1.min.js"></script>          <!-- https://jquery.com/ -->
     <script src="js/jquery.singlePageNav.min.js"></script>  <!-- https://github.com/ChrisWojcik/single-page-nav -->
