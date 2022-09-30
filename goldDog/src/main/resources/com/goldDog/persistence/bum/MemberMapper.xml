@@ -6,11 +6,15 @@
 
 	<!--회원 정보 추가  -->
 	<insert id="addMember">
-
-		insert into member(m_no, m_id, m_pw, m_name, m_email, m_phone, m_nick, m_manager, m_status, m_img, m_date) 
-		values(member_seq.nextval,#{m_id},#{m_pw},#{m_name},#{m_email},#{m_phone},#{m_nick},#{m_manager},#{m_status},#{m_img},sysdate)
-
+		insert into member(m_no, m_id, m_pw, m_name, m_email, m_phone, m_nick, m_type, m_status, m_img, m_date) 
+		values(member_seq.nextval,#{m_id},#{m_pw},#{m_name},#{m_email},#{m_phone},#{m_nick},#{m_type},#{m_status},'null',sysdate)
 	</insert>
+	
+	<insert id="addaddress">
+		insert into address(a_no, m_no, a_road, a_details, a_name, a_addr1, a_addr2) 
+		values(address.nextval,#{m_no},#{a_road},#{a_details},'집','null','null')
+	</insert>
+	
 	
 	<!-- 로그인 처리  -->
 	<select id="idPwCheck" resultType="int">
