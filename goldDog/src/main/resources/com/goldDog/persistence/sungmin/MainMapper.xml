@@ -13,11 +13,16 @@
 		select * from member where m_no=#{m_no} 
 	</select>
 	
+	<!-- 훈련사 한명의 정보 가져오기 -->
 	<select id="getTrainer" resultType="com.goldDog.domain.TrainerVO">
-		select * from trainer where m_no=#{m_no}
+		select * from trainer where t_no=#{t_no}
 	</select>
 
-
+	<!-- 모든 훈련사 가져오기 -->
+	<select id="getAllTrainer" resultType="com.goldDog.domain.TrainerVO">
+		select * from trainer order by t_date 
+	</select>
+	
 	<!-- 리뷰 하나 가져오기 -->
 	<select id="getReview" resultType="com.goldDog.domain.ReviewVO">
 		select * from Review where m_no=#{m_no} 
@@ -28,6 +33,12 @@
 		select * from Review where t_no=#{t_no} 
 	</select>
 
+	<!-- 판매자 한명이 가지고 있는 리뷰 총갯수 세어주기 -->
+	<select id="getReviewCount" resultType="int">
+		 select count(*) from review where t_no=#{t_no}
+	</select>
+	
+
 	<!-- 판매자 추가정보 등록하기 -->
 	<update id="addTinfo">
 		update trainer set 
@@ -35,6 +46,10 @@
 		where m_no = #{m_no}
 	</update>
 		
+	<!-- 트레이너 리뷰 평점-->
+	<select id="rAvg" resultType="int">
+		 select * from review where t_no=#{t_no}
+	</select>
 	
 
 

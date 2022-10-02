@@ -256,7 +256,6 @@
                         <th>제목</th>
                         <th>작성자</th>
                         <th>날짜</th>
-                        <th>${trainer.t_self}</th>
                         <th>되는거냐?</th>
                     </tr>
                 </thead>
@@ -271,263 +270,54 @@
                 </c:forEach>
                   <tr>
                     <td>${member[0].m_id}</td>
-                    <td>${member[0].m_id}</td>
-                    <td>${member[0].m_id}</td>
-                    <td>${member[0].m_id}</td>
-                    <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${trainer.t_date}"/></td>
-                </tr>              
-               
-                
+                </tr> 
             </tbody>
            </table> <!-- end table -->
            
-           
-           
-           
-           
-           ${trainer.m_no}
+      <!-- 사용자 리스트 출력 -->  
       <div class="filters-content">
         <div class="row grid">
-          <div class="col-sm-6 col-lg-4 all pizza">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <a class="move" href="detailForm?m_no=${trainer.m_no}"><img src="/resources/feane/images/Michaela.png" width="300" height="200px"></a> 
-                </div>
-                <div class="detail-box">
-                  <h5>
- 					${member[0].m_id}                 
-                   </h5>
-                  <p>
-                    ${trainer.t_self}
-                  </p>
-                  <div class="options">
-                    <h6>
-                      ${trainer.t_salary}~ 
-                    </h6>
-                    <a href="">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+        	
+	         <c:forEach var="i" begin="0" end="4" step="1">
+	          <div class="col-sm-12 col-lg-12 all pizza">
+	            <div class="box">
+	              <div>
+	                <div class="img-box">
+	                  <a class="move" href="detailForm?m_no=${trainer[i].m_no}&t_no=${trainer[i].t_no}"><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
+	                </div>
+	                <div class="detail-box" >
+		                  <h5>닉네임 : ${member[i].m_nick}</h5>
+		                  <p>소개 : ${trainer[i].t_self}</p>
+		                  <p>리뷰평점 : ${review[0].r_score}점(${ReviewCount+i})</p>
+		                  <p>훈련 가격 : ${trainer[i].t_price} 원</p>
+		                  <p>보유 자격증 : ${trainer[i].t_license}</p>
+	                </div>
+	                </div>
+	              </div>
+	            </div>
+	         </c:forEach>
+	         
           </div>
-          <div class="col-sm-6 col-lg-4 all burger">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="/resources/feane/images/f2.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Delicious Burger
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $15
-                    </h6>
-                    <a href="">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4 all pizza">
-            <div class="box">
-              <div>
-                <div class="img-box">
-                  <img src="/resources/feane/images/f3.png" alt="">
-                </div>
-                <div class="detail-box">
-                  <h5>
-                    Delicious Pizza
-                  </h5>
-                  <p>
-                    Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam voluptatem repellendus sed eaque
-                  </p>
-                  <div class="options">
-                    <h6>
-                      $17
-                    </h6>
-                    <a href="">
-                      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
-                        <g>
-                          <g>
-                            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                         c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                         C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                         c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                         C457.728,97.71,450.56,86.958,439.296,84.91z" />
-                          </g>
-                        </g>
-                        <g>
-                          <g>
-                            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
-                          </g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-         
+         </div>
        
     <div class="col-sm-6 col-lg-12 all pasta">
       <div class="btn-box">
         <a href="">더보기</a>
       </div>
     </div>
+    
+ 	<form  id="btnForm" action="/main/detail" method="get">
+		<input type="hidden" name="m_no"  value="${member[0].m_no}">
+	</form>
+    
+    
+    
   </section>
 
   <!-- end food section -->
 
   <!-- 베스트리뷰 5개만 불러오기 c:로 줄이기 -->
+
 
   <section class="client_section layout_padding-bottom">
     <div class="container">
@@ -538,17 +328,19 @@
       </div>
       <div class="carousel-wrap row ">
         <div class="owl-carousel client_owl-carousel">
+        
+	      <c:forEach var="i" begin="0" end="5" step="1">
           <div class="item">
             <div class="box">
               <div class="detail-box">
                 <p>
-                  ${review.r_text}
+                  ${review[i].r_text}
                 </p>
                 <h6>
-                범석스
+                	리뷰 등록한사람 이름
                 </h6>
                 <p>
-                  ${review.r_date}
+                  ${review[i].r_date}
                 </p>
               </div>
               <div class="img-box">
@@ -556,49 +348,7 @@
               </div>
             </div>
           </div>
-          
-          
-          <div class="item">
-            <div class="box">
-              <div class="detail-box">
-                <p>
-                   ${review.r_text}
-                </p>
-                <h6>
-                  성민쓰
-                </h6>
-                <p>
-                  ${review.r_date}
-                </p>
-              </div>
-              <div class="img-box">
-                <img src="/resources/feane/images/client2.jpg" alt="" class="box-img">
-              </div>
-            </div>
-          </div>
-          
-          
-          <div class="item">
-            <div class="box">
-              <div class="detail-box">
-                <p>
-                  ${review.r_text} 
-                </p>
-                <h6>
-                  영준쓰
-                </h6>
-                <p>
-                  ${review.r_date}
-                </p>
-              </div>
-              <div class="img-box">
-                <img src="/resources/feane/images/client2.jpg" alt="" class="box-img">
-              </div>
-            </div>
-          </div>
-          
-          
-          
+          </c:forEach>
           
         </div>
       </div>
