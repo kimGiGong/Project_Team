@@ -17,10 +17,17 @@ public interface MainMapper {
 	public MemberVO getOneMember(int m_no);
 	
 	//맴버 번호 받아서 맞는 트레이너 가져오기
-	public TrainerVO getTrainer(int m_no);
+	public TrainerVO getTrainer(int t_no);
+	
+	//전체 훈련사 리스트 가져오기
+	public List<TrainerVO> getAllTrainer();
+	
 	
 	//모든리뷰 가져오기 
-	public ReviewVO getReview(int m_no);
+	public List<ReviewVO> getReview(int m_no);
+	
+	//훈련사 한명에 해당하는 리뷰 갯수 가져오기
+	public int getReviewCount(int t_no);
 	
 	//트레이너 판매정보 등록
 	public int addTinfo(TrainerVO trainer);
@@ -28,6 +35,7 @@ public interface MainMapper {
 	//훈련사 한명에 해당하는 모든 리뷰 가져오기
 	public List<ReviewVO> getAllReview(int t_no);
 	
+	public int rAvg(int t_no,int rCount);
 	
 	
 	

@@ -2,6 +2,10 @@ package com.goldDog.controller.sungmin;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
 import com.goldDog.service.sungmin.MainService;
@@ -48,7 +53,33 @@ public class mainController {
 	public void tmain(Model model,Criteria cri) {
 		model.addAttribute("member",mainService.getMember(cri));
 		model.addAttribute("review",mainService.getReview(1));
-		model.addAttribute("trainer",mainService.getTrainer(1));
+		model.addAttribute("trainer",mainService.getAllTrainer());
+		
+		
+		int rCount = mainService.getReviewCount(1);
+		List<ReviewVO> re=mainService.getAllReview(1);
+		int total = 0;
+		for(int i = 0 ; i<rCount; i++) {
+			
+			total+=re.get(i).getR_score();	
+		}
+		double avg= (double)total/rCount;
+		log.info(total+"토탈이지~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		log.info(avg+"평균이지!~~~~~~~~~~~~~~~");	
+		
+		
+		
+		//훈련사 한명에 해당하는 리뷰를 세어주는 메서드
+		List<TrainerVO> trainer1 =mainService.getAllTrainer();
+		for(int i = 0 ;i<trainer1.size() ; i++){
+		
+			model.addAttribute("ReviewCount"+i,mainService.getReviewCount(i));	
+		
+		}
+		
+		
+		
+		
 	}
 	
 	
@@ -60,12 +91,13 @@ public class mainController {
 	
 	
 	@GetMapping("detailForm")
-	public void detailForm(int m_no, Model model) {
+	public void detailForm(@Param("t_no") int t_no,@Param("m_no")int m_no, Model model) {
 		log.info("디테일폼으로 왔다!");
+		log.info(t_no);
 		log.info(m_no);
-		model.addAttribute("trainer",mainService.getTrainer(m_no));
+		model.addAttribute("trainer",mainService.getTrainer(t_no));
 		model.addAttribute("member",mainService.getOneMember(m_no));
-		model.addAttribute("review",mainService.getReview(m_no));
+		model.addAttribute("review",mainService.getReview(t_no));
 	
 		
 	}
@@ -83,7 +115,7 @@ public class mainController {
 		
 		log.info(trainer);
 		int result=mainService.addTinfo(trainer);
-		log.info(result+"회원가입 결과");
+		log.info(result+"추가정보 등록 결과");
 		
 		
 		return "redirect:/main/tmain";

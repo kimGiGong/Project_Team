@@ -40,11 +40,11 @@
 		</tr>
 		<tr>
 			<td> 리뷰</td>	
-			<td> 평균 평점 ${review.r_text}</td>
+			<td> 평균 평점 ${review[0].r_text}</td>
 		</tr>
 		<tr>
 			<td> 리뷰</td>	
-			<td> ${review.r_text}</td>
+			<td> ${review[0].r_text}</td>
 		</tr>
 		
 		
