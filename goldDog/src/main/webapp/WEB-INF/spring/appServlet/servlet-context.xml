@@ -48,8 +48,8 @@
 
 	
 	
-	<!-- 스프링 시큐리티 어노테이션을 사용하기 위한 설정 추가 8.30 
-	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>-->
+	<!-- 스프링 시큐리티 어노테이션을 사용하기 위한 설정 추가 8.30 -->
+	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
 	
 	
 	

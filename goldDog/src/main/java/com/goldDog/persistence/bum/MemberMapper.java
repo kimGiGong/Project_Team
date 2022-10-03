@@ -1,7 +1,9 @@
 package com.goldDog.persistence.bum;
 
 import com.goldDog.domain.AddressVO;
+import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
+
 
 public interface MemberMapper {
 	
@@ -23,5 +25,7 @@ public interface MemberMapper {
 	//회원 삭제
 	public int deleteMember(String m_no);
 	
+	//회원 권한 추가
+	public int addAuth(AuthVO auth);
 	
 }
