@@ -29,6 +29,45 @@
 		update member set m_nick=#{m_nick}, m_email=#{m_email}, m_phone=#{m_phone}
 		where m_id=#{m_id}
 	</update>
+	
+	<!-- 시큐리티 추가  -->
+	<!-- 권한 추가  -->
+	<insert id="addAuth">
+		insert into memberSec_auth values(#{m_no},#{auth})
+	</insert>
+	
+	
+	<!-- 테이블 묶기  -->
+	<resultMap type="com.goldDog.domain.MemberVO" id="memberMap">
+		<id property="m_no" column="m_no"/>
+		<result property="m_no" column="m_no"/>
+		<result property="m_id" column="m_id"/>
+		<result property="m_pw" column="m_pw"/>
+		<result property="m_name" column="m_name"/>
+		<result property="m_email" column="m_email"/>
+		<result property="m_phone" column="m_phone"/>
+		<result property="m_nick" column="m_nick"/>
+		<result property="m_manager" column="m_manager"/>
+		<result property="m_status" column="m_status"/>
+		<result property="m_img" column="m_img"/>
+		<result property="m_date" column="m_date"/>
+		
+		<collection property="authList" resultMap="authMap"></collection>	
+	</resultMap>
 
+	<!-- 권한 테이블 값을 AuthVO 클래스에 대입하는것 명확히 정의 -->
+	<resultMap type="com.goldDog.domain.AuthVO" id="authMap">
+		<result property="m_no" column="m_no"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+
+	<!-- 이게 젤 중요  테이블 2개 묶어서 권한 가져오기 타입은 위에 만들어준 타입으로-->
+	<select id="getMember" resultMap="memberMap">
+		select m.* , a.auth from member m, auth a
+		where m.m_no = a.m_no 
+		and m.m_no=#{m_no} 
+	</select>
+	
+	
 
 </mapper>

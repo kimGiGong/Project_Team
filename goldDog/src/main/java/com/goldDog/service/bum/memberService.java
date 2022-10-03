@@ -15,7 +15,7 @@ public interface memberService {
 		public int idPwCheck(MemberVO member);
 		
 		// 권한 추가
-		public int addAuth(String auth, String id);
+		public int addAuth(String auth, int m_no);
 		
 		// 회원 정보 가져오기
 		public MemberVO getMember(String m_no);
