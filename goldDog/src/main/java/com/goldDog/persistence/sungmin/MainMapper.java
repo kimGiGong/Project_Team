@@ -27,9 +27,10 @@ public interface MainMapper {
 	//전체 훈련사 T_no 가져오기
 	public List<TrainerVO> getAllTrainerT_no(List<Integer> list);
 	
-	
-	//모든리뷰 가져오기 
+	//훈련사한명의 리뷰 가져오기
 	public List<ReviewVO> getReview(List<Integer> list);
+	//훈련사들 평점 가져오기 
+	public List<List<ReviewVO>> getTReview(List<Integer> list);
 	
 	//훈련사 한명에 해당하는 리뷰 갯수 가져오기
 	public int getReviewCount(int t_no);
@@ -40,7 +41,7 @@ public interface MainMapper {
 	//훈련사 한명에 해당하는 모든 리뷰 가져오기
 	public List<ReviewVO> getAllReview(int t_no);
 	
-	public int rAvg(int t_no,int rCount);
+	//public List<Integer> avg rAvg(int t_no,int rCount);
 	
 	
 	

@@ -288,7 +288,7 @@
 	                <div class="detail-box" >
 		                  <h5>닉네임 : ${member[i].m_nick}</h5>
 		                  <p>소개 : ${trainer[i].t_self}</p>
-		                  <p>리뷰평점 : ${review[i].r_score}점(${ReviewCount})</p>
+		                  <!--  <p>리뷰평점 : ${review[0].r_score}점(${review[i]})</p>-->
 		                  <p>훈련 가격 : ${trainer[i].t_price} 원</p>
 		                  <p>보유 자격증 : ${trainer[i].t_license}</p>
 	                </div>
