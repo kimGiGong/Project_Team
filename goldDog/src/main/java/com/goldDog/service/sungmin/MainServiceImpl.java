@@ -80,7 +80,11 @@ public class MainServiceImpl implements MainService {
 	//훈련사가 가지고 있는 리뷰 평점 구해주는 메서드
 	@Override
 	public int rAvg(int t_no, int rCount) {
-		return mapper.rAvg(t_no,rCount);
+		
+		int avg = mapper.rAvg(t_no,rCount);
+		
+		
+		return avg;
 	}
 
 
