@@ -17,7 +17,6 @@ public class memberServiceImpl implements memberService{
 	
 	//비밀번호 암호화를 위한 객체 자동 주입
 	
-	//BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
 	 
 	@Autowired 
 	private MemberMapper mapper;
@@ -27,13 +26,14 @@ public class memberServiceImpl implements memberService{
 	
 	/* 회원가입 처리*/
 	@Override	
-	public int addMember(MemberVO member) {
+	public int addMember(MemberVO member, AddressVO address) {
 		log.info("*************service add member pw before: **"+ member.getM_pw());
 		//비밀번호 암호화
 		member.setM_pw(bcryptPasswordEncoder.encode(member.getM_pw()));
-		mapper.addMember(member);
+		int result1 = mapper.addMember(member);
+		int result2 = mapper.addaddress(address);
 		
-		return mapper.addMember(member);
+		return result1 + result2;
 	}
 
 	@Override
@@ -46,10 +46,17 @@ public class memberServiceImpl implements memberService{
 			authVO.setAuth("ROLE_MEMBER");
 			result =mapper.addAuth(authVO);
 			 
-		}else if (auth.equals("trainer")) { 	// 훈련사로 가입시 권한 추가
+		}else if (auth.equals("trainer")) { 	// 훈련 매니저로 가입시 권한 추가
 			authVO.setAuth("ROLE_TRAINER");
 			result =mapper.addAuth(authVO);
 			
+		}else if (auth.equals("hairstylist")) { 	// 미용 매니저로 가입시 권한 추가
+			authVO.setAuth("ROLE_HAIR");
+			result =mapper.addAuth(authVO);
+		}
+		else if (auth.equals("manager")) { 	// 통합 매니저로 가입시 권한 추가
+			authVO.setAuth("ROLE_MANAGER");
+			result =mapper.addAuth(authVO);
 		}
 		
 		return result ;
@@ -68,10 +75,10 @@ public class memberServiceImpl implements memberService{
 		int result = mapper.idPwCheck(member);	//mapper 메서드 실행시키고
 		return result;
 	}
+	
 	@Override
-	public MemberVO getMember(String m_no) {
-		// TODO Auto-generated method stub
-		return null;
+	public MemberVO getMember(String m_id) {
+		return mapper.getMember(m_id);
 	}
 
 	@Override
