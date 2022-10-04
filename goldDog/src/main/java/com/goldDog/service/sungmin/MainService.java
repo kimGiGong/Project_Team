@@ -10,8 +10,10 @@ import com.goldDog.domain.TrainerVO;
 
 public interface MainService {
 
+	//모든 맴버 가져오기
+	public List<MemberVO> getMember(List<Integer> t_m_no_list);
 	//정렬 후 맴버정보 가져오기 페이징 처리
-	public List<MemberVO> getMember(Criteria cri);
+	public List<MemberVO> getAllMember(List<Integer> t_no_list);
 	
 	//맴버 한명의 정보 가져오기
 	public MemberVO getOneMember(int m_no); 
@@ -20,10 +22,11 @@ public interface MainService {
 	public TrainerVO getTrainer(int t_no);
 	
 	//모든 훈련사 가져오기
+	public List<TrainerVO> getAllTrainerT_no(List<Integer> t_no_list);
 	public List<TrainerVO> getAllTrainer();
 	
 	//맴버 한명의 리뷰 가져오기
-	public List<ReviewVO> getReview(int m_no);
+	public List<ReviewVO> getReview(List<Integer> t_no_list);
 	
 	//리뷰정보 여러개 가져오기(훈련사용)
 	public List<ReviewVO> getAllReview(int t_no);

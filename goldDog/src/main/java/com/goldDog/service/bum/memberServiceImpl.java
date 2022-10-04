@@ -17,12 +17,12 @@ public class memberServiceImpl implements memberService{
 	
 	//비밀번호 암호화를 위한 객체 자동 주입
 	
-	BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
+	//BCryptPasswordEncoder bcryptPasswordEncoder = new BCryptPasswordEncoder();
 	 
 	@Autowired 
 	private MemberMapper mapper;
-	//@Autowired
-	//private BCryptPasswordEncoder bcryptPasswordEncoder;
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	 
 	
 	/* 회원가입 처리*/
@@ -31,6 +31,8 @@ public class memberServiceImpl implements memberService{
 		log.info("*************service add member pw before: **"+ member.getM_pw());
 		//비밀번호 암호화
 		member.setM_pw(bcryptPasswordEncoder.encode(member.getM_pw()));
+		mapper.addMember(member);
+		
 		return mapper.addMember(member);
 	}
 
