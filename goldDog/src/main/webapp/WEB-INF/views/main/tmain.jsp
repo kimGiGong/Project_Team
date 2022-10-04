@@ -283,12 +283,12 @@
 	            <div class="box">
 	              <div>
 	                <div class="img-box">
-	                  <a class="move" href="detailForm?m_no=${trainer[i].m_no}&t_no=${trainer[i].t_no}"><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
+	                  <a class="move" href="detailForm?m_no=${trainer[t_no[i]].m_no}&t_no=${trainer[t_no[i]].t_no}"><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
 	                </div>
 	                <div class="detail-box" >
 		                  <h5>닉네임 : ${member[i].m_nick}</h5>
 		                  <p>소개 : ${trainer[i].t_self}</p>
-		                  <p>리뷰평점 : ${review[0].r_score}점(${ReviewCount})</p>
+		                  <p>리뷰평점 : ${review[i].r_score}점(${ReviewCount})</p>
 		                  <p>훈련 가격 : ${trainer[i].t_price} 원</p>
 		                  <p>보유 자격증 : ${trainer[i].t_license}</p>
 	                </div>
@@ -305,6 +305,8 @@
         <a href="">더보기</a>
       </div>
     </div>
+    
+    
     
  	<form  id="btnForm" action="/main/detail" method="get">
 		<input type="hidden" name="m_no"  value="${member[0].m_no}">
