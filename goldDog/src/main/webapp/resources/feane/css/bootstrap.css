@@ -300,15 +300,8 @@ textarea {
 }
 fieldset {
 	width: 100%;
-	
 }
-.grid {
-	padding-left: 40px;
-	width : 90%;
-	display: grid;
-	grid-template-rows: auto auto;
-	grid-template-columns: auto auto;
-}
+
 #mapage_container {
 	display: flex;
 
@@ -354,33 +347,6 @@ output {
   display: inline-block;
 }
 
-.details{
-	margin-bottom:15px; 
-	margin-top: 15px;
-}
-
-details {
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: .5em .5em 0;
-    width: 92%;
-}
-
-summary {
-    font-weight: bold;
-    margin: -.5em -.5em 0;
-    padding: .5em;
-    width: 92%;
-}
-
-details[open] {
-    padding: .5em;
-}
-
-details[open] summary {
-    border-bottom: 1px solid #aaa;
-    margin-bottom: .5em;
-}
 
 
 template {
@@ -4099,7 +4065,6 @@ input[type="button"].btn-block {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem;
 }
 
 .nav-link:hover, .nav-link:focus {

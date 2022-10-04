@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.goldDog.domain.MemberVO;
 import com.goldDog.service.bum.memberService;
+import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -23,16 +24,16 @@ import lombok.extern.log4j.Log4j;
 public class mypageController {
 	
 	@Autowired
-	private memberService memberService; 
+	private MainService mainService; 
 	
 	@GetMapping("mypage")
-	public String viewmypage(/*HttpServletRequest request, Model model */) {
+	public String viewmypage(/*HttpServletRequest request,*/ Model model) {
 		
 		
 //		HttpSession session = request.getSession(false);
-//		final int loginNumber = (int)session.getAttribute("m_no");
-//		MemberVO member = memberService.getMember(""/* loginNumber */);
-		
+		final int loginNumber = /*(int)session.getAttribute("m_no");*/ 1;
+		MemberVO member = mainService.getOneMember(loginNumber);
+		model.addAttribute("manager",member);
 		
 		return "mypage/mypage";
 	}

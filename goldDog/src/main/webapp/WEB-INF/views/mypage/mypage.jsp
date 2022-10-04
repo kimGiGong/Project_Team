@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,8 @@
     <link rel="stylesheet" href="/resources/Upright/slick/slick.min.css">          <!-- https://kenwheeler.github.io/slick/ -->
     <link rel="stylesheet" href="/resources/Upright/slick/slick-theme.css">
     <link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
-    
+    <link rel="stylesheet" href="/resources/team.css">
+    <script type="text/javascript" src="/resources/mypage.js"/>
 	
 </head>
 <body>
@@ -21,7 +23,7 @@
 	<!--  헤더 END -->
 	
 <div class="bodymain"><!-- 바디메인 -->
-	<div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-04.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-03.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-02.jpg"></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src="img/img-01.jpg"></div>    
+	<div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div>    
 	    <div class="container-fluid" >
 	        <div class="row">
 	            <!-- Leftside bar -->
@@ -39,21 +41,21 @@
 	                                <a href="#home" class="nav-link current">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-home nav-icon"></i>
-	                                    My Page
+	                                    견적서
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
 	                                <a href="#gallery" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-images nav-icon"></i>
-	                                    Gallery
+	                                    애견등록 및 수정
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
 	                                <a href="#about" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-user-friends nav-icon"></i>
-	                                    About
+	                                    결제수단
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
@@ -98,14 +100,19 @@
                     </section>
                     
                     <div>
-                    	<div class="details">
-	                    	<details>
-	    						<summary>오늘의 환율</summary>
-	    						<p>나닛!</p>
-	                    	</details>
+                    	<div class="Estimate">
+		                    	<details class="Estimate_details" id="${ manager.m_no }">
+		    						<summary>${ manager.m_name }</summary>
+		    						<p>${manager}</p>
+		                    	</details>
+		                    	<div class="Estimate_interval"></div> 
+                    		<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
+                    		<!-- </c:forEach> -->
                     	</div>
                     </div>
+                    <script type="text/javascript">
                     
+                    </script>
                     
                 	<!-- Contact section -->
 	                <div class="tm-section-wrap" id = "contact">
@@ -183,13 +190,5 @@
 		</div> <!-- .row -->
 	</div> <!-- .container-fluid -->
 </div><!-- 바디메인 END -->
-    <script src="js/jquery-3.4.1.min.js"></script>          <!-- https://jquery.com/ -->
-    <script src="js/jquery.singlePageNav.min.js"></script>  <!-- https://github.com/ChrisWojcik/single-page-nav -->
-    <script src="js/parallax/parallax.min.js"></script>     <!-- https://pixelcog.github.io/parallax.js/ -->
-    <script src="js/imagesloaded.pkgd.min.js"></script>     <!-- https://imagesloaded.desandro.com/ -->
-    <script src="js/isotope.pkgd.min.js"></script>          <!-- https://isotope.metafizzy.co/ -->
-    <script src="js/jquery.magnific-popup.min.js"></script> <!-- https://dimsemenov.com/plugins/magnific-popup/ -->
-    <script src="slick/slick.min.js"></script>              <!-- https://kenwheeler.github.io/slick/ -->
-    <script src="js/templatemo-script.js"></script>
  </body>
  </html>
