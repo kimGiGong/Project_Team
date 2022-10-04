@@ -65,9 +65,11 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	@Override
-	public List<ReviewVO> getReview(List<Integer> t_no_list) {
+	public List<ReviewVO> getReview(int t_no) {
+		
 		log.info("리뷰정보 가져왔떠");
-		return mapper.getReview(t_no_list);  
+		
+		return mapper.getReview(t_no);  
 	}
 	
 	@Override

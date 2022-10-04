@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.MemberVO;
+import com.goldDog.domain.PageDTO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
@@ -68,39 +69,31 @@ public class mainController {
 		model.addAttribute("t_no",t_no_list);
 		
 		
-		
+		List<Double> total = new ArrayList<Double>(); 
+		List<Integer> rTotal = new ArrayList<Integer>();
+		int t_review_total = 0;
+		//t_no를 받아서 훈련사 당 리뷰 평점 구하기
+		for(int i =0 ;i<t_no_list.size() ;i++) {
+			List<ReviewVO> re =mainService.getReview(t_no_list.get(i));
+				rTotal.add(re.size());
+				for(int j=0 ;j<re.size() ;j++) {
+					t_review_total += re.get(j).getR_score();
+				}
+				if(re.size()==0) {
+					total.add(0.0);	
+				}else {
+					total.add((double)t_review_total/re.size());
+				}
+		}
 		
 		model.addAttribute("member", mainService.getMember(t_m_no_list));
-		model.addAttribute("review", mainService.getReview(t_no_list));
+		model.addAttribute("rAvg", total); //리뷰 평점
+		model.addAttribute("rTotal", rTotal); //리뷰 총 갯수
 		model.addAttribute("trainer",mainService.getAllTrainerT_no(t_no_list));
-		 
+		model.addAttribute("pager", new PageDTO(cri, Tlist.size()));  
 		
 		
-		
-//		List<ReviewVO> rCount = mainService.getReview(t_no_list);
-//		
-//		List<Double> total = new ArrayList<Double>(); 
-//		int t_review_total = 0;
-//		for (int i =0 ;i < t_no_list.size();i++) {
-//			 rCount.get(i).getR_score(); 
-//		}
-//		
-		
-		
-		
-//		for(int i=0;i<rCount.size() ;i++) {
-//				for(int j = 0 ; j<rCount.get(i).size(); j++) {
-//					t_review_total+=rCount.get(i).get(j).getR_score();
-//				}
-//				double avg= (double)t_review_total/rCount.get(i).size();
-//				total.add(avg);
-//				log.info("정산완료!!!!!!!!");
-//				
-//		}
-//		log.info(total+"리뷰들");
-//		model.addAttribute("reviewScore",total);
-//		
-//		
+
 	}
 	
 	

@@ -37,10 +37,8 @@
 	
 	<!-- 훈련사한명 한명의 리뷰 가져오기 -->
 	<select id="getReview" resultType="com.goldDog.domain.ReviewVO">
-		select * from Review where t_no in 
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
-			#{item}
-		</foreach> 
+		select * from Review where t_no =#{t_no} 
+		
 	</select>
 	
 	<!-- 훈련사 리뷰평점 가져오기 -->
