@@ -42,10 +42,10 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 				session.removeAttribute("PrevPage");					// 삭제 딱하고
 				response.sendRedirect(redirectURL);
 			}else {
-				response.sendRedirect("/common/main");
+				response.sendRedirect("/main/tmain");
 			}
 		}else {
-			response.sendRedirect("/common/main");
+			response.sendRedirect("/main/tmain");
 		}
 	}
 	

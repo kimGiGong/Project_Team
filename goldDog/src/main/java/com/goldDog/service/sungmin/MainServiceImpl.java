@@ -23,13 +23,19 @@ public class MainServiceImpl implements MainService {
 	
 	
 	@Override
-	public List<MemberVO> getMember(Criteria cri) {
+	public List<MemberVO> getMember(List<Integer> t_m_no_list) {
 		log.info("맴버 여러명 가져온다.");
-		return mapper.getMember(cri);
+		return mapper.getMember(t_m_no_list);  
+	}
+	@Override
+	public List<MemberVO> getAllMember(List<Integer> t_no_list) {
+		return mapper.getMember(t_no_list);  
 	}
 	@Override
 	public MemberVO getOneMember(int m_no) {
 		log.info("맴버 한명만 가져온다.");
+		
+		
 		return mapper.getOneMember(m_no);
 	}
 
@@ -40,8 +46,14 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	@Override
-	public List<TrainerVO> getAllTrainer() {
+	public List<TrainerVO> getAllTrainerT_no(List<Integer> t_no_list) {
 			log.info("훈련사 정보 다 가져오는 메서드 호출");
+		return mapper.getAllTrainerT_no(t_no_list);
+	}
+	
+	@Override
+	public List<TrainerVO> getAllTrainer() {
+		log.info("훈련사 정보 다 가져오는 메서드 호출");
 		return mapper.getAllTrainer();
 	}
 	
@@ -52,9 +64,9 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	@Override
-	public List<ReviewVO> getReview(int m_no) {
+	public List<ReviewVO> getReview(List<Integer> t_no_list) {
 		log.info("리뷰정보 가져왔떠");
-		return mapper.getReview(m_no); 
+		return mapper.getReview(t_no_list); 
 	}
 
 	@Override
@@ -80,7 +92,11 @@ public class MainServiceImpl implements MainService {
 	//훈련사가 가지고 있는 리뷰 평점 구해주는 메서드
 	@Override
 	public int rAvg(int t_no, int rCount) {
-		return mapper.rAvg(t_no,rCount);
+		
+		int avg = mapper.rAvg(t_no,rCount);
+		
+		
+		return avg;
 	}
 
 

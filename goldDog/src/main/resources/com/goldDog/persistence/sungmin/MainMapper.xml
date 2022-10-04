@@ -5,8 +5,12 @@
 <mapper namespace="com.goldDog.persistence.sungmin.MainMapper">
 	<!-- 맴버 여러명 가져오기 -->	
 	<select id="getMember" resultType="com.goldDog.domain.MemberVO">
-		select * from member
+		select * from member where m_no in
+			<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach> 
 	</select>
+
 	
 	<!-- 맴버 한명만 가져오기 -->	
 	<select id="getOneMember" resultType="com.goldDog.domain.MemberVO">
@@ -20,13 +24,29 @@
 
 	<!-- 모든 훈련사 가져오기 -->
 	<select id="getAllTrainer" resultType="com.goldDog.domain.TrainerVO">
-		select * from trainer order by t_date 
+		select * from trainer 
+	</select>
+	
+	<!-- 모든 훈련사 t_no 가져오기 -->
+	<select id="getAllTrainerT_no" resultType="com.goldDog.domain.TrainerVO">
+		select * from trainer where t_no in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>  
 	</select>
 	
 	<!-- 리뷰 하나 가져오기 -->
 	<select id="getReview" resultType="com.goldDog.domain.ReviewVO">
-		select * from Review where m_no=#{m_no} 
+		select * from Review where t_no in 
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach> 
 	</select>
+	
+	
+	
+	
+	
 	
 	<!-- 훈련사 한명에 해당하는 모든 리뷰 가져오기 -->
 	<select id="getAllReview" resultType="com.goldDog.domain.ReviewVO">
