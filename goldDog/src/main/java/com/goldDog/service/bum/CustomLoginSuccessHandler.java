@@ -23,6 +23,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		log.info("login 성공 !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		
+		
+		
 		List<String> roleNames = new ArrayList<String>(); 
 		//로그인한 사람의 권한 목록 얻어오기
 		authentication.getAuthorities().forEach(authority -> roleNames.add(authority.getAuthority()));;
@@ -36,7 +38,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		// 로그인폼으로 강제 이동되어, 로그인 처리 성공후 보던 곳으로 가기위한 처리
 		HttpSession session = request.getSession();
-		if(session !=null) {
+		if(session != null) {
 			String redirectURL = (String)session.getAttribute("prevPage"); // 담아놓고
 			if(redirectURL !=null) {
 				session.removeAttribute("PrevPage");					// 삭제 딱하고

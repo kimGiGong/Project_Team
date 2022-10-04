@@ -26,16 +26,28 @@ public class memberServiceImpl implements memberService{
 	
 	/* 회원가입 처리*/
 	@Override	
-	public int addMember(MemberVO member, AddressVO address) {
+	public int addMember(MemberVO member) {
 		log.info("*************service add member pw before: **"+ member.getM_pw());
 		//비밀번호 암호화
 		member.setM_pw(bcryptPasswordEncoder.encode(member.getM_pw()));
 		int result1 = mapper.addMember(member);
-		int result2 = mapper.addaddress(address);
 		
-		return result1 + result2;
+		//int result2 = mapper.addaddress(address);
+		return result1;
 	}
-
+	
+	/* 회원 가입 주소 처리 */
+	@Override
+	public int addaddress(AddressVO address, int m_no) {
+		int result= -1;
+		
+		address.setM_no(m_no);
+		
+		result = mapper.addaddress(address);
+		
+		return 0;
+	}
+	/* 회원 가입 권한 처리 */
 	@Override
 	public int addAuth(String auth, int m_no) {
 		int result= -1;
@@ -44,37 +56,33 @@ public class memberServiceImpl implements memberService{
 		authVO.setM_no(m_no);
 		if(auth.equals("member")) {			// 일반 회원 가입시 권한 추가
 			authVO.setAuth("ROLE_MEMBER");
-			result =mapper.addAuth(authVO);
+			result = mapper.addAuth(authVO);
 			 
 		}else if (auth.equals("trainer")) { 	// 훈련 매니저로 가입시 권한 추가
 			authVO.setAuth("ROLE_TRAINER");
-			result =mapper.addAuth(authVO);
+			result = mapper.addAuth(authVO);
 			
 		}else if (auth.equals("hairstylist")) { 	// 미용 매니저로 가입시 권한 추가
 			authVO.setAuth("ROLE_HAIR");
-			result =mapper.addAuth(authVO);
+			result = mapper.addAuth(authVO);
 		}
 		else if (auth.equals("manager")) { 	// 통합 매니저로 가입시 권한 추가
-			authVO.setAuth("ROLE_MANAGER");
-			result =mapper.addAuth(authVO);
+			authVO.setAuth("ROLE_TRAINER");
+			result = mapper.addAuth(authVO);
+			authVO.setAuth("ROLE_HAIR");
+			result = mapper.addAuth(authVO);
 		}
 		
-		return result ;
+		return 0 ;
 		
 	}
-	/* 회원 가입 주소 처리 */
-	@Override	
-	public int addaddress(AddressVO address) {
-		return mapper.addaddress(address);
-	}
 
-	
-	/* 로그인 처리*/
+	/* 로그인 처리
 	@Override
 	public int idPwCheck(MemberVO member) {
 		int result = mapper.idPwCheck(member);	//mapper 메서드 실행시키고
 		return result;
-	}
+	} */
 	
 	@Override
 	public MemberVO getMember(String m_id) {
@@ -92,6 +100,15 @@ public class memberServiceImpl implements memberService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int getMno(String m_id) {
+		
+		return mapper.getMno(m_id);
+				
+	}
+
+
 
 	
 

@@ -3,6 +3,7 @@ package com.goldDog.controller.bum;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goldDog.domain.AddressVO;
+import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.service.bum.memberService;
 
@@ -81,33 +83,25 @@ public class memberController {
 	public void signup() {
 		log.info("************ signup ************");
 	}
+	
 	@PostMapping("signup")
-	public String signup(MemberVO member, AddressVO address,RedirectAttributes rttr) {
+	public String signup(MemberVO member, AddressVO address, @Param("auth") String auth,RedirectAttributes rttr) {
 		log.info("********************** signupPro MemberVO : " + member);
+		log.info("********************** signupPro AddressVO : " + address);
 		
-		int result = service.addMember(member, address); //회원 추가
-		if(result == 2) {
-			rttr.addFlashAttribute("msg", "success");
-		}
+		int result = service.addMember(member); 		//회원 추가
+		int mno = service.getMno(member.getM_id());
+		log.info(" ========================"+address+" ========================");
+	
+		service.addaddress(address, mno); 	//주소 추가
 		
-		return "redirect:/member/login";
-	}
-	//회원가입(주소)
-	@GetMapping("address")
-	public void address() {
-		log.info("************ address ************");
-	}
-	@PostMapping("address")
-	public String address(AddressVO address, RedirectAttributes rttr) {
-		log.info("********************** address AddressVO : " + address);
+		service.addAuth(auth, mno); 			//권한 추가
 		
-		int result = service.addaddress(address); //주소 추가
 		if(result == 1) {
 			rttr.addFlashAttribute("msg", "success");
 		}
-		return "";
+		return "redirect:/member/login";
 	}
-	
 	
 	
 	
