@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="/resources/Upright/slick/slick-theme.css">
     <link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
     <link rel="stylesheet" href="/resources/team.css">
-    <script type="text/javascript" src="/resources/mypage.js"/>
-	
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 
@@ -101,18 +100,15 @@
                     
                     <div>
                     	<div class="Estimate">
-		                    	<details class="Estimate_details" id="${ manager.m_no }">
+		                    	<details class="Estimate_details" id="${ manager.m_no }" onclick="ondetails(this.id)">
 		    						<summary>${ manager.m_name }</summary>
-		    						<p>${manager}</p>
+		    						<p id="ammo">${manager}</p>
 		                    	</details>
 		                    	<div class="Estimate_interval"></div> 
                     		<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
                     		<!-- </c:forEach> -->
                     	</div>
                     </div>
-                    <script type="text/javascript">
-                    
-                    </script>
                     
                 	<!-- Contact section -->
 	                <div class="tm-section-wrap" id = "contact">
@@ -190,5 +186,6 @@
 		</div> <!-- .row -->
 	</div> <!-- .container-fluid -->
 </div><!-- 바디메인 END -->
+	<script type="text/javascript" src="../../../resources/mypage.js"></script>
  </body>
  </html>
