@@ -17,7 +17,7 @@ public interface MemberMapper {
 	public int addaddress(AddressVO address);
 	
 	//회원 한 명 정보 가져오기
-	public MemberVO getMember(String m_no);
+	public MemberVO getMember(String m_id);
 	
 	//회원 정보 수정
 	public int updateMember(MemberVO member);

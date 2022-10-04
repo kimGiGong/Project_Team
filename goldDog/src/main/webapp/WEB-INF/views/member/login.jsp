@@ -22,7 +22,8 @@
 </head>
 
 <body class="bg-gradient-primary">
-	<form action="/member/login" method="post">
+	<form action="/login" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
 	    <div class="container">
 	
 	        <!-- Outer Row -->
@@ -42,10 +43,10 @@
 	                                    </div>
 	                                    <form class="user">
 	                                        <div class="form-group">
-	                                            <input type="text" class="form-control form-control-user" name="m_id" placeholder="아이디">
+	                                            <input type="text" class="form-control form-control-user" name="username" placeholder="아이디">
 	                                        </div>
 	                                        <div class="form-group">
-	                                            <input type="password" class="form-control form-control-user" name="m_pw" placeholder="비밀번호">
+	                                            <input type="password" class="form-control form-control-user" name="password" placeholder="비밀번호">
 	                                        </div>
 	                                        <div class="form-group">
 	                                            <div class="custom-control custom-checkbox small">

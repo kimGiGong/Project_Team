@@ -6,7 +6,7 @@ import com.goldDog.domain.MemberVO;
 public interface memberService {
 
 		//회원 가입 (추가)
-		public int addMember(MemberVO member);
+		public int addMember(MemberVO member, AddressVO address);
 		
 		//회원가입 (주소)
 		public int addaddress(AddressVO address);
@@ -18,7 +18,7 @@ public interface memberService {
 		public int addAuth(String auth, int m_no);
 		
 		// 회원 정보 가져오기
-		public MemberVO getMember(String m_no);
+		public MemberVO getMember(String m_id);
 		
 		// 회원 정보 수정 처리
 		public int ModifyMember(MemberVO member);

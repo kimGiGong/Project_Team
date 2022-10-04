@@ -27,7 +27,7 @@ public class CustomUser extends User{ //principal를 이용해 사용할 수 있
 	public CustomUser(MemberVO vo) { 
 		super(vo.getM_id(), vo.getM_pw(), vo.getAuthList().stream()
 				.map(auth -> new SimpleGrantedAuthority(auth.getAuth()))
-				.collect(Collectors.toList())	
+				.collect(Collectors.toList())
 				);
 		
 		this.member = vo;

@@ -1,5 +1,6 @@
 package com.goldDog.controller.bum;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +42,13 @@ public class memberController {
 	public void test() {
 		log.info("************ test1 ************");
 	}
-
+	
+	/*
 	@GetMapping("login")
 	public void login() {
 		log.info("************ login ************");
 	}
+	
 	@PostMapping("login")
 	public String loginPro(MemberVO member, String auto, Model model, HttpSession session) {
 		log.info(member);
@@ -60,18 +63,30 @@ public class memberController {
 			return "/member/loginPro";
 		}
 	}
+	*/
 	
+	//로그인 폼 요청 (처리는 시큐리티가 해줌)
+	@GetMapping("login")
+	public void login(String error, HttpServletRequest request) {
+		log.info("********************** login ! **********************");
+		log.info("error : " + error);
+		
+		//접근 제한때문에 로그인폼으로 강제 이동되었다면 직전 url 뽑아서 session 임시저장
+		String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevPage", referrer);
+	}
+
 	//회원가입
 	@GetMapping("signup")
 	public void signup() {
 		log.info("************ signup ************");
 	}
 	@PostMapping("signup")
-	public String signup(MemberVO member, RedirectAttributes rttr) {
+	public String signup(MemberVO member, AddressVO address,RedirectAttributes rttr) {
 		log.info("********************** signupPro MemberVO : " + member);
 		
-		int result = service.addMember(member); //회원 추가
-		if(result == 1) {
+		int result = service.addMember(member, address); //회원 추가
+		if(result == 2) {
 			rttr.addFlashAttribute("msg", "success");
 		}
 		
@@ -90,8 +105,11 @@ public class memberController {
 		if(result == 1) {
 			rttr.addFlashAttribute("msg", "success");
 		}
-		return "redirect:/member/login";
+		return "";
 	}
+	
+	
+	
 	
 	@GetMapping("idFind")
 	public void idFind() {
