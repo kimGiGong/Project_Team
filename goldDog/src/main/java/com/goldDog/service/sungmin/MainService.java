@@ -27,7 +27,7 @@ public interface MainService {
 	
 	
 	//맴버 한명의 리뷰 가져오기
-	public List<ReviewVO> getReview(List<Integer> t_no_list);
+	public List<ReviewVO> getReview(int t_no);
 	//훈련사들 리뷰평점
 	public List<List<ReviewVO>> getTReview(List<Integer> t_no_list);
 	

@@ -235,85 +235,81 @@
 
   <section class="food_section layout_padding-bottom">
     <div class="container">
-      <div class="heading_container heading_center">
-        <h2>
-          Our Menu
-        </h2>
-      </div>
-
-      <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">훈련사</li>
-        <li data-filter=".pizza">미용사</li>
-        <li data-filter=".pasta">마포구</li>
-        <li data-filter=".fries">고양시</li>
-      </ul>
-		
-			<table>
-                <thead>
-                    <tr>
-                        <th>#번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>날짜</th>
-                        <th>되는거냐?</th>
-                    </tr>
-                </thead>
-                <tbody>                                                                   
-                	<c:forEach var="member" items="${member}" >
-                <tr>
-                    <td>${member.m_no}</td>
-                    <td><a class="move" href="${member.m_no}">${member.m_no}</a></td>
-                    <td>${member.m_id}</td>
-                    <td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${member.m_date}"/></td>
-                </tr>
-                </c:forEach>
-                  <tr>
-                    <td>${member[0].m_id}</td>
-                </tr> 
-            </tbody>
-           </table> <!-- end table -->
-           
       <!-- 사용자 리스트 출력 -->  
       <div class="filters-content">
         <div class="row grid">
+		<form id="searchForm" action="/board/list" method="get">
+          <div class="col-lg-2  all pizza">
+			<input type="text" name="keyword" class="form-control" placeholder="훈련사 찾기"/>
+   			<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+   			<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+          </div>
+          <div class="col-lg-2  all pizza">
+   			<button class="btn btn-light">검색</button>
+          </div>
+          <div class="col-lg-2 offset-lg-6 all pizza">
+          			<select name="sel">
+          				<option value=""> 정   렬 </option>
+          				<option value="W"> 리뷰 평점순</option>
+          				<option value="C"> 리뷰 많은순</option>
+          				<option value="T"> 낮은 가격순</option>
+          				<option value="T"> 높은 가격순</option>
+          			</select>
+          </div>
+		</form>
         	
 	         <c:forEach var="i" begin="0" end="4" step="1">
 	          <div class="col-sm-12 col-lg-12 all pizza">
 	            <div class="box">
 	              <div>
 	                <div class="img-box">
-	                  <a class="move" href="detailForm?m_no=${trainer[t_no[i]].m_no}&t_no=${trainer[t_no[i]].t_no}"><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
+	                  <a class="move" href="${trainer[t_no[i]-1].m_no}" id="${trainer[t_no[i]-1].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
 	                </div>
 	                <div class="detail-box" >
 		                  <h5>닉네임 : ${member[i].m_nick}</h5>
 		                  <p>소개 : ${trainer[i].t_self}</p>
-		                  <!--  <p>리뷰평점 : ${review[0].r_score}점(${review[i]})</p>-->
+		                  <p>리뷰평점 : ${rAvg[i]}점 (${rTotal[i]})</p>
 		                  <p>훈련 가격 : ${trainer[i].t_price} 원</p>
 		                  <p>보유 자격증 : ${trainer[i].t_license}</p>
+		                  <p>m_no : ${trainer[t_no[i]-1].m_no}</p>
+		                  <p>t_no : ${trainer[t_no[i]-1].t_no}</p>
 	                </div>
 	                </div>
 	              </div>
 	            </div>
+	          
+		     
 	         </c:forEach>
-	         
           </div>
          </div>
        
-    <div class="col-sm-6 col-lg-12 all pasta">
-      <div class="btn-box">
-        <a href="">더보기</a>
-      </div>
-    </div>
-    
-    
-    
- 	<form  id="btnForm" action="/main/detail" method="get">
-		<input type="hidden" name="m_no"  value="${member[0].m_no}">
+   <div class="col-sm-12 col-md-12">
+		<ul class="pagination">
+			<c:if test="${pager.prev}">
+				<li class="page-item">
+					<a class="page-link" href="${pager.startPage-1}" tabindex="-1">Previous</a>
+				</li>
+			</c:if>
+			<c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" >
+				<li class="page-item ${pager.cri.pageNum == num ? "active":""}">
+					<a class="page-link" href="${num}">${num}</a>
+				</li>
+			</c:forEach>
+			<c:if test="${pager.next}">
+				<li class="page-item">
+					<a class="page-link" href="${pager.endPage+1}">Next</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
+   </div>
+   
+     <form  id="pagingForm" action="/main/detailForm" >
+		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+		<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+		<input type="hidden" name="sel" value="${pager.cri.sel}" />
+		<input type="hidden" name="keyword" value="${pager.cri.keyword}" />
 	</form>
-    
-    
-    
   </section>
 
   <!-- end food section -->
@@ -356,137 +352,42 @@
       </div>
     </div>
   </section>
-
+  
+  
+  <!-- footer 복붙 -->  
+  <%@ include file="../footer.jsp" %>
   <!-- end client section -->
-
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 footer-col">
-          <div class="footer_contact">
-            <h4>
-             	금댕이의
-            </h4>
-            <div class="contact_link_box">
-              <a href="">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>
-                  Location
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>
-                  Call +01 1234567890
-                </span>
-              </a>
-              <a href="">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>
-                  demo@gmail.com
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 footer-col">
-          <div class="footer_detail">
-            <a href="" class="footer-logo">
-              Feane
-            </a>
-            <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
-            </p>
-            <div class="footer_social">
-              <a href="">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-twitter" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-linkedin" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-              </a>
-              <a href="">
-                <i class="fa fa-pinterest" aria-hidden="true"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 footer-col">
-          <h4>
-            Opening Hours
-          </h4>
-          <p>
-            Everyday
-          </p>
-          <p>
-            10.00 Am -10.00 Pm
-          </p>
-        </div>
-      </div>
-      <div class="footer-info">
-        <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved By
-          <a href="https://html.design/">Free Html Templates</a><br><br>
-          &copy; <span id="displayYear"></span> Distributed By
-          <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-        </p>
-      </div>
-    </div>
-  </footer>
-  <!-- footer section -->
-
 	<script type="text/javascript">
-	
-		// 제목클릭시 detailForm로 넘어가는 처리 
+		$(document).ready(function(){
+			
+		let pagingForm = $("#pagingForm"); // 숨긴 폼태그 가져오기 	
+		// 제목클릭시 detailForm로 넘어가는 처리
 		$(".move").on("click", function(e){
 			e.preventDefault(); 
 			console.log("detail!!!");
-			// pagingForm에 히든input으로 bno값 추가하기 (태그 동적 생성) 
+			// pagingForm에 히든input으로 m_no값 추가하기 (태그 동적 생성) 
 			let m_no = $(this).attr("href");
-			pagingForm.append("<input type='hidden' name='m_no' value='" +m_no+ "' />"); 
+			let t_no = $(this).attr("id");
+			pagingForm.append("<input type='hidden' name='m_no' value='" + m_no + "' />"); 
+			pagingForm.append("<input type='hidden' name='t_no' value='" + t_no + "' />"); 
 			// pagingForm의 action 속성값을 /board/read로 변경
 			pagingForm.attr("action", "/main/detailForm"); 
 			// read로 이동하기(form으로 요청) 
 			pagingForm.submit(); 
 		});
 		
+		
+		
+		
+		
+		
+		
+		});
 	
+		
+		
+		
+		
+		
+		
 	</script>
-
-
-
-
-
-
-
-
-  <!-- jQery -->
-  <script src="/resources/feane/js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
-  <!-- bootstrap js -->
-  <script src="/resources/feane/js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
-  <!-- isotope js -->
-  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
-  <!-- nice select -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-  <!-- custom js -->
-  <script src="/resources/feane/js/custom.js"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-  </script>
-  <!-- End Google Map -->
-
-</body>
-
-</html>

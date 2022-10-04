@@ -28,7 +28,7 @@ public interface MainMapper {
 	public List<TrainerVO> getAllTrainerT_no(List<Integer> list);
 	
 	//훈련사한명의 리뷰 가져오기
-	public List<ReviewVO> getReview(List<Integer> list);
+	public List<ReviewVO> getReview(int t_no);
 	//훈련사들 평점 가져오기 
 	public List<List<ReviewVO>> getTReview(List<Integer> list);
 	
