@@ -7,34 +7,36 @@
 	<!--회원 정보 추가  -->
 	<insert id="addMember">
 		insert into member(m_no, m_id, m_pw, m_name, m_email, m_phone, m_nick, m_type, m_status, m_img, m_date) 
-		values(member_seq.nextval,#{m_id},#{m_pw},#{m_name},#{m_email},#{m_phone},#{m_nick},#{m_type},#{m_status},'null',sysdate)
+		values(member_seq.nextval,#{m_id},#{m_pw},#{m_name},#{m_email},#{m_phone},#{m_nick},'보류',#{m_status},'null',sysdate)
 	</insert>
 	
+	<!-- 주소 추가 -->
 	<insert id="addaddress">
 		insert into address(a_no, m_no, a_road, a_details, a_zonecode, a_name, a_addr1, a_addr2) 
-		values(address_seq.nextval,member_seq.nextval-1,#{a_road},#{a_details}, #{a_zonecode},'집','null','null')
+		values(address_seq.nextval,#{m_no},#{a_road},#{a_details}, #{a_zonecode},'집','null','null')
 	</insert>
 	
+	<!-- 권한 추가  -->
+	<insert id="addAuth">
+		insert into auth values(#{m_no}, #{auth})
+	</insert>
 	
-	<!-- 로그인 처리  -->
+	<!-- 로그인 처리  
 	<select id="idPwCheck" resultType="int">
  		select count(*) from member where m_id=#{m_id} 
  		<if test="m_pw != null">
 	 		and m_pw=#{m_pw}
  		</if>
- 	</select>
-	
+ 	</select> -->
 	
 	<update id="updateMember">
 		update member set m_nick=#{m_nick}, m_email=#{m_email}, m_phone=#{m_phone}
 		where m_id=#{m_id}
 	</update>
 	
+	
 	<!-- 시큐리티 추가  -->
-	<!-- 권한 추가  -->
-	<insert id="addAuth">
-		insert into memberSec_auth values(#{m_id},#{auth})
-	</insert>
+	
 	
 	<!-- 테이블 묶기  -->
 	<resultMap type="com.goldDog.domain.MemberVO" id="memberMap">
@@ -67,6 +69,9 @@
 		and m_id = #{m_id}
 	</select>
 	
+	<select id="getMno" resultType="int">
+		select m_no from member where m_id = #{m_id}
+	</select>
 	
 	
 	

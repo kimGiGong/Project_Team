@@ -88,7 +88,7 @@
 <body class="bg-gradient-primary">
 
 	<form action="/member/signup" method="post">
-	
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
 	    <div class="container">
 	
 	        <div class="card o-hidden border-0 shadow-lg my-5">
@@ -164,16 +164,16 @@
 	                                <!-- </form>  -->
 		                            <!--  -->    
 									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-								      <input type="radio" class="btn-check" name="m_type" id="btnradio1" autocomplete="off" value="owner" checked="" >
+								      <input type="radio" class="btn-check" name="auth" id="btnradio1" autocomplete="off" value="member" checked="" >
 								      <label class="btn btn-outline-primary" for="btnradio1">견주</label>
 								    
-								      <input type="radio" class="btn-check" name="m_type" id="btnradio2" autocomplete="off" value="trainer">
+								      <input type="radio" class="btn-check" name="auth" id="btnradio2" autocomplete="off" value="trainer">
 								      <label class="btn btn-outline-primary" for="btnradio2">훈련매니저</label>
 								    
-								      <input type="radio" class="btn-check" name="m_type" id="btnradio3" autocomplete="off" value="hairstylist">
+								      <input type="radio" class="btn-check" name="auth" id="btnradio3" autocomplete="off" value="hairstylist">
 								      <label class="btn btn-outline-primary" for="btnradio3">미용매니저</label>
 								      
-								      <input type="radio" class="btn-check" name="m_type" id="btnradio4" autocomplete="off" value="manager">
+								      <input type="radio" class="btn-check" name="auth" id="btnradio4" autocomplete="off" value="manager">
 								      <label class="btn btn-outline-primary" for="btnradio4">통합매니저</label>
 								    </div>
 										                           
