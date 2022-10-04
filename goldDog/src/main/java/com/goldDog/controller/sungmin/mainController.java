@@ -62,6 +62,7 @@ public class mainController {
 			t_no_list.add(Tlist.get(i).getT_no()); 
 			t_m_no_list.add(Tlist.get(i).getM_no());
 		}
+		
 		// t_no 를 받아서 그에 맞게 띄워주기
 		log.info(t_no_list+"입니다잇"); 
 		model.addAttribute("t_no",t_no_list);
@@ -76,30 +77,30 @@ public class mainController {
 		
 		
 		
-		int rCount = mainService.getReviewCount(1);
-		List<ReviewVO> re=mainService.getAllReview(1);
-		int total = 0;
-		for(int i = 0 ; i<rCount; i++) {
-			
-			total+=re.get(i).getR_score();	
-		}
-		double avg= (double)total/rCount;
-		log.info(total+"토탈이지~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		log.info(avg+"평균이지!~~~~~~~~~~~~~~~");	
+//		List<ReviewVO> rCount = mainService.getReview(t_no_list);
+//		
+//		List<Double> total = new ArrayList<Double>(); 
+//		int t_review_total = 0;
+//		for (int i =0 ;i < t_no_list.size();i++) {
+//			 rCount.get(i).getR_score(); 
+//		}
+//		
 		
 		
 		
-		//훈련사 한명에 해당하는 리뷰를 세어주는 메서드
-		List<TrainerVO> trainer1 =mainService.getAllTrainer();
-		for(int i = 0 ;i<trainer1.size() ; i++){
-		
-			model.addAttribute("ReviewCount"+i,mainService.getReviewCount(i));	
-		
-		}
-		
-		
-		
-		
+//		for(int i=0;i<rCount.size() ;i++) {
+//				for(int j = 0 ; j<rCount.get(i).size(); j++) {
+//					t_review_total+=rCount.get(i).get(j).getR_score();
+//				}
+//				double avg= (double)t_review_total/rCount.get(i).size();
+//				total.add(avg);
+//				log.info("정산완료!!!!!!!!");
+//				
+//		}
+//		log.info(total+"리뷰들");
+//		model.addAttribute("reviewScore",total);
+//		
+//		
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.goldDog.service.sungmin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,13 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<ReviewVO> getReview(List<Integer> t_no_list) {
 		log.info("리뷰정보 가져왔떠");
-		return mapper.getReview(t_no_list); 
+		return mapper.getReview(t_no_list);  
+	}
+	
+	@Override
+	public List<List<ReviewVO>> getTReview(List<Integer> t_no_list) {
+		log.info("리뷰정보 가져왔떠");
+		return mapper.getTReview(t_no_list); 
 	}
 
 	@Override
@@ -89,15 +96,7 @@ public class MainServiceImpl implements MainService {
 		return mapper.getAllReview(t_no);
 	}
 	
-	//훈련사가 가지고 있는 리뷰 평점 구해주는 메서드
-	@Override
-	public int rAvg(int t_no, int rCount) {
-		
-		int avg = mapper.rAvg(t_no,rCount);
-		
-		
-		return avg;
-	}
+
 
 
 	
