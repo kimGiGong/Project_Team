@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
@@ -51,9 +52,28 @@ public class mainController {
 	//메인올때 훈련사도 가져온다.
 	@RequestMapping("tmain")
 	public void tmain(Model model,Criteria cri) {
-		model.addAttribute("member",mainService.getMember(cri));
-		model.addAttribute("review",mainService.getReview(1));
-		model.addAttribute("trainer",mainService.getAllTrainer());
+		// m_no 만 뽑아오기
+		List<TrainerVO> Tlist = mainService.getAllTrainer();
+		
+		List<Integer> t_no_list = new ArrayList<Integer>(); 
+		List<Integer> t_m_no_list = new ArrayList<Integer>(); 
+		
+		for(int i = 0; i < Tlist.size(); i++) {
+			t_no_list.add(Tlist.get(i).getT_no()); 
+			t_m_no_list.add(Tlist.get(i).getM_no());
+		}
+		// t_no 를 받아서 그에 맞게 띄워주기
+		log.info(t_no_list+"입니다잇"); 
+		model.addAttribute("t_no",t_no_list);
+		
+		
+		
+		
+		model.addAttribute("member", mainService.getMember(t_m_no_list));
+		model.addAttribute("review", mainService.getReview(t_no_list));
+		model.addAttribute("trainer",mainService.getAllTrainerT_no(t_no_list));
+		 
+		
 		
 		
 		int rCount = mainService.getReviewCount(1);
@@ -97,7 +117,7 @@ public class mainController {
 		log.info(m_no);
 		model.addAttribute("trainer",mainService.getTrainer(t_no));
 		model.addAttribute("member",mainService.getOneMember(m_no));
-		model.addAttribute("review",mainService.getReview(t_no));
+		//model.addAttribute("review",mainService.getReview(t_no));
 	
 		
 	}

@@ -2,6 +2,8 @@ package com.goldDog.persistence.sungmin;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
@@ -11,7 +13,8 @@ public interface MainMapper {
 	
 	
 	// 맴버 정보 가져오기 페이징 처리 된 버젼
-	public List<MemberVO> getMember(Criteria cri); 
+	public List<MemberVO> getAllMember(); 
+	public List<MemberVO> getMember(List<Integer> list); 
 	
 	// 맴버 한명의 정보 가져오기
 	public MemberVO getOneMember(int m_no);
@@ -21,10 +24,12 @@ public interface MainMapper {
 	
 	//전체 훈련사 리스트 가져오기
 	public List<TrainerVO> getAllTrainer();
+	//전체 훈련사 T_no 가져오기
+	public List<TrainerVO> getAllTrainerT_no(List<Integer> list);
 	
 	
 	//모든리뷰 가져오기 
-	public List<ReviewVO> getReview(int m_no);
+	public List<ReviewVO> getReview(List<Integer> list);
 	
 	//훈련사 한명에 해당하는 리뷰 갯수 가져오기
 	public int getReviewCount(int t_no);
