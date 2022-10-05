@@ -32,6 +32,14 @@ public interface MemberMapper {
 	//회원 삭제
 	public int deleteMember(String m_no);
 	
+	//
+	public int idCheck(String m_id);
+	
+	//
+	public int updatePw(MemberVO member);
+	
+	//getMemberEmail
+	public MemberVO getMemberEmail(String m_id);
 	
 	
 }
