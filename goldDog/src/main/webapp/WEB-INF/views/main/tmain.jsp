@@ -263,7 +263,7 @@
 	            <div class="box">
 	              <div>
 	                <div class="img-box">
-	                  <a class="move" href="${trainer[t_no[i]-1].m_no}" id="${trainer[t_no[i]-1].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
+	                  <a class="move" href="${trainer[i].m_no}" id="${trainer[i].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
 	                </div>
 	                <div class="detail-box" >
 		                  <h5>닉네임 : ${member[i].m_nick}</h5>
@@ -271,14 +271,13 @@
 		                  <p>리뷰평점 : ${rAvg[i]}점 (${rTotal[i]})</p>
 		                  <p>훈련 가격 : ${trainer[i].t_price} 원</p>
 		                  <p>보유 자격증 : ${trainer[i].t_license}</p>
-		                  <p>m_no : ${trainer[t_no[i]-1].m_no}</p>
-		                  <p>t_no : ${trainer[t_no[i]-1].t_no}</p>
+		                  <p>m_no : ${trainer[i].m_no}</p>
+		                  <p>t_no : ${trainer[i].t_no}</p>
 	                </div>
 	                </div>
 	              </div>
 	            </div>
 	          
-		     
 	         </c:forEach>
           </div>
          </div>
@@ -304,7 +303,7 @@
 	</div>
    </div>
    
-     <form  id="pagingForm" action="/main/detailForm" >
+     <form  id="pagingForm" action="/main/detaisdasdaslFm" >
 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
 		<input type="hidden" name="sel" value="${pager.cri.sel}" />
@@ -361,6 +360,7 @@
 		$(document).ready(function(){
 			
 		let pagingForm = $("#pagingForm"); // 숨긴 폼태그 가져오기 	
+		
 		// 제목클릭시 detailForm로 넘어가는 처리
 		$(".move").on("click", function(e){
 			e.preventDefault(); 

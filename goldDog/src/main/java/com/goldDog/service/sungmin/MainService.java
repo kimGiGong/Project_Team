@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
@@ -40,6 +41,11 @@ public interface MainService {
 	//한 훈련사의 리뷰 총갯수 가져오기
 	public int getReviewCount(int t_no);
 
+	
+	
+	// 강아지 관련 메서드
+	// 사용자 m_no 으로 사용자에게 등록된 강아지 한마리 가져오기
+	public List<DogVO> getMyDog(int user_M_no);
 	
 	
 	
