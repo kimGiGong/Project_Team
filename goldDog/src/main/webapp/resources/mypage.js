@@ -8,3 +8,9 @@ function ondetails(id) {
 
 $(document).ready(function(){
 });	//ready
+
+ClassicEditor
+    .create( document.querySelector( '#HTMLeditor' ) )
+    .catch( error => {
+        console.error( error );
+    } );

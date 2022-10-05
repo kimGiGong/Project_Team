@@ -84,16 +84,14 @@
                         <hr class="mb-5">
                         <div class="row">
                         	<fieldset id="mapage_container">
-                        		<div class="item"> <img src="">이미지 </div>
-	                        		<div class="grid">
-									  <div class="item">1</div>
-									  <div class="item">2</div>
-									  <div class="item">3</div>
-									  <div class="item">4</div>
-									  <div class="item">5</div>
-									  <div class="item">6</div>
-									</div>
-                        		</table>
+                        		<div class="item"> <img class="mapageIMG" src=""></div>
+                        		<div class="grid">
+									<div class="item">이름 : ${ manager.m_name }</div>
+									<div class="item">휴대전화 : ${ manager.m_phone }</div>
+									<div class="item">닉네임 : ${ manager.m_nick }</div>
+									<div class="item">이메일 : ${ manager.m_email }</div>
+									<div class="item">이용서비스 : ${ manager.authList[0].auth }</div>
+								</div>
                         	</fieldset>
                         </div>
                     </section>

@@ -26,12 +26,18 @@ import lombok.extern.log4j.Log4j;
 public class mypageController {
 	
 	@Autowired
-	private MainService sungminService; 
+	private MainService sungminService;
+	
+	@Autowired
 	private memberService bumService; 
 	
 	@GetMapping("mypage")
-	public String viewMypage(/*HttpServletRequest request,*/ Model model) {
+	public String viewMypage(Authentication auth, Model model) {
 		
+		CustomUser user = (CustomUser)auth.getPrincipal();
+		String loginID = user.getUsername();
+		MemberVO member = bumService.getMember(loginID);
+		model.addAttribute("manager",member);
 		
 		return "mypage/mypage";
 	}
@@ -39,15 +45,34 @@ public class mypageController {
 	
 	@RequestMapping("manager")
 	public String viewManager(Authentication auth, Model model) {
+		if(auth == null) {
+			return "member/login"; 
+			
+		}else {
 		
-		CustomUser user = (CustomUser)auth.getPrincipal();
-		String loginID = user.getUsername();
-		System.out.println(loginID);
-		MemberVO member = bumService.getMember("1234");
-		model.addAttribute("manager",member);
-		
-		return "mypage/managerpage";
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			String loginID = user.getUsername();
+			MemberVO member = bumService.getMember(loginID);
+			model.addAttribute("manager",member);
+			
+			return "mypage/managerpage";
+		}
 	}
 	
+	@RequestMapping("selUpload")
+	public String viewSelUpload(Authentication auth, Model model) {
+		if(auth == null) {
+			return "member/login"; 
+			
+		}else {
+			
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			String loginID = user.getUsername();
+			MemberVO member = bumService.getMember(loginID);
+			model.addAttribute("manager",member);
+			
+			return "main/selUpload";
+		}
+	}
 
 }
