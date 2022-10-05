@@ -183,11 +183,16 @@ public class memberServiceImpl implements memberService{
 				pw += (char) ((Math.random() * 26) + 97);
 			}
 			vo.setM_pw(pw);
-			// 비밀번호 변경
+			sendEmail(vo, "findpw");
+			
+			
 			updatePw(vo);
 			
+			
+			String password = pw;
+			// 비밀번호 변경
+			
 			// 비밀번호 변경 메일 발송
-			sendEmail(vo, "findpw");
 
 			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			out.close();
