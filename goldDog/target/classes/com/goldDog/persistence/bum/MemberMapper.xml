@@ -73,7 +73,13 @@
 		select m_no from member where m_id = #{m_id}
 	</select>
 	
+	<update id="findPw" >
+		update member set m_pw = #{m_pw} where m_email = #{m_email} and m_id = #{m_id}
+	</update>
 	
+	<select id="findPwCheck" resultType="int">
+		select count(*) from member where m_email = #{m_email} and m_id = #{m_id}
+	</select>
 	
 
 </mapper>
