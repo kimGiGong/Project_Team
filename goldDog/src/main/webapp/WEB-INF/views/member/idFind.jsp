@@ -44,10 +44,12 @@
                                     </div>
                                     <br />
                                     <form class="user">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="이름">
+                                                <td> ${member.m_id} 우당탕당</td>
                                         </div>
                                         
                                         <div class="form-group">
