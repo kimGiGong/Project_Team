@@ -69,17 +69,22 @@
 		and m_id = #{m_id}
 	</select>
 	
+	<select id="getMemberEmail" resultType="com.goldDog.domain.MemberVO">
+		select * from member where m_id=#{m_id}
+		
+	</select>
+	
 	<select id="getMno" resultType="int">
 		select m_no from member where m_id = #{m_id}
 	</select>
 	
-	<update id="findPw" >
-		update member set m_pw = #{m_pw} where m_email = #{m_email} and m_id = #{m_id}
-	</update>
-	
-	<select id="findPwCheck" resultType="int">
-		select count(*) from member where m_email = #{m_email} and m_id = #{m_id}
+	<select id="idCheck" resultType="int">
+		select * from member where m_id = #{m_id}
 	</select>
 	
-
+	<update id="updatePw">
+		update member set m_pw=#{m_pw} where m_id=#{m_id}
+	</update>
+	
+	
 </mapper>

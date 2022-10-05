@@ -1,5 +1,7 @@
 package com.goldDog.service.bum;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
@@ -29,7 +31,21 @@ public interface memberService {
 		
 		// 회원 탈퇴 처리
 		public int deleteMember(MemberVO member);
-	
-	
+		
+		
+		//이메일발송
+		public void sendEmail(MemberVO vo, String div) throws Exception;
+
+		//비밀번호찾기
+		public void findPw(HttpServletResponse resp, MemberVO vo) throws Exception;
+		
+		//
+		public int idCheck(String m_id);
+		
+		public int updatePw(MemberVO member);
+		
+		// 회원 정보 가져오기
+		public MemberVO getMemberEmail(String m_id);
+
 	
 }
