@@ -144,190 +144,53 @@
     <!-- end header section -->
     
     
-	<h1>detail 페이지 입니다.</h1>
+	<h1>pushDetail 페이지 입니다.</h1>
 	
 	 <div class="container">
-	<table width="680" height="500">
-		<tr>
-			<td>사진</td>
-			<td>이름</td>
-			<td>${member.m_nick}</td>
-		</tr>
-		<tr>
-			<td>
-				<a>판매자 소개 </a>		
-			</td>
-			<td>
-				<a>특이사항</a>		
-			</td>
-			<td>
-				<a>리뷰</a>		
-			</td>
-		</tr>
-		<tr>
-			<td >자기소개</td>			
-			<td >${trainer.t_self}</td>
-		</tr>
-		<tr>
-			<td> 판매정보</td>	
-			<td> ${trainer.t_sel}</td>	
-		</tr>
-		<tr>
-			<td> 리뷰(${Ravg})</td>
-			<td> ${review[i].r_score}</td>
-		</tr>
-		<tr>
-			<td> 리뷰(${Ravg})</td>	
-			<c:forEach var="i" begin="0" end="5" step="1" >
-			<td> ${review[i].r_text}</td>
-			</c:forEach>
-		</tr>
-		
-		
+		<table width="680" height="500">
+			<tr>
+				<td>1.나의 강아지</td>
+				<td>로또</td>
+			</tr>
+			<tr>
+				<td>2.주소 선택</td>
+				<td>여기 radio</td>
+			</tr>
+			<tr>
+				<td >3.어떤 미용을 원하시나요</td>			
+				<td >여기 radio</td>
+			</tr>
+			<tr>
+				<td>3.출장시 주의사항을 적어주세요</td>	
+				<td> text 박스</td>	
+			</tr>
 	</table> 
-	
-	<table width="680" height="500">
-		<tr>
-			<td>완료</td>
-		</tr>
-		<tr>
-			<td>기본금액</td>
-			<td>${trainer.t_price}</td>
-		</tr>
-		<tr>
-			<td>가능한 날짜</td>
-			<td>달력api 올 곳</td>
-		</tr>
-		<tr>
-			<td>보유 자격증</td>
-			<td>${trainer.t_license}</td>
-		</tr>
-		<tr>
-			<td>경력</td>
-			<td>${trainer.t_career}</td>
-		</tr>
-		<tr>
-			<td> <button id="dogCheck">협의하기</button>  </td>
-		</tr>
+    </div>
 		
-	</table>
-	</div>
-	<!-- 펫 등록 되어있을시 띄울 모달 -->
-	<div class="modal fade" id="yesPet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-    		<div class="modal-content">
-	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="myModalLabel">내 강아지 선택</h5>
-	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          			<span aria-hidden="true">&times;</span>
-	        		</button>
-	      		</div>
-      			<div class="modal-body">
-      				<c:forEach var="i" begin="0" end="${petSize-1}" step="1">
-	       				<input type="radio" name="myDog" value="d_no"/>${petName[i]} 
-      				</c:forEach>
-      			</div>
-      			<div class="modal-footer">
-        			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      			</div>
-   			</div>
-  		</div>
-	</div> <!-- end 모달 -->
 	
-	
-	<!-- 펫 등록 안되어있을시 띄울 모달 -->
-	<div class="modal fade" id="noPet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-    		<div class="modal-content">
-	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="myModalLabel">금댕이</h5>
-	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          			<span aria-hidden="true">&times;</span>
-	        		</button>
-	      		</div>
-      			<div class="modal-body">
-        			등록된 펫이 없습니다. 등록하러 가시겠습니까?
-      			</div>
-      			<div class="modal-footer">
-        			<button type="button" class="btn btn-secondary" id="go" >등록하러가기</button>
-        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      			</div>
-   			</div>
-  		</div>
-	</div> <!-- end 모달 -->
-	
-	
-	<!-- 펫 등록 안되어있을시 띄울 모달 -->
-	<div class="modal fade" id="noId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-    		<div class="modal-content">
-	      		<div class="modal-header">
-	        		<h5 class="modal-title" id="myModalLabel">금댕이</h5>
-	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          			<span aria-hidden="true">&times;</span>
-	        		</button>
-	      		</div>
-      			<div class="modal-body">
-        			로그인 후 이용해 주세요
-      			</div>
-      			<div class="modal-footer">
-        			<button type="button" class="btn btn-secondary" id="goLogin" >확인</button>
-        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      			</div>
-   			</div>
-  		</div>
-	</div> <!-- end 모달 -->
-	
-	
-	
-	  <form id="addPet" action="/board/list">
+	  <form id="info" action="/board/list">
 		<!-- value 추가해야함 -->  
-       	<input type="hidden" name="m_no" />
+       		<input type="hidden" name="m_no" />
        </form>
 	
 	
 
 
  <%@ include file="../footer.jsp" %>
-	<script type="text/javascript">
+		<script type="text/javascript">
 		$(document).ready(function(){
+
 			
-			let result ="${result}";
-			function modalCheck(result){
-				if(result =='0'){
-					$("#noPet").modal("show");
-				}else if(result =='1'){
-					$("#yesPet").modal("show");	
-				}else if(result =='2'){
-					$("#noId").modal("show");	
-				}	
-			}
 			
-			//협의하기 눌렀을때 애견정보가 있는지 없는지
-			//let result ="${result}";
-			$("#dogCheck").on("click",function(e){
-				e.preventDefault(); 
-				console.log("펫등록확인모달.");
-				let result="${pet}"
-				modalCheck(result);
-			});
 			
-			// 모달 확인 누르면 이동하는 처리
-			let	addPet = $("#addPet")
-			$("#go").on("click",function(e){
-				console.log("펫등록하러간다.");
-				addPet.attr("action","/main/tmain");
-				addPet.submit();
-			});
 			
-			$("#goLogin").on("click",function(e){
-				console.log("아이디가 없군.");
-				addPet.attr("action","/member/login");
-				addPet.submit();
-			});
+			
+			
+			
 			
 			
 		});
+	
 		</script>
 	
 

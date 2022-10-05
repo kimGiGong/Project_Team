@@ -14,7 +14,7 @@
 	<table>
 		<tr>
 			<td>
-				hkhphdk		
+				${manager.m_id}
 			</td>
 		</tr>
 	</table> 

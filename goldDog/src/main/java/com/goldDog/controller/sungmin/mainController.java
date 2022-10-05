@@ -7,18 +7,22 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.PageDTO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
-import com.goldDog.service.bum.memberService;
+import com.goldDog.persistence.bum.MemberMapper;
+import com.goldDog.service.bum.domain.CustomUser;
 import com.goldDog.service.sungmin.MainService;
 
 
@@ -33,13 +37,9 @@ public class mainController {
 	
 	@Autowired
 	private MainService mainService;
-	private memberService memberService;
+	@Autowired
+	private MemberMapper memberService;
 	
-	
-	@RequestMapping("test01")
-	public void test() {
-		
-	}
 	
 	@GetMapping("premain")
 	public void premain() {
@@ -71,11 +71,12 @@ public class mainController {
 		
 		List<Double> total = new ArrayList<Double>(); 
 		List<Integer> rTotal = new ArrayList<Integer>();
-		int t_review_total = 0;
+		
 		//t_no를 받아서 훈련사 당 리뷰 평점 구하기
 		for(int i =0 ;i<t_no_list.size() ;i++) {
 			List<ReviewVO> re =mainService.getReview(t_no_list.get(i));
 				rTotal.add(re.size());
+				int t_review_total = 0;
 				for(int j=0 ;j<re.size() ;j++) {
 					t_review_total += re.get(j).getR_score();
 				}
@@ -86,13 +87,12 @@ public class mainController {
 				}
 		}
 		
+		
 		model.addAttribute("member", mainService.getMember(t_m_no_list));
 		model.addAttribute("rAvg", total); //리뷰 평점
 		model.addAttribute("rTotal", rTotal); //리뷰 총 갯수
 		model.addAttribute("trainer",mainService.getAllTrainerT_no(t_no_list));
 		model.addAttribute("pager", new PageDTO(cri, Tlist.size()));  
-		
-		
 
 	}
 	
@@ -105,14 +105,64 @@ public class mainController {
 	
 	
 	@GetMapping("detailForm")
-	public void detailForm(@Param("t_no") int t_no,@Param("m_no")int m_no, Model model) {
+	public void detailForm(@Param("t_no") int t_no,@Param("m_no")int m_no, Model model,Authentication auth ) {
 		log.info("디테일폼으로 왔다!");
 		log.info(t_no);
 		log.info(m_no);
 		model.addAttribute("trainer",mainService.getTrainer(t_no));
 		model.addAttribute("member",mainService.getOneMember(m_no));
-		//model.addAttribute("review",mainService.getReview(t_no));
-	
+		
+		List<ReviewVO> re = mainService.getReview(t_no);
+		int rTotal = 0; // 
+		double Ravg = 0;
+		//리뷰 평점 처리
+		for(int i =0 ;i<re.size() ;i++) {
+		rTotal +=re.get(i).getR_score();
+		}
+		Ravg=(double)rTotal/re.size();
+		
+		String Ravg1 =String.format("%.2f", Ravg); // 리뷰 뒤에 끊어주기
+		model.addAttribute("review",mainService.getReview(t_no));
+		
+		model.addAttribute("Ravg",Ravg1);
+		
+		
+		
+		//사용자가 로그인이 되어있다면 강아지 정보 보내주는 처리 
+		String userId=((CustomUser)auth.getPrincipal()).getUsername();
+		
+		log.info(userId+"=======================");
+		
+		if(userId!=null) {
+			MemberVO member= memberService.getMember(userId);
+			
+			List<AuthVO> list =member.getAuthList();
+			for(int i=0 ;i<list.size() ;i++) {
+					
+			}
+			
+			List<Integer> D_no = new ArrayList<Integer>();
+			List<String> myDogName = new ArrayList<String>();
+			
+			int user_M_no =member.getM_no();
+			List<DogVO> myDog =mainService.getMyDog(user_M_no);
+				for(int i=0 ;i<myDog.size() ;i++) {
+					D_no.add(myDog.get(i).getD_no());
+					myDogName.add(myDog.get(i).getD_name());
+				} 
+				model.addAttribute("d_no",D_no);
+				if(D_no.size()==0) {
+					model.addAttribute("pet",0);	
+				}else if (D_no.size()!=0) {
+					model.addAttribute("pet",1);
+					model.addAttribute("petSize",myDog.size());
+					model.addAttribute("petName",myDogName);
+				}
+		}else if(userId==null) {
+				//로그인 안하고 협상 눌렀을때 띄울 모달
+				model.addAttribute("pet",2);
+		}
+		
 		
 	}
 	
@@ -134,7 +184,8 @@ public class mainController {
 		
 		return "redirect:/main/tmain";
 	}
-
+	
+	
 	@GetMapping("addPetInfo")
 	public void addPetInfo() {
 		
@@ -142,6 +193,13 @@ public class mainController {
 		
 	}
 	
+	
+	@GetMapping("pushDetailForm")
+	public void pushDetailForm() {
+		
+		
+	}
+
 	
 	
 	

@@ -6,7 +6,7 @@
 	<!-- 맴버 여러명 가져오기 -->	
 	<select id="getMember" resultType="com.goldDog.domain.MemberVO">
 		select * from member where m_no in
-			<foreach collection="list" item="item" open="(" close=")" separator=",">
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
 			#{item}
 		</foreach> 
 	</select>
@@ -72,9 +72,15 @@
 		where m_no = #{m_no}
 	</update>
 		
+		
 	<!-- 트레이너 리뷰 평점-->
 	<select id="rAvg" resultType="int">
 		 select * from review where t_no=#{t_no}
+	</select>
+		
+	<!-- 사용자 한명에게 등록된 강아지 한마리 가져오기-->
+	<select id="getMyDog" resultType="com.goldDog.domain.DogVO">
+		 select * from dog where m_no=#{user_M_no}
 	</select>
 	
 

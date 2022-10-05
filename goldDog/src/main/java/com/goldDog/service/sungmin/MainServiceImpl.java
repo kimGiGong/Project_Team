@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
@@ -96,6 +97,12 @@ public class MainServiceImpl implements MainService {
 	public List<ReviewVO> getAllReview(int t_no) {
 		
 		return mapper.getAllReview(t_no);
+	}
+	
+	// 사용자 m_no 으로 사용자에게 등록된 강아지 한마리 가져오기
+	@Override
+	public List<DogVO> getMyDog(int user_M_no) {
+		return mapper.getMyDog(user_M_no);
 	}
 	
 

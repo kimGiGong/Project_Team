@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
@@ -41,8 +42,8 @@ public interface MainMapper {
 	//훈련사 한명에 해당하는 모든 리뷰 가져오기
 	public List<ReviewVO> getAllReview(int t_no);
 	
-	//public List<Integer> avg rAvg(int t_no,int rCount);
-	
+	//
+	public List<DogVO> getMyDog(int user_M_no);
 	
 	
 }
