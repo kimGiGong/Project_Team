@@ -7,4 +7,4 @@ function ondetails(id) {
 }
 
 $(document).ready(function(){
-});	//ready()
+});	//ready

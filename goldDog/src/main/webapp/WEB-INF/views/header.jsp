@@ -30,7 +30,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item ">
-                <a class="nav-link" href="tmain">Home </a>
+                <a class="nav-link" href="/manager">Home </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="main/hmain">훈련<span class="sr-only">(current)</span></a>
