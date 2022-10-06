@@ -510,14 +510,17 @@ a:focus {
   margin-top: 25px;
   background-color: #ffffff;
   border-radius: 10px;
-  color: #ffffff;
+  color: #4a4a4a;
+  display: grid;
   border-radius: 15px;
   overflow: hidden;
-  background: linear-gradient(to bottom, #f1f2f3 25px, #222831 25px);
+  background: #ffffff;
+  grid-template-columns: auto 1fr;
+  borderRadius: 1.5rem;
 }
 
 .food_section .box .img-box {
-  background: #f1f2f3;
+  background: #ffffff;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -528,20 +531,20 @@ a:focus {
       -ms-flex-align: center;
           align-items: center;
   height: 215px;
-  border-radius: 0 0 0 45px;
+  border-radius: 1.5rem 0 0 1.5rem;
   margin: -1px;
   padding: 25px;
 }
 
 .food_section .box .img-box img {
   max-width: 100%;
-  max-height: 145px;
+  max-height: 200px;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
 
 .food_section .box .detail-box {
-  padding: 25px;
+  padding: 15px;
 }
 
 .food_section .box .detail-box h5 {
