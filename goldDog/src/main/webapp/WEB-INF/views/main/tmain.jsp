@@ -261,7 +261,6 @@
 	         <c:forEach var="i" begin="0" end="4" step="1">
 	          <div class="col-sm-12 col-lg-12 all pizza">
 	            <div class="box">
-	              <div>
 	                <div class="img-box">
 	                  <a class="move" href="${trainer[i].m_no}" id="${trainer[i].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
 	                </div>
@@ -275,13 +274,11 @@
 		                  <p>t_no : ${trainer[i].t_no}</p>
 	                </div>
 	                </div>
-	              </div>
 	            </div>
 	          
 	         </c:forEach>
           </div>
          </div>
-       
    <div class="col-sm-12 col-md-12">
 		<ul class="pagination">
 			<c:if test="${pager.prev}">

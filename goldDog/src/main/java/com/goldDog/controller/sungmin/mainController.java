@@ -9,14 +9,17 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.DogVO;
+import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.PageDTO;
 import com.goldDog.domain.ReviewVO;
@@ -130,7 +133,7 @@ public class mainController {
 		System.out.println("auth : " + auth);
 		
 		
-		//사용자가 로그인이 되어있다면 강아지 정보 보내주는 처리 
+		//사용자가 로그인이 되어있다면 강아지 정보와 주소 보내주는 처리 
 		// 여기서 로그인 안했을때 오류가 뜸
 		if(auth != null) { // 로그인 
 			String userId=((CustomUser)auth.getPrincipal()).getUsername();
@@ -147,12 +150,19 @@ public class mainController {
 			
 			int user_M_no =member.getM_no();
 			List<DogVO> myDog =mainService.getMyDog(user_M_no);
+			List<AddressVO> address= mainService.getMyAddress(user_M_no);
 			
+				model.addAttribute("addrSize",address.size());
+				model.addAttribute("address",address);
+				
+			
+			// 로그인한 사람의 강아지들 불러오기
 			for(int i=0 ;i<myDog.size() ;i++) {
 				D_no.add(myDog.get(i).getD_no());
 				myDogName.add(myDog.get(i).getD_name());
 			} 
 			model.addAttribute("d_no",D_no);
+			model.addAttribute("m_no",member.getM_no());
 			
 			if(D_no.size()==0) {
 				model.addAttribute("pet",0);	
@@ -169,6 +179,13 @@ public class mainController {
 			model.addAttribute("pet",2);
 			model.addAttribute("petSize",2);//임의로 지정해준것
 		}
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -208,7 +225,41 @@ public class mainController {
 		
 	}
 
+	@PostMapping("insertEst")
+	public String insertEst(DogVO dog, EstimateVO est, Model model,@Param("t_m_no") int t_m_no) {
+		   
+		
+		//강아지 정보 불러오기
+		int d_no = dog.getD_no();
+		DogVO dogInfo = mainService.getOneDog(d_no);
+		
+		//견주 m_no , 훈련사 m_no, 강아지 고유넘 d_no 사용해서 견적서 추가 셋팅   
+		est.setM_no_puppy(dogInfo.getM_no());
+		est.setM_no_manager(t_m_no);
+		est.setP_no(d_no);
+		
+		// 견적서 생성
+		mainService.insertEst(est);
+		log.info("생성 완료");
+		
+		
+//		//사용자의 견적서 불러오기
+//		EstimateVO test1 = mainService.getEstimate(dogInfo.getM_no());
+//		model.addAttribute("est", test1);
+//		model.addAttribute("dog", dogInfo);
+		
+		return "redirect:/main/tmain" ;
+		
+	}
 	
+	
+	@GetMapping("test01")
+	public void test011(Model model) {
+		
+		
+		
+		
+	}
 	
 	
 	

@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.DogVO;
+import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
@@ -39,11 +41,23 @@ public interface MainMapper {
 	//트레이너 판매정보 등록
 	public int addTinfo(TrainerVO trainer);
 
+	//견적서 넣어주는 메서드
+	public int insertEst(EstimateVO est);
+	
 	//훈련사 한명에 해당하는 모든 리뷰 가져오기
 	public List<ReviewVO> getAllReview(int t_no);
 	
-	//
+	//견주의 모든 강아지 가져오는 메서드
 	public List<DogVO> getMyDog(int user_M_no);
+	
+	//강아지 한마리 가져오는 메서드
+	public DogVO getOneDog(int d_no); 
+	
+	//사용자가 가지고 있는 견적서 불러오기
+	public EstimateVO getEstimate(int m_no);
+	
+	//사용자가 가지고 있는 주소 리스트 불러오기
+	public List<AddressVO> getMyAddress(int user_M_no);
 	
 	
 }
