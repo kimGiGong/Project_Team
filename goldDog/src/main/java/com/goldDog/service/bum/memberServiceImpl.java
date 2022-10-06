@@ -111,9 +111,6 @@ public class memberServiceImpl implements memberService{
 		return mapper.getMno(m_id);
 				
 	}
-
-	
-	
 	
 	@Override
 	public void sendEmail(MemberVO vo, String div) throws Exception {
@@ -121,16 +118,16 @@ public class memberServiceImpl implements memberService{
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com"; //네이버 이용시 smtp.naver.com
 		String hostSMTPid = "cqt95@naver.com";
-		String hostSMTPpwd = "qjatjr95!";
+		String hostSMTPpwd = "qjatjr95zz!!";
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "cqt95@naver.com";
-		String fromName = "admin";
+		String fromName = "금댕이";
 		String subject = "";
 		String msg = "";
 
 		if(div.equals("findpw")) {
-			subject = "베프마켓 임시 비밀번호 입니다.";
+			subject = "금댕이 임시 비밀번호 입니다.";
 			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
 			msg += "<h3 style='color: blue;'>";
 			msg += vo.getM_id() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
@@ -185,18 +182,28 @@ public class memberServiceImpl implements memberService{
 			vo.setM_pw(pw);
 			sendEmail(vo, "findpw");
 			
-			
+			// 비밀번호 변경
 			updatePw(vo);
 			
-			
 			String password = pw;
-			// 비밀번호 변경
 			
 			// 비밀번호 변경 메일 발송
 
 			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			out.close();
 		}
+		
+	}
+	
+	@Override
+	public void sendIdEmail(MemberVO vo, String div) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void findId(HttpServletResponse resp, MemberVO vo) throws Exception {
+		// TODO Auto-generated method stub
 		
 	}
 
@@ -219,6 +226,9 @@ public class memberServiceImpl implements memberService{
 	public MemberVO getMemberEmail(String m_id) {
 		return mapper.getMemberEmail(m_id);
 	}
+
+	
+
 	
 
 	
