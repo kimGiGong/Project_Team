@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="_csrf"  content="${_csrf.token}">
+	<meta name="_csrf_header"  content="${_csrf.headerName}">
 
     <title>SB Admin 2 - Register</title>
 
@@ -20,10 +22,30 @@
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
     <!-- Custom styles for this template-->
     <link href="/resources/bum/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+		.id_ok{
+		color:#008000;
+		display: none;
+		}
+		.id_already{
+		color:#6A82FB; 
+		display: none;
+		}
+		.email_ok{
+		color:#008000;
+		display: none;
+		}
+		.email_already{
+		color:#6A82FB; 
+		display: none;
+		}
+	</style>
     <!-- 주소 -->
-    
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -81,6 +103,71 @@
 	            }
 	        }).open();
 	    }
+
+	function checkId(){
+		
+		let token =$("meta[name='_csrf']").attr("content");      
+        let header=$("meta[name='_csrf_header']").attr("content");
+		
+        var id = $('#m_id').val(); //id값이 "id"인 입력란의 값을 저장
+        
+        $.ajax({
+            url:'/member/idCheck.json', //Controller에서 요청 받을 주소
+            type:'post', //POST 방식으로 전달
+            data: {m_id:id},
+       		beforeSend: function(xhr){
+               	xhr.setRequestHeader(header,token);
+            },
+            success:function(result){ //컨트롤러에서 넘어온 cnt값을 받는다 
+            	console.log(result);
+                if(result == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+                    $('.id_ok').css("display","inline-block"); 
+                    $('.id_already').css("display", "none");
+                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                    $('.id_already').css("display","inline-block");
+                    $('.id_ok').css("display", "none");
+                    //alert("이미 사용중인 아이디입니다. 다시 입력해주세요.");
+                    $('#m_id').val('');
+                }
+            },
+            error:function(){
+                alert("에러입니다");
+            }
+		});
+   	}; 
+   	
+	function checkEmail(){
+			
+		let token =$("meta[name='_csrf']").attr("content");      
+        let header=$("meta[name='_csrf_header']").attr("content");
+		
+        var m_email = $('#m_email').val(); //m_email값이 "m_email"인 입력란의 값을 저장
+        
+        $.ajax({
+            url:'/member/emailCheck.json', //Controller에서 요청 받을 주소
+            type:'post', //POST 방식으로 전달
+            data: {m_email:m_email},
+       		beforeSend: function(xhr){
+               	xhr.setRequestHeader(header,token);
+            },
+            success:function(result){ //컨트롤러에서 넘어온 result값을 받는다 
+            	console.log(result);
+                if(result == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 이메일
+                    $('.email_ok').css("display","inline-block"); 
+                    $('.email_already').css("display", "none");
+                } else { // cnt가 1일 경우 -> 이미 존재하는 이메일
+                    $('.email_already').css("display","inline-block");
+                    $('.email_ok').css("display", "none");
+                    //alert("이미 사용중인 이메일입니다. 다시 입력해주세요.");
+                    $('#m_email').val('');
+                }
+            },
+            error:function(){
+                alert("에러입니다");
+			}
+		});
+	}; 
+   	
 	</script>
 	
 </head>
@@ -102,15 +189,11 @@
 	                                <h1 class="h4 text-gray-900 mb-4">Create an ID !</h1>
 	                            </div>
 	                            <form class="user">
-	                                <div class="form-group row">
-	                                    <div class="col-sm-9 mb-6 mb-sm-0">
-	                                        <input type="text" class="form-control form-control-user" name="m_id" placeholder="아이디">
-	                                    </div>
-	                                    <div class="col-sm-3">
-	                                        <input type="button" class="form-control form-control-user" name="m_ck" value="중복확인" >
-	                                    </div>
+                                    <div class="form-group">
+	                                    <input type="text" class="form-control form-control-user" id="m_id" name="m_id" onchange="checkId()"  placeholder="아이디">
 	                                </div>
-	                               
+                                        <span class="id_ok">사용 가능한 아이디입니다.</span>
+										<span class="id_already">중복된 아이디입니다.</span>
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
 	                                        <input type="password" class="form-control form-control-user" name="m_pw" placeholder="비밀번호">
@@ -128,8 +211,10 @@
 	                                    </div>
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="email" class="form-control form-control-user" name="m_email" aria-describedby="emailHelp" placeholder="Email">
+	                                    <input type="email" class="form-control form-control-user" id="m_email" name="m_email" aria-describedby="emailHelp" onchange="checkEmail()" placeholder="Email">
 	                                </div>
+	                                 	<span class="email_ok">사용 가능한 이메일입니다.</span>
+										<span class="email_already">중복된 이메일입니다.</span>
 	                                <div class="form-group">
 	                                    <input type="text" class="form-control form-control-user" name="m_phone" placeholder="전화번호">
 	                                </div>
