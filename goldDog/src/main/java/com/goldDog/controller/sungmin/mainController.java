@@ -105,7 +105,7 @@ public class mainController {
 	
 	
 	@GetMapping("detailForm")
-	public void detailForm(@Param("t_no") int t_no,@Param("m_no")int m_no, Model model,Authentication auth ) {
+	public void detailForm(@Param("t_no") int t_no,@Param("m_no")int m_no, Model model, Authentication auth) {
 		log.info("디테일폼으로 왔다!");
 		log.info(t_no);
 		log.info(m_no);
@@ -127,13 +127,14 @@ public class mainController {
 		model.addAttribute("Ravg",Ravg1);
 		
 		
+		System.out.println("auth : " + auth);
+		
 		
 		//사용자가 로그인이 되어있다면 강아지 정보 보내주는 처리 
-		String userId=((CustomUser)auth.getPrincipal()).getUsername();
-		
-		log.info(userId+"=======================");
-		
-		if(userId!=null) {
+		// 여기서 로그인 안했을때 오류가 뜸
+		if(auth != null) { // 로그인 
+			String userId=((CustomUser)auth.getPrincipal()).getUsername();
+			log.info(userId+"=======================");
 			MemberVO member= memberService.getMember(userId);
 			
 			List<AuthVO> list =member.getAuthList();
@@ -146,22 +147,29 @@ public class mainController {
 			
 			int user_M_no =member.getM_no();
 			List<DogVO> myDog =mainService.getMyDog(user_M_no);
-				for(int i=0 ;i<myDog.size() ;i++) {
-					D_no.add(myDog.get(i).getD_no());
-					myDogName.add(myDog.get(i).getD_name());
-				} 
-				model.addAttribute("d_no",D_no);
-				if(D_no.size()==0) {
-					model.addAttribute("pet",0);	
-				}else if (D_no.size()!=0) {
-					model.addAttribute("pet",1);
-					model.addAttribute("petSize",myDog.size());
-					model.addAttribute("petName",myDogName);
-				}
-		}else if(userId==null) {
-				//로그인 안하고 협상 눌렀을때 띄울 모달
-				model.addAttribute("pet",2);
+			
+			for(int i=0 ;i<myDog.size() ;i++) {
+				D_no.add(myDog.get(i).getD_no());
+				myDogName.add(myDog.get(i).getD_name());
+			} 
+			model.addAttribute("d_no",D_no);
+			
+			if(D_no.size()==0) {
+				model.addAttribute("pet",0);	
+				model.addAttribute("petSize",2);//임의로 지정해준것
+				
+			}else if (D_no.size()!=0) {
+				model.addAttribute("pet",1);
+				model.addAttribute("petSize",myDog.size());
+				model.addAttribute("petName",myDogName);
+			}
+			
+		}else { // 로그아웃
+			//로그인 안하고 협상 눌렀을때 띄울 모달
+			model.addAttribute("pet",2);
+			model.addAttribute("petSize",2);//임의로 지정해준것
 		}
+		
 		
 		
 	}

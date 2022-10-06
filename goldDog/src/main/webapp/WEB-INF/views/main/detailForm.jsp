@@ -293,6 +293,7 @@
 		$(document).ready(function(){
 			
 			let result ="${result}";
+			
 			function modalCheck(result){
 				if(result =='0'){
 					$("#noPet").modal("show");
@@ -309,6 +310,7 @@
 				e.preventDefault(); 
 				console.log("펫등록확인모달.");
 				let result="${pet}"
+				
 				modalCheck(result);
 			});
 			
