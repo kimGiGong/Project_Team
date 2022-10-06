@@ -5,6 +5,7 @@ import java.util.List;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.DogVO;
+import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
@@ -46,10 +47,16 @@ public interface MainService {
 	// 강아지 관련 메서드
 	// 사용자 m_no 으로 사용자에게 등록된 강아지 한마리 가져오기
 	public List<DogVO> getMyDog(int user_M_no);
+	// D_no 로 강아지 정보 하나 가져오기
+	public DogVO getOneDog(int d_no); 
 	
 	
 	
+	//회원이 협의하기 눌렀을때 견적서 만들어 주는 메서드
+	public int insertEst(EstimateVO est);
 	
+	//견적서 정보 불러오기
+	public EstimateVO getEstimate(int m_no);
 	
 	//지역정보 가져오기
 	public AddressVO address();
@@ -57,7 +64,8 @@ public interface MainService {
 	//훈련사 판매등록
 	public int addTinfo(TrainerVO trainer);	
 	 
-	
+	//회원 한명이 가지고 있는 주소 리스트 리턴
+	public List<AddressVO> getMyAddress(int user_M_no);
 
 	
 

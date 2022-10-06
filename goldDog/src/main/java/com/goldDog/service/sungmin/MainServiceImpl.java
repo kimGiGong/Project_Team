@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.DogVO;
+import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
@@ -81,7 +82,6 @@ public class MainServiceImpl implements MainService {
 
 	@Override
 	public AddressVO address() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -105,7 +105,33 @@ public class MainServiceImpl implements MainService {
 		return mapper.getMyDog(user_M_no);
 	}
 	
-
+	//견적서 만들어서 집어넣어주는 클래스
+	@Override
+	public int insertEst(EstimateVO est) {
+		return mapper.insertEst(est);
+	}
+	
+	//강아지 한마리 가져오는 메서드
+	@Override
+	public DogVO getOneDog(int d_no) {
+		return mapper.getOneDog(d_no);
+	}
+	
+	//사용자가 가지고 있는 견적서 불러오기
+	@Override
+	public EstimateVO getEstimate(int m_no) {
+		return mapper.getEstimate(m_no);
+	}
+	
+	
+	//사용자가 가지고 있는 주소 가져오는 메서드
+	@Override
+	public List<AddressVO> getMyAddress(int user_M_no) {
+		
+		return mapper.getMyAddress(user_M_no);
+	}
+	
+	
 
 
 	
