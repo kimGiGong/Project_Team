@@ -32,6 +32,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 		<beans:property name="order" value="0"></beans:property>	
 	</beans:bean>
+	
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -52,5 +53,7 @@
 	<security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
 	
 	
+	<!-- 이미지 업로드 multipartResolver -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
 </beans:beans>
