@@ -122,6 +122,7 @@
             	console.log(result);
                 if(result == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
                     $('.id_ok').css("display","inline-block"); 
+                    $('.id_ok').css("display","inline-block"); 
                     $('.id_already').css("display", "none");
                 } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
                     $('.id_already').css("display","inline-block");
@@ -191,9 +192,9 @@
 	                            <form class="user">
                                     <div class="form-group">
 	                                    <input type="text" class="form-control form-control-user" id="m_id" name="m_id" onchange="checkId()"  placeholder="아이디">
-	                                </div>
                                         <span class="id_ok">사용 가능한 아이디입니다.</span>
 										<span class="id_already">중복된 아이디입니다.</span>
+	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
 	                                        <input type="password" class="form-control form-control-user" name="m_pw" placeholder="비밀번호">
@@ -212,9 +213,9 @@
 	                                </div>
 	                                <div class="form-group">
 	                                    <input type="email" class="form-control form-control-user" id="m_email" name="m_email" aria-describedby="emailHelp" onchange="checkEmail()" placeholder="Email">
-	                                </div>
 	                                 	<span class="email_ok">사용 가능한 이메일입니다.</span>
 										<span class="email_already">중복된 이메일입니다.</span>
+	                                </div>
 	                                <div class="form-group">
 	                                    <input type="text" class="form-control form-control-user" name="m_phone" placeholder="전화번호">
 	                                </div>
