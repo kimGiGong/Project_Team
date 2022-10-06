@@ -71,20 +71,37 @@
 	
 	<select id="getMemberEmail" resultType="com.goldDog.domain.MemberVO">
 		select * from member where m_id=#{m_id}
-		
+	</select>
+	
+	<select id="getNameEmail" resultType="com.goldDog.domain.MemberVO">
+		select * from member where m_email=#{m_email}
 	</select>
 	
 	<select id="getMno" resultType="int">
 		select m_no from member where m_id = #{m_id}
 	</select>
-	
+	<!-- 
 	<select id="idCheck" resultType="int">
-		select * from member where m_id = #{m_id}
+		select count(*) from member where m_id = #{m_id}
+	</select>  -->
+	
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(m_id) FROM MEMBER WHERE m_id= #{m_id}
+	</select> 
+	
+	<select id="emailCheck" parameterType="String" resultType="int">
+		SELECT COUNT(m_email) FROM MEMBER WHERE m_email= #{m_email}
+	</select> 
+	
+	<select id="nameCheck" resultType="int">
+		select count(*) from member where m_name = #{m_name}
 	</select>
 	
 	<update id="updatePw">
 		update member set m_pw=#{m_pw} where m_id=#{m_id}
 	</update>
+	
+	
 	
 	
 </mapper>

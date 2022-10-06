@@ -165,7 +165,7 @@ public class memberServiceImpl implements memberService{
 		MemberVO ck = mapper.getMemberEmail(vo.getM_id());
 		PrintWriter out = response.getWriter();
 		// 가입된 아이디가 없으면
-		if(mapper.idCheck(vo.getM_id()) == 0) {
+		if(mapper.idCheck(vo.getM_id()) == 0 ) {
 			out.print("등록되지 않은 아이디입니다.");
 			out.close();
 		}
@@ -180,15 +180,13 @@ public class memberServiceImpl implements memberService{
 				pw += (char) ((Math.random() * 26) + 97);
 			}
 			vo.setM_pw(pw);
+			
+			// 비밀번호 변경 메일 발송
 			sendEmail(vo, "findpw");
 			
 			// 비밀번호 변경
 			updatePw(vo);
 			
-			String password = pw;
-			
-			// 비밀번호 변경 메일 발송
-
 			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			out.close();
 		}
@@ -197,19 +195,87 @@ public class memberServiceImpl implements memberService{
 	
 	@Override
 	public void sendIdEmail(MemberVO vo, String div) throws Exception {
-		// TODO Auto-generated method stub
-		
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.naver.com"; //네이버 이용시 smtp.naver.com
+		String hostSMTPid = "cqt95@naver.com";
+		String hostSMTPpwd = "qjatjr95zz!!";
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "cqt95@naver.com";
+		String fromName = "금댕이";
+		String subject = "";
+		String msg = "";
+
+		if(div.equals("findId")) {
+			subject = "금댕이 아이디 입니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h3 style='color: blue;'>";
+			msg += vo.getM_name() + "님의 아이디 입니다.</h3>";
+			msg += "<p>아이디 : ";
+			msg += vo.getM_id() + "</p></div>";
+		}
+
+		// 받는 사람 E-Mail 주소
+		String mail = vo.getM_email();
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(587); //네이버 이용시 587
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+		}
 	}
 	
 	@Override
-	public void findId(HttpServletResponse resp, MemberVO vo) throws Exception {
-		// TODO Auto-generated method stub
+	public void findId(HttpServletResponse response, MemberVO vo) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		
+		MemberVO ck = mapper.getNameEmail(vo.getM_email());
+		PrintWriter out = response.getWriter();
+		// 가입된 아이디가 없으면
+		if(mapper.nameCheck(vo.getM_name()) == 0) {
+			out.print("등록되지 않은 이름입니다.");
+			out.close();
+		}
+		// 가입된 이메일이 아니면
+		else if(!vo.getM_email().equals(ck.getM_email())) {
+			out.print("등록되지 않은 이메일입니다.");
+			out.close();
+		}else {
+			
+			// 아이디 메일 발송
+			sendIdEmail(ck, "findId");
+			
+			out.print("이메일로 아이디를 발송하였습니다.");
+			out.close();
+			
+		}
 		
 	}
 
 	@Override
 	public int idCheck(String m_id) {
-		return mapper.idCheck(m_id); 
+		int result = mapper.idCheck(m_id);
+		System.out.println("result: " + result);
+		return result;
+	}
+	@Override
+	public int emailCheck(String m_email) {
+		int result = mapper.emailCheck(m_email);
+		System.out.println("result: " + result);
+		return result;
 	}
 
 	@Override
@@ -221,11 +287,25 @@ public class memberServiceImpl implements memberService{
 		//int result2 = mapper.addaddress(address);
 		return result1;
 	}
-
+	
 	@Override
+	public int nameCheck(String m_name) {
+		return mapper.nameCheck(m_name); 
+	}
+
+	@Override 
 	public MemberVO getMemberEmail(String m_id) {
 		return mapper.getMemberEmail(m_id);
 	}
+
+	@Override
+	public MemberVO getNameEmail(String m_email) {
+		return mapper.getNameEmail(m_email); 
+	}
+
+	
+
+	
 
 	
 

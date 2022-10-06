@@ -9,6 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_csrf"  content="${_csrf.token}">
+	<meta name="_csrf_header"  content="${_csrf.headerName}">
 
     <title>SB Admin 2 - Forgot Password</title>
 
@@ -20,11 +25,38 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/bum/css/sb-admin-2.min.css" rel="stylesheet">
-
+    
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function(){
+				
+				let token =$("meta[name='_csrf']").attr("content");      
+		        let header=$("meta[name='_csrf_header']").attr("content");
+				
+				$(function(){
+					$("#findBtn").click(function(){
+						$.ajax({
+							url : "/member/idFind",
+							type : "POST",
+							data : {
+								m_name : $("#name").val(),
+								m_email : $("#email").val()
+							},
+		               		beforeSend: function(xhr){
+		                   	xhr.setRequestHeader(header,token);
+		                	},
+							success : function(result) {
+								alert(result);
+							},
+						})
+					});
+				});
+			});
+		</script>
 </head>
 
 <body class="bg-gradient-primary">
-
+ <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
     <div class="container">
 
         <!-- Outer Row -->
@@ -44,22 +76,20 @@
                                     </div>
                                     <br />
                                     <form class="user">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
+                                   
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="이름">
-                                                <td> ${member.m_id} 우당탕당</td>
+                                            <input type="text" class="form-control form-control-user" id="name" name="name"
+                                            	aria-describedby="emailHelp" placeholder="이름" required>
                                         </div>
                                         
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email">
+                                            <input type="email" class="form-control form-control-user" id="email" name="email" 
+                                            	aria-describedby="emailHelp" placeholder="Email" required>
                                         </div>
                                         <a href="login.html" class="btn btn-primary btn-user btn-block">
                                             Send ID
                                         </a>
+                                        <button type="button" id="findBtn" class="btn btn-primary btn-user btn-block">Send Password</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

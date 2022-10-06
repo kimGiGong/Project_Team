@@ -32,27 +32,33 @@ public interface memberService {
 		// 회원 탈퇴 처리
 		public int deleteMember(MemberVO member);
 		
-		
 		//비밀번호 이메일발송
 		public void sendEmail(MemberVO vo, String div) throws Exception;
 
 		//비밀번호찾기
 		public void findPw(HttpServletResponse resp, MemberVO vo) throws Exception;
 		
-		//비밀번호 이메일발송
+		//아이디 확인
+		public int idCheck(String m_id);
+		
+		//이메일 확인
+		public int emailCheck(String m_email);
+		
+		//아이디 이메일발송
 		public void sendIdEmail(MemberVO vo, String div) throws Exception;
 		
 		//아이디찾기
 		public void findId(HttpServletResponse resp, MemberVO vo) throws Exception;
 		
-		//아이디 확인
-		public int idCheck(String m_id);
-		
+		//이름 확인
+		public int nameCheck(String m_id);
+				
 		//비밀번호 업데이트
 		public int updatePw(MemberVO member);
 		
-		// 회원 정보 가져오기
+		// 회원 정보 가져오기 (아이디)
 		public MemberVO getMemberEmail(String m_id);
 
-	
+		// 회원 정보 가져오기 (이름)
+		public MemberVO getNameEmail(String m_email);
 }

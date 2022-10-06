@@ -32,14 +32,24 @@ public interface MemberMapper {
 	//회원 삭제
 	public int deleteMember(String m_no);
 	
-	//
+	//아이디 확인
 	public int idCheck(String m_id);
 	
-	//
+	//이메일 확인
+	public int emailCheck(String m_email);
+	
+	//이름 확인
+	public int nameCheck(String m_name);
+	
+	//비밀번호 업데이트
 	public int updatePw(MemberVO member);
 	
 	//getMemberEmail
 	public MemberVO getMemberEmail(String m_id);
+	
+	//getNameEmail
+	public MemberVO getNameEmail(String m_email);
+	
 	
 	
 }
