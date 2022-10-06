@@ -98,37 +98,6 @@
                    c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
                     </g>
                   </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                  <g>
-                  </g>
-                </svg>
               </a>
               
               <form class="form-inline">
@@ -247,7 +216,7 @@
           <div class="col-lg-2  all pizza">
    			<button class="btn btn-light">검색</button>
           </div>
-          <div class="col-lg-2 offset-lg-6 all pizza">
+          <div class="col-lg-2 offset-lg-6 all pizza" style="">
           			<select name="sel">
           				<option value=""> 정   렬 </option>
           				<option value="W"> 리뷰 평점순</option>
@@ -260,9 +229,10 @@
         	
 	         <c:forEach var="i" begin="0" end="4" step="1">
 	          <div class="col-sm-12 col-lg-12 all pizza">
-	            <div class="box">
-	                <div class="img-box">
-	                  <a class="move" href="${trainer[i].m_no}" id="${trainer[i].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="300" height="190px"></a> 
+	                <span class="border-top"></span>
+	            <div class="box" style="border: solid 2px #008294;">
+	                <div class="img-box" style="padding: 25px;">
+	                  <a class="move" href="${trainer[i].m_no}" id="${trainer[i].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
 	                </div>
 	                <div class="detail-box" >
 		                  <h5>닉네임 : ${member[i].m_nick}</h5>
@@ -270,8 +240,7 @@
 		                  <p>리뷰평점 : ${rAvg[i]}점 (${rTotal[i]})</p>
 		                  <p>훈련 가격 : ${trainer[i].t_price} 원</p>
 		                  <p>보유 자격증 : ${trainer[i].t_license}</p>
-		                  <p>m_no : ${trainer[i].m_no}</p>
-		                  <p>t_no : ${trainer[i].t_no}</p>
+		                  <p>m_no : ${trainer[i].m_no} t_no : ${trainer[i].t_no}</p>
 	                </div>
 	                </div>
 	            </div>
