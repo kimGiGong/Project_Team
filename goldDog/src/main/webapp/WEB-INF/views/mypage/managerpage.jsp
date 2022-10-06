@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
     <link rel="stylesheet" href="/resources/team.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+    <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 
@@ -72,11 +72,11 @@
 	                                    External
 	                                </a>
 	                            </li>
-	                            <li class="nav-item">
+	                            <li class="nav-item" id="stackmoney">
 	                            	<div class="input-block">
-									  <input type="text" name="input-text" id="input-text" required spellcheck="false" value="0" >
+									  <input type="text" name="input-text" id="input-text" required spellcheck="false" value="0 원" >
 									  <span class="placeholder">
-									    누적금액
+									    정산 예정 금액
 									  </span>
 									</div>
 	                            </li>
@@ -89,7 +89,7 @@
                 <!-- Home section -->
                 <div class="tm-section-wrap">
                     <section id="mypage" class="tm-section">
-              <!--          <h3 class="tm-text-primary">${manager.m_name}</h3> -->
+              <!--      <h3 class="tm-text-primary">${manager.m_name}</h3> -->
                         <hr class="mb-5">
                         <div class="row">
                         	<fieldset id="mapage_container">
@@ -119,8 +119,11 @@
                     
                     <div>
                     	<div class="manager_info">
-                    	
-                    		<div id="HTMLeditor"></div>
+	                    	<form action="/amm" method="post">
+	                    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+								<div id="WriteEditor" name="t_sel"></div>
+								<input type="submit" value="저장!">
+	                    	</form>
                     	</div>
                     </div>
                     
@@ -202,6 +205,15 @@
 		</div> <!-- .row -->
 	</div> <!-- .container-fluid -->
 </div><!-- 바디메인 END -->
-	<script type="text/javascript" src="../../../resources/mypage.js"></script>
- </body>
- </html>
+
+<script type="text/javascript">	
+// 글쓰기 editor 및 사진 업로드 기능
+	CKEDITOR.replace('WriteEditor',
+		{filebrowserUploadUrl:"/ImgUpLoad/imageUpload.do"
+		});
+	CKEDITOR.config.width = '75%';
+	CKEDITOR.config.height = 400;
+</script>
+
+</body>
+</html>

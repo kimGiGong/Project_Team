@@ -21,13 +21,15 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		
 		log.error("접근거부핸들러 실행!!!*****");
+		log.info(request.getRequestURI());
+		log.info(request.getRequestURL());
 		log.info(accessDeniedException);
 		
 		//접근 제한시 처리할 것 있으면 처리해주기 
 		
-		
 		//접근 제한 에러 페이지로 이동
-		response.sendRedirect("/common/accessError");
+			response.sendRedirect("/common/accessError");
+		
 		
 	}
 
