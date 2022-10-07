@@ -1,6 +1,5 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="/resources/feane/css/bootstrap.css" />
 
@@ -20,7 +19,7 @@
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html" >
-            <h3>Gold DOG</h3>
+            <h3>금댕이</h3>
           </a>
 			<div style="width: 300px;"></div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,14 +31,22 @@
               <li class="nav-item ">
                 <a class="nav-link" href="/manager">Home </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="main/hmain">훈련<span class="sr-only">(current)</span></a>
+              <li class="nav-item" id="t" >
+                <a class="nav-link" href="/main/tmain">훈련<span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="main/hmain">미용</a>
+              <li class="nav-item active" id="h">
+                <a class="nav-link" href="/main/hmain">미용</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/member/login">로그인</a>
+                 	<sec:authorize access="isAuthenticated()">
+              		<form action="/logout" method="post" id="logoutForm" >
+              			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                		<a class="nav-link" href="#" id="logoutBtn">로그아웃</a>
+                	</form>
+              	</sec:authorize>
+              	<sec:authorize access="isAnonymous()">
+                	<a class="nav-link" href="/member/login">로그인</a>
+              	</sec:authorize>
               </li>
             </ul>
             <div class="user_option">
