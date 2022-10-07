@@ -76,20 +76,15 @@
                                     </div>
                                     <br />
                                     <form class="user">
-                                   
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="name" name="name"
                                             	aria-describedby="emailHelp" placeholder="이름" required>
                                         </div>
-                                        
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" id="email" name="email" 
                                             	aria-describedby="emailHelp" placeholder="Email" required>
                                         </div>
-                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                            Send ID
-                                        </a>
-                                        <button type="button" id="findBtn" class="btn btn-primary btn-user btn-block">Send Password</button>
+                                        <button type="button" id="findBtn" class="btn btn-primary btn-user btn-block">Send ID</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

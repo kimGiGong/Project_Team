@@ -44,6 +44,9 @@ public interface memberService {
 		//이메일 확인
 		public int emailCheck(String m_email);
 		
+		//닉네임 확인
+		public int nickCheck(String m_nick);
+		
 		//아이디 이메일발송
 		public void sendIdEmail(MemberVO vo, String div) throws Exception;
 		
