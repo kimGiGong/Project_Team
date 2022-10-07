@@ -1,5 +1,8 @@
 package com.goldDog.persistence.instance;
 
-public interface MyPageMapper {
+import com.goldDog.domain.AddressVO;
 
+public interface MyPageMapper {
+	
+	public AddressVO getAddress(int m_no);
 }
