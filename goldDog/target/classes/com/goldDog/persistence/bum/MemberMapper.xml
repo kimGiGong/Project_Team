@@ -34,10 +34,7 @@
 		where m_id=#{m_id}
 	</update>
 	
-	
 	<!-- 시큐리티 추가  -->
-	
-	
 	<!-- 테이블 묶기  -->
 	<resultMap type="com.goldDog.domain.MemberVO" id="memberMap">
 		<id property="m_no" column="m_no"/>
@@ -80,17 +77,17 @@
 	<select id="getMno" resultType="int">
 		select m_no from member where m_id = #{m_id}
 	</select>
-	<!-- 
-	<select id="idCheck" resultType="int">
-		select count(*) from member where m_id = #{m_id}
-	</select>  -->
 	
 	<select id="idCheck" parameterType="String" resultType="int">
-		SELECT COUNT(m_id) FROM MEMBER WHERE m_id= #{m_id}
+		select count(m_id) from member where m_id= #{m_id}
 	</select> 
 	
 	<select id="emailCheck" parameterType="String" resultType="int">
-		SELECT COUNT(m_email) FROM MEMBER WHERE m_email= #{m_email}
+		select count(m_email) from member where m_email= #{m_email}
+	</select> 
+	
+	<select id="nickCheck" parameterType="String" resultType="int">
+		select count(m_nick) from member where m_nick= #{m_nick}
 	</select> 
 	
 	<select id="nameCheck" resultType="int">
