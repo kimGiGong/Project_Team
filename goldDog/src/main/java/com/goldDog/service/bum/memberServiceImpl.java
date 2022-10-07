@@ -20,9 +20,6 @@ import lombok.extern.log4j.Log4j;
 @Service
 @Log4j
 public class memberServiceImpl implements memberService{
-	
-	//비밀번호 암호화를 위한 객체 자동 주입
-	
 	 
 	@Autowired 
 	private MemberMapper mapper;
@@ -40,7 +37,6 @@ public class memberServiceImpl implements memberService{
 		//int result2 = mapper.addaddress(address);
 		return result1;
 	}
-	
 	/* 회원 가입 주소 처리 */
 	@Override
 	public int addaddress(AddressVO address, int m_no) {
@@ -81,14 +77,6 @@ public class memberServiceImpl implements memberService{
 		return 0 ;
 		
 	}
-
-	/* 로그인 처리
-	@Override
-	public int idPwCheck(MemberVO member) {
-		int result = mapper.idPwCheck(member);	//mapper 메서드 실행시키고
-		return result;
-	} */
-	
 	@Override
 	public MemberVO getMember(String m_id) {
 		return mapper.getMember(m_id);
@@ -134,7 +122,6 @@ public class memberServiceImpl implements memberService{
 			msg += "<p>임시 비밀번호 : ";
 			msg += vo.getM_pw() + "</p></div>";
 		}
-
 		// 받는 사람 E-Mail 주소
 		String mail = vo.getM_email();
 		try {
@@ -155,7 +142,6 @@ public class memberServiceImpl implements memberService{
 		} catch (Exception e) {
 			System.out.println("메일발송 실패 : " + e);
 		}
-		
 	}
 
 	@Override
@@ -190,7 +176,6 @@ public class memberServiceImpl implements memberService{
 			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			out.close();
 		}
-		
 	}
 	
 	@Override
@@ -260,9 +245,7 @@ public class memberServiceImpl implements memberService{
 			
 			out.print("이메일로 아이디를 발송하였습니다.");
 			out.close();
-			
 		}
-		
 	}
 
 	@Override
@@ -274,6 +257,13 @@ public class memberServiceImpl implements memberService{
 	@Override
 	public int emailCheck(String m_email) {
 		int result = mapper.emailCheck(m_email);
+		System.out.println("result: " + result);
+		return result;
+	}
+
+	@Override
+	public int nickCheck(String m_nick) {
+		int result = mapper.nickCheck(m_nick);
 		System.out.println("result: " + result);
 		return result;
 	}
@@ -302,6 +292,7 @@ public class memberServiceImpl implements memberService{
 	public MemberVO getNameEmail(String m_email) {
 		return mapper.getNameEmail(m_email); 
 	}
+
 
 	
 

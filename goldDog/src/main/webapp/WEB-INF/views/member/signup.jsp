@@ -24,7 +24,6 @@
 
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
-
     <!-- Custom styles for this template-->
     <link href="/resources/bum/css/sb-admin-2.min.css" rel="stylesheet">
     <style>
@@ -41,6 +40,14 @@
 		display: none;
 		}
 		.email_already{
+		color:#6A82FB; 
+		display: none;
+		}
+		.nick_ok{
+		color:#008000;
+		display: none;
+		}
+		.nick_already{
 		color:#6A82FB; 
 		display: none;
 		}
@@ -120,11 +127,10 @@
             },
             success:function(result){ //컨트롤러에서 넘어온 cnt값을 받는다 
             	console.log(result);
-                if(result == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
-                    $('.id_ok').css("display","inline-block"); 
+                if(result == 0){ //result가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
                     $('.id_ok').css("display","inline-block"); 
                     $('.id_already').css("display", "none");
-                } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                } else { // result가 1일 경우 -> 이미 존재하는 아이디
                     $('.id_already').css("display","inline-block");
                     $('.id_ok').css("display", "none");
                     //alert("이미 사용중인 아이디입니다. 다시 입력해주세요.");
@@ -153,10 +159,10 @@
             },
             success:function(result){ //컨트롤러에서 넘어온 result값을 받는다 
             	console.log(result);
-                if(result == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 이메일
+                if(result == 0){ //result가 1이 아니면(=0일 경우) -> 사용 가능한 이메일
                     $('.email_ok').css("display","inline-block"); 
                     $('.email_already').css("display", "none");
-                } else { // cnt가 1일 경우 -> 이미 존재하는 이메일
+                } else { // result가 1일 경우 -> 이미 존재하는 이메일
                     $('.email_already').css("display","inline-block");
                     $('.email_ok').css("display", "none");
                     //alert("이미 사용중인 이메일입니다. 다시 입력해주세요.");
@@ -169,6 +175,56 @@
 		});
 	}; 
    	
+	function checkNick(){
+		
+		let token =$("meta[name='_csrf']").attr("content");      
+        let header=$("meta[name='_csrf_header']").attr("content");
+		
+        var m_nick = $('#m_nick').val(); //m_nick값이 "m_nick"인 입력란의 값을 저장
+        
+        $.ajax({
+            url:'/member/nickCheck.json', //Controller에서 요청 받을 주소
+            type:'post', //POST 방식으로 전달
+            data: {m_nick:m_nick},
+       		beforeSend: function(xhr){
+               	xhr.setRequestHeader(header,token);
+            },
+            success:function(result){ //컨트롤러에서 넘어온 result값을 받는다 
+            	console.log(result);
+                if(result == 0){ //result가 1이 아니면(=0일 경우) -> 사용 가능한 이메일
+                    $('.nick_ok').css("display","inline-block"); 
+                    $('.nick_already').css("display", "none");
+                } else { // result가 1일 경우 -> 이미 존재하는 이메일
+                    $('.nick_already').css("display","inline-block");
+                    $('.nick_ok').css("display", "none");
+                    //alert("이미 사용중인 이메일입니다. 다시 입력해주세요.");
+                    $('#m_nick').val('');
+                }
+            },
+            error:function(){
+                alert("에러입니다");
+			}
+		});
+	}; 
+	
+	function passConfirm() {
+		/* 비밀번호, 비밀번호 확인 입력창에 입력된 값을 비교해서 같다면 비밀번호 일치, 그렇지 않으면 불일치 라는 텍스트 출력.*/
+		/* document : 현재 문서를 의미함. 작성되고 있는 문서를 뜻함. */
+		/* getElementByID('아이디') : 아이디에 적힌 값을 가진 id의 value를 get을 해서 password 변수 넣기 */
+		var password = document.getElementById('password');					//비밀번호 
+		var passwordConfirm = document.getElementById('passwordConfirm');	//비밀번호 확인 값
+		var confrimMsg = document.getElementById('confirmMsg');				//확인 메세지
+		var correctColor = "#00ff00";	//맞았을 때 출력되는 색깔.
+		var wrongColor ="#ff0000";	//틀렸을 때 출력되는 색깔
+		
+		if(password.value == passwordConfirm.value){//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
+			confirmMsg.style.color = correctColor;/* span 태그의 ID(confirmMsg) 사용  */
+			confirmMsg.innerHTML ="비밀번호 일치";/* innerHTML : HTML 내부에 추가적인 내용을 넣을 때 사용하는 것. */
+		}else{
+			confirmMsg.style.color = wrongColor;
+			confirmMsg.innerHTML ="비밀번호 불일치";
+		}
+	}
 	</script>
 	
 </head>
@@ -208,9 +264,11 @@
 	                                        <input type="text" class="form-control form-control-user" name="m_name" placeholder="이름">
 	                                    </div>
 	                                    <div class="col-sm-6">
-	                                        <input type="text" class="form-control form-control-user" name="m_nick" placeholder="닉네임">
+	                                        <input type="text" class="form-control form-control-user" id="m_nick" name="m_nick" onchange="checkNick()" placeholder="닉네임">
+	                                        <span class="nick_ok">사용 가능한 닉네임입니다.</span>
+											<span class="nick_already">중복된 닉네임입니다.</span>
 	                                    </div>
-	                                </div>
+	                                </div> 
 	                                <div class="form-group">
 	                                    <input type="email" class="form-control form-control-user" id="m_email" name="m_email" aria-describedby="emailHelp" onchange="checkEmail()" placeholder="Email">
 	                                 	<span class="email_ok">사용 가능한 이메일입니다.</span>
@@ -220,8 +278,7 @@
 	                                    <input type="text" class="form-control form-control-user" name="m_phone" placeholder="전화번호">
 	                                </div>
 	                                
-	                               <!-- <form action="/member/address" method="post"> 
-	                                address -->
+	                               <!-- <form action="/member/address" method="post"> address -->
 	                                <span id="guide" style="color:#999;display:none"></span>
 		                                <div class="form-group row">
 		                                    <div class="col-sm-9 mb-6 mb-sm-0">

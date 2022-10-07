@@ -38,37 +38,7 @@
                     </div>
                 </div>
             </div>
-            
         </header>
-      
-       
-        <!-- Portfolio-->
-        <div id="portfolio">
-            <div class="container-fluid p-0">
-            
-                <div class="row g-0">
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="/resources/premain/assets/img/portfolio/fullsize/1.jpg" title="훈련하러">
-                            <img class="img-fluid" src="/resources/premain/assets/img/portfolio/thumbnails/1.jpg" width="860px" height="420px" >
-                            <div class="portfolio-box-caption">
-                                <div class="project-name text-white-70"> <span style="font-size:25pt"> 훈련</span></div>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="col-lg-4 col-sm-6">
-                        <a class="portfolio-box" href="/resources/premain/assets/img/portfolio/fullsize/2.jpg" title="미용하러">
-                            <img class="img-fluid" src="/resources/premain/assets/img/portfolio/thumbnails/2.jpg" width="1020px" height="420px">
-                            <div class="portfolio-box-caption">
-                                <div class="project-name text-white-70" > <span style="font-size:25pt"> 미용</span></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
         <!-- Footer-->
         <footer class="bg-light py-5">
             <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2022 - 금댕이</div></div>

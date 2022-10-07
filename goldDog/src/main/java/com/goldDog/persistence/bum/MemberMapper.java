@@ -4,7 +4,6 @@ import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
 
-
 public interface MemberMapper {
 	
 	//회원 추가
@@ -15,7 +14,6 @@ public interface MemberMapper {
 	
 	//회원 추가 (권한)
 	public int addAuth(AuthVO auth);
-	
 	
 	/* 아이디 비번 확인
 	public int idPwCheck(MemberVO member); */
@@ -37,6 +35,9 @@ public interface MemberMapper {
 	
 	//이메일 확인
 	public int emailCheck(String m_email);
+	
+	//닉네임 확인
+	public int nickCheck(String m_nick);
 	
 	//이름 확인
 	public int nameCheck(String m_name);

@@ -41,7 +41,7 @@
 	                                    <div class="text-center">
 	                                        <h1 class="h4 text-gray-900 mb-4">Welcome GoldDog!</h1>
 	                                    </div>
-	                                    <form class="user">
+	                                    
 	                                        <div class="form-group">
 	                                            <input type="text" class="form-control form-control-user" name="username" placeholder="아이디">
 	                                        </div>
@@ -57,7 +57,7 @@
 	                                        <hr>
 	                                        <input type="submit"  class="btn btn-primary btn-user btn-block" value="Login" />
 	                                        <hr>
-	                                    </form>
+	                                    
 	                                    <div class="text-center">
 	                                        <a class="small" href="idFind">Forgot ID ?</a>
 	                                    </div>
