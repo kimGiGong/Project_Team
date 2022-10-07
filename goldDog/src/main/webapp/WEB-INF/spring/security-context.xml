@@ -20,8 +20,11 @@
 	<!-- 시큐리티에서 우리가 원하는 형태의 회원테이블로 처리되기 위한 클래스 빈으로 등록 -->
 	<bean id="customUserDetailsService" class="com.goldDog.service.bum.CustomUserDetailsService"></bean>
 		
-	<!-- 인증예외처리 
+
+	<!-- 인증예외처리
 	<security:http pattern="/ImgUpLoad/*" security="none" /> -->
+	
+
 	<!-- 접근 제한 설정 -->
 	<security:http>
 		<!--특정 URI에 접근 제한 설정 로그인페이지를 지정 안해놓으면 security가 만든 로그인 페이지로

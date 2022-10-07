@@ -1,16 +1,22 @@
-
-function ondetails(id) {
-	alert(id);
-	var html = "아니!!!"
-	$("#"+id+" p").empty();
-	$("#"+id+" p").append(html);
-}
-
 $(document).ready(function(){
-});	//ready
 
-ClassicEditor
-    .create( document.querySelector( '#HTMLeditor' ) )
-    .catch( error => {
-        console.error( error );
-    } );
+	function ondetails(id) {
+		alert(id);
+		var html = "아니!!!"
+		$("#"+id+" p").empty();
+		$("#"+id+" p").append(html);
+	}
+	
+	CKEDITOR.replace('WriteEditor',
+		{filebrowserUploadUrl:"/ImgUpLoad/imageUpload.do?${_csrf.parameterName}=${_csrf.token}"
+		});
+	CKEDITOR.config.width = '75%';
+	CKEDITOR.config.height = 400;
+	
+	$('.area').click(function() {
+	
+	})
+	    
+
+
+});	//ready

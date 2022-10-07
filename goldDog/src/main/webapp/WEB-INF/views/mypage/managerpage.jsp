@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,6 +71,7 @@
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-external-link-alt nav-icon"></i>
 	                                    External
+
 	                                </a>
 	                            </li>
 	                            <li class="nav-item" id="stackmoney">
@@ -95,38 +97,62 @@
                         	<fieldset id="mapage_container">
                         		<div class="item"> <img class="mapageIMG" src=""></div>
                         		<div class="grid">
-									<div class="item">이름 : ${ manager.m_name }</div>
-									<div class="item">휴대전화 : ${ manager.m_phone }</div>
-									<div class="item">닉네임 : ${ manager.m_nick }</div>
-									<div class="item">이메일 : ${ manager.m_email }</div>
-									<div class="item">이용서비스 : ${ manager.authList[0].auth }</div>
+									<div class="item">이름 : ${ managerlist[0].m_name }</div>
+									<div class="item">휴대전화 : ${ managerlist[0].m_phone }</div>
+									<div class="item">닉네임 : ${ managerlist[0].m_nick }</div>
+									<div class="item">이메일 : ${ managerlist[0].m_email }</div>
+									<div class="item">이용서비스 : ${ managerlist[0].authList[0].auth }</div>
 								</div>
                         	</fieldset>
                         </div>
                     </section>
                     
-                    <div>
-                    	<div class="Estimate">
-		                    	<details class="Estimate_details" id="${ member.m_no }" onclick="ondetails(this.id)">
-		    						<summary>${ member.m_name }</summary>
-		    						<p id="ammo">${ member }</p>
-		                    	</details>
-		                    	<div class="Estimate_interval"></div> 
-                    		<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
-                    		<!-- </c:forEach> -->
-                    	</div>
-                    </div>
+                    <%-- 견적서 --%>
+                   	<div class="Estimate">
+	                    	<details class="Estimate_details" id="${ member.m_no }" onclick="ondetails(this.id)">
+	    						<summary>${ member.m_name }</summary>
+	    						<p id="ammo">${ member }</p>
+	                    	</details>
+	                    	<div class="Estimate_interval"></div> 
+                   		<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
+                   		<!-- </c:forEach> -->
+                   	</div>
+                   	
+                    <%-- 훈련사 정보 --%>
+                   	<div class="manager_info">
+                    	<form action="/amm" method="post">
+                    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<div id="WriteEditor" name="t_sel"></div>
+							<input type="submit" value="저장!">
+                    	</form>
+                   	</div>
                     
-                    <div>
-                    	<div class="manager_info">
-	                    	<form action="/amm" method="post">
-	                    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-								<div id="WriteEditor" name="t_sel"></div>
-								<input type="submit" value="저장!">
-	                    	</form>
-                    	</div>
+                    <!-- 활동지역 -->
+                    <div class="business_trip_section">
+                    	<div>
+                    		${ managerlist[1] }
+                    		<c:if test="${empty managerlist[1].a_addr}" >
+                    			<div>
+                    				<div>
+                    					<a href="javascript:void(0);" id="seoul" class="area">서울</a>
+                    					<a href="javascript:void(0);" id="gyeonggi" class="area">경기</a>
+                    				</div>
+                   					<ul class="area_container">
+                   						<c:forEach items="${ managerlist[2][0] }" var="area" varStatus="vs">
+                   							<c:if test="${vs.index lt 10}">
+                    							<li> <input type="checkbox" value="010${vs.index}">${ area }</li>
+                   							</c:if>
+                   							<c:if test="${vs.index ge 10}">
+                   								<li> <input type="checkbox" value="01${vs.index}"> ${ area } </li>                    							
+                   							</c:if>
+                   						</c:forEach>
+                   					</ul>
+                    			</div>
+                    		</c:if>
+                    	</div>	
+                    	<div></div>
+                    	<div></div>
                     </div>
-                    
                     
                     
                 	<!-- Contact section -->
@@ -206,13 +232,9 @@
 	</div> <!-- .container-fluid -->
 </div><!-- 바디메인 END -->
 
-<script type="text/javascript">	
-// 글쓰기 editor 및 사진 업로드 기능
-	CKEDITOR.replace('WriteEditor',
-		{filebrowserUploadUrl:"/ImgUpLoad/imageUpload.do"
-		});
-	CKEDITOR.config.width = '75%';
-	CKEDITOR.config.height = 400;
+
+<script type="text/javascript" src="/resources/mypage.js">
+//글쓰기 editor 및 사진 업로드 기능
 </script>
 
 </body>

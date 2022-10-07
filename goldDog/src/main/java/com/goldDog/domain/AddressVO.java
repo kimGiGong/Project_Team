@@ -11,7 +11,6 @@ public class AddressVO {
 	private String a_details ;
 	private int a_zonecode;
 	private String a_name;
-	private String a_addr1;
-	private String a_addr2;
+	private String a_addr;
 	
 }

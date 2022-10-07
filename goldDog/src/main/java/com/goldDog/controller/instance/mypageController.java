@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -30,10 +32,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.goldDog.domain.AddressTranslator;
+import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
 import com.goldDog.service.bum.domain.CustomUser;
+import com.goldDog.service.instance.MyPageService;
 import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -48,6 +53,9 @@ public class mypageController {
 	
 	@Autowired
 	private memberService bumService; 
+	
+	@Autowired
+	private MyPageService instanceService;
 	
 	//	일반 이용자 MyPage 이동
 	@GetMapping("mypage")
@@ -68,11 +76,19 @@ public class mypageController {
 			return "member/login"; 
 			
 		}else {
-		
 			CustomUser user = (CustomUser)auth.getPrincipal();
 			String loginID = user.getUsername();
 			MemberVO member = bumService.getMember(loginID);
-			model.addAttribute("manager",member);
+			AddressVO address = instanceService.getAddress(member.getM_no());
+			List<Object> list = new ArrayList<Object>();
+			AddressTranslator addrtr = new AddressTranslator();
+			List<String []> area = new ArrayList<String[]>();
+			area.add(addrtr.getSeoul());
+			area.add(addrtr.getGyeonggi());
+			list.add(member);
+			list.add(address);
+			list.add(area);
+			model.addAttribute("managerlist",list);
 			
 			return "mypage/managerpage";
 		}
