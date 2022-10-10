@@ -12,6 +12,7 @@ import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.HairstylistVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.NoticeVO;
+import com.goldDog.domain.QnAVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
 
@@ -96,14 +97,27 @@ public interface MainMapper {
 	public List<NoticeVO> getAllNotice();
 	//공지사항 조회수 올려주기
 	public void addViewPoint(int n_no);
-	
+	//n_no에 해당하는 공지사항 가져오기
+	public NoticeVO getNotice(int n_no);
+	//n_no에 해당하는 공지사항 삭제하기
+	public int deleteNotice(int n_no);
+	//n_no에 해당하는 공지사항 수정하기
+	public int modifyNotice(NoticeVO notice);;
+	  
 	
 	//QnA********************************************************
 	//QnA 추가
-	public int addQnA(NoticeVO notice);
+	public int addQnA(QnAVO QnA);
 	//QnA 모두 가져오기
-	public List<NoticeVO> getAllQnA();
-	
+	public List<QnAVO> getAllQnA();
+	//공지사항 조회수 올려주기
+	public void addQViewPoint(int q_no);
+	//q_no에 해당하는 공지사항 가져오기
+	public QnAVO getQnA(int q_no);
+	//q_no에 해당하는 공지사항 삭제하기
+	public int deleteQnA(int q_no); 
+	//q_no에 해당하는 공지사항 수정하기
+	public int modifyQnA(QnAVO QnA);
 	
 	
 	

@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goldDog.domain.AddressVO;
@@ -78,12 +80,6 @@ public class memberController {
 		request.getSession().setAttribute("prevPage", referrer);
 	}
 
-	//회원가입
-	@GetMapping("signup")
-	public void signup() {
-		log.info("************ signup ************");
-	}
-	
 	@PostMapping("signup")
 	public String signup(MemberVO member, AddressVO address, @Param("auth") String auth,RedirectAttributes rttr) {
 		log.info("********************** signupPro MemberVO : " + member);
@@ -103,7 +99,11 @@ public class memberController {
 		return "redirect:/member/login";
 	}
 	
-	
+	//회원가입
+	@GetMapping("signup")
+	public void signup() {
+		log.info("************ signup ************");
+	}
 	
 	@GetMapping("idFind")
 	public void idFind() {
@@ -114,6 +114,43 @@ public class memberController {
 	public void pwFind() {
 		log.info("************ pwFind ************");
 	}
+	
+	@RequestMapping(value = "idCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int memberIdChkPOST(String m_id) throws Exception{
+		int result = service.idCheck(m_id);
+		if(result != 0) {
+			return result;	// 중복 아이디가 존재
+		} else {
+			return result;	// 중복 아이디 x
+		}	
+		
+	}
+	
+	@RequestMapping(value = "emailCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int memberemailCheck(String m_email) throws Exception{
+		int result = service.emailCheck(m_email);
+		if(result != 0) {
+			return result;	// 중복 아이디가 존재
+		} else {
+			return result;	// 중복 아이디 x
+		}	
+		
+	}
+	
+	@RequestMapping(value = "nickCheck", method = RequestMethod.POST)
+	@ResponseBody
+	public int membernickCheck(String m_nick) throws Exception{
+		int result = service.nickCheck(m_nick);
+		if(result != 0) {
+			return result;	// 중복 아이디가 존재
+		} else {
+			return result;	// 중복 아이디 x
+		}	
+		
+	} 
+	
 	
 	
 	

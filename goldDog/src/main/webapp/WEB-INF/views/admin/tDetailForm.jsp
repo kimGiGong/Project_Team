@@ -144,9 +144,42 @@
     <!-- end header section -->
     
     
-	<h1>detail 페이지 입니다.</h1>
-	
+	<h1>detail 페이지 입니다@.</h1>
 	 <div class="container">
+			<div class="box" >
+				<div class="filters-content">
+					<div class="row justify-content-md-center">
+						<div class="col-lg-6">
+						<table class="table"  style="color: black ;" height="500px" >
+						  <thead>
+						    <tr class="table-light" >
+						      <th scope="col" class="text-center" align="center" colspan="2">  <p style="font-size:25px;">${notice.n_title}</p> </th>
+						    </tr>
+						  </thead>
+						  <tbody>
+							   	<tr >
+							      <th class="text-left"><fmt:formatDate pattern="yy-MM-dd" value="${notice.n_date}"/></th>
+							      <th class="text-right">조회수 : ${notice.n_readcount}</th>
+							    </tr>
+							   	<tr>
+							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="notice" readonly>${notice.n_content}</textarea></th>
+							    </tr>
+							   	<tr>
+							      <td class="text-right" colspan="2"> 
+								    <sec:authorize access="hasRole('ROLE_ADMIN')">
+									    <button id="deletee"   class="btn btn-danger" >삭제</button>
+									    <button id="modifyy"   class="btn btn-success"  >수정</button>
+								    </sec:authorize>
+							     	 <input type="button" class="btn btn-dark" id="back" onclick="window.location='/admin/QnA?pageNum=${1}'" value="뒤로">
+							       </td>
+							    </tr>
+						  </tbody>
+						</table>
+				 	 </div>
+				 	 </div>
+			 	 </div>
+			  </div>
+	 
 	<table width="680" height="500">
 		<tr>
 			<td>사진</td>

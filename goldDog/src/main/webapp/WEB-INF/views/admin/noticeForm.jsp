@@ -22,16 +22,16 @@
 						<table class="table"  style="color: black ;" height="500px" >
 						  <thead>
 						    <tr class="table-light" >
-						      <th scope="col" class="text-center" align="center" colspan="2">  <p style="font-size:25px;">${QnA.q_title}</p> </th>
+						      <th scope="col" class="text-center" align="center" colspan="2">  <p style="font-size:25px;">${notice.n_title}</p> </th>
 						    </tr>
 						  </thead>
 						  <tbody>
 							   	<tr >
-							      <th class="text-left"><fmt:formatDate pattern="yy-MM-dd" value="${QnA.q_date}"/></th>
-							      <th class="text-right">조회수 : ${QnA.q_readcount}</th>
+							      <th class="text-left"><fmt:formatDate pattern="yy-MM-dd" value="${notice.n_date}"/></th>
+							      <th class="text-right">조회수 : ${notice.n_readcount}</th>
 							    </tr>
 							   	<tr>
-							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="QnA" readonly>${QnA.q_content}</textarea></th>
+							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="notice" readonly>${notice.n_content}</textarea></th>
 							    </tr>
 							   	<tr>
 							      <td class="text-right" colspan="2"> 
@@ -64,16 +64,16 @@
 	      			<div class="modal-body">
 	      			<form id="updateNotice" action="/main/tmain" method="post" >
 	      			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-     					<input type="hidden" name="q_no" value="${q_no}"/>
+     					<input type="hidden" name="n_no" value="${n_no}"/>
 	        			<table class="table"  style="color: black;" height="500px" >
 						  <thead>
 						    <tr class="table-light" >
-						      <th scope="col" class="text-center" align="center" colspan="2"> <input type="text" name="q_title" >${QnA.q_title}</th>
+						      <th scope="col" class="text-center" align="center" colspan="2"> <input type="text" name="n_title" >${notice.n_title}</th>
 						    </tr>
 						  </thead>
 						  <tbody>
 							   	<tr>
-							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="q_content" >${QnA.q_content}</textarea></th>
+							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="n_content" >${notice.n_content}</textarea></th>
 							    </tr>
 						  </tbody>
 						</table>
@@ -114,7 +114,7 @@
 
 		<form action="/admin/QnA" id="pagingForm">
 			<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
-			<input type="hidden" name="q_no" value="${QnA.q_no}"/>
+			<input type="hidden" name="n_no" value="${notice.n_no}"/>
 		</form>
 
 
@@ -153,14 +153,14 @@
 			// 글 삭제 눌렀을때 삭제하러감
 			$("#goDelete").on("click",function(e){
 				console.log("글삭제");
-				pagingForm.attr("action","/admin/QnADeletePro");
+				pagingForm.attr("action","/admin/noticeDeletePro");
 				pagingForm.submit();
 			});
 			
 			// 글 수정 눌렀을때 가는 처리
 			$("#goModify").on("click",function(e){
 				console.log("글수정");
-				pagingForm.attr("action","/admin/QnAModifyPro");
+				pagingForm.attr("action","/admin/modifyPro");
 				pagingForm.submit();
 			});
 			
@@ -168,7 +168,7 @@
 			let	updateNotice = $("#updateNotice")
 			$("#goModify").on("click",function(e){
 				console.log("정보를 보낸다 .");
-				updateNotice.attr("action","/admin/QnAModifyPro");
+				updateNotice.attr("action","/admin/noticeModifyPro");
 				
 				updateNotice.submit();
 			});

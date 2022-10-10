@@ -17,6 +17,9 @@
 	<h1>detail 페이지 입니다.</h1>
 	
 	 <div class="container">
+	 
+	 
+	 
 	<table width="680" height="500">
 		<tr>
 			<td>사진</td>
@@ -77,7 +80,7 @@
 			<td>${trainer.t_career}</td>
 		</tr>
 		<tr>
-			<td> <button id="dogCheck">협의하기</button>  </td>
+			<td> <button id="dogCheck" class="btn btn-danger">협의하기</button>  </td>
 		</tr>
 		
 	</table>
@@ -309,10 +312,6 @@
 			
 			
 		});
-		
-		
-		
-		
 		
 		</script>
 	

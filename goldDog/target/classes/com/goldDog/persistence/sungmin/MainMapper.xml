@@ -182,16 +182,53 @@
 	</insert>
 	<!-- 공지사항 모두 가져오기-->
 	<select id="getAllNotice" resultType="com.goldDog.domain.NoticeVO">
-		select * from notice
+		select * from notice order by n_no desc
 	</select>
 	<!-- 공지사항 조회수 올려주기-->
 	<update id="addViewPoint">
-		update notice set n_readcount = n_readcount+1 where n_no=#{n_no} 
+		update notice set n_readcount = n_readcount+0.5 where n_no=#{n_no} 
+	</update>	
+	<!-- n_no공지사항 가져오기-->
+	<select id="getNotice" resultType="com.goldDog.domain.NoticeVO">
+		select * from notice where n_no= #{n_no}
+	</select>
+	<!-- n_no공지사항 삭제하기-->
+	<delete id="deleteNotice">
+		delete from notice where n_no=#{n_no}
+	</delete>
+	<!-- n_no공지사항 수정하기-->
+	<update id="modifyNotice">
+		update notice set n_title=#{n_title} , n_content= #{n_content} where n_no=#{n_no}
 	</update>	
 
 
-
-	
+	<!-- 
+	//QnA ********************************************************-->
+	<!-- QnA 추가-->
+	<insert id="addQnA">
+		insert into QnA values 
+		(qna_seq.nextval ,#{q_img}, #{q_title} ,#{q_content}, sysdate ,0)
+	</insert>
+	<!-- 공지사항 모두 가져오기-->
+	<select id="getAllQnA" resultType="com.goldDog.domain.QnAVO">
+		select * from QnA order by q_no desc
+	</select>
+	<!-- 공지사항 조회수 올려주기-->
+	<update id="addQViewPoint">
+		update QnA set q_readcount = q_readcount+0.5 where q_no=#{q_no} 
+	</update>	
+	<!-- q_no공지사항 가져오기-->
+	<select id="getQnA" resultType="com.goldDog.domain.QnAVO">
+		select * from QnA where q_no= #{q_no}
+	</select>
+	<!-- q_no공지사항 삭제하기-->
+	<delete id="deleteQnA">
+		delete from QnA where q_no=#{q_no}
+	</delete>
+	<!-- q_no공지사항 수정하기-->
+	<update id="modifyQnA">
+		update QnA set q_title=#{q_title}, q_img=#{q_img} , q_content= #{q_content} where q_no=#{q_no}
+	</update>
 
 
 

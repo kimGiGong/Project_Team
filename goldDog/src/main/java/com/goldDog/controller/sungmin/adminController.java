@@ -1,6 +1,7 @@
 package com.goldDog.controller.sungmin;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import org.apache.ibatis.annotations.Param;
@@ -15,6 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.goldDog.domain.ADVO;
+import com.goldDog.domain.Criteria;
+import com.goldDog.domain.NoticeVO;
+import com.goldDog.domain.QnAVO;
 import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -88,24 +92,102 @@ public class adminController {
 	
 	
 	@GetMapping("QnA")
-	public void QnA(Model model) {
+	public void QnA(Model model,Criteria cri) {
 		
 		//공지사항 가져와서 뿌려주기
+		List<NoticeVO> notice =mainService.getAllNotice();
+		log.info(notice+"dhdhdhdhdhdhdh");
+		log.info(notice.size()+"성민확인");
 		
+		model.addAttribute("notice",notice);
 		
-		
-		
-		
-		//현재 등록된 광고3개 이름 가져오는 메서드
-		ADVO ad1=mainService.getAdName(1);
-		ADVO ad2=mainService.getAdName(2);
-		ADVO ad3=mainService.getAdName(3);
-		model.addAttribute("add1",ad1);
-		model.addAttribute("add2",ad2);
-		model.addAttribute("add3",ad3);
+		//QnA 가져와서 뿌려주기
+		List<QnAVO> QnA = mainService.getAllQnA();
+		model.addAttribute("QnA",QnA);
+	
 		
 	}
 	
+	@GetMapping("noticeForm")
+	public void noticeForm(Model model,@Param("n_no") int n_no) {
+		mainService.addViewPoint(n_no);
+		log.info(n_no+"가져왔어!!!!");
+		NoticeVO notice =mainService.getNotice(n_no);
+		model.addAttribute("notice",notice);
+		
+		
+	}
+	@GetMapping("QnAForm")
+	public void QnAForm(Model model,@Param("q_no") int q_no) {
+		mainService.addQViewPoint(q_no);
+		log.info(q_no+"가져왔어!!!!");
+		QnAVO QnA =mainService.getQnA(q_no);
+		model.addAttribute("QnA",QnA);
+		
+		
+	}
+	
+	
+	
+	@GetMapping("noticeDeletePro")
+	public String noticeDeletePro(@Param("n_no") int n_no,Criteria cri) {
+		//notice 글 하나 삭제하기
+		// 관리자가 글삭제를 누르면 모달 띄우고 삭제하기
+		int result = mainService.deleteNotice(n_no);
+		if(result == 1) {
+			log.info("삭제완료");
+		}
+			int pageNum=1;
+					//cri.getPageNum();
+		return "redirect:/admin/QnA?pageNum="+pageNum;
+		
+		
+	}
+	
+	@PostMapping("noticeModifyPro")
+	public String noticeModifyPro(NoticeVO notice,Criteria cri) {
+		// 관리자가 글수정을 누르면 수정하기
+		int result = mainService.modifyNotice(notice);
+		
+		if(result == 1) {
+			log.info("수정완료");
+		}
+		int pageNum=1;
+		//cri.getPageNum();
+		return "redirect:/admin/QnA?pageNum="+pageNum;
+		
+		
+	}
+	
+	@GetMapping("QnADeletePro")
+	public String QnADeletePro(@Param("q_no") int q_no,Criteria cri) {
+		//notice 글 하나 삭제하기
+		// 관리자가 글삭제를 누르면 모달 띄우고 삭제하기
+		int result = mainService.deleteQnA(q_no);
+		if(result == 1) {
+			log.info("삭제완료");
+		}
+		int pageNum=1;
+		//cri.getPageNum();
+		return "redirect:/admin/QnA?pageNum1="+pageNum;
+		
+		
+	}
+	
+	@PostMapping("QnAModifyPro")
+	public String QnAModifyPro(QnAVO qna,Criteria cri) {
+		// 관리자가 글수정을 누르면 수정하기
+		int result = mainService.modifyQnA(qna);
+		
+		if(result == 1) {
+			log.info("수정완료");
+		}
+		int pageNum=1;
+		//cri.getPageNum();
+		return "redirect:/admin/QnA?pageNum1="+pageNum;
+		
+		
+	}
 	
 	
 	
