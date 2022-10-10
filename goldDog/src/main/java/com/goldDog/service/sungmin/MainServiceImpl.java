@@ -14,6 +14,7 @@ import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.HairstylistVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.NoticeVO;
+import com.goldDog.domain.QnAVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.persistence.sungmin.MainMapper;
@@ -185,21 +186,56 @@ public class MainServiceImpl implements MainService {
 	public void addViewPoint(int n_no) {
 			mapper.addViewPoint(n_no);
 	}
+	//n_no에 해당하는 공지사항 가져오기
+	@Override
+	public NoticeVO getNotice(int n_no) {
+		return mapper.getNotice(n_no);
+	}
+	// 공지사항 삭제하기
+	@Override
+	public int deleteNotice(int n_no) { 
+		return mapper.deleteNotice(n_no);
+	}
+	//공지사항 수정하기
+	@Override
+	public int modifyNotice(NoticeVO notice) { 
+		return mapper.modifyNotice(notice);
+	} 
+	
+	 
 	
 	
 	//QnA ********************************************************
 	//공지사항 추가
 	@Override
-	public int addQnA(NoticeVO notice) {
-		return mapper.addQnA(notice);
+	public int addQnA(QnAVO QnA) {
+		return mapper.addQnA(QnA);
 	}
 	//공지사항 모두 가져오기
 	@Override
-	public List<NoticeVO> getAllQnA() {
+	public List<QnAVO> getAllQnA() {
 		return mapper.getAllQnA();
 	}
-	
-	
+	//공지사항 조회수 올려주기
+	@Override
+	public void addQViewPoint(int q_no) {
+		mapper.addQViewPoint(q_no);
+	}
+	//q_no에 해당하는 공지사항 가져오기
+	@Override
+	public QnAVO getQnA(int q_no) {
+		return mapper.getQnA(q_no);
+	}
+	//q_no에 해당하는 공지사항 삭제하기
+	@Override
+	public int deleteQnA(int q_no) {
+		return mapper.deleteQnA(q_no);
+	}
+	//q_no에 해당하는 공지사항 수정하기
+	@Override
+	public int modifyQnA(QnAVO QnA) {
+		return mapper.modifyQnA(QnA);
+	}
 	
 	
 	

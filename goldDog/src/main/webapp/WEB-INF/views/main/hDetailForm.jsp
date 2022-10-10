@@ -13,6 +13,9 @@
 		</div>
 	<!--  헤더 END -->
 	
+	
+	
+	
   <div class="hero_area">
 	 <div class="container">
 	<table width="680" height="500">
@@ -91,7 +94,6 @@
 	        		</button>
 	      		</div>
       			<div class="modal-body">
-      			
       				<form id="addDogInfo" action="/main/tmain" method="post" >
       				 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       				  	<input type="hidden" name="t_m_no" value="${hairstylist.m_no}"/>

@@ -7,6 +7,7 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
 </head>
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
@@ -112,28 +113,40 @@
 
   <section class="food_section layout_padding-bottom">
     <div class="container">
-      <!-- 사용자 리스트 출력 -->  
       <div class="filters-content">
-        <div class="row grid">
-		<form id="searchForm" action="/board/list" method="get">
-          <div class="col-lg-2  all pizza">
-			<input type="text" name="keyword" class="form-control" placeholder="훈련사 찾기"/>
-   			<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
-   			<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+      	<!-- 사용자 검색 -->  
+        <div class="row justify-content-between">
+	          	<div class="col-3 all pizza">
+				 	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/board/list" method="get">
+				 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+		   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="훈련사 검색">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                    </form>
+		   		</div>
+		   		
+		   		<div class="col-2 all pizza">
+		   			<form id="selectForm" action="/board/list" method="get">
+		   			<select name="sel" >
+		   				<option value=""> 정   렬 </option>
+		   				<option value="W"> 리뷰 평점순</option>
+		   				<option value="C"> 리뷰 많은순</option>
+		   				<option value="T"> 낮은 가격순</option>
+		   				<option value="T"> 높은 가격순</option>
+		   			</select>
+		   			</form>
+		   		</div>	
           </div>
-          <div class="col-lg-2  all pizza">
-   			<button class="btn btn-light">검색</button>
-          </div>
-          <div class="col-lg-2 offset-lg-6 all pizza" style="">
-          			<select name="sel">
-          				<option value=""> 정   렬 </option>
-          				<option value="W"> 리뷰 평점순</option>
-          				<option value="C"> 리뷰 많은순</option>
-          				<option value="T"> 낮은 가격순</option>
-          				<option value="T"> 높은 가격순</option>
-          			</select>
-          </div>
-		</form>
+          
+          
+          
+          
+	      <!-- 사용자 리스트 출력 -->  
+          <div class="row grid">
         	<c:if test="${hairstylistcheck!=0}">
 	         <c:forEach var="i" begin="0" end="${hairstylistcheck-1}" step="1">
 	          <div class="col-sm-12 col-lg-12 all pizza">
@@ -153,7 +166,11 @@
 	                </div>
 	            </div>
 	         </c:forEach>
+	         	
          	</c:if>
+         	
+         	
+         	
          	<c:if test="${hairstylistcheck==0}">
 	         <c:forEach var="i" begin="0" end="0" step="1">
 	          <div class="col-sm-12 col-lg-12 all pizza">
@@ -169,39 +186,42 @@
 	                </div>
 	            </div>
 	         </c:forEach>
+	         
          	</c:if>
-         	
-          </div>
-         </div>
-   <div class="col-sm-12 col-md-12">
-		<ul class="pagination">
-			<c:if test="${pager.prev}">
-				<li class="page-item">
-					<a class="page-link" href="${pager.startPage-1}" tabindex="-1">Previous</a>
-				</li>
-			</c:if>
-			<c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" >
-				<li class="page-item ${pager.cri.pageNum == num ? "active":""}">
-					<a class="page-link" href="${num}">${num}</a>
-				</li>
-			</c:forEach>
-			<c:if test="${pager.next}">
-				<li class="page-item">
-					<a class="page-link" href="${pager.endPage+1}">Next</a>
-				</li>
-			</c:if>
-		</ul>
-	</div>
-   </div>
-   
-     <form  id="pagingForm" action="/main/detaisdasdaslFm" >
-		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
-		<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
-		<input type="hidden" name="sel" value="${pager.cri.sel}" />
-		<input type="hidden" name="keyword" value="${pager.cri.keyword}" />
-	</form>
-  </section>
-
+         	</div><!-- row end -->
+          </div> <!-- filters-content end -->
+          <br/><br/>
+          
+		   <div >
+				<ul class="pagination justify-content-md-center">
+					<c:if test="${pager.prev}">
+						<li class="page-item">
+							<a class="page-link" href="${pager.startPage-1}" tabindex="-1">Previous</a>
+						</li>
+					</c:if>
+					<c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" >
+						<li class="page-item ${pager.cri.pageNum == num ? "active":""}">
+							<a class="page-link" href="${num}">${num}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${pager.next}">
+						<li class="page-item">
+							<a class="page-link" href="${pager.endPage+1}">Next</a>
+						</li>
+					</c:if>
+				</ul>
+			</div>
+		     <form  id="pagingForm" action="/main/detaisdasdaslFm" >
+				<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+				<input type="hidden" name="sel" value="${pager.cri.sel}" />
+				<input type="hidden" name="keyword" value="${pager.cri.keyword}" />
+			</form>
+			
+			
+			</div><!-- end container" -->
+		  </section>
+  
   <!-- end food section -->
 
   <!-- 베스트리뷰 5개만 불러오기 c:로 줄이기 -->
