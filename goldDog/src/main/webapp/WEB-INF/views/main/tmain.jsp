@@ -7,6 +7,19 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
 </head>
+
+ <style>
+	.fa-star:before {
+    content: "\f005";
+    color: #48c1bd;
+	}
+	.fa-vcard:before, .fa-address-card:before {
+    color: #6b6b6b;
+}
+
+</style>
+
+
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
@@ -117,13 +130,14 @@
       		<!-- 사용자 검색 --> 
            <div class="row justify-content-between">
 	          	<div class="col-6 all pizza">
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/board/list" method="get">
+					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="searchForm"  action="/main/tmain" method="post">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="훈련사 검색">
+                            <input type="text" class="form-control bg-light border-0 small"  name="keyword"  placeholder="훈련사 검색">
                             <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                               <button class="btn btn-primary" id=searchIdBtn  type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </form>
@@ -132,7 +146,7 @@
 		   		
 		   		
 		   		<div class="col-2 all pizza">
-		   			<form id="selectForm" action="/board/list" method="get">
+		   			<form id="selectForm" action="/main/tmain" method="get">
 		   			<select name="sel" >
 		   				<option value=""> 정   렬 </option>
 		   				<option value="W"> 리뷰 평점순</option>
@@ -156,12 +170,16 @@
 	                  <a class="move" href="${trainer[i].m_no}" id="${trainer[i].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
 	                </div>
 	                <div class="detail-box" >
-		                  <h5>닉네임 : ${member[i].m_nick}</h5>
-		                  <p>소개 : ${trainer[i].t_self}</p>
-		                  <p>리뷰평점 : ${rAvg[i]}점 (${rTotal[i]})</p>
-		                  <p>훈련 가격 : ${trainer[i].t_price} 원</p>
-		                  <p>보유 자격증 : ${trainer[i].t_license}</p>
-		                  <p>m_no : ${trainer[i].m_no} t_no : ${trainer[i].t_no}</p>
+		                  <h5 style="height: 35px;">${member[i].m_nick}</h5>
+		                  <p style="font-size:17px;">소개 : ${trainer[i].t_self}</p>
+		                  <c:if test="${rTotal[i]==0}">
+		                  	<p><i class="fa fa-star fa-lg " aria-hidden="true"></i> 가장먼저 리뷰를 남겨주세요!</p>
+		                  </c:if>
+		                  <c:if test="${rTotal[i]!=0}">
+			                  <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${rAvg[i]}점 (${rTotal[i]})</p>
+		                  </c:if>
+	 	                  <p>훈련 가격 : ${trainer[i].t_price}~ 원</p>
+		                  <p>자격증<i class="fa fa-address-card" aria-hidden="true"></i> : ${trainer[i].t_license}</p>
 	                </div>
 	                </div>
 	            </div>
@@ -263,7 +281,8 @@
   <!-- end client section -->
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
+		let token =$("meta[name='_csrf']").attr("content");		
+		let header=$("meta[name='_csrf_header']").attr("content");		
 		let pagingForm = $("#pagingForm"); // 숨긴 폼태그 가져오기 	
 		
 		// 제목클릭시 detailForm로 넘어가는 처리
@@ -281,13 +300,33 @@
 			pagingForm.submit(); 
 		});
 		
-		
-		
-		
-		
-		
-		
+		//검색 폼 처리
+		let searchForm=$("#searchForm");
+		$("#searchIdBtn").on("click",function(e){
+			if(!searchForm.find("input[name='keyword']").val(" ")){
+				alert("키워드를 입력하세요..")
+				return false;	//submit 이동 막기
+			}
+			e.preventDefault();
+			searchForm.find("input[name='pageNum']").val("1"); 
+			searchForm.submit();	
+			
+				
+			});
+			
+			
+			
+			
+			
+			
 		});
+		
+		
+		
+		
+		
+		
+		
 	
 		
 		
