@@ -16,7 +16,11 @@ $(document).ready(function(){
 	$('.area').click(function() {
 	
 	})
-	    
-
-
 });	//ready
+
+
+
+ function onAddress(a) {
+	$('.area_container').css('display', 'none');
+	document.getElementById(a.className).style.display= "grid";
+}

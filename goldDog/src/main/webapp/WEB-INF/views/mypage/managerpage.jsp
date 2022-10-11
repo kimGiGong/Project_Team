@@ -169,27 +169,18 @@
                     		<c:if test="${empty managerlist[1].a_addr}" >
                     			<div>
                     				<div>
-                    					<a href="javascript:void(0);" id="seoul" class="area">서울</a>
-                    					<a href="javascript:void(0);" id="gyeonggi" class="area">경기</a>
+                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="seoul" class="area">서울</a>
+                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="gyeonggi" class="area">경기</a>
                     				</div>
                    					<ul class="area_container" id="seoul">
                    						<c:forEach items="${ managerlist[2][0] }" var="area" varStatus="vs">
-                   							<c:if test="${vs.index lt 10}">
-                    							<li> <input type="checkbox" value="010${vs.index}">${ area }</li>
-                   							</c:if>
-                   							<c:if test="${vs.index ge 10}">
-                   								<li> <input type="checkbox" value="01${vs.index}">${ area }</li>                    							
-                   							</c:if>
+                   							<li> <input type="checkbox" value="${ area }">${ area }</li>
                    						</c:forEach>
                    					</ul>
+                   					
                    					<ul class="area_container" id="gyeonggi">
                    						<c:forEach items="${ managerlist[2][1] }" var="area" varStatus="vs">
-                   							<c:if test="${vs.index lt 10}">
-                    							<li> <input type="checkbox" value="020${vs.index}">${ area }</li>
-                   							</c:if>
-                   							<c:if test="${vs.index ge 10}">
-                   								<li> <input type="checkbox" value="02${vs.index}">${ area }</li>                    							
-                   							</c:if>
+                   							<li> <input type="checkbox" value="${ area }">${ area }</li>
                    						</c:forEach>
                    					</ul>
                     			</div>
@@ -277,8 +268,8 @@
 	</div> <!-- .container-fluid -->
 </div><!-- 바디메인 END -->
 
+<script type="text/javascript" src="/resources/mypage.js"> 
 
-<script type="text/javascript" src="/resources/mypage.js">
 //글쓰기 editor 및 사진 업로드 기능
 </script>
 
