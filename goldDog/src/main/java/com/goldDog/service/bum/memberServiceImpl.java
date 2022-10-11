@@ -106,7 +106,7 @@ public class memberServiceImpl implements memberService{
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com"; //네이버 이용시 smtp.naver.com
 		String hostSMTPid = "cqt95@naver.com";
-		String hostSMTPpwd = "qjatjr95zz!!";
+		String hostSMTPpwd = "qjatjr95!!";
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "cqt95@naver.com";
@@ -184,7 +184,7 @@ public class memberServiceImpl implements memberService{
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com"; //네이버 이용시 smtp.naver.com
 		String hostSMTPid = "cqt95@naver.com";
-		String hostSMTPpwd = "qjatjr95zz!!";
+		String hostSMTPpwd = "qjatjr95!!";
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "cqt95@naver.com";
@@ -292,11 +292,18 @@ public class memberServiceImpl implements memberService{
 	public MemberVO getNameEmail(String m_email) {
 		return mapper.getNameEmail(m_email); 
 	}
-
-
 	
+	@Override
+	public int modifyMember(MemberVO member) {
+		//id pw 체크 추가
+		int result = 0;
+		MemberVO dbMember = getMember(member.getM_id());
+		if(bcryptPasswordEncoder.matches(member.getM_pw(), dbMember.getM_pw())) {
+			result = mapper.updateMember(member);
+		}
+		return result;
+	}
 
-	
 
 	
 

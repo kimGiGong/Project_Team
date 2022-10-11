@@ -1,13 +1,16 @@
 package com.goldDog.controller.bum;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +21,7 @@ import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.service.bum.memberService;
+import com.goldDog.service.bum.domain.CustomUser;
 
 import lombok.extern.log4j.Log4j;
 
@@ -47,28 +51,6 @@ public class memberController {
 		log.info("************ test1 ************");
 	}
 	
-	/*
-	@GetMapping("login")
-	public void login() {
-		log.info("************ login ************");
-	}
-	
-	@PostMapping("login")
-	public String loginPro(MemberVO member, String auto, Model model, HttpSession session) {
-		log.info(member);
-		log.info(auto);
-		//비지니스 로직 처리
-		int result = service.idPwCheck(member);
-		if(result == 1) { //로그인 성공
-			session.setAttribute("memId", member.getM_id());
-			return "redirect:/main/tmain";	//컨트롤러에 재요청하여 메인으로 바로 이동
-		}else {
-			model.addAttribute("result",result); //결과 pro페이지로 전달
-			return "/member/loginPro";
-		}
-	}
-	*/
-	
 	//로그인 폼 요청 (처리는 시큐리티가 해줌)
 	@GetMapping("login")
 	public void login(String error, HttpServletRequest request) {
@@ -79,7 +61,12 @@ public class memberController {
 		String referrer = request.getHeader("Referer");
 		request.getSession().setAttribute("prevPage", referrer);
 	}
-
+	
+	//회원가입
+	@GetMapping("signup")
+	public void signup() {
+		log.info("************ signup ************");
+	}
 	@PostMapping("signup")
 	public String signup(MemberVO member, AddressVO address, @Param("auth") String auth,RedirectAttributes rttr) {
 		log.info("********************** signupPro MemberVO : " + member);
@@ -99,57 +86,82 @@ public class memberController {
 		return "redirect:/member/login";
 	}
 	
-	//회원가입
-	@GetMapping("signup")
-	public void signup() {
-		log.info("************ signup ************");
+	
+	@GetMapping("pwFind")
+	public void findPwGET() throws Exception{
+	}
+ 
+	@PostMapping("pwFind")
+	public void findPwPOST(@ModelAttribute MemberVO member, HttpServletResponse response) throws Exception{
+		service.findPw(response, member);
 	}
 	
 	@GetMapping("idFind")
-	public void idFind() {
-		log.info("************ idFind ************");
+	public void findIdGET() throws Exception{
+	}
+ 
+	@PostMapping("idFind")
+	public void findIdPOST(@ModelAttribute MemberVO member, HttpServletResponse response) throws Exception{
+		service.findId(response, member);
+		log.info(member.getM_name()+"********************"+member.getM_email());
 	}
 	
-	@GetMapping("pwFind")
-	public void pwFind() {
-		log.info("************ pwFind ************");
-	}
-	
-	@RequestMapping(value = "idCheck", method = RequestMethod.POST)
+	//아이디 중복 검사
+	@PostMapping("idCheck")
 	@ResponseBody
 	public int memberIdChkPOST(String m_id) throws Exception{
+		
 		int result = service.idCheck(m_id);
-		if(result != 0) {
-			return result;	// 중복 아이디가 존재
-		} else {
-			return result;	// 중복 아이디 x
-		}	
 		
-	}
+		return result;
+	} // memberIdChkPOST() 종료
 	
-	@RequestMapping(value = "emailCheck", method = RequestMethod.POST)
+	//이메일 중복 검사
+	@PostMapping("emailCheck")
 	@ResponseBody
-	public int memberemailCheck(String m_email) throws Exception{
+	public int memberemailChkPOST(String m_email) throws Exception{
+		
 		int result = service.emailCheck(m_email);
-		if(result != 0) {
-			return result;	// 중복 아이디가 존재
-		} else {
-			return result;	// 중복 아이디 x
-		}	
 		
+		return result;
+	} // memberemailChkPOST() 종료
+	
+	//닉네임 중복 검사
+	@PostMapping("nickCheck")
+	@ResponseBody
+	public int membernickChkPOST(String m_nick) throws Exception{
+		
+		int result = service.nickCheck(m_nick);
+		
+		return result;
+	} // membernickChkPOST() 종료
+	
+	@GetMapping("modify")
+	public void modify(Authentication auth, Model model) {
+		log.info("******* modify form *******");
+		//Authentication 매개변수 선언하면 principal등 정보 꺼낼 수 있다.
+		CustomUser user = (CustomUser)auth.getPrincipal();
+		log.info("********** user : " + user);
+		MemberVO member =  service.getMember(user.getUsername()); //== principal.username
+		model.addAttribute("member", member);
+	}
+	@PostMapping("modify")
+	public String modifyPro(MemberVO member, Authentication auth, Model model) {
+		log.info("******* modify Pro *******");
+		log.info("******* modify Pro customUser : "+((CustomUser)auth.getPrincipal()).getUsername());
+		
+		member.setM_id(((CustomUser)auth.getPrincipal()).getUsername()); //auth에서 username == id 꺼내 vo에 채우기
+		int result = service.modifyMember(member);
+		log.info("******* modify Pro result : " + result);
+		model.addAttribute("result", result);
+		
+		return "member/modifyPro";
 	}
 	
-	@RequestMapping(value = "nickCheck", method = RequestMethod.POST)
-	@ResponseBody
-	public int membernickCheck(String m_nick) throws Exception{
-		int result = service.nickCheck(m_nick);
-		if(result != 0) {
-			return result;	// 중복 아이디가 존재
-		} else {
-			return result;	// 중복 아이디 x
-		}	
-		
-	} 
+	
+	
+	
+	
 	
 	
 	
