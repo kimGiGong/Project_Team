@@ -139,7 +139,7 @@ public class adminController {
 		}
 			int pageNum=1;
 					//cri.getPageNum();
-		return "redirect:/admin/QnA?pageNum="+pageNum;
+		return "redirect:/admin/QnA";
 		
 		
 	}
@@ -154,7 +154,7 @@ public class adminController {
 		}
 		int pageNum=1;
 		//cri.getPageNum();
-		return "redirect:/admin/QnA?pageNum="+pageNum;
+		return "redirect:/admin/QnA";
 		
 		
 	}
@@ -167,9 +167,9 @@ public class adminController {
 		if(result == 1) {
 			log.info("삭제완료");
 		}
-		int pageNum=1;
+		int pageNum= 1;
 		//cri.getPageNum();
-		return "redirect:/admin/QnA?pageNum1="+pageNum;
+		return "redirect:/admin/QnA";
 		
 		
 	}
@@ -177,14 +177,19 @@ public class adminController {
 	@PostMapping("QnAModifyPro")
 	public String QnAModifyPro(QnAVO qna,Criteria cri) {
 		// 관리자가 글수정을 누르면 수정하기
-		int result = mainService.modifyQnA(qna);
-		
+		int result = 0;
+		if(qna.getQ_img()==null) {
+			qna.setQ_img("dog.jpg");
+			 result = mainService.modifyQnA(qna);	
+		}else if(qna.getQ_img()!=null) {
+			 result = mainService.modifyQnA(qna);
+		}
 		if(result == 1) {
 			log.info("수정완료");
 		}
 		int pageNum=1;
 		//cri.getPageNum();
-		return "redirect:/admin/QnA?pageNum1="+pageNum;
+		return "redirect:/admin/QnA";
 		
 		
 	}

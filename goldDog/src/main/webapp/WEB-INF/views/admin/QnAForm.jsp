@@ -52,7 +52,7 @@
 		<br/><br/><br/><br/>
 
 		<!-- 수정버튼 눌렀을때 띄울 모달 -->
-		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 	    		<div class="modal-content">
 		      		<div class="modal-header">
@@ -62,13 +62,13 @@
 		        		</button>
 		      		</div>
 	      			<div class="modal-body">
-	      			<form id="updateNotice" action="/main/tmain" method="post" >
+	      			<form id="updateQnA" action="/main/tmain" method="post" >
 	      			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-     					<input type="hidden" name="q_no" value="${q_no}"/>
+     					<input type="hidden" name="q_no" value="${QnA.q_no}"/>
 	        			<table class="table"  style="color: black;" height="500px" >
 						  <thead>
 						    <tr class="table-light" >
-						      <th scope="col" class="text-center" align="center" colspan="2"> <input type="text" name="q_title" >${QnA.q_title}</th>
+						      <th scope="col" class="text-center" align="center" colspan="2"> 수정할 내용 :<input type="text" name="q_title" value="${QnA.q_title}" ></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -89,7 +89,7 @@
 		
 		
 		<!-- 삭제버튼 눌렀을때 띄울 모달 -->
-		<div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 	    		<div class="modal-content">
 		      		<div class="modal-header">
@@ -122,46 +122,35 @@
  
 	<script type="text/javascript">
 		$(document).ready(function(){
-			let pagingForm = $("#pagingForm");
-			let result="${result}"
-			
+		
 		
 			
 			//수정 클릭하면
 			$("#modifyy").on("click",function(e){
 				e.preventDefault(); 
-				let result="${1}";
+				$("#modify").modal("show");	
 			});
 			
 			//삭제 클릭하면
 			$("#deletee").on("click",function(e){
 				e.preventDefault();
-				let result="0;
-				modalCheck(result);
+				$("#delete").modal("show");
 			});
 			
-			// 모달 띄우는 매서드
-			function modalCheckk(result){
-				if(result =='0'){
-					$("#delete").modal("show");
-				}else if(result =='1'){
-					$("#modify").modal("show");	
-				}	
-					
-			}
-			
+		
+			let pagingForm = $("#pagingForm");
 			// 글 삭제 눌렀을때 삭제하러감
 			$("#goDelete").on("click",function(e){
 				console.log("글삭제");
 				pagingForm.attr("action","/admin/QnADeletePro");
 				pagingForm.submit();
 			});
-			
+			let	updateQnA = $("#updateQnA")
 			// 글 수정 눌렀을때 가는 처리
 			$("#goModify").on("click",function(e){
 				console.log("글수정");
-				pagingForm.attr("action","/admin/QnAModifyPro");
-				pagingForm.submit();
+				updateQnA.attr("action","/admin/QnAModifyPro");
+				updateQnA.submit();
 			});
 			
 			//수정정보 보낼때 작동하는 코드
@@ -178,6 +167,7 @@
 				e.preventDefault(); 
 				$("#pagingForm").submit();
 			});
+		});
 	</script>
 	
 
