@@ -125,8 +125,48 @@ div.input-block input:focus + span.placeholder {
 }
 .area_container {
 	display: grid;
-	grid-template-columns: auto auto auto auto auto auto ;
-	grid-template-rows : 50px 50px 50px 50px 50px;
+	grid-template-columns: repeat(4, auto) ;
+	grid-template-rows : repeat(12,50px);
 	align-items: center;
 	padding-left : 2%;
+}
+.business_trip_section {
+	width: 75%;
+	
+}
+.business_container , .business_items_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items : center;
+	flex-grow :1;
+}
+.business_items_container {
+	justify-content: initial;
+	
+}
+.business_items:nth-child(1) {
+	flex: 1 10%;
+}
+.business_items:nth-child(2) {
+	flex: 1 5%;
+}
+.business_items:nth-child(3) {
+	flex: 1 80%;
+}
+.business_items button {
+	display: grid;
+	grid-auto-flow: column;
+	grid-gap: .5em;
+	border: solid 2.2px;
+	padding: 2px 10px;
+	border-radius: 7em;
+	background: #fff;
+	color: #000;
+	text-transform: uppercase;
+	margin: 1px; 
+}
+.business_items button::after {
+    content: attr(data-ico);
+	}
 }

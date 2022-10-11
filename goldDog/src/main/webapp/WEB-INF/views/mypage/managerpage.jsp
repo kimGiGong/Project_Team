@@ -130,20 +130,65 @@
                     <!-- 활동지역 -->
                     <div class="business_trip_section">
                     	<div>
-                    		${ managerlist[1] }
+                    		<fieldset>
+                    			<div class="business_container">
+                    				<div class="business_items">
+			                    		활동지역
+                    				</div>
+                    				<div class="business_items">
+                    					지역
+                    				</div>
+                    				<div class="business_items">
+                    					<fieldset style="padding: 5px;">
+                    						<div class="business_items_container">
+                   								<div class="business_item"><button data-ico='X'>마포구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
+                    						</div>
+                    					</fieldset>
+                    				</div>
+                    			</div>
+                    		</fieldset>
+                    	<div>
+                    	</div>
                     		<c:if test="${empty managerlist[1].a_addr}" >
                     			<div>
                     				<div>
                     					<a href="javascript:void(0);" id="seoul" class="area">서울</a>
                     					<a href="javascript:void(0);" id="gyeonggi" class="area">경기</a>
                     				</div>
-                   					<ul class="area_container">
+                   					<ul class="area_container" id="seoul">
                    						<c:forEach items="${ managerlist[2][0] }" var="area" varStatus="vs">
                    							<c:if test="${vs.index lt 10}">
                     							<li> <input type="checkbox" value="010${vs.index}">${ area }</li>
                    							</c:if>
                    							<c:if test="${vs.index ge 10}">
-                   								<li> <input type="checkbox" value="01${vs.index}"> ${ area } </li>                    							
+                   								<li> <input type="checkbox" value="01${vs.index}">${ area }</li>                    							
+                   							</c:if>
+                   						</c:forEach>
+                   					</ul>
+                   					<ul class="area_container" id="gyeonggi">
+                   						<c:forEach items="${ managerlist[2][1] }" var="area" varStatus="vs">
+                   							<c:if test="${vs.index lt 10}">
+                    							<li> <input type="checkbox" value="020${vs.index}">${ area }</li>
+                   							</c:if>
+                   							<c:if test="${vs.index ge 10}">
+                   								<li> <input type="checkbox" value="02${vs.index}">${ area }</li>                    							
                    							</c:if>
                    						</c:forEach>
                    					</ul>
