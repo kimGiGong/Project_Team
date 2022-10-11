@@ -26,9 +26,6 @@ public interface memberService {
 		// 회원 정보(m_no) 가져오기
 		public int getMno(String m_id);
 		
-		// 회원 정보 수정 처리
-		public int ModifyMember(MemberVO member);
-		
 		// 회원 탈퇴 처리
 		public int deleteMember(MemberVO member);
 		
@@ -68,4 +65,9 @@ public interface memberService {
 		//회원 정보 수정 처리
 		public int modifyMember(MemberVO member);
 		
+		//주소 가져오기
+		public AddressVO getAddress(int m_no);
+		
+		//주소 수정
+		public int modifyAddress(AddressVO address);
 }

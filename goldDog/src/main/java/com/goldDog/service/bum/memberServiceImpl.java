@@ -83,12 +83,6 @@ public class memberServiceImpl implements memberService{
 	}
 
 	@Override
-	public int ModifyMember(MemberVO member) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int deleteMember(MemberVO member) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -296,11 +290,28 @@ public class memberServiceImpl implements memberService{
 	@Override
 	public int modifyMember(MemberVO member) {
 		//id pw 체크 추가
-		int result = 0;
+		/*int result = 0;
 		MemberVO dbMember = getMember(member.getM_id());
 		if(bcryptPasswordEncoder.matches(member.getM_pw(), dbMember.getM_pw())) {
+			
 			result = mapper.updateMember(member);
-		}
+			
+			// 비밀번호 암호화 변경
+			updatePw(member);
+		} */
+		int result = mapper.updateMember(member);
+		updatePw(member);
+		return result;
+	}
+	
+	@Override
+	public AddressVO getAddress(int m_no) {
+		return mapper.getAddress(m_no);
+	}
+	
+	@Override
+	public int modifyAddress(AddressVO address) {
+		int result = mapper.updateAddress(address);
 		return result;
 	}
 
