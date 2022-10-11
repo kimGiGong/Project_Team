@@ -129,6 +129,7 @@ div.input-block input:focus + span.placeholder {
 	grid-template-rows : repeat(12,50px);
 	align-items: center;
 	padding-left : 2%;
+	display: none;
 }
 .business_trip_section {
 	width: 75%;
