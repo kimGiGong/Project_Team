@@ -62,7 +62,7 @@
 	<!-- 이게 젤 중요  테이블 2개 묶어서 권한 가져오기 타입은 위에 만들어준 타입으로-->
 	<select id="getMember" resultMap="memberMap">
 		select m.*, a.auth from member m, auth a
-		where m.m_id = a.m_id
+		where m.m_no = a.m_no
 		and m_id = #{m_id}
 	</select>
 	
