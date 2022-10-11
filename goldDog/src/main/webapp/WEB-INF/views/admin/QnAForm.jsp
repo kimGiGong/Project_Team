@@ -27,8 +27,11 @@
 						  </thead>
 						  <tbody>
 							   	<tr >
-							      <th class="text-left"><fmt:formatDate pattern="yy-MM-dd" value="${QnA.q_date}"/></th>
-							      <th class="text-right">조회수 : ${QnA.q_readcount}</th>
+							      <th class="text-left">작성자 : "${QnA.m_id}" </th>
+							      <th class="text-right">(<fmt:formatDate pattern="yy-MM-dd" value="${QnA.q_date}"/>) 조회수 : ${QnA.q_readcount}</th>
+							    </tr>
+							   	<tr>
+							      <th class="text-center" colspan="2"> <img src="/resources/serverImg/${QnA.q_img}"> </th>
 							    </tr>
 							   	<tr>
 							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="QnA" readonly>${QnA.q_content}</textarea></th>
@@ -36,10 +39,20 @@
 							   	<tr>
 							      <td class="text-right" colspan="2"> 
 								    <sec:authorize access="hasRole('ROLE_ADMIN')">
+									    <button id="answer"  class="btn btn-danger" >답변달기</button>
 									    <button id="deletee"  class="btn btn-danger" >삭제</button>
-									    <button id="modifyy"  class="btn btn-success" >수정</button>
 								    </sec:authorize>
-							     	 <input type="button" class="btn btn-dark" id="back" onclick="window.location='/admin/QnA?pageNum=${1}'" value="뒤로">
+								    
+								    <sec:authorize access="isAuthenticated()">
+				               		<sec:authentication property="principal" var="pInfo"/>
+					               		<c:if test="${pInfo.username eq QnA.m_id}">
+										    <button id="modifyy"  class="btn btn-success" >수정</button>
+										    <button id="deletee"  class="btn btn-danger" >삭제</button>
+					                	</c:if>
+					               	</sec:authorize>
+					               	
+					               	
+							     	 <input type="button" class="btn btn-dark" id="back" onclick="window.location='/admin/QnA'" value="뒤로">
 							       </td>
 							    </tr>
 						  </tbody>
@@ -62,25 +75,30 @@
 		        		</button>
 		      		</div>
 	      			<div class="modal-body">
-	      			<form id="updateQnA" action="/main/tmain" method="post" >
-	      			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	      			<form id="updateQnA" action="/main/tmain" method="post" enctype="multipart/form-data">
      					<input type="hidden" name="q_no" value="${QnA.q_no}"/>
 	        			<table class="table"  style="color: black;" height="500px" >
 						  <thead>
 						    <tr class="table-light" >
-						      <th scope="col" class="text-center" align="center" colspan="2"> 수정할 내용 :<input type="text" name="q_title" value="${QnA.q_title}" ></th>
+						      <th scope="col" class="text-center" align="center" colspan="2"> 제목수정:<input type="text" name="q_title" value="${QnA.q_title}" ></th>
 						    </tr>
 						  </thead>
 						  <tbody>
+						  		<tr>
+							      <th class="text-center" colspan="2"> <img src="/resources/serverImg/${QnA.q_img}"> </th>
+							    </tr>
+							    <tr>
+							      <th class="text-center" colspan="2"><input class="form-control" type="file" id="formFile" name="part_img"/><br> </th>
+							    </tr>
 							   	<tr>
-							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="q_content" >${QnA.q_content}</textarea></th>
+							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="q_content" >내용수정:${QnA.q_content}</textarea></th>
 							    </tr>
 						  </tbody>
 						</table>
 	        		</form>
 	      			</div>
 	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" id="goModify" >글수정</button>
+       					<button type="button" class="btn btn-secondary" id="goModify" >글수정</button>
 	        			<button type="button" class="btn btn-primary" data-dismiss="modal">취소</button>
 	      			</div>
 	   			</div>
@@ -108,12 +126,15 @@
 	   			</div>
 	  		</div>
 		</div> <!-- end 모달 -->
+		
+		
+		
+		
 
 		
 
 
 		<form action="/admin/QnA" id="pagingForm">
-			<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 			<input type="hidden" name="q_no" value="${QnA.q_no}"/>
 		</form>
 
@@ -149,7 +170,7 @@
 			// 글 수정 눌렀을때 가는 처리
 			$("#goModify").on("click",function(e){
 				console.log("글수정");
-				updateQnA.attr("action","/admin/QnAModifyPro");
+				updateQnA.attr("action","/admin/QnAModifyPro?${_csrf.parameterName}=${_csrf.token}");
 				updateQnA.submit();
 			});
 			
@@ -157,12 +178,12 @@
 			let	updateNotice = $("#updateNotice")
 			$("#goModify").on("click",function(e){
 				console.log("정보를 보낸다 .");
-				updateNotice.attr("action","/admin/QnAModifyPro");
+				updateNotice.attr("action","/admin/QnAModifyPro?${_csrf.parameterName}=${_csrf.token}");
 				
 				updateNotice.submit();
 			});
 			
-			// 로그아웃 
+			// 뒤로
 			$("#back").click(function(e){
 				e.preventDefault(); 
 				$("#pagingForm").submit();

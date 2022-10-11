@@ -53,14 +53,13 @@ public class MainServiceImpl implements MainService {
 		return mapper.getTrainer(t_no);
 	}
 	@Override
-	public List<TrainerVO> getAllTrainer() {
+	public List<TrainerVO> getAllTrainer(Criteria cri) {
 		log.info("훈련사 정보 다 가져오는 메서드 호출");
-		return mapper.getAllTrainer();
+		return mapper.getAllTrainer(cri);
 	}
 	@Override
-	public List<TrainerVO> getAllTrainerT_no(List<Integer> t_no_list) {
-			log.info("훈련사 t_no 순으로 가져오는 메서드 호출");
-		return mapper.getAllTrainerT_no(t_no_list);
+	public int getAllTrainerCount() {
+		return mapper.getAllTrainerCount();
 	}
 	
 	//트레이너 판매정보 등록

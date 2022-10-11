@@ -70,10 +70,14 @@ public class mainController {
 		
 		
 		
-		// m_no 만 뽑아오기
-		List<TrainerVO> Tlist = mainService.getAllTrainer();
+		
+		
+		// 페이징 처리해서 가져오기
+		int Ttotal = mainService.getAllTrainerCount();
+		List<TrainerVO> Tlist = mainService.getAllTrainer(cri);
 		List<Integer> t_no_list = new ArrayList<Integer>(); 
 		List<Integer> t_m_no_list = new ArrayList<Integer>(); 
+		
 		
 		for(int i = 0; i < Tlist.size(); i++) {
 			t_no_list.add(Tlist.get(i).getT_no()); 
@@ -106,12 +110,12 @@ public class mainController {
 		
 		if(t_m_no_list.size()!=0) {
 			model.addAttribute("member", mainService.getMember(t_m_no_list));
-			model.addAttribute("trainer",mainService.getAllTrainerT_no(t_no_list));
+			model.addAttribute("trainer",mainService.getAllTrainer(cri));
 		}
 			model.addAttribute("trainercheck",t_no_list.size()); //트레이너 숫자 체크
 			model.addAttribute("rAvg", total); //리뷰 평점
 			model.addAttribute("rTotal", rTotal); //리뷰 총 갯수
-			model.addAttribute("pager", new PageDTO(cri, Tlist.size()));   
+			model.addAttribute("pager", new PageDTO(cri, Ttotal)); // total count로 수정    
 
 		//리뷰 추가해야함 베스트 5개 뽑기
 		

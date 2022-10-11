@@ -19,6 +19,7 @@ import com.goldDog.domain.ADVO;
 import com.goldDog.domain.Criteria;
 import com.goldDog.domain.NoticeVO;
 import com.goldDog.domain.QnAVO;
+import com.goldDog.service.bum.domain.CustomUser;
 import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -110,6 +111,8 @@ public class adminController {
 	
 	@GetMapping("noticeForm")
 	public void noticeForm(Model model,@Param("n_no") int n_no) {
+	
+		
 		mainService.addViewPoint(n_no);
 		log.info(n_no+"가져왔어!!!!");
 		NoticeVO notice =mainService.getNotice(n_no);
@@ -126,6 +129,121 @@ public class adminController {
 		
 		
 	}
+	
+	
+	@PostMapping("addNoticePro")
+	public String addNoticePro(NoticeVO notice,MultipartHttpServletRequest request,Authentication auth) {
+		try {
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			String m_id =user.getUsername();
+			notice.setM_id(m_id);
+			
+			
+			NoticeVO ad = new NoticeVO();	
+				
+			MultipartFile mf = request.getFile("part_img");
+			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			
+			log.info(mf.getSize());
+			log.info(mf.getContentType());
+			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			
+			
+			// 이름 중복 방지를 위한 새 파일명 생성
+			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			log.info(uuid);
+			//업로드한 파일 확장자만 가져오기
+			String orgName=mf.getOriginalFilename();
+			String ext= orgName.substring(orgName.lastIndexOf("."));
+			// 저장할 파일명
+			String newFileName= uuid + ext;
+			
+			//DB 상에도 파일명을 저장해 준다.
+					
+			int result = 0;
+			if(mf.getOriginalFilename()==null) {
+				notice.setN_img("dog.jpg");
+				 result = mainService.addNotice(notice);	
+			}else if(mf.getOriginalFilename()!=null) {
+				notice.setN_img(newFileName);
+				 result = mainService.addNotice(notice);
+			}
+			if(result == 1) {
+				log.info("글추가완료");
+			}
+			 
+			log.info("***********uuid"+uuid);
+			//저장할 파일 전체 경로
+			String imgPath = path+"\\"+newFileName;
+			log.info("*****imgPath"+imgPath);
+
+			// 파일 저장
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return "redirect:/admin/QnA";
+	}
+	
+	@PostMapping("addQnAPro")
+	public String addQnAPro(QnAVO qna,MultipartHttpServletRequest request,Authentication auth) {
+		try {
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			String m_id =user.getUsername();
+			qna.setM_id(m_id);
+				
+			MultipartFile mf = request.getFile("part_img");
+			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			
+			log.info(mf.getSize());
+			log.info(mf.getContentType());
+			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			
+			
+			// 이름 중복 방지를 위한 새 파일명 생성
+			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			log.info(uuid);
+			//업로드한 파일 확장자만 가져오기
+			String orgName=mf.getOriginalFilename();
+			String ext= orgName.substring(orgName.lastIndexOf("."));
+			// 저장할 파일명
+			String newFileName= uuid + ext;
+			
+			//DB 상에도 파일명을 저장해 준다.
+
+			int result = 0;
+			if(mf.getOriginalFilename()==null) {
+				qna.setQ_img("dog.jpg");
+				 result = mainService.addQnA(qna);	
+			}else if(mf.getOriginalFilename()!=null) {
+				qna.setQ_img(newFileName);
+				
+				 result = mainService.addQnA(qna);
+			}
+			if(result == 1) {
+				log.info("수정완료");
+			}
+			
+			
+			log.info("***********uuid"+uuid);
+			//저장할 파일 전체 경로
+			String imgPath = path+"\\"+newFileName;
+			log.info("*****imgPath"+imgPath);
+
+			// 파일 저장
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+						
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		return "redirect:/admin/QnA";
+	}
+	
+	
 	
 	
 	
@@ -145,15 +263,58 @@ public class adminController {
 	}
 	
 	@PostMapping("noticeModifyPro")
-	public String noticeModifyPro(NoticeVO notice,Criteria cri) {
-		// 관리자가 글수정을 누르면 수정하기
-		int result = mainService.modifyNotice(notice);
+	public String noticeModifyPro(NoticeVO notice,Criteria cri,MultipartHttpServletRequest request) {
+		try {
+			
+			
+			MultipartFile mf = request.getFile("part_img");
+			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			
+			log.info(mf.getSize());
+			log.info(mf.getContentType());
+			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			
+			
+			// 이름 중복 방지를 위한 새 파일명 생성
+			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			log.info(uuid);
+			//업로드한 파일 확장자만 가져오기
+			String orgName=mf.getOriginalFilename();
+			String ext= orgName.substring(orgName.lastIndexOf("."));
+			// 저장할 파일명
+			String newFileName= uuid + ext;
+			
+			//DB 상에도 파일명을 저장해 준다.
+
+			int result = 0;
+			if(mf.getOriginalFilename()==null) {
+				notice.setN_img("dog.jpg");
+				 result = mainService.modifyNotice(notice);	
+			}else if(mf.getOriginalFilename()!=null) {
+				notice.setN_img(newFileName);
+				
+				 result = mainService.modifyNotice(notice);
+			}
+			if(result == 1) {
+				log.info("수정완료");
+			}
+			
+			log.info("***********uuid"+uuid);
+			//저장할 파일 전체 경로
+			String imgPath = path+"\\"+newFileName;
+			log.info("*****imgPath"+imgPath);
+
+			// 파일 저장
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+						
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		
-		if(result == 1) {
-			log.info("수정완료");
-		}
-		int pageNum=1;
-		//cri.getPageNum();
+		
+		
 		return "redirect:/admin/QnA";
 		
 		
@@ -175,20 +336,57 @@ public class adminController {
 	}
 	
 	@PostMapping("QnAModifyPro")
-	public String QnAModifyPro(QnAVO qna,Criteria cri) {
-		// 관리자가 글수정을 누르면 수정하기
-		int result = 0;
-		if(qna.getQ_img()==null) {
-			qna.setQ_img("dog.jpg");
-			 result = mainService.modifyQnA(qna);	
-		}else if(qna.getQ_img()!=null) {
-			 result = mainService.modifyQnA(qna);
-		}
-		if(result == 1) {
-			log.info("수정완료");
-		}
-		int pageNum=1;
-		//cri.getPageNum();
+	public String QnAModifyPro(QnAVO qna,Criteria cri,MultipartHttpServletRequest request) {
+		try {
+			
+			
+			MultipartFile mf = request.getFile("part_img");
+			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			
+			log.info(mf.getSize());
+			log.info(mf.getContentType());
+			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			
+			
+			// 이름 중복 방지를 위한 새 파일명 생성
+			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			log.info(uuid);
+			//업로드한 파일 확장자만 가져오기
+			String orgName=mf.getOriginalFilename();
+			String ext= orgName.substring(orgName.lastIndexOf("."));
+			// 저장할 파일명
+			String newFileName= uuid + ext;
+			
+			//DB 상에도 파일명을 저장해 준다.
+
+			int result = 0;
+			
+			if(mf.getOriginalFilename()==null) {
+				qna.setQ_img("dog.jpg");
+				 result = mainService.modifyQnA(qna);
+			}else if(mf.getOriginalFilename()!=null) {
+				qna.setQ_img(newFileName);
+				
+				 result = mainService.modifyQnA(qna);
+			}
+			if(result == 1) {
+				log.info("수정완료");
+			}
+			
+			log.info("***********uuid"+uuid);
+			//저장할 파일 전체 경로
+			String imgPath = path+"\\"+newFileName;
+			log.info("*****imgPath"+imgPath);
+
+			// 파일 저장
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+						
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
 		return "redirect:/admin/QnA";
 		
 		

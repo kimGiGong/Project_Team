@@ -148,10 +148,26 @@
 					        		</button>
 					      		</div>
 				      			<div class="modal-body">
-				        			새로운 공지사항 글쓰는 창
+				        			<form id="addNoticePro" action="/admin/addNoticePro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+					        			<table class="table"  style="color: black;" height="500px" >
+										  <thead>
+										    <tr class="table-light" >
+										      <th scope="col" class="text-center" align="center" colspan="2">제목 :<input type="text" name="n_title"  ></th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										  		<tr>
+											      <th class="text-center" colspan="2">사진첨부 : <input class="form-control" type="file" id="formFile" name="part_img"/><br> </th>
+											    </tr>
+											   	<tr>
+											      <th class="text-center" colspan="2">내용 :<textarea rows="10" cols="50" name="n_content" ></textarea></th>
+											    </tr>
+										  </tbody>
+										</table>
+					        		</form>
 				      			</div>
 				      			<div class="modal-footer">
-				        			</a> <button type="button" class="btn btn-secondary" id="goLogin" >확인</button>
+				        			</a> <button type="button" class="btn btn-secondary" id="addnotice" >글추가</button>
 				        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				      			</div>
 				   			</div>
@@ -169,10 +185,26 @@
 					        		</button>
 					      		</div>
 				      			<div class="modal-body">
-				        			새로운 QnA 글쓰는 창
+			        				<form id="addQnAPro" action="/admin/addQnAPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+					        			<table class="table"  style="color: black;" height="500px" >
+										  <thead>
+										    <tr class="table-light" >
+										      <th scope="col" class="text-center" align="center" colspan="2"> <input type="text" name="q_title" placeholder="제목" ></th>
+										    </tr>
+										  </thead>
+										  <tbody>
+											   	<tr>
+											      <th class="text-center" colspan="2"><input class="form-control" type="file" id="formFile" name="part_img"/><br> </th>
+											    </tr>
+											   	<tr>
+											      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="q_content"  placeholder="QnA작성"></textarea></th>
+											    </tr>
+										  </tbody>
+										</table>
+					        		</form>
 				      			</div>
 				      			<div class="modal-footer">
-				        			</a> <button type="button" class="btn btn-secondary" id="goLogin" >확인</button>
+				        			</a> <button type="button" class="btn btn-secondary" id="addQnA" >글쓰기</button>
 				        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 				      			</div>
 				   			</div>
@@ -204,15 +236,35 @@
 			$("#newBoard1").on("click",function(e){
 				e.preventDefault(); 
 				console.log("글쓰기 확인 모달.");
+				
 				$("#addNew1").modal("show");
 			});
+			
+			//공지사항 모달 글쓰기 눌렀을때 정보 보내기
+			//let result ="${result}";
+			$("#addnotice").on("click",function(e){
+				e.preventDefault(); 
+				console.log("글쓰기 확인 모달.");
+				
+				$("#addNoticePro").submit();
+			});
 
+			
+			
+			
+			
 			
 			//QnA 글쓰기 눌렀을때 띄울 모달
 			$("#newBoard2").on("click",function(e){
 				e.preventDefault(); 
 				console.log("글쓰기 확인 모달.");
 				$("#addNew2").modal("show");
+			});
+			//QnA 모달 글쓰기 눌렀을때 띄울 
+			$("#addQnA").on("click",function(e){
+				e.preventDefault(); 
+				console.log("글쓰기 확인 모달.");
+				$("#addQnAPro").submit();
 			});
 			
 			

@@ -35,9 +35,9 @@ public interface MainMapper {
 	//맴버 번호 받아서 맞는 트레이너 가져오기
 	public TrainerVO getTrainer(int t_no);
 	//전체 훈련사 리스트 가져오기
-	public List<TrainerVO> getAllTrainer();
+	public List<TrainerVO> getAllTrainer(Criteria cri);
 	//전체 훈련사 T_no 가져오기
-	public List<TrainerVO> getAllTrainerT_no(List<Integer> list);
+	public int getAllTrainerCount();
 	//트레이너 판매정보 등록
 	public int addTinfo(TrainerVO trainer);
 	

@@ -12,6 +12,7 @@ public class QnAVO {
 	private String q_content; 
 	private Timestamp q_date;
 	private int q_readcount;
+	private String m_id; 
 	
 	
 	

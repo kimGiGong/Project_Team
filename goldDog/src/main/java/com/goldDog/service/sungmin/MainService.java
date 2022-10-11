@@ -27,11 +27,11 @@ public interface MainService {
 	
 	
 	// 훈련사 *******************************************************
-	//훈련사 정보 하나 가져오기
+	//훈련사 정보 하나 가져오기 
 	public TrainerVO getTrainer(int t_no);
-	//모든 훈련사 가져오기
-	public List<TrainerVO> getAllTrainerT_no(List<Integer> t_no_list);
-	public List<TrainerVO> getAllTrainer();
+	//모든 훈련사숫자 가져오기
+	public int getAllTrainerCount();
+	public List<TrainerVO> getAllTrainer(Criteria cri);
 	//훈련사 판매등록
 	public int addTinfo(TrainerVO trainer);
 	

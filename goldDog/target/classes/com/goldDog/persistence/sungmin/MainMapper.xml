@@ -39,17 +39,20 @@
 		select * from trainer where t_no=#{t_no}
 	</select>
 
-	<!-- 모든 훈련사 가져오기 -->
+	<!-- 모든 훈련사 가져오기 페이징 처리 -->
 	<select id="getAllTrainer" resultType="com.goldDog.domain.TrainerVO">
-		select * from trainer 
+	<![CDATA[ 
+		select B.* from (select rownum r, A.* from 
+		(select * from trainer order by t_price desc) A order by t_ravg desc) B 
+		where ]]>
+	 <![CDATA[  
+		 r > (#{pageNum} - 1) * #{listQty} and r <= #{pageNum} * #{listQty}
+	 	]]>
 	</select>
 	
 	<!-- 모든 훈련사 가져오기 t_no 순서대로 -->
-	<select id="getAllTrainerT_no" resultType="com.goldDog.domain.TrainerVO">
-		select * from trainer where t_no in
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
-			#{item}
-		</foreach>  
+	<select id="getAllTrainerCount" resultType="int">
+		select count(*) from trainer 
 	</select>
 	
 	<!-- 판매자 추가정보 등록하기 -->
@@ -178,7 +181,7 @@
 	<!-- 공지사항 추가-->
 	<insert id="addNotice">
 		insert into notice values 
-		(notice_seq.nextval ,#{n_title} ,#{n_content},sysdate,0)
+		(notice_seq.nextval ,#{n_title} ,#{n_content},sysdate,0,#{n_img},#{m_id})
 	</insert>
 	<!-- 공지사항 모두 가져오기-->
 	<select id="getAllNotice" resultType="com.goldDog.domain.NoticeVO">
@@ -198,7 +201,7 @@
 	</delete>
 	<!-- n_no공지사항 수정하기-->
 	<update id="modifyNotice">
-		update notice set n_title=#{n_title} , n_content= #{n_content} where n_no=#{n_no}
+		update notice set n_title=#{n_title},n_img=#{n_img} , n_content= #{n_content},m_id=#{m_id} where n_no=#{n_no}
 	</update>	
 
 
@@ -207,7 +210,7 @@
 	<!-- QnA 추가-->
 	<insert id="addQnA">
 		insert into QnA values 
-		(qna_seq.nextval ,#{q_img}, #{q_title} ,#{q_content}, sysdate ,0)
+		(qna_seq.nextval ,#{q_img}, #{q_title} ,#{q_content}, sysdate ,0,#{m_id})
 	</insert>
 	<!-- 공지사항 모두 가져오기-->
 	<select id="getAllQnA" resultType="com.goldDog.domain.QnAVO">
@@ -227,7 +230,7 @@
 	</delete>
 	<!-- q_no공지사항 수정하기-->
 	<update id="modifyQnA">
-		update QnA set q_title=#{q_title}, q_img=#{q_img} , q_content= #{q_content} where q_no=#{q_no}
+		update QnA set q_title=#{q_title}, q_img=#{q_img} , q_content= #{q_content},m_id=#{m_id} where q_no=#{q_no}
 	</update>
 
 

@@ -20,7 +20,7 @@ public class Criteria { // 게시판 사용시 부수적으로 필요한 데이�
 	
 	
 	public Criteria() {
-		this(1, 10); // 페이지번호 1이고 10개씩 보여주겠다
+		this(1, 4); // 페이지번호 1이고 10개씩 보여주겠다
 	}
 	
 	public Criteria(int pageNum, int listQty) {
@@ -46,7 +46,7 @@ public class Criteria { // 게시판 사용시 부수적으로 필요한 데이�
 				.queryParam("keyword", this.keyword)
 				;
 		
-		return builder.toUriString(); // ?pageNum=1&listQty=10
+		return builder.toUriString(); // ?pageNum=1&listQty=10&sel=제목&keyword=hava
 	}
 	
 	

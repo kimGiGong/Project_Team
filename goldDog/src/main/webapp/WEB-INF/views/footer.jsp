@@ -105,3 +105,13 @@
   </body>
 
 </html>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		// 로그아웃 
+		$("#logoutBtn").click(function(e){
+			e.preventDefault(); 
+			$("#logoutForm").submit();
+		});
+	});
+</script>
