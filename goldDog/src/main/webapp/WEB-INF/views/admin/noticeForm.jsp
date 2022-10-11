@@ -27,8 +27,11 @@
 						  </thead>
 						  <tbody>
 							   	<tr >
-							      <th class="text-left"><fmt:formatDate pattern="yy-MM-dd" value="${notice.n_date}"/></th>
-							      <th class="text-right">조회수 : ${notice.n_readcount}</th>
+							      <th class="text-left">작성자 : "${QnA.m_id}" </th>
+							      <th class="text-right">(<fmt:formatDate pattern="yy-MM-dd" value="${notice.n_date}"/>)  조회수 : ${notice.n_readcount}</th>
+							    </tr>
+							   	<tr>
+							      <th class="text-center" colspan="2"> <img src="/resources/serverImg/${notice.n_img}"> </th>
 							    </tr>
 							   	<tr>
 							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="notice" readonly>${notice.n_content}</textarea></th>
@@ -62,7 +65,7 @@
 		        		</button>
 		      		</div>
 	      			<div class="modal-body">
-	      			<form id="updateNotice" action="/main/tmain" method="post" >
+	      			<form id="updateNotice" action="/main/tmain" method="post" enctype="multipart/form-data">
 	      			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
      					<input type="hidden" name="n_no" value="${notice.n_no}"/>
 	        			<table class="table"  style="color: black;" height="500px" >
@@ -72,6 +75,12 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+							   	<tr>
+							      <th class="text-center" colspan="2"> <img src="/resources/serverImg/${notice.n_img}"> </th>
+							    </tr>
+							    <tr>
+							      <th class="text-center" colspan="2"><input class="form-control" type="file" id="formFile" name="part_img"/><br> </th>
+							    </tr>
 							   	<tr>
 							      <th class="text-center" colspan="2"><textarea rows="10" cols="50" name="n_content" >${notice.n_content}</textarea></th>
 							    </tr>
@@ -154,7 +163,7 @@
 			let	updateNotice = $("#updateNotice")
 			$("#goModify").on("click",function(e){
 				console.log("정보를 보낸다 .");
-				updateNotice.attr("action","/admin/noticeModifyPro");
+				updateNotice.attr("action","/admin/noticeModifyPro?${_csrf.parameterName}=${_csrf.token}");
 				
 				updateNotice.submit();
 			});
