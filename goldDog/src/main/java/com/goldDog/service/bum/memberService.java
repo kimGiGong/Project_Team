@@ -64,4 +64,8 @@ public interface memberService {
 
 		// 회원 정보 가져오기 (이름)
 		public MemberVO getNameEmail(String m_email);
+		
+		//회원 정보 수정 처리
+		public int modifyMember(MemberVO member);
+		
 }
