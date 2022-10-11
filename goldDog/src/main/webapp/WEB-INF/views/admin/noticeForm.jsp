@@ -39,7 +39,7 @@
 									    <button id="deletee"  class="btn btn-danger" >삭제</button>
 									    <button id="modifyy"  class="btn btn-success" >수정</button>
 								    </sec:authorize>
-							     	 <input type="button" class="btn btn-dark" id="back" onclick="window.location='/admin/QnA?pageNum=${1}'" value="뒤로">
+							     	 <input type="button" class="btn btn-dark" id="back" onclick="window.location='/admin/QnA?pageNum=1'" value="뒤로">
 							       </td>
 							    </tr>
 						  </tbody>
@@ -52,7 +52,7 @@
 		<br/><br/><br/><br/>
 
 		<!-- 수정버튼 눌렀을때 띄울 모달 -->
-		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 	    		<div class="modal-content">
 		      		<div class="modal-header">
@@ -64,11 +64,11 @@
 	      			<div class="modal-body">
 	      			<form id="updateNotice" action="/main/tmain" method="post" >
 	      			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-     					<input type="hidden" name="n_no" value="${n_no}"/>
+     					<input type="hidden" name="n_no" value="${notice.n_no}"/>
 	        			<table class="table"  style="color: black;" height="500px" >
 						  <thead>
 						    <tr class="table-light" >
-						      <th scope="col" class="text-center" align="center" colspan="2"> <input type="text" name="n_title" >${notice.n_title}</th>
+						      <th scope="col" class="text-center" align="center" colspan="2">제목 : <input type="text" name="n_title" value="${notice.n_title}"></th>
 						    </tr>
 						  </thead>
 						  <tbody>
@@ -89,7 +89,7 @@
 		
 		
 		<!-- 삭제버튼 눌렀을때 띄울 모달 -->
-		<div class="modal fade" id="modify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 	    		<div class="modal-content">
 		      		<div class="modal-header">
@@ -113,7 +113,7 @@
 
 
 		<form action="/admin/QnA" id="pagingForm">
-			<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+			<input type="hidden" name="pageNum"  value=1>
 			<input type="hidden" name="n_no" value="${notice.n_no}"/>
 		</form>
 
@@ -123,32 +123,18 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			let pagingForm = $("#pagingForm");
-			let result="${result}"
-			
-		
 			
 			//수정 클릭하면
 			$("#modifyy").on("click",function(e){
 				e.preventDefault(); 
-				let result="${1}";
+				$("#modify").modal("show");
 			});
 			
 			//삭제 클릭하면
 			$("#deletee").on("click",function(e){
 				e.preventDefault();
-				let result="0;
-				modalCheck(result);
-			});
-			
-			// 모달 띄우는 매서드
-			function modalCheckk(result){
-				if(result =='0'){
 					$("#delete").modal("show");
-				}else if(result =='1'){
-					$("#modify").modal("show");	
-				}	
-					
-			}
+			});
 			
 			// 글 삭제 눌렀을때 삭제하러감
 			$("#goDelete").on("click",function(e){
@@ -178,6 +164,8 @@
 				e.preventDefault(); 
 				$("#pagingForm").submit();
 			});
+			
+		});
 	</script>
 	
 

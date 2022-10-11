@@ -225,6 +225,8 @@
 				e.preventDefault(); 
 				$("#logoutForm").submit();
 			});
+			
+		});
 	</script>
 	
 
