@@ -23,6 +23,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	
+	
 
     <!-- Custom styles for this template-->
     <link href="/resources/bum/css/sb-admin-2.min.css" rel="stylesheet">
@@ -224,6 +226,14 @@
 			confirmMsg.innerHTML ="비밀번호 불일치";
 		}
 	}
+	
+	const myModal = document.getElementById('myModal')
+	const myInput = document.getElementById('myInput')
+
+	myModal.addEventListener('shown.bs.modal', () => {
+	  myInput.focus()
+	})
+	
 	</script>
 	
 </head>
@@ -322,6 +332,10 @@
 	                                <div class="form-check form-switch" style="padding: 10">
 										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
 										<a class="form-check-label" for="flexSwitchCheckDefault">이용 약관 및 개인 정보 동의</a>
+										<!-- Scrollable modal -->
+										<div class="modal-dialog modal-dialog-scrollable">
+										  ...
+										</div>
 									</div>
 	                                
 	                                <hr>

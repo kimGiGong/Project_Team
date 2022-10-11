@@ -109,38 +109,6 @@
 	            }
 	        }).open();
 	    }
-
-	function checkId(){
-		
-		let token =$("meta[name='_csrf']").attr("content");      
-        let header=$("meta[name='_csrf_header']").attr("content");
-		
-        var id = $('#m_id').val(); //id값이 "id"인 입력란의 값을 저장
-        
-        $.ajax({
-            url:'/member/idCheck.json', //Controller에서 요청 받을 주소
-            type:'post', //POST 방식으로 전달
-            data: {m_id:id},
-       		beforeSend: function(xhr){
-               	xhr.setRequestHeader(header,token);
-            },
-            success:function(result){ //컨트롤러에서 넘어온 cnt값을 받는다 
-            	console.log(result);
-                if(result == 0){ //result가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
-                    $('.id_ok').css("display","inline-block"); 
-                    $('.id_already').css("display", "none");
-                } else { // result가 1일 경우 -> 이미 존재하는 아이디
-                    $('.id_already').css("display","inline-block");
-                    $('.id_ok').css("display", "none");
-                    //alert("이미 사용중인 아이디입니다. 다시 입력해주세요.");
-                    $('#m_id').val('');
-                }
-            },
-            error:function(){
-                alert("에러입니다");
-            }
-		});
-   	}; 
    	
 	function checkEmail(){
 			
@@ -238,7 +206,12 @@
 	            <div class="card-body p-0">
 	                <!-- Nested Row within Card Body -->
 	                <div class="row">
-	                    <div class="col-lg-5 d-none d-lg-block">사진 등록</div>
+	                    <div class="col-lg-5 d-none d-lg-block">
+	                    <div class="p-5">
+	                    	<img class="card-img-top" src="/resources/serverImg/${add1.ad_img}" width="350" height="300" alt="Card image cap">
+	                    	<input class="form-control" type="file" id="formFile" name="img"/>
+	                    </div>
+	                   	</div>
 	                    <div class="col-lg-7">
 	                        <div class="p-5">
 	                            <div class="text-center">
@@ -246,9 +219,7 @@
 	                            </div>
 	                            <form class="user">
                                     <div class="form-group">
-	                                    <input type="text" class="form-control form-control-user" id="m_id" name="m_id" onchange="checkId()"  placeholder="아이디">
-                                        <span class="id_ok">사용 가능한 아이디입니다.</span>
-										<span class="id_already">중복된 아이디입니다.</span>
+                                    	<a class="form-control form-control-user">${member.m_id} (수정 불가)</a>
 	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
@@ -260,28 +231,28 @@
 	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
-	                                        <input type="text" class="form-control form-control-user" name="m_name" placeholder="이름">
+	                                        <a class="form-control form-control-user">${member.m_name} (수정 불가)</a> 
 	                                    </div>
 	                                    <div class="col-sm-6">
-	                                        <input type="text" class="form-control form-control-user" id="m_nick" name="m_nick" onchange="checkNick()" placeholder="닉네임">
+	                                        <input type="text" class="form-control form-control-user" id="m_nick" name="m_nick" onchange="checkNick()" value="${member.m_nick}">
 	                                        <span class="nick_ok">사용 가능한 닉네임입니다.</span>
 											<span class="nick_already">중복된 닉네임입니다.</span>
 	                                    </div>
 	                                </div> 
 	                                <div class="form-group">
-	                                    <input type="email" class="form-control form-control-user" id="m_email" name="m_email" aria-describedby="emailHelp" onchange="checkEmail()" placeholder="Email">
+	                                    <input type="email" class="form-control form-control-user" id="m_email" name="m_email" aria-describedby="emailHelp" onchange="checkEmail()" value="${member.m_email}">
 	                                 	<span class="email_ok">사용 가능한 이메일입니다.</span>
 										<span class="email_already">중복된 이메일입니다.</span>
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control form-control-user" name="m_phone" placeholder="전화번호">
+	                                    <input type="text" class="form-control form-control-user" name="m_phone" value="${member.m_phone}">
 	                                </div>
 	                                
 	                               <!-- <form action="/member/address" method="post"> address -->
 	                                <span id="guide" style="color:#999;display:none"></span>
 		                                <div class="form-group row">
 		                                    <div class="col-sm-9 mb-6 mb-sm-0">
-		                                        <input type="text" class="form-control form-control-user" id="sample4_postcode" name="a_zonecode" placeholder="우편번호">
+		                                        <input type="text" class="form-control form-control-user" id="sample4_postcode" name="a_zonecode" value="${address.a_zonecode}">
 		                                    </div>
 		                                    <div class="col-sm-3">
 		                                        <input type="button" class="form-control form-control-user" onclick="sample4_execDaumPostcode()" name="a_ck" value="위치검색" >
@@ -289,7 +260,7 @@
 	                                	</div>
 		                         	<div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
-	                                        <input type="text" class="form-control form-control-user" id="sample4_roadAddress" name="a_road" placeholder="도로명주소">
+	                                        <input type="text" class="form-control form-control-user" id="sample4_roadAddress" name="a_road" value="${address.a_road}">
 	                                    </div>
 	                                    <div class="col-sm-6">
 	                                        <input type="text" class="form-control form-control-user" id="sample4_jibunAddress"  placeholder="지번주소">
@@ -297,41 +268,19 @@
 	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0"">
-	                                        <input type="text" class="form-control form-control-user" id="sample4_detailAddress"  name="a_details" placeholder="상세주소">
+	                                        <input type="text" class="form-control form-control-user" id="sample4_detailAddress"  name="a_details" value="${address.a_details}">
 	                                    </div>
 	                                    <div class="col-sm-6">
 	                                        <input type="text" class="form-control form-control-user" id="sample4_extraAddress" placeholder=참고항목>
 	                                    </div>
 	                                </div>
 	                                <!-- </form>  -->
-		                            <!--  -->    
-									<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-								      <input type="radio" class="btn-check" name="auth" id="btnradio1" autocomplete="off" value="member" checked="" >
-								      <label class="btn btn-outline-primary" for="btnradio1">견주</label>
-								    
-								      <input type="radio" class="btn-check" name="auth" id="btnradio2" autocomplete="off" value="trainer">
-								      <label class="btn btn-outline-primary" for="btnradio2">훈련매니저</label>
-								    
-								      <input type="radio" class="btn-check" name="auth" id="btnradio3" autocomplete="off" value="hairstylist">
-								      <label class="btn btn-outline-primary" for="btnradio3">미용매니저</label>
-								      
-								      <input type="radio" class="btn-check" name="auth" id="btnradio4" autocomplete="off" value="manager">
-								      <label class="btn btn-outline-primary" for="btnradio4">통합매니저</label>
-								    </div>
-										                           
-	                                <div class="form-check form-switch" style="padding: 10">
-										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-										<a class="form-check-label" for="flexSwitchCheckDefault">이용 약관 및 개인 정보 동의</a>
-									</div>
 	                                
-	                                <hr>
-	                                <input type="submit" class="btn btn-primary btn-user btn-block" value="회원가입" /> 
-	                                <hr>
+	                                <input type="submit" class="btn btn-primary btn-user btn-block" value="수정하기" /> 
+	                               
+	                                <input type="button" class="btn btn-primary btn-user btn-block" value="마이페이지" onclick="window.location='/mypage'"/> 
 	                                
 	                            </form>
-	                            <div class="text-center">
-	                                <a class="small" href="login">Already have an ID ? Login!</a>
-	                            </div>
 	                        </div>
 	                    </div>
 	                </div>

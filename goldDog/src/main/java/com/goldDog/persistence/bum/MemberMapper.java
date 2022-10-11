@@ -51,6 +51,10 @@ public interface MemberMapper {
 	//getNameEmail
 	public MemberVO getNameEmail(String m_email);
 	
-	
+	//getAddress
+	public AddressVO getAddress(int m_no);
+
+	//updateAddress
+	public int updateAddress(AddressVO address);
 	
 }

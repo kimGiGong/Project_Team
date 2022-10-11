@@ -143,17 +143,30 @@ public class memberController {
 		CustomUser user = (CustomUser)auth.getPrincipal();
 		log.info("********** user : " + user);
 		MemberVO member =  service.getMember(user.getUsername()); //== principal.username
+		int mno = service.getMno(user.getUsername());
+		AddressVO address = service.getAddress(mno); 
+		
 		model.addAttribute("member", member);
+		model.addAttribute("address", address);
 	}
 	@PostMapping("modify")
-	public String modifyPro(MemberVO member, Authentication auth, Model model) {
+	public String modifyPro(MemberVO member, AddressVO address, Authentication auth, Model model) {
 		log.info("******* modify Pro *******");
 		log.info("******* modify Pro customUser : "+((CustomUser)auth.getPrincipal()).getUsername());
 		
 		member.setM_id(((CustomUser)auth.getPrincipal()).getUsername()); //auth에서 username == id 꺼내 vo에 채우기
 		int result = service.modifyMember(member);
 		log.info("******* modify Pro result : " + result);
+		
+		int mno = service.getMno(((CustomUser)auth.getPrincipal()).getUsername());
+		log.info("******* modify mno : " + mno);
+		
+		address.setM_no(mno);
+		int result2 = service.modifyAddress(address);
+		log.info("******* modify Address result : " + result2);
+		
 		model.addAttribute("result", result);
+		model.addAttribute("result2", result2);
 		
 		return "member/modifyPro";
 	}
