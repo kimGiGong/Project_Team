@@ -57,6 +57,22 @@ public class mypageController {
 	@Autowired
 	private MyPageService instanceService;
 	
+	
+	/*
+	@RequestMapping("headers.do")
+	public String headers(Authentication auth, Model model) {
+		if(auth == null) {
+			return "header";
+		}else {
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			MemberVO member =  user.getMember();
+			model.addAttribute("member",member);
+			return "header";
+		}
+	}
+	*/
+	
+	
 	//	일반 이용자 MyPage 이동
 	@GetMapping("mypage")
 	public String viewMypage(Authentication auth, Model model) {
@@ -86,8 +102,9 @@ public class mypageController {
 			area.add(addrtr.getSeoul());
 			area.add(addrtr.getGyeonggi());
 			list.add(member);
-			list.add(address);
+			list.add(address.getA_addr());
 			list.add(area);
+			System.out.println(list);
 			model.addAttribute("managerlist",list);
 			
 			return "mypage/managerpage";
