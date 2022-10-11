@@ -40,7 +40,8 @@ public interface MainMapper {
 	public int getAllTrainerCount();
 	//트레이너 판매정보 등록
 	public int addTinfo(TrainerVO trainer);
-	
+	//검색한 훈련사 가져오기
+	public List<TrainerVO> searchTrainer(Criteria cri);	
 	
 	
 	//미용사 *********************************************************

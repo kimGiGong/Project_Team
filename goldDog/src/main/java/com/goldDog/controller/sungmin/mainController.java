@@ -68,13 +68,12 @@ public class mainController {
 		model.addAttribute("ad2",ad2);
 		model.addAttribute("ad3",ad3);
 		
-		
-		
+		log.info(cri.getKeyword()+"훈련사 이름 이거 맞아 >");
+		List<TrainerVO> Tlist = mainService.getAllTrainer(cri);
 		
 		
 		// 페이징 처리해서 가져오기
 		int Ttotal = mainService.getAllTrainerCount();
-		List<TrainerVO> Tlist = mainService.getAllTrainer(cri);
 		List<Integer> t_no_list = new ArrayList<Integer>(); 
 		List<Integer> t_m_no_list = new ArrayList<Integer>(); 
 		

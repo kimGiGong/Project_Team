@@ -34,8 +34,8 @@ public interface MainService {
 	public List<TrainerVO> getAllTrainer(Criteria cri);
 	//훈련사 판매등록
 	public int addTinfo(TrainerVO trainer);
-	
-	
+	//이름 검색한 훈련사 한명 가져오기
+	public List<TrainerVO> searchTrainer(Criteria cri);	
 	
 	//미용사 *********************************************************
 	//미용사 한명의 정보 가져오기

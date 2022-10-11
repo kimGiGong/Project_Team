@@ -7,20 +7,23 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
 </head>
+	
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
 		</div>
 	<!--  헤더 END -->
-  <div class="hero_area">
+	
+	
+	
+	
     
 	<h1>detail 페이지 입니다.</h1>
 	
 	 <div class="container">
-	 
-	 
-	 
-	<table width="680" height="500">
+	  <div class="row">
+	  <div class="col-lg-8 ">
+	  		<table width="680" height="500">
 		<tr>
 			<td>사진</td>
 			<td>이름</td>
@@ -55,35 +58,67 @@
 			<td> ${review[i].r_text}</td>
 			</c:forEach>
 		</tr>
-		
-		
 	</table> 
+	  </div>
+                  <div class="col-lg-4 ">
+                      <div class="card">
+                          <div class="card-header">
+                              <strong class="card-title">훈련사 정보</strong>
+                          </div>
+                          <div class="card-body">
+                              <!-- Credit Card -->
+                              <div id="pay-invoice">
+                                  <div class="card-body">
+                                      <div class="card-title">
+                                          <h3 class="text-center">Pay Invoice</h3>
+                                      </div>
+                                      <hr>
+                                      <form action="#" method="post" novalidate="novalidate">
+                                          <div class="form-group text-center">
+                                              <ul class="list-inline">
+                                                  <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
+                                                  <li class="list-inline-item"><i class="fa fa-cc-mastercard fa-2x"></i></li>
+                                                  <li class="list-inline-item"><i class="fa fa-cc-amex fa-2x"></i></li>
+                                                  <li class="list-inline-item"><i class="fa fa-cc-discover fa-2x"></i></li>
+                                              </ul>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="cc-payment" class="control-label mb-1">기본금액</label>
+                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_price}" readonly>
+                                          </div>
+                                          <div class="form-group has-success">
+                                              <label for="cc-name" class="control-label mb-1">가능한 날짜</label>
+                                              <input id="cc-name" name="cc-name" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name">
+                                              <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="cc-payment" class="control-label mb-1">보유자격증</label>
+                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_license}" readonly>
+                                          </div>
+                                          <div class="form-group">
+                                              <label for="cc-payment" class="control-label mb-1">경력</label>
+                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_career}년" readonly>
+                                          </div>
+                                          <div>
+                                              <button id="dogCheck" type="submit" class="btn btn-lg btn-danger btn-block">
+                                                  <i class="fa fa-bell" aria-hidden="true"></i></i>&nbsp;
+                                                  <span id="payment-button-amount">협의하기</span>
+                                                  <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                              </button>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+
+                          </div>
+                      </div> <!-- .card -->
+                  </div><!--/.col-->
+                  
+                  </div><!--/.row-->
+	 
+	 
 	
-	<table width="680" height="500">
-		<tr>
-			<td>완료</td>
-		</tr>
-		<tr>
-			<td>기본금액</td>
-			<td>${trainer.t_price}</td>
-		</tr>
-		<tr>
-			<td>가능한 날짜</td>
-			<td>달력api 올 곳</td>
-		</tr>
-		<tr>
-			<td>보유 자격증</td>
-			<td>${trainer.t_license}</td>
-		</tr>
-		<tr>
-			<td>경력</td>
-			<td>${trainer.t_career}</td>
-		</tr>
-		<tr>
-			<td> <button id="dogCheck" class="btn btn-danger">협의하기</button>  </td>
-		</tr>
-		
-	</table>
+
 	</div>
 	<!-- 펫 등록 되어있을시 띄울 모달 -->
 	<div class="modal fade" id="yesPet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
