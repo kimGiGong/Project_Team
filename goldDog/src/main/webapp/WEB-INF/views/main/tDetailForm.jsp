@@ -100,7 +100,7 @@
                                               <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_career}년" readonly>
                                           </div>
                                           <div>
-                                              <button id="dogCheck" type="submit" class="btn btn-lg btn-danger btn-block">
+                                               <button id="dogCheck" type="submit" class="btn btn-lg btn-danger btn-block">
                                                   <i class="fa fa-bell" aria-hidden="true"></i></i>&nbsp;
                                                   <span id="payment-button-amount">협의하기</span>
                                                   <span id="payment-button-sending" style="display:none;">Sending…</span>

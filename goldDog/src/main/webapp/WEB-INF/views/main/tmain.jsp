@@ -178,7 +178,7 @@
 		                  <c:if test="${rTotal[i]!=0}">
 			                  <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${rAvg[i]}점 (${rTotal[i]})</p>
 		                  </c:if>
-		                  <p>훈련 가격 : ${trainer[i].t_price}~ 원</p>
+	 	                  <p>훈련 가격 : ${trainer[i].t_price}~ 원</p>
 		                  <p>자격증<i class="fa fa-address-card" aria-hidden="true"></i> : ${trainer[i].t_license}</p>
 	                </div>
 	                </div>
