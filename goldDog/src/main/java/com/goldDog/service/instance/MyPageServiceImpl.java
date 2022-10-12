@@ -27,6 +27,7 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 		System.out.println(m_no);
 		System.out.println(numbercode);
+		Mapper.updateAddr(m_no, numbercode);
 	}
 
 

@@ -9,7 +9,7 @@
 	</select>
 
 	<update id="updateAddr">
-		update address set a_addr=#{a_addr} where m_no=#{m_no}
+		update address set a_addr=#{numbercode} where m_no=#{m_no}
 	</update>
 	
 
