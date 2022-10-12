@@ -6,6 +6,25 @@
 
 
 
+	<sql id="search">
+			<trim prefix="(" suffix=") and " prefixOverrides="or">
+	 			<foreach item="sel" collection="selArr">
+	 				<trim prefix="or" >
+						<choose>
+							<when test="sel=='R'.toString()">
+								title like '%'||#{keyword}||'%'
+							</when>
+							<when test="sel=='C'.toString()">
+								content like '%'||#{keyword}||'%'
+							</when>
+							<when test="sel=='W'.toString()">
+								writer like '%'||#{keyword}||'%'
+							</when>
+						</choose>		 			
+	 				</trim>
+	 			</foreach>
+	 		</trim>
+		</sql>
 
 	<!-- 
 	// 맴버 ******************************************************
@@ -64,8 +83,37 @@
 		
 	<!-- 검색한 훈련사 가져오기 페이징 처리 -->
 	<select id="searchTrainer" resultType="com.goldDog.domain.TrainerVO">
-		select m.m_id , t.* from member m, trainer t where m.m_no = t.m_no and  m.m_id=#{keyword}
+		select t.* from member m, trainer t where m.m_no = t.m_no and  m.m_nick like '%'||#{keyword}||'%'
 	</select>
+	
+	<!--정렬기능 분기처리 -->
+	<select id="sortTrainer" resultType="com.goldDog.domain.TrainerVO">
+		<![CDATA[ 
+		select B.* from (select rownum r, A.* from 
+		(select * from trainer ]]>
+		<choose>
+			<when test="sort=='R'.toString()">
+				order by t_ravg desc
+			</when>
+			<when test="sort=='RH'.toString()">
+				order by t_price desc
+			</when>
+			<when test="sort=='L'.toString()">
+				order by t_price 
+			</when>
+			<when test="sort=='H'.toString()">
+				order by t_price desc
+			</when>
+		</choose>
+		 <![CDATA[ 	 
+		) A ) B where 
+		 r > (#{pageNum} - 1) * #{listQty} and r <= #{pageNum} * #{listQty}
+	 	]]>
+	</select>
+	
+	
+	
+	
 	
 	
 	

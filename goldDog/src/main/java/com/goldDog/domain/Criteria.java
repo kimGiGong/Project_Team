@@ -16,7 +16,7 @@ public class Criteria { // 게시판 사용시 부수적으로 필요한 데이�
 	private int listQty;	// 한페이지에 보여줄 게시물 개수 
 	private String sel;		// 검색조건 T, W, C, TW, TC, TCW
 	private String keyword; // 검색 키워드 
-	
+	private String sort;	// 정렬 키워드
 	
 	
 	public Criteria() {
@@ -34,6 +34,8 @@ public class Criteria { // 게시판 사용시 부수적으로 필요한 데이�
 		return sel == null? new String [] {} : sel.split(""); 
 		
 	}
+	
+	
 	
 	
 	

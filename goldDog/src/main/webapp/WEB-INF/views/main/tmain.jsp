@@ -135,7 +135,7 @@
 				 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"  name="keyword"  placeholder="훈련사 검색">
+                        <input type="text" class="form-control bg-light border-0 small"  name="keyword"  placeholder="훈련사 검색">
                             <div class="input-group-append">
                                <button class="btn btn-primary" id=searchIdBtn  type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
@@ -146,13 +146,16 @@
 		   		
 		   		
 		   		<div class="col-2 all pizza">
-		   			<form id="selectForm" action="/main/tmain" method="get">
-		   			<select name="sel" >
+		   			<form id="selectForm" action="/main/tmain" method="post">
+		   			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+	   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+		   			<select id="select" name="sort" >
 		   				<option value=""> 정   렬 </option>
-		   				<option value="W"> 리뷰 평점순</option>
-		   				<option value="C"> 리뷰 많은순</option>
-		   				<option value="T"> 낮은 가격순</option>
-		   				<option value="T"> 높은 가격순</option>
+		   				<option value="R"> 리뷰 평점순</option>
+		   				<option value="RH"> 리뷰 많은순</option>
+		   				<option value="L"> 낮은 가격순</option>
+		   				<option value="H"> 높은 가격순</option>
 		   			</select>
 		   			</form>
 		   		</div>	
@@ -300,32 +303,38 @@
 			pagingForm.submit(); 
 		});
 		
-		//검색 폼 처리
-		let searchForm=$("#searchForm");
-		$("#searchIdBtn").on("click",function(e){
-			if(!searchForm.find("input[name='keyword']").val(" ")){
-				alert("키워드를 입력하세요..")
-				return false;	//submit 이동 막기
-			}
-			e.preventDefault();
-			searchForm.find("input[name='pageNum']").val("1"); 
-			searchForm.submit();	
-			
-				
-			});
+		
+	
+			let selectForm=$("#selectForm");
+		    $("#select").change(function() {
+		      let sort = $("#select").val();
+		      selectForm.submit();
+		    });
+		    
+		    
+		
 			
 			
 			
+			//검색 폼 처리
+			let searchForm=$("#searchForm");
+			$("#searchIdBtn").on("click",function(e){
+				let searchForm1 = searchForm.find("input[name='keyword']").val();
+				console.log(searchForm1);
+				if(!searchForm.find("input[name='keyword']").val()){
+					alert("키워드를 입력하세요..")
+					return false;	//submit 이동 막기
+				}
+				e.preventDefault();
+					searchForm.find("input[name='pageNum']").val("1");
+					searchForm.submit();
+			    });
 			
 			
+	
+
 			
 		});
-		
-		
-		
-		
-		
-		
 		
 	
 		
