@@ -55,6 +55,48 @@
     <!-- 주소 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+	//유효성 검사
+	function checkField() {
+		let inputs = document.modify;
+		
+		if(! inputs.m_pw.value) {
+			alert("비밀번호를 입력해주세요.")
+			return false;
+		}
+		if(! inputs.m_pwch.value) {
+			alert("비밀번호 확인을 입력해주세요.")
+			return false;
+		}
+		if(inputs.m_pw.value != inputs.m_pwch.value) {
+			alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다.")
+			return false;
+		}
+		if(! inputs.m_nick.value) {
+			alert("닉네임을 입력해주세요.")
+			return false;
+		}
+		if(! inputs.m_email.value) {
+			alert("이메일을 입력해주세요.")
+			return false;
+		}
+		if(! inputs.m_phone.value) {
+			alert("전화번호를 입력해주세요.")
+			return false;
+		}
+		if(! inputs.a_zonecode.value) {
+			alert("주소를 입력해주세요.")
+			return false;
+		}
+		if(! inputs.a_road.value) {
+			alert("주소을 입력해주세요.")
+			return false;
+		}
+		if(! inputs.a_details.value) {
+			alert("주소을 입력해주세요.")
+			return false;
+		}
+	}
+	
 	    function sample4_execDaumPostcode() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
@@ -198,7 +240,7 @@
 
 <body class="bg-gradient-primary">
 
-	<form action="/member/modify" method="post">
+	<form action="/member/modify" method="post" name="modify" onsubmit="return checkField()">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
 	    <div class="container">
 	

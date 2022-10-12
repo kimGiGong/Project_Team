@@ -1,5 +1,9 @@
 package com.goldDog.controller.bum;
 
+import java.io.File;
+import java.util.List;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,13 +19,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
+import com.goldDog.domain.NoticeVO;
+import com.goldDog.domain.ReviewVO;
 import com.goldDog.service.bum.memberService;
 import com.goldDog.service.bum.domain.CustomUser;
+import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,6 +42,8 @@ public class memberController {
 	@Autowired
 	private memberService service;
 	
+	@Autowired
+	private MainService mainService;
 	
 	@RequestMapping("mypage")
 	public String a123444() {
@@ -171,8 +182,74 @@ public class memberController {
 	}
 	
 	
+	@GetMapping("review")
+	public void review() {
+		
+	}
 	
-	
+	@PostMapping("reviewPro")
+	public String reviewPro(ReviewVO review, MultipartHttpServletRequest request, Authentication auth) {
+		
+		int t_no = 1;
+		
+		try {
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			String m_id =user.getUsername();
+			review.setM_no(service.getMno(user.getUsername()));
+							
+			MultipartFile mf = request.getFile("part_img");
+			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			
+			log.info(mf.getSize());
+			log.info(mf.getContentType());
+			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			
+			// 이름 중복 방지를 위한 새 파일명 생성
+			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			log.info(uuid);
+			//업로드한 파일 확장자만 가져오기
+			String orgName=mf.getOriginalFilename();
+			String ext= orgName.substring(orgName.lastIndexOf("."));
+			// 저장할 파일명
+			String newFileName= uuid + ext;
+			
+			//DB 상에도 파일명을 저장해 준다.
+			int result = 0;
+			if(mf.getOriginalFilename()==null) {
+				review.setR_img("dog.jpg");
+				 result = service.addReview(review);	
+				 
+			}else if(mf.getOriginalFilename()!=null) {
+				review.setR_img(newFileName);
+				 result = service.addReview(review);
+				 
+			}
+			if(result == 1) {
+				log.info("글추가완료");
+				
+				double rTotal = 0;
+	            List<ReviewVO> re =mainService.getTReview(t_no);
+                int t_review_total = 0;
+                for(int j=0 ;j<re.size() ;j++) {
+                        t_review_total += re.get(j).getR_score();
+                }
+                rTotal = (double)(t_review_total / re.size());
+	    	}
+			 
+			log.info("***********uuid"+uuid);
+			//저장할 파일 전체 경로
+			String imgPath = path+"\\"+newFileName;
+			log.info("*****imgPath"+imgPath);
+
+			// 파일 저장
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return "redirect:/member/review";
+	}
 	
 	
 	

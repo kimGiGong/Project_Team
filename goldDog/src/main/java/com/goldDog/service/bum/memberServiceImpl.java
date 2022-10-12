@@ -1,6 +1,8 @@
 package com.goldDog.service.bum;
 
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
+import com.goldDog.domain.ReviewVO;
 import com.goldDog.persistence.bum.MemberMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -221,9 +224,9 @@ public class memberServiceImpl implements memberService{
 	public void findId(HttpServletResponse response, MemberVO vo) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		
-		MemberVO ck = mapper.getNameEmail(vo.getM_email());
+		MemberVO ck = mapper.getNameEmail(vo.getM_name());
 		PrintWriter out = response.getWriter();
-		// 가입된 아이디가 없으면
+		// 가입된 이름이 없으면
 		if(mapper.nameCheck(vo.getM_name()) == 0) {
 			out.print("등록되지 않은 이름입니다.");
 			out.close();
@@ -232,8 +235,8 @@ public class memberServiceImpl implements memberService{
 		else if(!vo.getM_email().equals(ck.getM_email())) {
 			out.print("등록되지 않은 이메일입니다.");
 			out.close();
-		}else {
-			
+		}
+		else {
 			// 아이디 메일 발송
 			sendIdEmail(ck, "findId");
 			
@@ -313,6 +316,11 @@ public class memberServiceImpl implements memberService{
 	public int modifyAddress(AddressVO address) {
 		int result = mapper.updateAddress(address);
 		return result;
+	}
+	
+	@Override
+	public int addReview(ReviewVO review) {
+		return mapper.addReview(review);
 	}
 
 
