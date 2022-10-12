@@ -86,7 +86,6 @@ public class memberController {
 		return "redirect:/member/login";
 	}
 	
-	
 	@GetMapping("pwFind")
 	public void findPwGET() throws Exception{
 	}

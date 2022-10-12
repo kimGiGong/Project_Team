@@ -208,8 +208,8 @@
 	                <div class="row">
 	                    <div class="col-lg-5 d-none d-lg-block">
 	                    <div class="p-5">
-	                    	<img class="card-img-top" src="/resources/serverImg/${add1.ad_img}" width="350" height="300" alt="Card image cap">
-	                    	<input class="form-control" type="file" id="formFile" name="img"/>
+	                    	<img class="card-img-top" src="/resources/serverImg/dog.jpg" width="420" height="500" alt="Card image cap">
+	                    	<input class="form-control" width="420" type="file" id="formFile" name="img"/>
 	                    </div>
 	                   	</div>
 	                    <div class="col-lg-7">
@@ -219,7 +219,7 @@
 	                            </div>
 	                            <form class="user">
                                     <div class="form-group">
-                                    	<a class="form-control form-control-user">${member.m_id} (수정 불가)</a>
+                                    	<input class="form-control form-control-user" value="${member.m_id}" readonly="readonly" />
 	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
@@ -231,7 +231,7 @@
 	                                </div>
 	                                <div class="form-group row">
 	                                    <div class="col-sm-6 mb-3 mb-sm-0">
-	                                        <a class="form-control form-control-user">${member.m_name} (수정 불가)</a> 
+	                                        <input class="form-control form-control-user" value="${member.m_name}" readonly="readonly" />
 	                                    </div>
 	                                    <div class="col-sm-6">
 	                                        <input type="text" class="form-control form-control-user" id="m_nick" name="m_nick" onchange="checkNick()" value="${member.m_nick}">

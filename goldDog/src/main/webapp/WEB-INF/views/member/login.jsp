@@ -19,10 +19,25 @@
 
     <!-- Custom styles for this template-->
     <link href="/resources/bum/css/sb-admin-2.min.css" rel="stylesheet">
+    <script>
+    	//유효성 검사
+    	function checkField() {
+    		let inputs = document.loginForm;
+    		if(! inputs.username.value) {
+    			alert("아이디를 입력해주세요.")
+    			return false;
+    		}
+    		if(! inputs.password.value) {
+    			alert("비밀번호를 입력해주세요.")
+    			return false;
+    		}
+    	}
+    </script>
+    
 </head>
 
 <body class="bg-gradient-primary">
-	<form action="/login" method="post">
+	<form action="/login" method="post" name="loginForm" onsubmit="return checkField()">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
 	    <div class="container">
 	
