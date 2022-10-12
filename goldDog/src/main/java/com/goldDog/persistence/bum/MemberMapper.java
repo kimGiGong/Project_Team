@@ -3,6 +3,8 @@ package com.goldDog.persistence.bum;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
+import com.goldDog.domain.NoticeVO;
+import com.goldDog.domain.ReviewVO;
 
 public interface MemberMapper {
 	
@@ -49,12 +51,15 @@ public interface MemberMapper {
 	public MemberVO getMemberEmail(String m_id);
 	
 	//getNameEmail
-	public MemberVO getNameEmail(String m_email);
+	public MemberVO getNameEmail(String m_name);
 	
 	//getAddress
 	public AddressVO getAddress(int m_no);
 
 	//updateAddress
 	public int updateAddress(AddressVO address);
+	
+	//addReivew
+	public int addReview(ReviewVO review);
 	
 }

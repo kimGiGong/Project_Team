@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.MemberVO;
+import com.goldDog.domain.NoticeVO;
+import com.goldDog.domain.ReviewVO;
 
 public interface memberService {
 
@@ -70,4 +72,7 @@ public interface memberService {
 		
 		//주소 수정
 		public int modifyAddress(AddressVO address);
+		
+		//addReivew
+		public int addReview(ReviewVO review);
 }

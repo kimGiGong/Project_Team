@@ -16,21 +16,6 @@
 	<meta name="_csrf_header"  content="${_csrf.headerName}">
 
     <title>SB Admin 2 - Forgot Password</title>
-    
-    <script>
-		//유효성 검사
-		function checkField() {
-			let inputs = document.loginForm;
-			if(! inputs.name.value) {
-				alert("아이디를 입력해주세요.")
-				return false;
-			}
-			if(! inputs.email.value) {
-				alert("이메일을 입력해주세요.")
-				return false;
-			}
-		}
-    </script>
 
     <!-- Custom fonts for this template-->
     <link href="/resources/bum/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -89,7 +74,7 @@
                                         <h1 class="h4 text-gray-900 mb-2">Forgot Your ID?</h1>
                                     </div>
                                     <br />
-                                    <form class="user" name="loginForm" onsubmit="return checkField()">
+                                    <form class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="name" name="name"
                                             	placeholder="이름" >

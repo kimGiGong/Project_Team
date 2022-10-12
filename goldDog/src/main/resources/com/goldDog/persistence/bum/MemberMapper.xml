@@ -71,7 +71,7 @@
 	</select>
 	
 	<select id="getNameEmail" resultType="com.goldDog.domain.MemberVO">
-		select * from member where m_email=#{m_email}
+		select * from member where m_name=#{m_name}
 	</select>
 	
 	<select id="getMno" resultType="int">
@@ -107,6 +107,10 @@
 		where m_no=#{m_no}
 	</update>
 	
+	<insert id="addReview">
+		insert into review values 
+		(review_seq.nextval, #{m_no}, #{r_text}, #{r_score}, sysdate, #{r_img},0,0)
+	</insert>
 	
 	
 </mapper>
