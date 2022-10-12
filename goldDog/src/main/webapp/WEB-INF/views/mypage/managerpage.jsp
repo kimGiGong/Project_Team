@@ -76,7 +76,8 @@
 	                            </li>
 	                            <li class="nav-item" id="stackmoney">
 	                            	<div class="input-block">
-									  <input type="text" name="input-text" id="input-text" required spellcheck="false" value="0 원" >
+									  <input type="text" name="input-text" id="input-text" 
+									  required spellcheck="false" value="${ managerlist[3].t_salary != null ? managerlist[3].t_salary : '0' } 원" >
 									  <span class="placeholder">
 									    정산 예정 금액
 									  </span>
@@ -128,68 +129,50 @@
                    	</div>
                     
                     <!-- 활동지역 -->
-                    <div class="business_trip_section">
-                    	<div>
-                    		<fieldset>
-                    			<div class="business_container">
-                    				<div class="business_items">
-			                    		활동지역
-                    				</div>
-                    				<div class="business_items">
-                    					지역
-                    				</div>
-                    				<div class="business_items">
-                    					<fieldset style="padding: 5px;">
-                    						<div class="business_items_container">
-                   								<div class="business_item"><button data-ico='X'>마포구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                   								<div class="business_item"><button data-ico='X'>서초구</button></div> 
-                    						</div>
-                    					</fieldset>
-                    				</div>
-                    			</div>
-                    		</fieldset>
-                    	<div>
-                    	</div>
-                    		<c:if test="${empty managerlist[1].a_addr}" >
-                    			<div>
-                    				<div>
-                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="seoul" class="area">서울</a>
-                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="gyeonggi" class="area">경기</a>
-                    				</div>
-                   					<ul class="area_container" id="seoul">
-                   						<c:forEach items="${ managerlist[2][0] }" var="area" varStatus="vs">
-                   							<li> <input type="checkbox" value="${ area }">${ area }</li>
-                   						</c:forEach>
-                   					</ul>
-                   					
-                   					<ul class="area_container" id="gyeonggi">
-                   						<c:forEach items="${ managerlist[2][1] }" var="area" varStatus="vs">
-                   							<li> <input type="checkbox" value="${ area }">${ area }</li>
-                   						</c:forEach>
-                   					</ul>
-                    			</div>
-                    		</c:if>
-                    	</div>	
-                    	<div></div>
-                    	<div></div>
-                    </div>
-                    
+        			<form action="area.go" method="post">
+        				<input type="hidden" value="${ managerlist[0].m_no }" name="m_no">
+                   		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	                    <div class="business_trip_section">
+	                    	<div>
+	                    		<fieldset>
+	                    			<div class="business_container">
+	                    				<div class="business_items">
+				                    		활동지역
+	                    				</div>
+	                    				<div class="business_items">
+	                    					<fieldset style="padding: 5px; min-height: 50px" >
+	                    						<div class="business_items_container">
+	                   								
+	                    						</div>
+	                    					</fieldset>
+	                    				</div>
+	                    				<div class="business_items"><input type="submit" value="저장"></div>
+	                    			</div>
+	                    		</fieldset>
+	                    	<div>
+	                    	</div>
+	                    		<c:if test="${empty managerlist[1].a_addr}" >
+	                    			<div>
+	                    				<div>
+	                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="seoul" class="area">서울</a>
+	                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="gyeonggi" class="area">경기</a>
+	                    				</div>
+	                   					<ul class="area_container" id="seoul">
+	                   						<c:forEach items="${ managerlist[2][0] }" var="area" varStatus="vs">
+	                   							<li> <input type="checkbox" name="seoul" value="${ area }">${ area }</li>
+	                   						</c:forEach>
+	                   					</ul>
+	                   					
+	                   					<ul class="area_container" id="gyeonggi">
+	                   						<c:forEach items="${ managerlist[2][1] }" var="area" varStatus="vs">
+	                   							<li> <input type="checkbox" name="gyeonggi" value="${ area }">${ area }</li>
+	                   						</c:forEach>
+	                   					</ul>
+	                    			</div>
+	                    		</c:if>
+	                    	</div>	
+	                    </div>
+                    </form>
                     
                 	<!-- Contact section -->
 	                <div class="tm-section-wrap" id = "contact">
@@ -267,9 +250,7 @@
 		</div> <!-- .row -->
 	</div> <!-- .container-fluid -->
 </div><!-- 바디메인 END -->
-
 <script type="text/javascript" src="/resources/mypage.js"> 
-
 //글쓰기 editor 및 사진 업로드 기능
 </script>
 
