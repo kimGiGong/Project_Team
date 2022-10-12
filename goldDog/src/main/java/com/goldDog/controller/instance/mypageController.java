@@ -106,6 +106,7 @@ public class mypageController {
 			list.add(member);
 			list.add(address.getA_addr());
 			list.add(area);
+			TrainerVO trainer = sungminService.getTrainer(member.getM_no());
 			System.out.println(list);
 			model.addAttribute("managerlist",list);
 			
@@ -248,6 +249,11 @@ public class mypageController {
     	log.info(vo.toString());
 		
 	}
+    @PostMapping("area.go")
+    public String areaSave(String [] seoul, String [] gyeonggi , int m_no){
+    	instanceService.updateAddr(seoul,gyeonggi , m_no, "");
+    	return "redirect:/manager";
+    }
     
 
 }

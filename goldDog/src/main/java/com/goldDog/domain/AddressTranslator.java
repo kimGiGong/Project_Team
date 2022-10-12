@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import lombok.Getter;
+import oracle.net.aso.m;
 
 public class AddressTranslator {
 	
-	private static final Map<String, String> seoulMap;
-	private static final Map<String, String> gyeonggiMap;
+	static final Map<String, String> seoulMap;
+	static final Map<String, String> gyeonggiMap;
 	
 	
 	
@@ -26,7 +27,7 @@ public class AddressTranslator {
 			"여주시","연천군","오산시","용인시 기흥구","용인시 수지구","용인시 처인구","의왕시","의정부시","이천시",
 			"파주시","평택시","포천시","하남시","화성시"};
 	
-	public Map<String, String> getSeoulMapMap() {
+	public Map<String, String> getSeoulMap() {
 		return this.seoulMap;
 	}
 	public Map<String, String> getGyeonggiMap() {
@@ -101,9 +102,65 @@ public class AddressTranslator {
 		}
 	} 
 	
+	private String addressNumberReanslator(String [] arr) {
+		
+		String numbercode="";
+		
+		for(String str : arr) {
+			for(String key : seoulMap.keySet()) {
+				if(seoulMap.get(key).equals(str)) {
+					if(arr[arr.length-1].equals(str)) {
+						numbercode += key;
+					}else {
+						numbercode += key+"_";
+						break;
+					}
+				}
+			}
+		}
+		
+		
+		return numbercode;
+	}
+	private String addressNumberReanslatorGyeonggiMap(String [] arr) {
+		
+		String numbercode="";
+		
+		for(String str : arr) {
+			for(String key : gyeonggiMap.keySet()) {
+				if(gyeonggiMap.get(key).equals(str)) {
+					if(arr[arr.length-1].equals(str)) {
+						numbercode += key;
+						break;
+					}else {
+						numbercode += key+"_";
+						break;
+					}
+				}
+			}
+		}
+		return numbercode;
+	}
 	
-	
-	
+	public String getNumberCode(String[] arr , String[] arr2) {
+		String numbercode ="";
+		if(arr.length!=0) {
+			
+			numbercode+=addressNumberReanslator(arr);
+					
+			if(arr2.length!=0) {
+				numbercode+="_"+addressNumberReanslatorGyeonggiMap(arr2);
+			}
+			
+		}else {
+			if(arr2.length!=0) {
+				numbercode +=addressNumberReanslatorGyeonggiMap(arr2);
+			}
+		}
+		
+		
+		return numbercode;
+	} 
 	
 	
 	
