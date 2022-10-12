@@ -67,13 +67,32 @@ public class mainController {
 		model.addAttribute("ad1",ad1);
 		model.addAttribute("ad2",ad2);
 		model.addAttribute("ad3",ad3);
+		log.info(cri.getSort()+"정렬기준 가져오는거야??");
+		log.info(cri.getKeyword()+"훈련사 이름 이거 맞아 ?");
 		
-		log.info(cri.getKeyword()+"훈련사 이름 이거 맞아 >");
-		List<TrainerVO> Tlist = mainService.getAllTrainer(cri);
+		List<TrainerVO> Tlist =null;
+		int Ttotal=4;
+		
+		if(cri.getKeyword()==null && cri.getSort()==null){
+			//기본 훈련사 정렬
+			Tlist=mainService.getAllTrainer(cri);
+			Ttotal = mainService.getAllTrainerCount();
+		}	
+		if(cri.getKeyword()!=null) {
+			Tlist=mainService.searchTrainer(cri);
+			
+		}
+		if(cri.getSort()!=null) {
+			// 정렬로 검색
+			log.info("getSort!!!!!!!!!!!!!!!");
+			Tlist=mainService.sortTrainer(cri);
+			log.info(Tlist);
+			Ttotal = mainService.getAllTrainerCount();
+			cri.setSort(null);
+		}
 		
 		
 		// 페이징 처리해서 가져오기
-		int Ttotal = mainService.getAllTrainerCount();
 		List<Integer> t_no_list = new ArrayList<Integer>(); 
 		List<Integer> t_m_no_list = new ArrayList<Integer>(); 
 		
@@ -109,7 +128,7 @@ public class mainController {
 		
 		if(t_m_no_list.size()!=0) {
 			model.addAttribute("member", mainService.getMember(t_m_no_list));
-			model.addAttribute("trainer",mainService.getAllTrainer(cri));
+			model.addAttribute("trainer",Tlist);
 		}
 			model.addAttribute("trainercheck",t_no_list.size()); //트레이너 숫자 체크
 			model.addAttribute("rAvg", total); //리뷰 평점

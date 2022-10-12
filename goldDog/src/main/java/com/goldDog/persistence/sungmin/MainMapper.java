@@ -42,7 +42,8 @@ public interface MainMapper {
 	public int addTinfo(TrainerVO trainer);
 	//검색한 훈련사 가져오기
 	public List<TrainerVO> searchTrainer(Criteria cri);	
-	 
+	//정렬 검색한 훈련사 리턴하기
+	public List<TrainerVO> sortTrainer(Criteria cri); 
 	
 	//미용사 *********************************************************
 	//미용사 한명 가져오기

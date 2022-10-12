@@ -36,6 +36,10 @@ public interface MainService {
 	public int addTinfo(TrainerVO trainer);
 	//이름 검색한 훈련사 한명 가져오기
 	public List<TrainerVO> searchTrainer(Criteria cri);	
+	//정렬 검색한 훈련사 리턴하기
+	public List<TrainerVO> sortTrainer(Criteria cri);
+	
+	
 	
 	//미용사 *********************************************************
 	//미용사 한명의 정보 가져오기
@@ -59,7 +63,8 @@ public interface MainService {
 	public List<ReviewVO> getAllReview(int t_no);
 	//한 훈련사의 리뷰 총갯수 가져오기
 	public int getReviewCount(int t_no);
-	
+	//훈련사 한명의 총 리뷰 업데이트
+	public int updateRtotal(int t_no);
 	
 	// 강아지 *******************************************************
 	// 사용자 m_no 으로 사용자에게 등록된 강아지 한마리 가져오기

@@ -6,60 +6,94 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <meta charset="UTF-8">
+	
+	 <style>
+	.fa-star:before {
+    content: "\f005";
+    color: #48c1bd;
+	}
+	.fa-vcard:before, .fa-address-card:before {
+    color: #6b6b6b;
+}
+
+</style>
 </head>
+	
 	
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
 		</div>
+		
 	<!--  헤더 END -->
 	
-	
-	
-	
-    
-	<h1>detail 페이지 입니다.</h1>
 	
 	 <div class="container">
 	  <div class="row">
 	  <div class="col-lg-8 ">
-	  		<table width="680" height="500">
-		<tr>
-			<td>사진</td>
-			<td>이름</td>
-			<td>${member.m_nick}</td>
-		</tr>
-		<tr>
-			<td>
-				<a>판매자 소개 </a>		
-			</td>
-			<td>
-				<a>특이사항</a>		
-			</td>
-			<td>
-				<a>리뷰</a>		
-			</td>
-		</tr>
-		<tr>
-			<td >자기소개</td>			
-			<td >${trainer.t_self}</td>
-		</tr>
-		<tr>
-			<td> 판매정보</td>	
-			<td> ${trainer.t_sel}</td>	
-		</tr>
-		<tr>
-			<td> 리뷰(${Ravg})</td>
-			<td> ${review[i].r_score}</td>
-		</tr>
-		<tr>
-			<td> 리뷰(${Ravg})</td>	
-			<c:forEach var="i" begin="0" end="5" step="1" >
-			<td> ${review[i].r_text}</td>
-			</c:forEach>
-		</tr>
-	</table> 
-	  </div>
+               <div class="col-md ">
+                 <div class="card mb-3 border border-primary mb-3">
+                   <div class="row g-0">
+                     <div class="col-md-4">
+                      <img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/>
+                     </div>
+                     <div class="col-md-8">
+                       <div class="card-body">
+                         <h5 class="card-title">${member.m_nick}</h5>
+                         <p class="card-text">
+                          	${trainer.t_self}
+                         </p>
+                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>    
+             
+              <div class="col-lg-12">
+               <div class="card shadow-none bg-transparent border border-primary mb-3">
+                 <div class="card-body">
+                   <h5 class="card-title">판매정보</h5>
+                   <p class="card-text">${trainer.t_sel}</p>
+                 </div>
+               </div>
+             </div>
+             
+              <div class="col-lg-12">
+               <div class="card shadow-none bg-transparent border border-primary mb-3">
+                 <div class="card-body">
+                   <h5 class="card-title " style="text-align: left;">훈련사의 BEST 리뷰</h5>
+                   <p class="card-text" style="text-align: right;" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>(${Ravg})${review[i].r_score}</p>
+                 </div>
+               </div>
+             </div>
+             
+             <c:forEach var="i" begin="0" end="2" step="1" >
+             <div class="col-lg-12 ">
+                 <div class="card mb-3">
+                   <div class="row g-0">
+                     <div class="col-md-4">
+                      <img src="/resources/feane/images/${r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
+                     </div>
+                     <div class="col-md-8">
+                       <div class="card-body">
+                         <h5 class="card-title">${member.m_nick}
+                         <c:forEach  begin="1" end="${review[i].r_score}" step="1" >
+                         	<i class="fa fa-star fa-lg " aria-hidden="true"></i>
+                         </c:forEach>
+                         <fmt:formatDate pattern="yy-MM-dd" value="${review[i].r_date}"/>
+						</h5>
+                         <p class="card-text">${review[i].r_text} </p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>   
+             	</c:forEach>
+             	<br/><br/><br/>
+               </div>   
+             
+	  
                   <div class="col-lg-4 ">
                       <div class="card">
                           <div class="card-header">
@@ -105,6 +139,7 @@
                                                   <span id="payment-button-amount">협의하기</span>
                                                   <span id="payment-button-sending" style="display:none;">Sending…</span>
                                               </button>
+                                              <div class="col-12 col-md-9"><small class="form-text text-muted">협의는 결제가 되지 않습니다.</small></div>
                                           </div>
                                       </form>
                                   </div>
@@ -115,6 +150,7 @@
                   </div><!--/.col-->
                   
                   </div><!--/.row-->
+                  </div><!--/.con-->
 	 
 	 
 	

@@ -73,7 +73,12 @@ public class MainServiceImpl implements MainService {
 	public List<TrainerVO> searchTrainer(Criteria cri) {
 		return mapper.searchTrainer(cri);
 	}
-	
+	//정렬 검색한 훈련사 리턴하기
+	@Override
+	public List<TrainerVO> sortTrainer(Criteria cri) {
+		return mapper.sortTrainer(cri);
+	}
+
 	
 	
 	//미용사 *********************************************************
@@ -117,6 +122,13 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<ReviewVO> getAllReview(int t_no) {
 		return mapper.getAllReview(t_no);
+	}
+	
+	//훈련사 한명의 총 리뷰 업데이트
+	@Override
+	public int updateRtotal(int t_no) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	
@@ -242,7 +254,7 @@ public class MainServiceImpl implements MainService {
 	public int modifyQnA(QnAVO QnA) {
 		return mapper.modifyQnA(QnA);
 	}
-
+	
 	
 	
 	
