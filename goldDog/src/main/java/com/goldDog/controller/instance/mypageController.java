@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -98,7 +100,7 @@ public class mypageController {
 			AddressVO address = instanceService.getAddress(member.getM_no());
 			List<Object> list = new ArrayList<Object>();
 			AddressTranslator addrtr = new AddressTranslator();
-			List<String []> area = new ArrayList<String[]>();
+			List<String []> area = new ArrayList<String []>();
 			area.add(addrtr.getSeoul());
 			area.add(addrtr.getGyeonggi());
 			list.add(member);

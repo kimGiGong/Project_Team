@@ -156,12 +156,16 @@
 	                  <a class="move" href="${hairstylist[i].m_no}" id="${hairstylist[i].h_no}"  ><img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
 	                </div>
 	                <div class="detail-box" >
-		                  <h5>닉네임 : ${member[i].m_nick}</h5>
-		                  <p>소개 : ${hairstylist[i].h_self}</p>
-		                  <p>리뷰평점 : ${rAvg[i]}점 (${rTotal[i]})</p>
-		                  <p>훈련 가격 : ${hairstylist[i].h_price} 원</p>
+		                  <h5 style="height: 35px;">${member[i].m_nick}</h5>
+		                  <p style="font-size:17px;">소개 : ${hairstylist[i].h_self}</p>
+		                  <c:if test="${rTotal[i]==0}">
+		                  	<p><i class="fa fa-star " aria-hidden="true"></i>가장먼저 리뷰를 남겨주세요!</p>
+		                  </c:if>
+		                   <c:if test="${rTotal[i]!=0}">
+			                  <p><i class="fa fa-star " aria-hidden="true"></i> : ${rAvg[i]}점 (${rTotal[i]})</p>
+		                  </c:if>
+		                  <p>미용 가격 : ${hairstylist[i].h_price}~ 원</p>
 		                  <p>보유 자격증 : ${hairstylist[i].h_license}</p>
-		                  <p>m_no : ${hairstylist[i].m_no} h_no : ${hairstylist[i].h_no}</p>
 	                </div>
 	                </div>
 	            </div>

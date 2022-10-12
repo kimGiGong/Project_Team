@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
+	
+	
+	
+<meta name="_csrf"  content="${_csrf.token}">
+<meta name="_csrf_header"  content="${_csrf.headerName}">	
 <!-- bootstrap core css -->
 <link rel="stylesheet" type="text/css"
 	href="/resources/feane/css/bootstrap.css" />

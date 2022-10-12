@@ -68,6 +68,13 @@ public class MainServiceImpl implements MainService {
 		
 		return mapper.addTinfo(trainer);
 	}
+	//검색한 훈련사 가져오기
+	@Override
+	public List<TrainerVO> searchTrainer(Criteria cri) {
+		return mapper.searchTrainer(cri);
+	}
+	
+	
 	
 	//미용사 *********************************************************
 	//모든 미용사 가져오기
@@ -235,6 +242,7 @@ public class MainServiceImpl implements MainService {
 	public int modifyQnA(QnAVO QnA) {
 		return mapper.modifyQnA(QnA);
 	}
+
 	
 	
 	
