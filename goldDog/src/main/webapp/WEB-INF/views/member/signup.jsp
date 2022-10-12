@@ -57,6 +57,55 @@
     <!-- 주소 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
+		//유효성 검사
+		function checkField() {
+			let inputs = document.singup;
+			if(! inputs.m_id.value) {
+				alert("아이디를 입력해주세요.")
+				return false;
+			}
+			if(! inputs.m_pw.value) {
+				alert("비밀번호를 입력해주세요.")
+				return false;
+			}
+			if(! inputs.m_pwch.value) {
+				alert("비밀번호 확인을 입력해주세요.")
+				return false;
+			}
+			if(inputs.m_pw.value != inputs.m_pwch.value) {
+				alert("비밀번호와 비밀번호 확인란이 일치하지 않습니다.")
+				return false;
+			}
+			if(! inputs.m_name.value) {
+				alert("이름을 입력해주세요.")
+				return false;
+			}
+			if(! inputs.m_nick.value) {
+				alert("닉네임을 입력해주세요.")
+				return false;
+			}
+			if(! inputs.m_email.value) {
+				alert("이메일을 입력해주세요.")
+				return false;
+			}
+			if(! inputs.m_phone.value) {
+				alert("전화번호를 입력해주세요.")
+				return false;
+			}
+			if(! inputs.a_zonecode.value) {
+				alert("주소를 입력해주세요.")
+				return false;
+			}
+			if(! inputs.a_road.value) {
+				alert("주소을 입력해주세요.")
+				return false;
+			}
+			if(! inputs.a_details.value) {
+				alert("주소을 입력해주세요.")
+				return false;
+			}
+		}
+	
 	    function sample4_execDaumPostcode() {
 	        new daum.Postcode({
 	            oncomplete: function(data) {
@@ -240,7 +289,7 @@
 
 <body class="bg-gradient-primary">
 
-	<form action="/member/signup" method="post">
+	<form action="/member/signup" method="post" name="singup" onsubmit="return checkField()">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
 	    <div class="container">
 	
@@ -331,11 +380,30 @@
 										                           
 	                                <div class="form-check form-switch" style="padding: 10">
 										<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-										<a class="form-check-label" for="flexSwitchCheckDefault">이용 약관 및 개인 정보 동의</a>
-										<!-- Scrollable modal -->
-										<div class="modal-dialog modal-dialog-scrollable">
-										  ...
+										
+										<!-- Button trigger modal -->
+										<a type="button" class="form-check-label" data-bs-toggle="modal" data-bs-target="#exampleModal">
+										  이용 약관 및 개인 정보 동의
+										</a>
+										
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h1 class="modal-title fs-5" id="exampleModalLabel">이용 약관 및 개인 정보 동의</h1>
+										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										      </div>
+										      <div class="modal-body">
+										        <p>뭐라도 떠봐유</p>
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										      </div>
+										    </div>
+										  </div>
 										</div>
+										<!-- <a class="form-check-label" for="flexSwitchCheckDefault">이용 약관 및 개인 정보 동의</a> -->
 									</div>
 	                                
 	                                <hr>

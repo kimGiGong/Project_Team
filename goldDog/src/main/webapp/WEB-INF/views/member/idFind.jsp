@@ -16,6 +16,21 @@
 	<meta name="_csrf_header"  content="${_csrf.headerName}">
 
     <title>SB Admin 2 - Forgot Password</title>
+    
+    <script>
+		//유효성 검사
+		function checkField() {
+			let inputs = document.loginForm;
+			if(! inputs.name.value) {
+				alert("아이디를 입력해주세요.")
+				return false;
+			}
+			if(! inputs.email.value) {
+				alert("이메일을 입력해주세요.")
+				return false;
+			}
+		}
+    </script>
 
     <!-- Custom fonts for this template-->
     <link href="/resources/bum/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,37 +43,36 @@
     
 	<script src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
-			$(document).ready(function(){
-				
-				let token =$("meta[name='_csrf']").attr("content");      
-		        let header=$("meta[name='_csrf_header']").attr("content");
-				
-				$(function(){
-					$("#findBtn").click(function(){
-						$.ajax({
-							url : "/member/idFind",
-							type : "POST",
-							data : {
-								m_name : $("#name").val(),
-								m_email : $("#email").val()
-							},
-		               		beforeSend: function(xhr){
-		                   	xhr.setRequestHeader(header,token);
-		                	},
-							success : function(result) {
-								alert(result);
-							},
-						})
-					});
+		$(document).ready(function(){
+			
+			let token =$("meta[name='_csrf']").attr("content");      
+	        let header=$("meta[name='_csrf_header']").attr("content");
+			
+			$(function(){
+				$("#findBtn").click(function(){
+					$.ajax({
+						url : "/member/idFind",
+						type : "POST",
+						data : {
+							m_name : $("#name").val(),
+							m_email : $("#email").val()
+						},
+	               		beforeSend: function(xhr){
+	                   	xhr.setRequestHeader(header,token);
+	                	},
+						success : function(result) {
+							alert(result);
+						},
+					})
 				});
 			});
-		</script>
+		});
+	</script>
 </head>
 
 <body class="bg-gradient-primary">
  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
     <div class="container">
-
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -75,14 +89,14 @@
                                         <h1 class="h4 text-gray-900 mb-2">Forgot Your ID?</h1>
                                     </div>
                                     <br />
-                                    <form class="user">
+                                    <form class="user" name="loginForm" onsubmit="return checkField()">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="name" name="name"
-                                            	aria-describedby="emailHelp" placeholder="이름" required>
+                                            	placeholder="이름" >
                                         </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" id="email" name="email" 
-                                            	aria-describedby="emailHelp" placeholder="Email" required>
+                                            	aria-describedby="emailHelp" placeholder="Email" >
                                         </div>
                                         <button type="button" id="findBtn" class="btn btn-primary btn-user btn-block">Send ID</button>
                                     </form>
@@ -104,7 +118,6 @@
         </div>
 
     </div>
-
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
