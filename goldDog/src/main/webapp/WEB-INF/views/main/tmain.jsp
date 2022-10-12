@@ -28,7 +28,7 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="/resources/feane/images/roto.jpg" alt="">
+      <img src="/resources/feane/images/roto.jpg" >
     </div>
     <!-- slider section -->
     <section class="slider_section ">
@@ -47,7 +47,7 @@
                       우리 금댕이를 위해서라면 모든지 할 수 있어!
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a class="btn1">
                         구매하기
                       </a>
                     <div class="bg-box">
@@ -71,7 +71,7 @@
                       두번쨰 광고 입니도
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a class="btn1">
                         구매하기
                       </a>
                        <div class="bg-box">
@@ -95,7 +95,7 @@
                       세번째 광고입니다.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a class="btn1">
                         구매하기
                       </a>
                        <div class="bg-box">
@@ -130,7 +130,7 @@
       		<!-- 사용자 검색 --> 
            <div class="row justify-content-between">
 	          	<div class="col-6 all pizza">
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="searchForm"  action="/main/tmain" method="post">
+					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="searchForm"  action="/main/tmain" method="get">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
@@ -146,12 +146,13 @@
 		   		
 		   		
 		   		<div class="col-2 all pizza">
-		   			<form id="selectForm" action="/main/tmain" method="post">
+		   			<form id="selectForm" action="/main/tmain" method="get">
 		   			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 	   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
 		   			<select id="select" name="sort" >
-		   				<option value=""> 정   렬 </option>
+		   				<option value=" "> 정렬 </option>
+		   				<option value="S"> 기본 정렬 </option>
 		   				<option value="R"> 리뷰 평점순</option>
 		   				<option value="RH"> 리뷰 많은순</option>
 		   				<option value="L"> 낮은 가격순</option>
@@ -175,11 +176,11 @@
 	                <div class="detail-box" >
 		                  <h5 style="height: 35px;">${member[i].m_nick}</h5>
 		                  <p style="font-size:17px;">소개 : ${trainer[i].t_self}</p>
-		                  <c:if test="${rTotal[i]==0}">
+		                  <c:if test="${trainer[i].t_RTotal==0}">
 		                  	<p><i class="fa fa-star fa-lg " aria-hidden="true"></i> 가장먼저 리뷰를 남겨주세요!</p>
 		                  </c:if>
-		                  <c:if test="${rTotal[i]!=0}">
-			                  <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${rAvg[i]}점 (${rTotal[i]})</p>
+		                  <c:if test="${trainer[i].t_RTotal!=0}">
+			                  <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${trainer[i].t_RAvg}점 (${trainer[i].t_RTotal})</p>
 		                  </c:if>
 	 	                  <p>훈련 가격 : ${trainer[i].t_price}~ 원</p>
 		                  <p>자격증<i class="fa fa-address-card" aria-hidden="true"></i> : ${trainer[i].t_license}</p>
@@ -232,7 +233,6 @@
 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
 		<input type="hidden" name="sel" value="${pager.cri.sel}" />
-		<input type="hidden" name="keyword" value="${pager.cri.keyword}" />
 	</form>
 	</div>
   </section>
@@ -267,7 +267,7 @@
                 </p>
               </div>
               <div class="img-box">
-                <img src="/resources/feane/images/client1.jpg" alt="" class="box-img">
+                <img src="/resources/feane/images/client1.jpg"  class="box-img">
               </div>
             </div>
           </div>
@@ -302,19 +302,14 @@
 			// read로 이동하기(form으로 요청) 
 			pagingForm.submit(); 
 		});
-		
-		
-	
+			//소트 처리
 			let selectForm=$("#selectForm");
+			
 		    $("#select").change(function() {
 		      let sort = $("#select").val();
 		      selectForm.submit();
 		    });
 		    
-		    
-		
-			
-			
 			
 			//검색 폼 처리
 			let searchForm=$("#searchForm");
@@ -331,16 +326,7 @@
 			    });
 			
 			
-	
-
-			
 		});
-		
-	
-		
-		
-		
-		
 		
 		
 	</script>

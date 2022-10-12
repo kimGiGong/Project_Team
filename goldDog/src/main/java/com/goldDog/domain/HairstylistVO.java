@@ -19,4 +19,5 @@ public class HairstylistVO {
 	private long h_salary;
 	private Timestamp h_date;
 	private double h_RAvg;
+	private int h_RTotal;
 }

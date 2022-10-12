@@ -58,7 +58,7 @@ public class mainController {
 	
 	//*************************************훈련사 메인**********************************************
 	//메인올때 훈련사도 가져온다.
-	@RequestMapping("tmain")
+	@GetMapping("tmain")
 	public void tmain(Model model,Criteria cri) {
 		//광고 가져오기 for 문 돌리기 귀찬...
 		String ad1 = mainService.getAdName(1).getAd_img();
@@ -73,24 +73,32 @@ public class mainController {
 		List<TrainerVO> Tlist =null;
 		int Ttotal=4;
 		
-		if(cri.getKeyword()==null && cri.getSort()==null){
+		if((cri.getKeyword()==null && cri.getSort()==null)||cri.getSort().equals("S")){
 			//기본 훈련사 정렬
+			log.info("기본를 탄다구");
 			Tlist=mainService.getAllTrainer(cri);
 			Ttotal = mainService.getAllTrainerCount();
-		}	
-		if(cri.getKeyword()!=null) {
-			Tlist=mainService.searchTrainer(cri);
 			
 		}
-		if(cri.getSort()!=null) {
+		
+		if(cri.getSort()!=null && !cri.getSort().equals("S")) {
 			// 정렬로 검색
 			log.info("getSort!!!!!!!!!!!!!!!");
 			Tlist=mainService.sortTrainer(cri);
 			log.info(Tlist);
 			Ttotal = mainService.getAllTrainerCount();
-			cri.setSort(null);
+			cri.setSort("kk");
 		}
 		
+		if(cri.getKeyword()!=null) {
+			log.info("검색을 탄다구");
+			Tlist=mainService.searchTrainer(cri);
+			Ttotal=mainService.countSearchTrainer(cri);
+			
+		}
+		
+		//초기화
+		cri.setSort(null);
 		
 		// 페이징 처리해서 가져오기
 		List<Integer> t_no_list = new ArrayList<Integer>(); 
@@ -106,33 +114,12 @@ public class mainController {
 		log.info(t_no_list+"입니다잇"); 
 		model.addAttribute("t_no",t_no_list);
 		
-		
-		List<Double> total = new ArrayList<Double>(); 
-		List<Integer> rTotal = new ArrayList<Integer>();
-		
-		//t_no를 받아서 훈련사 당 리뷰 평점 구하기
-		for(int i =0 ;i<t_no_list.size() ;i++) {
-			List<ReviewVO> re =mainService.getTReview(t_no_list.get(i));
-				rTotal.add(re.size());
-				int t_review_total = 0;
-				for(int j=0 ;j<re.size() ;j++) {
-					t_review_total += re.get(j).getR_score();
-				}
-				if(re.size()==0) {
-					total.add(0.0);	
-				}else {
-					total.add((double)t_review_total/re.size());
-				}
-		}
-		
-		
+			
 		if(t_m_no_list.size()!=0) {
 			model.addAttribute("member", mainService.getMember(t_m_no_list));
 			model.addAttribute("trainer",Tlist);
 		}
 			model.addAttribute("trainercheck",t_no_list.size()); //트레이너 숫자 체크
-			model.addAttribute("rAvg", total); //리뷰 평점
-			model.addAttribute("rTotal", rTotal); //리뷰 총 갯수
 			model.addAttribute("pager", new PageDTO(cri, Ttotal)); // total count로 수정    
 
 		//리뷰 추가해야함 베스트 5개 뽑기
@@ -415,10 +402,8 @@ public class mainController {
 	}
 	
 	
-	@GetMapping("test01")
-	public void test011(Model model) {
-		
-		
+	@GetMapping("addEstimate")
+	public void addEstimate(Model model) {
 		
 		
 	}

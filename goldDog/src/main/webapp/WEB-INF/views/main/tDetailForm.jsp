@@ -121,8 +121,12 @@
                                               <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_price}" readonly>
                                           </div>
                                           <div class="form-group has-success">
-                                              <label for="cc-name" class="control-label mb-1">가능한 날짜</label>
-                                              <input id="cc-name" name="cc-name" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name">
+                                              <label for="cc-name" class="control-label mb-1">원하는 날짜</label>
+                                              
+		                                        <div class="mb-3 row">
+													<input class="form-control" type="datetime-local" name="date" value="2022-10-12T12:30:00" id="html5-datetime-local-input"/>						                          
+						                      	</div>       
+						                      
                                               <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                           </div>
                                           <div class="form-group">

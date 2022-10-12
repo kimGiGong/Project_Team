@@ -96,7 +96,7 @@
 				order by t_ravg desc
 			</when>
 			<when test="sort=='RH'.toString()">
-				order by t_price desc
+				order by t_rTotal desc
 			</when>
 			<when test="sort=='L'.toString()">
 				order by t_price 
@@ -111,7 +111,10 @@
 	 	]]>
 	</select>
 	
-	
+	<!-- 이름으로 검색한 훈련사 가져오기 페이징 처리 -->
+	<select id="countSearchTrainer" resultType="int">
+		select t.* from member m, trainer t where m.m_no = t.m_no and  m.m_nick like '%'||#{keyword}||'%'
+	</select>
 	
 	
 	
@@ -169,7 +172,14 @@
 	<select id="getReviewCount" resultType="int">
 		 select count(*) from review where t_no=#{t_no}
 	</select>
-	
+	<!-- 훈련사 한명의 총 리뷰 업데이트 -->
+	<update id="updateRAvg">
+		update trainer set t_ravg =#{ravg} ,t_Rtotal=#{total} where t_no=#{t_no} 
+	</update>	
+	<!-- 미용사 한명의 총 리뷰 업데이트 -->
+	<update id="updateRHAvg">
+		update hairstylist set h_ravg =#{ravg} ,h_Rtotal=#{total} where h_no=#{h_no}
+	</update>
 
 
 
