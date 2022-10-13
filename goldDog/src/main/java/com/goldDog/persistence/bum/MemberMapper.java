@@ -1,7 +1,10 @@
 package com.goldDog.persistence.bum;
 
+import java.util.List;
+
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.NoticeVO;
 import com.goldDog.domain.ReviewVO;
@@ -61,5 +64,14 @@ public interface MemberMapper {
 	
 	//addReivew
 	public int addReview(ReviewVO review);
+	
+	//insertDog
+	public int insertDog(DogVO dog);
+	
+	//getDog
+	public List<DogVO> getDog(int m_no);
+	
+	//getOneDog
+	public DogVO getOneDog(int d_no);
 	
 }

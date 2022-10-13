@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,37 +12,22 @@
 <br/><br/><br/>
 	<h1>test(견적서) 페이지 입니다.</h1>
 
+
+
+	<c:forEach var="i" begin="0" end="${eCount-1}" step="1">
 	<table>
 		<tr>
-			<td>강쥐이름</td>
-			<td>${dog.d_name}</td>
+			<td>견적서 확인</td>
+			<td>${estimate[i].e_no}</td>
 		</tr>
 		<tr>
-			<td>강아지 나이</td>
-			<td>${dog.d_age}</td>
+			<td>훈련사 닉</td>
 		</tr>
 		<tr>
-			<td>성별</td>
-			<td>${dog.d_gender}</td>
-		</tr>
-		<tr>
-			<td>견종</td>
-			<td>${dog.d_type}</td>
-		</tr>
-		<tr>
-			<td>무게</td>
-			<td>${dog.d_weight}</td>
-		</tr>
-		<tr>
-			<td>원하는 서비스</td>
-			<td>${est.e_service}</td>
-		</tr>
-		<tr>
-			<td>출장시 주의사항</td>
-			<td>${est.e_note}</td>
+			<td>훈련사 전화번호</td>
 		</tr>
 	</table> 
-
+	</c:forEach>
 
 
 

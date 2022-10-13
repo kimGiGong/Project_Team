@@ -29,6 +29,8 @@ public interface MainService {
 	// 훈련사 *******************************************************
 	//훈련사 정보 하나 가져오기 
 	public TrainerVO getTrainer(int t_no);
+	//훈련사 정보 하나 가져오기 
+	public TrainerVO getMTrainer(int m_no);
 	//모든 훈련사숫자 가져오기
 	public int getAllTrainerCount();
 	public List<TrainerVO> getAllTrainer(Criteria cri);
@@ -40,7 +42,8 @@ public interface MainService {
 	public List<TrainerVO> sortTrainer(Criteria cri);
 	//이름으로 검색했을때 나오는 훈련사 카운팅
 	public int countSearchTrainer(Criteria cri);
-	
+	//훈련사 판매등록 업데이트하기
+	public int updateTinfo(TrainerVO trainer);
 	
 	
 	//미용사 *********************************************************
@@ -83,8 +86,11 @@ public interface MainService {
 	//견적서 ********************************************************
 	//회원이 협의하기 눌렀을때 견적서 만들어 주는 메서드
 	public int insertEst(EstimateVO est);
-	//견적서 정보 불러오기
-	public EstimateVO getEstimate(int m_no);
+	//견적서 정보 불러오기 아직 처리안된것만 e_con =1
+	public List<EstimateVO> getEstimate(int m_no);
+	//견적서 하나 가져오는 메서드 
+	public EstimateVO getEOneEstimate(int e_no);
+	
 	
 	
 	

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -348,16 +349,65 @@ public class mainController {
 		
 	}
 	
-	@PostMapping("selUpload")
-	public String selUploadPro(TrainerVO trainer) {
+	@GetMapping("selModify")
+	@PreAuthorize("isAuthenticated()") 
+	public void selModify(Model model,Authentication auth) {
+		String userId= ((CustomUser)auth.getPrincipal()).getUsername();
+		MemberVO loginUser=memberService.getMember(userId);
 		
-		log.info(trainer);
-		int result=mainService.addTinfo(trainer);
-		log.info(result+"추가정보 등록 결과");
+		TrainerVO trainer =mainService.getMTrainer(loginUser.getM_no());
 		
 		
-		return "redirect:/main/tmain";
+		model.addAttribute("trainer",trainer);
+		log.info(trainer+"가져왔니??");
+		
+		
 	}
+	
+	// 정보 수정 업데이트
+	@PostMapping("selModifyPro")
+	@PreAuthorize("isAuthenticated()") 
+	public String selModifyPro(Model model,Authentication auth,TrainerVO trainer) {
+		String userId= ((CustomUser)auth.getPrincipal()).getUsername();
+		
+		MemberVO loginUser=memberService.getMember(userId);
+		
+		
+		if(trainer.getM_no()==loginUser.getM_no()) {
+		int result = mainService.updateTinfo(trainer);
+		
+		log.info(result+"성공했니??");
+		return "redirect:/mypage";
+		}
+		
+		
+		return "redirect:/member/login";
+	}
+	
+	
+	
+	@PostMapping("selUpload")
+	public String selUploadPro(TrainerVO trainer,Authentication auth) {
+		
+		String userId= ((CustomUser)auth.getPrincipal()).getUsername();
+			MemberVO loginMember=memberService.getMember(userId);
+			
+			if(trainer.getM_no()==loginMember.getM_no()) {
+			log.info(trainer);
+			int result=mainService.addTinfo(trainer);
+			log.info(result+"추가정보 등록 결과");
+			
+			return "redirect:/main/tmain";
+		}
+		
+		
+		return "redirect:/member/login";
+	}
+	
+	
+	
+	
+	
 	
 	
 	@GetMapping("addPetInfo")
@@ -374,6 +424,13 @@ public class mainController {
 		
 	}
 
+	//로그인한 사용자가 누른 견적서 보여주기
+	@GetMapping("addEstimate")
+	public void addEstimate(Model model) {
+		
+		
+	}
+	
 	@PostMapping("insertEst")
 	public String insertEst(DogVO dog, EstimateVO est, Model model,@Param("t_m_no") int t_m_no) {
 		   
@@ -384,7 +441,9 @@ public class mainController {
 		
 		//견주 m_no , 훈련사 m_no, 강아지 고유넘 d_no 사용해서 견적서 추가 셋팅   
 		est.setM_no_puppy(dogInfo.getM_no());
+		//훈련에서 오는 페이지
 		est.setM_no_manager(t_m_no);
+		//강아지 넘버
 		est.setP_no(d_no);
 		
 		// 견적서 생성
@@ -392,21 +451,53 @@ public class mainController {
 		log.info("생성 완료");
 		
 		
-//		//사용자의 견적서 불러오기
-//		EstimateVO test1 = mainService.getEstimate(dogInfo.getM_no());
-//		model.addAttribute("est", test1);
-//		model.addAttribute("dog", dogInfo);
-		
-		return "redirect:/main/tmain" ;
+		return "redirect:/main/test01" ;
 		
 	}
 	
 	
-	@GetMapping("addEstimate")
-	public void addEstimate(Model model) {
+	@GetMapping("test01")
+	@PreAuthorize("isAuthenticated()") 
+	public void test1(Authentication auth,Model model) {
+		//로그인한 유저 정보
+		
+		String userId=((CustomUser)auth.getPrincipal()).getUsername();
+		MemberVO loginUser=memberService.getMember(userId);
+		
+		
+		//로그인한 사용자가 가지고있는 견적서 번호들
+		List<Integer> e_no = new ArrayList<Integer>();
+		//로그인한 사용자가 가지고있는 견적서의 훈련사 번호들
+		List<Integer> m_no_manager = new ArrayList<Integer>();
+		List<EstimateVO> Estimate =mainService.getEstimate(loginUser.getM_no());
+		List<MemberVO> tMember=null;
+		MemberVO member =null;
+		
+		for(int i = 0 ;i<Estimate.size();i++) {
+			//유저가 가지고있는 견적서넘버 정보 담기(미리 만들어놓음)
+			e_no.add(Estimate.get(i).getE_no());
+			m_no_manager.add(Estimate.get(i).getM_no_manager());
+			member=mainService.getOneMember(Estimate.get(i).getM_no_manager());
+			tMember.add(member);
+	
+		
+		log.info(tMember+"맴버 리스트");
+		log.info(m_no_manager+"견적서의 훈련사 정보");
+		//견적서에 있는 훈련사 맴버정보 가져오기
+		
+		
+		model.addAttribute("tMember",tMember);
+		model.addAttribute("estimate",Estimate);
+		model.addAttribute("eCount",Estimate.size());
+		}
 		
 		
 	}
+	
+	
+	
+	
+	
 	
 	
 	

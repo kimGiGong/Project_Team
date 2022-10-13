@@ -249,10 +249,10 @@
 	                <!-- Nested Row within Card Body -->
 	                <div class="row">
 	                    <div class="col-lg-5 d-none d-lg-block">
-	                    <div class="p-5">
-	                    	<img class="card-img-top" src="/resources/serverImg/dog.jpg" width="420" height="500" alt="Card image cap">
-	                    	<input class="form-control" width="420" type="file" id="formFile" name="img"/>
-	                    </div>
+		                    <div class="p-5">
+		                    	<img class="card-img-top" src="/resources/serverImg/dog.jpg" width="420" height="500" alt="Card image cap">
+		                    	<input class="form-control" width="420" type="file" id="formFile" name="img"/>
+		                    </div>
 	                   	</div>
 	                    <div class="col-lg-7">
 	                        <div class="p-5">

@@ -143,40 +143,41 @@
 										</tr>
 									</table>
 								</div>
-								
-								<div class="collapse" id="collapseExample">
-									<div class="card card-body">
-										<table>
-											<tr>
-												<th>가을이</th>
-												<th style="width:70px">
-													<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-														보기
-													</button>
-												</th>
-												<th style="width:70px">	
-													<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-														삭제
-													</button>
-												</th>
-											</tr>
-											<tr>
-												<th>쥬디</th>
-												<th style="width:70px">
-													<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-														보기
-													</button>
-												</th>
-												<th style="width:70px">	
-													<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-														삭제
-													</button>
-												</th>
-											</tr>
-										</table>
+								<c:if test="${dogCheck == 0 }">
+									<div class="collapse" id="collapseExample">
+										<div class="card card-body">
+											<table>
+												<tr>
+													<th>등록된 반려견이 없습니다.</th>
+												</tr>
+											</table>
+										</div>
 									</div>
-								</div>
-								
+								</c:if>
+								<c:if test="${dogCheck != 0}">
+									<c:forEach var="i" begin="0" end="${dogCheck-1}" step="1">
+										<div class="collapse" id="collapseExample">
+											<div class="card card-body">
+												<table>
+													<tr>
+														<th>${dog[i].d_name}</th>
+														<th style="width:70px">
+															<button type="button" id="d_no" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+																보기
+															</button>
+														</th>
+														<th style="width:70px">	
+															<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+																삭제
+															</button>
+														</th>
+													</tr>
+													
+												</table>
+											</div>
+										</div>
+									</c:forEach>
+								</c:if>
 		                    </div>
                     	</div>
                     </div>
@@ -310,7 +311,9 @@
 		</div>
 	</div>
 	
+	
 	<!-- Modal 2-->
+	
 	<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
@@ -318,7 +321,11 @@
 					<h3 class="modal-title fs-5" id="exampleModalLabel">애견 수정</h3>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="row">
+				
+				
+				
+				<div class="row" id="dogModal">
+				<!-- 
 					<div class="col-lg-5 d-none d-lg-block">
 	                    <div class="p-5">
 	                    	<img class="card-img-top" src="/resources/serverImg/dog.jpg" width="222" height="180" alt="Card image cap">
@@ -331,37 +338,103 @@
 								<br/><br/>
 								<tr>
 									<th>이　　름　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_name" value="가을이"></th>
+									<th><input type="text" class="form-control form-control-user" name="d_name" value="${dog[i].d_name}"></th>
 								</tr>
 								<tr>
 									<th>나　　이　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_age" value="4살"></th>
+									<th><input type="text" class="form-control form-control-user" name="d_age" value="${dog[i].d_age}살"></th>
 								</tr>
 								<tr>
 									<th>성　　별　:　</th>
-									<th><input class="form-control form-control-user" value="남"  readonly="" /></th>
+									<th><input class="form-control form-control-user" value="${dog[i].d_gender}"  readonly="" /></th>
 								</tr>
 								<tr>
 									<th>종　　류　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_type" value="푸들"></th>
+									<th><input type="text" class="form-control form-control-user" name="d_type" value="${dog[i].d_type}"></th>
 								</tr>
 								<tr>
 									<th>무　　게　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_weight" value="5kg"></th>
+									<th><input type="text" class="form-control form-control-user" name="d_weight" value="${dog[i].d_weight}kg"></th>
 								</tr>
 							</table>
 						</form>
 					</div>
-				
 					<div class="modal-footer col-lg-12" >
 						<button type="button" class="btn btn-primary" id="review" >수정</button>
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 					</div>
+				 -->
 				</div>
+				
+				
+				
 			</div>
 		</div>
 	</div>
 	
 	
  </body>
+ 
+  <script type="text/javascript">
+  $(document).ready(function(){
+		let d_noVal = "${dog.d_no}";		// 본문글 고유번호 
+		console.log("m_no : " + m_no);
+  	
+		
+		
+		
+		
+		showReplyList(); // 댓글 목록 가져와 뿌리기 호출 
+  	
+		// 댓글 목록 가져와 뿌려주기 함수 (페이징처리 X)
+		function showReplyList(){
+			console.log("show reply list 호출!!"); 
+			// 전체 댓글 가져오기 요청 
+			$.ajax({
+				type: "GET",
+				url: "/member/dogModal/" + d_no + ".json",
+				data: {d_no:d_noVal}, 
+				success: function(result){
+					console.log("요청 성공!!!"); 
+					console.log(result);
+					makeModal(result);
+				}, 
+				error: function(e){
+					console.log("요청 실패....");
+					console.log(e);
+				}
+			});
+		}//showReplyList
+  	
+		let dogModalrow = $("#dogModal"); // 댓글목록 담을 컨테이너 div
+		let username="${pInfo.username}"; //sec:authenticated로 저장한 로그인한 사라 정보 js로 가져오기
+  	
+		// 댓글 목록 만들어서 화면에 부착 함수 
+		function makeModal(result){
+			console.log("makeModal!!!!!" + result.length);
+  		
+			// 부착할 html 목록 문자열로 만들기 
+			let str = ""; 
+				str += "<div class='col-lg-5 d-none d-lg-block'><div class='p-5'><img class='card-img-top' src='/resources/serverImg/";
+				str += result.d_img+"' width='222' height='180' alt='Card image cap'>";
+				str += "<input class='form-control' width='420' type='file' id='formFile' name='img'/></div></div><div class='col-lg-7'>";
+				str += "<form id='dogModfiyPro' action='/member/dogModfiyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModfiy' onsubmit='return checkField()'> <table><br/><br/>";
+				str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"'></th></tr>";
+				str += "<tr><th>나　　이　:　</th><th><input type='text' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "살'></th></tr>";
+				str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' value='"+ result.d_gender +"'  readonly='' /></th></tr>";
+				str += "<tr><th>종　　류　:　</th><th><input type='text' class='form-control form-control-user' name='d_type' value='"+ result.d_type +"'></th></tr>";
+				str += "<tr><th>무　　게　:　</th><th><input type='text' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"kg'></th></tr>";
+				str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='review' >수정</button>";
+				str += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button></div>";
+				
+				dogModalrow.html(str);	// html 부착 
+		}
+ 	 });// ready 
+ 	 
+ 	 
+ 	 
+  </script>
+
  </html>
+ 
+ 

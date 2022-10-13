@@ -4,6 +4,7 @@ package com.goldDog.service.bum;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.persistence.bum.MemberMapper;
@@ -321,6 +323,18 @@ public class memberServiceImpl implements memberService{
 	@Override
 	public int addReview(ReviewVO review) {
 		return mapper.addReview(review);
+	}
+	@Override
+	public int insertDog(DogVO dog) {
+		return mapper.insertDog(dog);
+	}
+	@Override
+	public List<DogVO> getDog(int m_no) {
+		return mapper.getDog(m_no); 
+	}
+	@Override
+	public DogVO getOneDog(int d_no) {
+		return mapper.getOneDog(d_no);
 	}
 
 
