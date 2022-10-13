@@ -36,7 +36,7 @@ public class MainServiceImpl implements MainService {
 	}
 	@Override
 	public List<MemberVO> getAllMember(List<Integer> t_no_list) {
-		return mapper.getMember(t_no_list);  
+		return mapper.getAllMember(t_no_list);  
 	}
 	@Override
 	public MemberVO getOneMember(int m_no) {
@@ -52,6 +52,13 @@ public class MainServiceImpl implements MainService {
 		log.info("트레이너 정보 가져오니?");
 		return mapper.getTrainer(t_no);
 	}
+	//m_no 로 훈련사 한명 가져오기
+	@Override
+	public TrainerVO getMTrainer(int m_no) {
+		return mapper.getMTrainer(m_no);
+	}
+	
+	
 	@Override
 	public List<TrainerVO> getAllTrainer(Criteria cri) {
 		log.info("훈련사 정보 다 가져오는 메서드 호출");
@@ -83,6 +90,12 @@ public class MainServiceImpl implements MainService {
 	public int countSearchTrainer(Criteria cri) {
 		return mapper.countSearchTrainer(cri);
 	}
+	//훈련사 판매등록 업데이트하기
+	@Override
+	public int updateTinfo(TrainerVO trainer) {
+		return mapper.updateTinfo(trainer);
+	}
+	
 	
 	
 	//미용사 *********************************************************
@@ -166,11 +179,22 @@ public class MainServiceImpl implements MainService {
 	public int insertEst(EstimateVO est) {
 		return mapper.insertEst(est);
 	}
+	//견적서 정보 불러오기 아직 처리안된것만 e_con =1
+	@Override
+	public List<EstimateVO> getEstimate(int m_no) {
+		return mapper.getEstimate(m_no);
+	}
 	//사용자가 가지고 있는 견적서 불러오기
 	@Override
-	public EstimateVO getEstimate(int m_no) {
-		return mapper.getEstimate(m_no);
-	}	
+	public EstimateVO getEOneEstimate(int e_no) {
+		return mapper.getEOneEstimate(e_no);
+	}
+	
+	
+	
+	
+	
+	
 	//사용자가 가지고 있는 주소 가져오는 메서드
 	@Override
 	public List<AddressVO> getMyAddress(int user_M_no) {
@@ -264,6 +288,9 @@ public class MainServiceImpl implements MainService {
 	public int modifyQnA(QnAVO QnA) {
 		return mapper.modifyQnA(QnA);
 	}
+	
+	
+
 
 	
 	

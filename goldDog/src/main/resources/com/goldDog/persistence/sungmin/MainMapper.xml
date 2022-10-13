@@ -41,6 +41,15 @@
 		</foreach> 
 	</select>
 	
+	<!-- 견적서에 있는 훈련사 넘버 받아서 가져오기-->	
+	<select id="getAllMember" resultType="com.goldDog.domain.MemberVO">
+		select * from member 
+		where m_no in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach> 
+	</select>
+	
 	<!-- 맴버 한명만 가져오기 -->	
 	<select id="getOneMember" resultType="com.goldDog.domain.MemberVO">
 		select * from member where m_no=#{m_no} 
@@ -56,6 +65,10 @@
 	<!-- 훈련사 한명의 정보 가져오기 -->
 	<select id="getTrainer" resultType="com.goldDog.domain.TrainerVO">
 		select * from trainer where t_no=#{t_no}
+	</select>
+	<!-- 훈련사 한명의 정보 가져오기m_no -->
+	<select id="getMTrainer" resultType="com.goldDog.domain.TrainerVO">
+		select * from trainer where m_no=#{m_no}
 	</select>
 
 	<!-- 모든 훈련사 가져오기 페이징 처리 -->
@@ -75,12 +88,11 @@
 	</select>
 	
 	<!-- 판매자 추가정보 등록하기 -->
-	<update id="addTinfo">
-		update trainer set 
-		t_self=#{t_self}, t_sel=#{t_sel}, t_license=#{t_license}, t_price=#{t_price}, t_career=#{t_career}  
-		where m_no = #{m_no}
-	</update>
-		
+	<insert id="addTinfo">
+	insert into trainer(t_no,m_no,a_no,t_self,t_sel,t_license,t_price,t_career,t_date) 
+			values(trainer_seq.nextval,#{m_no},#{a_no},#{t_self},#{t_sel},#{t_license},#{t_price},#{t_career},sysdate)
+	</insert>
+			
 	<!-- 검색한 훈련사 가져오기 페이징 처리 -->
 	<select id="searchTrainer" resultType="com.goldDog.domain.TrainerVO">
 		select t.* from member m, trainer t where m.m_no = t.m_no and  m.m_nick like '%'||#{keyword}||'%'
@@ -96,7 +108,7 @@
 				order by t_ravg desc
 			</when>
 			<when test="sort=='RH'.toString()">
-				order by t_rTotal desc
+				order by t_RTotal desc
 			</when>
 			<when test="sort=='L'.toString()">
 				order by t_price 
@@ -116,6 +128,11 @@
 		select t.* from member m, trainer t where m.m_no = t.m_no and  m.m_nick like '%'||#{keyword}||'%'
 	</select>
 	
+	<!--훈련사 판매등록 업데이트하기 -->
+	<update id="updateTinfo">
+		update trainer set t_self=#{t_self} ,t_sel=#{t_sel},t_license=#{t_license},t_price=#{t_price}, t_career= #{t_career}, t_date=sysdate
+		where m_no=#{m_no} 
+	</update>
 	
 	
 	
@@ -213,10 +230,22 @@
 		 values(estimate_seq.nextval,#{m_no_puppy},#{e_note},#{e_service},#{m_no_manager},0,#{p_no})
 	</insert>
 		
-	<!-- 사용자의 견적서 가져오는 메서드 -->
+	<!-- 사용자의 견적서 가져오는 메서드 아직 처리안된것만 e_con =1 -->
 	<select id="getEstimate" resultType="com.goldDog.domain.EstimateVO">
 		select * from estimate where M_no_puppy = #{m_no}
+	</select>
+		
+	<!-- 사용자의 견적서하나 가져오는 메서드 -->
+	<select id="getEOneEstimate" resultType="com.goldDog.domain.EstimateVO">
+		select * from estimate where e_no = #{e_no}
 	</select>	
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- m_no로 사용자의 주소 리스트 가져오기-->
 	<select id="getMyAddress" resultType="com.goldDog.domain.AddressVO">

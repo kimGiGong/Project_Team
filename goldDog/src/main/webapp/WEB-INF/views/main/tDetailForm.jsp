@@ -124,7 +124,7 @@
                                               <label for="cc-name" class="control-label mb-1">원하는 날짜</label>
                                               
 		                                        <div class="mb-3 row">
-													<input class="form-control" type="datetime-local" name="date" value="2022-10-12T12:30:00" id="html5-datetime-local-input"/>						                          
+													<input class="form-control" type="datetime-local" name="date" value="2022-10-13T12:30:00" id="html5-datetime-local-input"/>						                          
 						                      	</div>       
 						                      
                                               <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
@@ -282,44 +282,6 @@
 				}else if(result =='2'){
 					$("#noId").modal("show");	
 				}	
-			}
-			
-			
-			//참고중 끝나고 지워야함
-			//등록 후 인풋란에 내용 없애기
-			$("#reply").val("");
-			let result="${result}"
-			let modalContainer =$(".modal-body"); // 모달 몸체 담을 컨테이너					
-			//사용자가 다음을 입력했을때 모달 수정 해줄것
-			function makeList(result){
-				console.log("addPetInfo!!!!!!!!!"+result.length);
-					
-				if(result ==null || result.length ==0){
-					 
-					modalContainer.html("<p>어떤 미용을 원하시나요?</p>");
-					modalContainer.html("<p>댓글이 없습니다</p>");
-					return; // makeList 함수 강제 종료!
-				}
-				
-				//댓글이 있으니 뿌려주는곳
-				let str = "";
-				for(let i = 0 ; i<result.length ; i++){
-					
-						str +=  "<div class='reply_li'><div class='replyer_reg_ctn'>";
-						str +=  "<div class='replyer_div'>"+result[i].replyer+"</div>";
-						str +=  "<div class='replyReg_div'>"+timeFormat(result[i].reg)+"</div></div>";
-						str +=  "<div><div class='reply_div'>"+result[i].reply+"</div>";
-						
-						// 로그인 된 상황에서 보여줘야 , 댓글 단 사람이 로그인한 id 와 같으면 보여주기
-						str +="<sec:authorize access='isAuthenticated()'>";
-							if(username ==result[i].replyer){ // 댓글 작성자가 로그인한 사람과 동일하면 
-								str += 	"<button class='btn btn-info replyBtn' data-rno='"+result[i].repno+"' data-service='modify'>수정</button>";								
-								str +=	"<button class='btn btn-warning replyBtn' data-rno='"+result[i].repno+"' data-service='delete'>삭제</button>";
-							}
-						str +="</sec:authorize></div></div>";
-				} 
-					replyContainer.html(str); 	//html 부착 
-				
 			}
 			
 			
