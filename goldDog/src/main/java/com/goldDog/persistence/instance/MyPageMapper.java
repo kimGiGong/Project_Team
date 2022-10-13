@@ -8,6 +8,8 @@ public interface MyPageMapper {
 	
 	public AddressVO getAddress(int m_no);
 	
-	public void updateAddr(@Param ("m_no")int m_no , @Param("numbercode") String numbercode); 
+	public void updateAddr(@Param ("m_no")int m_no , @Param("numbercode") String numbercode);
+
+	public void updateResume( @Param ("m_no") int m_no, @Param ("t_sel") String t_sel); 
 	
 }

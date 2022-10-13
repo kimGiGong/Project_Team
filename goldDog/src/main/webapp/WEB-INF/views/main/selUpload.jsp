@@ -15,11 +15,12 @@
 
 
 	<form action="selUpload" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		<input type="hidden" name="m_no" value="${m_no}">
 		<table>
 			<tr>
 				<td>자기소개</td>
-				<td> <input type="text" name="t_self"> </td>
+				<td> <input type="text" name="t_self">${m_no} </td>
 			</tr>
 			<tr>
 				<td>판매정보</td>

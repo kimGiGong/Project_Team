@@ -172,3 +172,13 @@ div.input-block input:focus + span.placeholder {
     content: attr(data-ico);
 	}
 }
+.addressEdit {
+	margin-left: auto;
+	margin-right: 0px;
+	width: 10%;
+}
+.addressEdit div {
+	width: 10%;
+	margin-left: auto;
+	margin-right: 0px;
+}

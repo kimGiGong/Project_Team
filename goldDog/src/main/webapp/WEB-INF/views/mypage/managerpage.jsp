@@ -46,7 +46,7 @@
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
-	                                <a href="selUpload" class="nav-link">
+	                                <a href="/main/selUpload?m_no=${ managerlist[0].m_no }" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-user-friends nav-icon"></i>
 	                                    매니저 등록 정보
@@ -119,19 +119,20 @@
                    		<!-- </c:forEach> -->
                    	</div>
                    	
+           			
+           			
                     <%-- 훈련사 정보 --%>
                    	<div class="manager_info">
+                   		
+                   	
                     	<form action="/amm" method="post">
                     		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-							<div id="WriteEditor" name="t_sel"></div>
+								<textarea id="WriteEditor" name="t_sel"></textarea>
 							<input type="submit" value="저장!">
                     	</form>
                    	</div>
                     
                     <!-- 활동지역 -->
-        			<form action="area.go" method="post">
-        				<input type="hidden" value="${ managerlist[0].m_no }" name="m_no">
-                   		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                    <div class="business_trip_section">
 	                    	<div>
 	                    		<fieldset>
@@ -142,21 +143,30 @@
 	                    				<div class="business_items">
 	                    					<fieldset style="padding: 5px; min-height: 50px" >
 	                    						<div class="business_items_container">
-	                   								
+                  									<c:if test="${ !empty managerlist[1] }">
+		                   								<c:forEach items="${ managerlist[1] }" var="addr">
+                   											<div class='business_item'>
+                   												<button type="text" name="${ addr.area }" data-ico='X' value='${ addr.field }' disabled="disabled">
+                   													<c:out value="${addr.areaKO}"/> <c:out value="${addr.field}"/> 
+                   												</button>
+                   											</div>
+		                   								</c:forEach>
+                   									</c:if>
 	                    						</div>
 	                    					</fieldset>
 	                    				</div>
-	                    				<div class="business_items"><input type="submit" value="저장"></div>
+	                    				<div class="edit"><input form="addressSave" type="submit" value="저장"></div>
 	                    			</div>
 	                    		</fieldset>
-	                    	<div>
-	                    	</div>
-	                    		<c:if test="${empty managerlist[1].a_addr}" >
-	                    			<div>
-	                    				<div>
-	                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="seoul" class="area">서울</a>
-	                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="gyeonggi" class="area">경기</a>
-	                    				</div>
+                  				<a href="javascript:void(0)" class="addressEdit" ><div class="edit">지역변경</div></a>
+                    			<div class="edit">
+                    				<div>
+                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="seoul" class="area">서울</a>
+                    					<a href="javascript:void(0)" onclick="onAddress(this)" class="gyeonggi" class="area">경기</a>
+                    				</div>
+				        			<form action="area.go" method="post" id="addressSave">
+				        				<input type="hidden" value="${ managerlist[0].m_no }" name="m_no">
+                   						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                   					<ul class="area_container" id="seoul">
 	                   						<c:forEach items="${ managerlist[2][0] }" var="area" varStatus="vs">
 	                   							<li> <input type="checkbox" name="seoul" value="${ area }">${ area }</li>
@@ -168,12 +178,15 @@
 	                   							<li> <input type="checkbox" name="gyeonggi" value="${ area }">${ area }</li>
 	                   						</c:forEach>
 	                   					</ul>
-	                    			</div>
-	                    		</c:if>
+									</form>
+                    			</div>
 	                    	</div>	
 	                    </div>
-                    </form>
                     
+                    
+                    <div>
+          				<p>${ managerlist[3] }</p>
+           			</div>
                 	<!-- Contact section -->
 	                <div class="tm-section-wrap" id = "contact">
 	                    <div id="contact" class="tm-section">
@@ -181,7 +194,6 @@
 	                        <hr class="mb-5">
 							<div class="row">
 	                            <div class="col-xl-6 tm-contact-col-l mb-4">
-	                                <form id="contact-form" action="" method="POST" class="tm-contact-form">
 	                                    <div class="form-group">
 	                                        <input type="text" name="name" class="form-control rounded-0" placeholder="Name" required="">
 	                                    </div>
@@ -203,7 +215,6 @@
 	                                    <div class="form-group tm-text-right">
 	                                        <button type="submit" class="btn btn-primary">Send</button>
 	                                    </div>
-	                                </form>
 	                            </div>
 	                            <div class="col-xl-6 tm-contact-col-r">
 	                                <!-- Map -->
