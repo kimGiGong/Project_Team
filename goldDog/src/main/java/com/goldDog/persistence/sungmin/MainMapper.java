@@ -22,7 +22,7 @@ public interface MainMapper {
 	// 맴버 정보 가져오기 페이징 처리 된 버젼
 	public List<MemberVO> getMember(List<Integer> list); 
 	//모든 맴버 가져오기
-	public List<MemberVO> getAllMember(); 
+	public List<MemberVO> getAllMember(List<Integer> t_no_list); 
 	// 맴버 한명의 정보 가져오기
 	public MemberVO getOneMember(int m_no);
 	
@@ -32,8 +32,10 @@ public interface MainMapper {
 	
 	// 훈련사 *******************************************************
 	//훈련사 정보 하나 가져오기
-	//맴버 번호 받아서 맞는 트레이너 가져오기
+	//T 번호 받아서 맞는 트레이너 가져오기
 	public TrainerVO getTrainer(int t_no);
+	//M_no훈련사 정보 하나 가져오기 
+	public TrainerVO getMTrainer(int m_no);
 	//전체 훈련사 리스트 가져오기
 	public List<TrainerVO> getAllTrainer(Criteria cri);
 	//전체 훈련사 T_no 가져오기
@@ -46,7 +48,8 @@ public interface MainMapper {
 	public List<TrainerVO> sortTrainer(Criteria cri); 
 	//이름으로 검색했을때 나오는 훈련사 카운팅
 	public int countSearchTrainer(Criteria cri);
-	
+	//훈련사 판매등록 업데이트하기
+	public int updateTinfo(TrainerVO trainer);
 	
 	
 	//미용사 *********************************************************
@@ -92,8 +95,10 @@ public interface MainMapper {
 	//회원이 협의하기 눌렀을때 견적서 만들어 주는 메서드
 	//견적서 넣어주는 메서드
 	public int insertEst(EstimateVO est);
-	//사용자가 가지고 있는 견적서 불러오기
-	public EstimateVO getEstimate(int m_no);
+	//견적서 정보 불러오기 아직 처리안된것만 e_con =1
+	public List<EstimateVO> getEstimate(int m_no);
+	//견적서 하나 가져오는 메서드 
+	public EstimateVO getEOneEstimate(int e_no);
 	//사용자가 가지고 있는 주소 리스트 불러오기
 	public List<AddressVO> getMyAddress(int user_M_no);
 	

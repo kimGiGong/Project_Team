@@ -18,7 +18,7 @@
 
 </style>
 </head>
-	
+	 
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
@@ -48,14 +48,14 @@
                  </div>
                </div>    
                
-             <form id="addtrainer" action="selUpload" method="post">
+             <form id="updatetrainer" action="selModifyPro" method="post">
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-             <input type="hidden" name="m_no" value="${m_no}">
+             <input type="hidden" name="m_no" value="${trainer.m_no}"/>
               <div class="col-lg-12">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">자기소개</h5>
-                   	<textarea class="form-control" rows="3" name="t_self" placeholder="ex)3년 경력의 강아지 입질 전문 훈련사 입니다." ></textarea>
+                   	<textarea class="form-control" rows="3" name="t_self" >${trainer.t_self}</textarea>
                  </div>
                </div>
              </div>
@@ -64,7 +64,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">판매 추가정보</h5>
-                   	<textarea class="form-control" rows="3" name="t_sel" placeholder="ex)훈련의 추가가격(강아지 입질훈련은 +50000)" ></textarea>
+                   	<textarea class="form-control" rows="3" name="t_sel" >${trainer.t_sel}</textarea>
                  </div>
                </div>
              </div>
@@ -73,7 +73,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">자격증</h5>
-                   	<input type="text" name="t_license">
+                   	<input type="text" name="t_license" value="${trainer.t_license}">
                  </div>
                </div>
              </div>
@@ -83,7 +83,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title"><td>훈련시작금액</td></h5>
-                   	<input type="text" name="t_price">원
+                   	<input type="text" name="t_price" value="${trainer.t_price}">원
                  </div>
                </div>
              </div>
@@ -91,14 +91,14 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title"><td>경력</td></h5>
-                   	<input type="text" name="t_career">년
+                   	<input type="text" name="t_career" value="${trainer.t_career}">년
                  </div>
                </div>
              </div>
 	         </div><!--/.row-->
 	         <div class="row justify-content-md-center">
     	          <div class="col-lg-12">
-	    	         <input type="button" class="btn float-right btn-info" id="newBoard" value="글쓰기">
+	    	         <input type="button" class="btn float-right btn-info" id="newBoard" value="수정하기">
 		         </div><!--/.row-->
 	         </div><!--/.row-->
              </form>
@@ -118,7 +118,7 @@
 			e.preventDefault(); 
 			console.log("글쓰기 확인");
 			
-			$("#addtrainer").submit();
+			$("#updatetrainer").submit();
 		});	
 		
 	});

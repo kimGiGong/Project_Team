@@ -14,19 +14,19 @@
 	}
 	.fa-vcard:before, .fa-address-card:before {
     color: #6b6b6b;
-}
+	}
 
-</style>
+	</style>
 </head>
 	
-	
+	 
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
 		</div>
 		
 	<!--  헤더 END -->
-	
+	<h2>견적서 페이지</h2>
 	
 	 <div class="container">
 	   </br></br></br></br></br></br></br></br>
