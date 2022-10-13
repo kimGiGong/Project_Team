@@ -112,5 +112,17 @@
 		(review_seq.nextval, #{m_no}, #{r_text}, #{r_score}, sysdate, #{r_img},0,0)
 	</insert>
 	
+	<insert id="insertDog">
+		insert into dog values 
+		(dog_seq.nextval+8, #{m_no}, #{d_name}, #{d_age}, #{d_img}, #{d_weight}, #{d_type}, #{d_gender})
+	</insert>
+	
+	<select id="getDog" resultType="com.goldDog.domain.DogVO">
+		select * from dog where m_no =#{m_no}
+	</select>
+	
+	<select id="getOneDog" resultType="com.goldDog.domain.DogVO">
+		select * from dog where d_no =#{d_no}
+	</select>
 	
 </mapper>

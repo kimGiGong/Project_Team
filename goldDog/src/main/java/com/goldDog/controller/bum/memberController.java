@@ -10,11 +10,15 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.NoticeVO;
 import com.goldDog.domain.ReviewVO;
+import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
 import com.goldDog.service.bum.domain.CustomUser;
 import com.goldDog.service.sungmin.MainService;
@@ -236,8 +242,8 @@ public class memberController {
 		                mainService.updateRAvg(t_no, rTotal,re.size());
 		                log.info("훈련사 리뷰추가완료");
 		                
-		                
-					}else if(h_no>1){ 
+					}
+					else if(h_no>1){ 
 					log.info("미용사 리뷰추가들어옴");	
 	                double rTotal = 0.0;
 	                List<ReviewVO> re =mainService.getHReview(t_no);
@@ -249,7 +255,6 @@ public class memberController {
 		                mainService.updateRHAvg(h_no, rTotal,re.size());
 		                log.info("미용사 리뷰추가완료");
 					}
-                
 	    	}
 			 
 			log.info("***********uuid"+uuid);
@@ -267,7 +272,86 @@ public class memberController {
 		return "redirect:/member/review";
 	}
 	
+	@GetMapping("dogAD")
+	public void dogAD() {
+		
+	}
+	@PostMapping("dogInsertPro")
+	public String dogInsertPro(DogVO dog, MultipartHttpServletRequest request, Authentication auth) {
+		try {
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			String m_id =user.getUsername();
+			dog.setM_no(service.getMno(user.getUsername()));
+							
+			MultipartFile mf = request.getFile("part_img");
+			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			
+			log.info(mf.getSize());
+			log.info(mf.getContentType());
+			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			
+			// 이름 중복 방지를 위한 새 파일명 생성
+			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			log.info(uuid);
+			//업로드한 파일 확장자만 가져오기
+			String orgName=mf.getOriginalFilename();
+			String ext= orgName.substring(orgName.lastIndexOf("."));
+			// 저장할 파일명
+			String newFileName= uuid + ext;
+			
+			//DB 상에도 파일명을 저장해 준다.
+			int result = 0;
+			if(mf.getOriginalFilename()==null) {
+				dog.setD_img("dog.jpg");
+				 result = service.insertDog(dog);	
+				 
+			}else if(mf.getOriginalFilename()!=null) {
+				dog.setD_img(newFileName);
+				 result = service.insertDog(dog);
+			}
+			
+			log.info("***********uuid"+uuid);
+			//저장할 파일 전체 경로
+			String imgPath = path+"\\"+newFileName;
+			log.info("*****imgPath"+imgPath);
+
+			// 파일 저장
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return "redirect:/member/dogAD";
+	}
 	
+	//	일반 이용자 MyPage 이동
+	@GetMapping("mypage")
+	public String viewMypage(Authentication auth, Model model) {
+		
+		CustomUser user = (CustomUser)auth.getPrincipal();
+		String loginID = user.getUsername();
+		MemberVO member = service.getMember(loginID);
+		
+		int mno = service.getMno(user.getUsername());
+		List<DogVO> dog = service.getDog(mno);
+		
+		model.addAttribute("manager",member);
+		model.addAttribute("dog", dog);
+		model.addAttribute("dogCheck", dog.size());
+		
+		return "/member/mypage";
+	}
+	//목록 요청 매핑
+	 @GetMapping(value="dogModal/{d_no}", 
+			 produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, MediaType.APPLICATION_XML_VALUE})
+	 public ResponseEntity<DogVO> dogModal(@PathVariable("d_no") int d_no) {
+	      
+		 log.info("**************** get reply list d_no : " + d_no);
+		 DogVO dog = service.getOneDog(d_no);  
+	      
+		 return new ResponseEntity<DogVO>(dog, HttpStatus.OK);
+	}
 	
 	
 	
