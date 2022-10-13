@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -101,12 +102,15 @@ public class mypageController {
 			List<Object> list = new ArrayList<Object>();
 			AddressTranslator addrtr = new AddressTranslator();
 			List<String []> area = new ArrayList<String []>();
+			
 			area.add(addrtr.getSeoul());
 			area.add(addrtr.getGyeonggi());
 			list.add(member);
-			list.add(address.getA_addr());
+			list.add(addrtr.translator(address.getA_addr()));
 			list.add(area);
 			TrainerVO trainer = sungminService.getTrainer(member.getM_no());
+			System.out.println(trainer);
+			list.add(trainer);
 			System.out.println(list);
 			model.addAttribute("managerlist",list);
 			
@@ -245,13 +249,17 @@ public class mypageController {
     
     //	HTML 에디터 DB저장 
     @PostMapping("amm")
-    public void name(TrainerVO vo) {
-    	log.info(vo.toString());
+    public String name(TrainerVO vo) {
+    	log.info(vo.toString()+"엿엿");
+    	instanceService.updateResume( vo.getM_no() , vo.getT_sel() );
 		
+    	return "redirect:/manager";
 	}
     @PostMapping("area.go")
-    public String areaSave(String [] seoul, String [] gyeonggi , int m_no){
-    	instanceService.updateAddr(seoul,gyeonggi , m_no, "");
+    public String areaSave(@Param("seoul")String [] seoul,@Param("gyeonggi") String [] gyeonggi , int m_no){
+    	instanceService.updateAddr( seoul,gyeonggi , m_no, "");
+    	System.out.println(seoul);
+    	System.out.println(gyeonggi);
     	return "redirect:/manager";
     }
     

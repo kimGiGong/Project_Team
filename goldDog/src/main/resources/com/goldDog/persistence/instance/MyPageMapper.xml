@@ -12,6 +12,9 @@
 		update address set a_addr=#{numbercode} where m_no=#{m_no}
 	</update>
 	
+	<update id="updateResume">
+		update trainer set t_sel=#{t_sel} where m_no=#{m_no}
+	</update>
 
 
 

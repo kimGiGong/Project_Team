@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Data;
 import lombok.Getter;
 import oracle.net.aso.m;
 
@@ -63,7 +64,6 @@ public class AddressTranslator {
 		
 		
 		
-		System.out.println();
 		for (int i = 0; i < gyeonggi.length; i++) {
 			if(i<10) {
 				implMap01.put("010"+i,gyeonggi[i]);
@@ -78,21 +78,44 @@ public class AddressTranslator {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	//	받은 문자열 분해 및 서치
-	public List<String> translator(String addr) {
-		if(!addr.isEmpty()) {
-			
-			String [] address = addr.split("_");
+	public List<AreaVO> translator(String addr) {
+		if(addr != null) {
+			String [] address = null;
+			if(addr.length() != 1) {
+				address = addr.split("_");
+			}
 			Arrays.sort(address);
-			
-			List<String> list = new ArrayList<String>();
-			
-					
-			for (int i = 0; i < address.length; i++) {
-				if(address[i].substring(0,1).equals("00")) {
-					list.add(seoulMap.get(address[i]));
-				}else if(address[i].substring(0,1).equals("01")) {
-					list.add(gyeonggiMap.get(address[i]));
+			System.out.println("address trans"+address);
+			List<AreaVO> list = new ArrayList<AreaVO>();
+			for (int i = 0; i < address.length ; i++) {
+				AreaVO vo = new AreaVO();
+				if(address[i].startsWith("00")) {
+					vo.setArea("seoul");
+					vo.setField(seoulMap.get(address[i]));
+					vo.setAreaKO("서울");
+					list.add(vo);
+				}else if(address[i].startsWith("01")) {
+					vo.setArea("gyeonggi");
+					vo.setField(gyeonggiMap.get(address[i]));
+					vo.setAreaKO("경기");
+					list.add(vo);
 				}
 			}
 			
@@ -144,17 +167,17 @@ public class AddressTranslator {
 	
 	public String getNumberCode(String[] arr , String[] arr2) {
 		String numbercode ="";
-		if(arr.length!=0) {
+		if(arr != null) {
 			
 			numbercode+=addressNumberReanslator(arr);
 					
-			if(arr2.length!=0) {
+			if(arr2 != null) {
 				numbercode+="_"+addressNumberReanslatorGyeonggiMap(arr2);
 			}
 			
 		}else {
-			if(arr2.length!=0) {
-				numbercode +=addressNumberReanslatorGyeonggiMap(arr2);
+			if(arr2 != null) {
+				numbercode = addressNumberReanslatorGyeonggiMap(arr2);
 			}
 		}
 		
@@ -163,6 +186,6 @@ public class AddressTranslator {
 	} 
 	
 	
-	
 
 }
+

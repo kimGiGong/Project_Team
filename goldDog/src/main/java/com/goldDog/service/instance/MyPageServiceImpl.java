@@ -1,5 +1,7 @@
 package com.goldDog.service.instance;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +24,15 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void updateAddr(String [] seoul, String [] gyeonggi , int m_no , String numbercode) {
 		AddressTranslator trans = new AddressTranslator();
-		if(seoul.length!=0 || gyeonggi.length!=0) {
+		if(seoul != null || gyeonggi != null) {
 			numbercode = trans.getNumberCode(seoul,gyeonggi);
 		}
-		System.out.println(m_no);
-		System.out.println(numbercode);
 		Mapper.updateAddr(m_no, numbercode);
+	}
+
+	@Override
+	public void updateResume(int m_no, String t_sel) {
+		Mapper.updateResume(m_no, t_sel);
 	}
 
 

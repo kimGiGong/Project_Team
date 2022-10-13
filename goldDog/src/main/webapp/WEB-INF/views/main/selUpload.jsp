@@ -109,6 +109,7 @@
 	 
 
 
+
  <%@ include file="../footer.jsp" %>
  
 	<script type="text/javascript">
@@ -125,9 +126,6 @@
 			
 		
 		</script>
-	
-
-
 
 
 

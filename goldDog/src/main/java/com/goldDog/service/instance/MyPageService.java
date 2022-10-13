@@ -7,4 +7,6 @@ public interface MyPageService {
 	
 	void updateAddr(String[] seoul, String[] gyeonggi, int m_no, String numbercode);
 
+	public void updateResume(int m_no, String t_sel);
+
 }

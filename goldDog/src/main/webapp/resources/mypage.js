@@ -38,11 +38,10 @@ $(document).ready(function(){
 			
 		}else{
 			if($(this).is(':checked')){
-		 		let addHTML = "<div class='business_item'><button name='"+this.name+"' data-ico='X' value='"+thisval+"'>"+thisname+'>'+thisval+"</button></div>"; 
+		 		let addHTML = "<div class='business_item'><button name='"+this.name+"' data-ico='X' value='"+thisval+"'>"+thisname+' '+thisval+"</button></div>"; 
 		 		$(".business_items_container").append(addHTML);
 		 		if($("button[value='전체'][name='"+this.name+"']")){
 		 			$("input[value='전체'][name='"+this.name+"']").prop('checked',false);
-		 			console.log("이게 맞나?");
 		 			$(".business_item > button[value='전체'][name='"+this.name+"']").parent().remove();
 		 		}
 		 		
@@ -57,12 +56,29 @@ $(document).ready(function(){
 	
 		let thisval = $(this).val();
 		
-		$("input[value='"+thisval+"']").prop('checked',false);
+		$("input[value='"+thisval+"'][name='"+this.name+"']").prop('checked',false);
 		
 		$(this).parent().remove();
 		
 	});
 	
+	$(document).on("click", ".addressEdit" , function(){
+	
+		if($(this).text() == "지역변경"){
+			$(this).children().text("취소");
+			$("button[data-ico='X']").attr("disabled",false	);
+			$(".edit").css("display","block");
+		}else{
+			$(this).children().text("지역변경");
+			$("button[data-ico='X']").attr("disabled",true	);
+			$(".edit").css("display","none");
+			$(this).children().css("display","block");
+		}
+	
+	});
+	
+	
+
 	
 });	//ready
 
@@ -80,3 +96,18 @@ function onAddress(a) {
 	$('.area_container').css('display', 'none');
 	document.getElementById(a.className).style.display= "grid";
 }
+
+(function(){
+let get = $("button[data-ico='X']");
+	for (let val of get) {
+	
+		$("input[value='"+val.value+"'][name='"+val.name+"']").prop('checked',true);
+		
+	};
+	$(".edit").css('display','none');
+	$(".addressEdit > .edit").css("display","block");
+})();
+
+
+
+
