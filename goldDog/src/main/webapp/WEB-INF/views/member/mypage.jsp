@@ -162,7 +162,7 @@
 													<tr>
 														<th>${dog[i].d_name}</th>
 														<th style="width:70px">
-															<button type="button" id="d_no" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+															<button type="button"  value="${dog[i].d_no}" class="btn btn-primary" veiwDog="${dog[i].d_name}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
 																보기
 															</button>
 														</th>
@@ -376,23 +376,30 @@
  </body>
  
   <script type="text/javascript">
+  
+  
   $(document).ready(function(){
-		let d_noVal = "${dog.d_no}";		// 본문글 고유번호 
-		console.log("m_no : " + m_no);
-  	
+		 
+	  $("button[veiwDog]").on("click",function(e){
+	      e.preventDefault(); 
+	      console.log("글쓰기 확인 모달.");
+	 		
+	     	let d_noVal = $(this).val();
+	      
+			showReplyList(d_noVal); // 댓글 목록 가져와 뿌리기 호출 
+	     
+	   });
+		  
 		
-		
-		
-		
-		showReplyList(); // 댓글 목록 가져와 뿌리기 호출 
   	
 		// 댓글 목록 가져와 뿌려주기 함수 (페이징처리 X)
-		function showReplyList(){
+		function showReplyList(d_noVal){
+			
 			console.log("show reply list 호출!!"); 
 			// 전체 댓글 가져오기 요청 
 			$.ajax({
 				type: "GET",
-				url: "/member/dogModal/" + d_no + ".json",
+				url: "/member/dogModal/" + d_noVal + ".json",
 				data: {d_no:d_noVal}, 
 				success: function(result){
 					console.log("요청 성공!!!"); 
