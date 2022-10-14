@@ -99,7 +99,8 @@ public interface MainService {
 	public AddressVO address();
 	//회원 한명이 가지고 있는 주소 리스트 리턴
 	public List<AddressVO> getMyAddress(int user_M_no);
-
+	//주소 고유넘버로 주소 가져오기
+	public AddressVO getOneAddress(int a_no);
 	
 	
 	// 광고 ********************************************************

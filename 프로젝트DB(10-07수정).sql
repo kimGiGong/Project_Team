@@ -60,7 +60,7 @@ create table notice(
 	n_title varchar2(100) not null,
 	n_content varchar2(2000) not null,
 	n_date date default sysdate,
-	n_readcount number default 0
+	n_readcount number default 0,
 	n_img varchar2(300),
 	m_id varchar2(20 char)
 );
@@ -72,7 +72,7 @@ create table QnA(
 	q_title varchar2(100) not null,
 	q_content varchar2(2000) not null,
 	q_date date default sysdate,
-	q_readcount number default 0
+	q_readcount number default 0,
 	q_id varchar2(20 char)
 );
 
@@ -92,8 +92,9 @@ create table estimate(
 	e_total_price number,
 	e_con number,
 	e_reject varchar2(2000),
-	p_no number,
-   	a_no number
+	d_no number,
+   	a_no number,
+	e_date date default sysdate
 );
 
 select * from estimate;
@@ -122,7 +123,7 @@ create table trainer(
 	t_best number default 0,
 	t_career number,
 	t_salary number,
-	t_date date default sysdate
+	t_date date default sysdate,
 	t_Ravg number default 0,
 	t_RTotal number default 0
 	
@@ -141,7 +142,7 @@ create table hairstylist(
 	h_best number default 0,
 	h_career number,
 	h_salary number,
-	h_date date default sysdate
+	h_date date default sysdate,
 	h_Ravg number default 0,
 	h_RTotal number default 
 	
