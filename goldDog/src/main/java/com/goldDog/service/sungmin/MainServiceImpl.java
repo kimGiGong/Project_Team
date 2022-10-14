@@ -189,7 +189,16 @@ public class MainServiceImpl implements MainService {
 	public EstimateVO getEOneEstimate(int e_no) {
 		return mapper.getEOneEstimate(e_no);
 	}
-	
+	//견적서 하나 삭제해주는 메서드
+	@Override
+	public int deleteEst(int e_no) {
+		return mapper.deleteEst(e_no);
+	}
+	//견적서 하나 업데이트하는 메서드
+	@Override
+	public int updateEst(EstimateVO estimate) {
+		return mapper.updateEst(estimate);
+	}
 	
 	
 	
@@ -298,7 +307,8 @@ public class MainServiceImpl implements MainService {
 	public int modifyQnA(QnAVO QnA) {
 		return mapper.modifyQnA(QnA);
 	}
-	
+
+
 	
 
 

@@ -260,6 +260,8 @@
 				console.log("글쓰기 확인 모달.");
 				$("#addNew2").modal("show");
 			});
+			
+			
 			//QnA 모달 글쓰기 눌렀을때 띄울 
 			$("#addQnA").on("click",function(e){
 				e.preventDefault(); 
