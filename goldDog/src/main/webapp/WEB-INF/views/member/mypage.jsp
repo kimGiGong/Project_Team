@@ -40,7 +40,7 @@
 	                        </div> --%>                
 	                        <ul id="tm-main-nav">
 	                            <li class="nav-item">                                
-	                                <a href="#home" class="nav-link current">
+	                                <a href="#Estimate" class="nav-link current">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-home nav-icon"></i>
 	                                    견적서
@@ -100,13 +100,60 @@
                     </section>
                     
                     <div>
-                    	<div class="Estimate">
+                    	<div class="Estimate" id="Estimate">
 		                    	<details class="Estimate_details" id="${ manager.m_no }" onclick="ondetails(this.id)">
 		    						<summary>${ manager.m_name }</summary>
 		    						<p id="ammo">${manager}</p>
 		                    	</details>
-		                    	<div class="Estimate_interval"></div> 
-                    		<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
+		                    	<p>
+								  <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">훈련 견적서</a>
+								  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">미용 견적서</button>
+								  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">모두 보기</button>
+								</p>
+		                    	<!-- <div class="Estimate_interval"></div>  -->
+								<div class="row">
+								<div class="col">
+									<div class="collapse multi-collapse"
+										id="multiCollapseExample1">
+										<div class="card card-body" style="height:140">
+											<table>
+												<tr>
+													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button></th>
+													<th>홍성현 훈련매니저</th>
+												</tr>
+												<tr>
+													<th colspan="2"><br></th>
+												</tr>
+												<tr>
+													<th align="center">　진행 중입니다</th>
+													<th align="center">010-1234-1234</th>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="col">
+									<div class="collapse multi-collapse"
+										id="multiCollapseExample2">
+										<div class="card card-body" style="height:140">
+											<table>
+												<tr>
+													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button></th>
+													<th>홍성현 미용매니저</th>
+												</tr>
+												<tr>
+													<th colspan="2"><br></th>
+												</tr>
+												<tr>
+													<th align="center">　진행 완료</th>
+													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">리뷰 작성</button></th>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
                     		<!-- </c:forEach> -->
                     	</div>
                     </div>
@@ -319,42 +366,6 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="row" id="dogModal">
-				<!--<div class="col-lg-5 d-none d-lg-block">
-	                    <div class="p-5">
-	                    	<img class="card-img-top" src="/resources/serverImg/dog.jpg" width="222" height="180" alt="Card image cap">
-	                    	<input class="form-control" width="420" type="file" id="formFile" name="img"/>
-	                    </div>
-	                </div>
-					<div class="col-lg-7">
-						<form id="dogModfiyPro" action="/member/dogModfiyPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="dogModfiy" onsubmit="return checkField()">
-							<table><br/><br/>
-								<tr>
-									<th>이　　름　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_name" value="${dog[i].d_name}"></th>
-								</tr>
-								<tr>
-									<th>나　　이　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_age" value="${dog[i].d_age}살"></th>
-								</tr>
-								<tr>
-									<th>성　　별　:　</th>
-									<th><input class="form-control form-control-user" value="${dog[i].d_gender}"  readonly="" /></th>
-								</tr>
-								<tr>
-									<th>종　　류　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_type" value="${dog[i].d_type}"></th>
-								</tr>
-								<tr>
-									<th>무　　게　:　</th>
-									<th><input type="text" class="form-control form-control-user" name="d_weight" value="${dog[i].d_weight}kg"></th>
-								</tr>
-							</table>
-						</form>
-					</div>
-					<div class="modal-footer col-lg-12" >
-						<button type="button" class="btn btn-primary" id="review" >수정</button>
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -410,38 +421,40 @@
 			let str = ""; 
 				str += "<div class='col-lg-5 d-none d-lg-block'><div class='p-5'><img class='card-img-top' src='/resources/serverImg/";
 				str += result.d_img+"' width='222' height='180' alt='Card image cap'>";
-				str += "<input class='form-control' width='420' type='file' id='formFile' name='img'/></div></div><div class='col-lg-7'>";
-				str += "<form id='dogModfiyPro' action='/member/dogModfiyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModfiy'> <table><br/><br/>";
+				str += "<input class='form-control' width='420' type='file' id='formFile' name='part_img'/></div></div><div class='col-lg-7'>";
+				str += "<form id='dogModifyPro' action='/member/dogModifyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModify'><input type='hidden' name='d_no' value='"+result.d_no+"' /><table><br/><br/>";
 				str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"'></th></tr>";
-				str += "<tr><th>나　　이　:　</th><th><input type='text' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "살'></th></tr>";
+				str += "<tr><th>나이(살)　:　</th><th><input type='text' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "'></th></tr>";
 				str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' value='"+ result.d_gender +"'  readonly='' /></th></tr>";
 				str += "<tr><th>종　　류　:　</th><th><input type='text' class='form-control form-control-user' name='d_type' value='"+ result.d_type +"'></th></tr>";
-				str += "<tr><th>무　　게　:　</th><th><input type='text' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"kg'></th></tr>";
+				str += "<tr><th>무게(kg)　:　</th><th><input type='text' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"'></th></tr>";
 				str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='dogModify' >수정</button>";
 				str += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button></div>";
 				dogModalrow.html(str);	// html 부착 		
 		}
- 	 });// ready 
- 	
- 	//dogInsert
- 	$(document).ready(function(){
+		
+ 		//dogInsert
 		//등록 or 추가 모달 눌렀을때 띄울 
 		$("#dogInsert").on("click",function(e){
 			e.preventDefault(); 
 			console.log("등록 or 추가 확인 모달.");
 			$("#dogInsertPro").submit();
 		});
-	});
- 	//dogModify
- 	$(document).ready(function(){
+ 	
+ 		//dogModify
 		//수정 모달 눌렀을때 띄울 
-		$("#dogModify").on("click",function(e){
+		$("#dogModal").on("click","#dogModify",function(e){
+			console.log("수정 클릭.");
 			e.preventDefault(); 
-			console.log("수정 확인 모달.");
-			$("#dogModfiyPro").submit();
+			console.log("수정 확인 모달.");	
+			$("#dogModifyPro").submit();
 		});
-	});
- 	 
+ 	
+ 	
+ 	 });// ready 
+ 	
+	
+	
   </script>
  </html>
  

@@ -89,6 +89,6 @@ public interface memberService {
 		public DogVO getOneDog(int d_no);
 
 		//modifytDog
-		public int modifytDog(DogVO dog);
+		public int modifytDog(int d_no);
 		
 }
