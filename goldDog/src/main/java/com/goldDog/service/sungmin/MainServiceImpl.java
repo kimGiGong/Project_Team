@@ -206,6 +206,16 @@ public class MainServiceImpl implements MainService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	//주소 고유넘버로 주소 가져오기
+	@Override
+	public AddressVO getOneAddress(int a_no) {
+		return mapper.getOneAddress(a_no);
+	}
+	
+	
+	
+	
+	
 	
 	
 	//광고 ********************************************************

@@ -101,6 +101,10 @@ public interface MainMapper {
 	public EstimateVO getEOneEstimate(int e_no);
 	//사용자가 가지고 있는 주소 리스트 불러오기
 	public List<AddressVO> getMyAddress(int user_M_no);
+	//주소 고유넘버로 주소 가져오기
+	public AddressVO getOneAddress(int a_no);
+	
+	
 	
 	
 	//광고 ********************************************************
