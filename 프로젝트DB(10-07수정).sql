@@ -92,7 +92,7 @@ create table estimate(
 	e_total_price number,
 	e_con number,
 	e_reject varchar2(2000),
-	_no number,
+	d_no number,
    	a_no number,
 	e_date date default sysdate
 );
