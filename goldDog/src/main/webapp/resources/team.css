@@ -182,3 +182,6 @@ div.input-block input:focus + span.placeholder {
 	margin-left: auto;
 	margin-right: 0px;
 }
+#mypage {
+	margin-bottom: 100px;
+}

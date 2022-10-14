@@ -92,7 +92,7 @@
                 <!-- Home section -->
                 <div class="tm-section-wrap">
                     <section id="mypage" class="tm-section">
-              <!--      <h3 class="tm-text-primary">${manager.m_name}</h3> -->
+                    	<h3 class="tm-text-primary">프로필</h3> 
                         <hr class="mb-5">
                         <div class="row">
                         	<fieldset id="mapage_container">
@@ -109,9 +109,13 @@
                     </section>
                     
                     <%-- 견적서 --%>
+                    <h3 class="tm-text-primary">견적서</h3> 
+                    <hr class="mb-5">
                    	<div class="Estimate">
 	                    	<details class="Estimate_details" id="${ member.m_no }" onclick="ondetails(this.id)">
-	    						<summary>${ member.m_name }</summary>
+	    						<summary>
+	    							${ member.m_name }
+	    						</summary>
 	    						<p id="ammo">${ member }</p>
 	                    	</details>
 	                    	<div class="Estimate_interval"></div> 
@@ -127,6 +131,7 @@
                    	
                     	<form action="/amm" method="post">
                     		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    		<input type="hidden" name="m_no" value="${ managerlist[0].m_no}"/>
 								<textarea id="WriteEditor" name="t_sel"></textarea>
 							<input type="submit" value="저장!">
                     	</form>
@@ -185,7 +190,7 @@
                     
                     
                     <div>
-          				<p>${ managerlist[3] }</p>
+          				${ managerlist[3].t_sel }
            			</div>
                 	<!-- Contact section -->
 	                <div class="tm-section-wrap" id = "contact">
