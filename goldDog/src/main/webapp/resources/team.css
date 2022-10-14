@@ -186,3 +186,6 @@ div.input-block input:focus + span.placeholder {
 #mypage {
 	margin-bottom: 100px;
 }
+#mypage_container {
+	width: 75%;
+}

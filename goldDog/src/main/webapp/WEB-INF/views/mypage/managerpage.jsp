@@ -119,7 +119,6 @@
 	    						</summary>
 	    						<p>
 	    							<c:choose>
-	    								<c:when test="${estimate.e_con eq 0}">신청중</c:when>
 
 	    								
 	    							</c:choose>
