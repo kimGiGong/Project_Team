@@ -2,6 +2,7 @@ package com.goldDog.controller.sungmin;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -473,15 +474,28 @@ public class mainController {
 	
 	//매니저가 확인하고 추가사항 적을 견적서 넣어주는 처리 
 	@PostMapping("estimate2Pro")
-	public String Estimate2Pro(EstimateVO estimate) {
+	public String Estimate2Pro(EstimateVO addEstimate,String t_date) {
+		//원래 견적서 불러오는 메서드.
+		log.info(t_date+"어떻게 생겼나요!!!");
 		
-		if(estimate.getE_extra_reason().trim()==null&&estimate.getE_extra_reason().trim()=="") {
+		
+		
+		EstimateVO estimate =mainService.getEOneEstimate(addEstimate.getE_no());
+		if(addEstimate.getE_extra_reason().trim()==null&&addEstimate.getE_extra_reason().trim()=="") {
 			estimate.setE_extra_reason("추가 없음");
-		}
-		if(estimate.getE_extraprice()==0) {
-			estimate.setE_extraprice(0);
+		}else {
+			estimate.setE_extra_reason(addEstimate.getE_extra_reason());
 		}
 		
+		
+		if(addEstimate.getE_extraprice()==0) {
+			estimate.setE_extraprice(0);
+		}else if(addEstimate.getE_extraprice()!=0){
+			estimate.setE_extraprice(addEstimate.getE_extraprice());
+			//견적서 최종가격에 더해서 추가
+			int e_total_price = addEstimate.getE_extraprice()+estimate.getE_basicprice();
+			estimate.setE_total_price(e_total_price);
+		}
 		
 		//메니저가 확인했을때 컨디션 바꿔주는 처리
 		estimate.setE_con(1);
@@ -489,27 +503,14 @@ public class mainController {
 		
 		mainService.updateEst(estimate);
 		
-		
-		
-		
-		
-		
-		
-		
-		return "redirect:/member/mypage" ;
+		return "redirect:/member/mypage";
 		
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	//매니저가 확인하고 추가사항 적을 견적서 페이지
 	@GetMapping("estimate3")
 	public void Estimate3(Model model,@Param("e_no") int e_no) {
+		
 		EstimateVO estimate =mainService.getEOneEstimate(e_no);
 		DogVO clientDog =mainService.getOneDog(estimate.getD_no());
 		AddressVO clientAddress=mainService.getOneAddress(estimate.getA_no());
@@ -529,6 +530,8 @@ public class mainController {
 		MemberVO loginUser=memberService.getMember(userId);
 		AddressVO loginUserAddress=memberService.getAddress(loginUser.getM_no());
 		
+		//훈련사 정보 불러오기
+		TrainerVO trainer =mainService.getMTrainer(t_m_no);
 		
 		//강아지 정보 불러오기
 		int d_no = dog.getD_no();
@@ -542,8 +545,8 @@ public class mainController {
 		est.setD_no(d_no);
 		//회원의 주소도 넣어 보내기
 		est.setA_no(loginUserAddress.getA_no());
-		
-		
+		//훈련사의 기본가격 넣어 보내기
+		est.setE_basicprice(trainer.getT_price());
 		
 		
 		// 견적서 생성

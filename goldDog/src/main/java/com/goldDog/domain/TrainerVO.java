@@ -9,7 +9,7 @@ public class TrainerVO {
 	private int t_no;
 	private int m_no; 
 	private int a_no; 
-	private long t_price;
+	private int t_price;
 	private String t_self;
 	private String t_sel;
 	private String t_license;
