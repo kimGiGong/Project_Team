@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -426,14 +427,29 @@ public class mainController {
 
 	//로그인한 사용자가 누른 견적서 보여주기
 	@GetMapping("addEstimate")
-	public void addEstimate(Model model) {
+	public void addEstimate(Model model,@Param("e_no") int e_no) {
+		EstimateVO estimate =mainService.getEOneEstimate(e_no);
+		DogVO clientDog =mainService.getOneDog(estimate.getP_no());
+		AddressVO clientAddress=mainService.getOneAddress(estimate.getA_no());
+		log.info(clientDog.getD_img());
+		
+		
+		model.addAttribute("estimate",estimate);
+		model.addAttribute("clientDog",clientDog);
+		model.addAttribute("clientAddress",clientAddress);
+		
+		
 		
 		
 	}
 	
 	@PostMapping("insertEst")
-	public String insertEst(DogVO dog, EstimateVO est, Model model,@Param("t_m_no") int t_m_no) {
-		   
+	public String insertEst(DogVO dog, EstimateVO est, Model model,@Param("t_m_no") int t_m_no,Authentication auth ) {
+		
+		String userId=((CustomUser)auth.getPrincipal()).getUsername();
+		MemberVO loginUser=memberService.getMember(userId);
+		AddressVO loginUserAddress=memberService.getAddress(loginUser.getM_no());
+		
 		
 		//강아지 정보 불러오기
 		int d_no = dog.getD_no();
@@ -445,6 +461,11 @@ public class mainController {
 		est.setM_no_manager(t_m_no);
 		//강아지 넘버
 		est.setP_no(d_no);
+		//회원의 주소도 넣어 보내기
+		est.setA_no(loginUserAddress.getA_no());
+		
+		
+		
 		
 		// 견적서 생성
 		mainService.insertEst(est);

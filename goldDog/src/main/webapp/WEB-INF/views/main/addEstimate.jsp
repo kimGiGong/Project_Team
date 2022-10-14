@@ -31,36 +31,53 @@
 	 <div class="container">
 	   </br></br></br></br></br></br></br></br>
 	   <div class="row mb-5">
-                <div class="col-md-6">
+                <div class="col-md-8">
+                
                   <div class="card mb-3">
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img class="card-img card-img-left" src="/resources/feane/images/12.jpg" alt="Card image" />
+                        <img class="card-img card-img-left" src="/resources/serverImg/${clientDog.d_img}" width="150" height="150"/>
                       </div>
                       <div class="col-md-8">
                         <div class="card-body">
                           <h5 class="card-title">견적서</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
-                          </p>
-                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                          <p class="card-text">이 름 : ${clientDog.d_name} </p> 
+                          <p class="card-text">나 이 : ${clientDog.d_age} </p> 
+                          <p class="card-text">성 별 : ${clientDog.d_gender} </p> 
+                          <p class="card-text">종 류 : ${clientDog.d_type} </p> 
+                          <p class="card-text">무 게 : ${clientDog.d_weight} </p> 
                         </div>
                       </div>
                     </div>
                   </div>
+                  
+	                <div class="card mb-3">
+	               <div class="card shadow-none bg-transparent border border-primary mb-3">
+	                 <div class="card-body">
+	                   <h5 class="card-title " style="text-align: left;">훈련사의 BEST 리뷰</h5>
+	                   <p class="card-text" style="text-align: right;" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>(${Ravg})${review[i].r_score}</p>
+	                 </div>
+	               </div>
+	             </div>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
                 </div>
                 
-                <div class="col-md-6">
+                
+                
+                <div class="col-md-4">
                   <div class="card mb-3">
                     <div class="row g-0">
                       <div class="col-md-8">
                         <div class="card-body">
                           <h5 class="card-title">Card title</h5>
-                          <p class="card-text">
-                            This is a wider card with supporting text below as a natural lead-in to additional content.
-                            This content is a little bit longer.
-                          </p>
+                          <p class="card-text"> </p>
                           <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
                       </div>
