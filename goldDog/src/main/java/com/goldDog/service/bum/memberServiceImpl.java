@@ -336,6 +336,11 @@ public class memberServiceImpl implements memberService{
 	public DogVO getOneDog(int d_no) {
 		return mapper.getOneDog(d_no);
 	}
+	@Override
+	public int modifytDog(DogVO dog) {
+		return mapper.modifytDog(dog);
+	}
+	
 
 
 	
