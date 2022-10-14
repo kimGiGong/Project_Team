@@ -15,6 +15,14 @@
 	<update id="updateResume">
 		update trainer set t_sel=#{t_sel} where m_no=#{m_no}
 	</update>
+	
+	<select id="getEstimate" resultType="com.goldDog.domain.EstimateVO">
+		select * from
+			(SELECT a.*,rownum r FROM estimate a where m_no_manager=1 order by e_no desc) 
+		<![CDATA[
+		where r<=5
+		 ]]> 
+	</select>
 
 
 

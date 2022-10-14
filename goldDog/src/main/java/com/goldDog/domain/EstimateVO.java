@@ -1,5 +1,7 @@
 package com.goldDog.domain;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
@@ -15,5 +17,7 @@ public class EstimateVO {
 	private long e_total;
 	private int e_con;
 	private String e_reject;
-	private int p_no;
+	private int d_no;
+	private Date e_date;
+	private int a_no;
 }

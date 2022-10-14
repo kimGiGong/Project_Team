@@ -112,23 +112,29 @@
                     <h3 class="tm-text-primary">견적서</h3> 
                     <hr class="mb-5">
                    	<div class="Estimate">
-	                    	<details class="Estimate_details" id="${ member.m_no }" onclick="ondetails(this.id)">
+                   		<c:forEach var="estimate" items="${ estimatelist }" varStatus="status">	
+	                    	<details class="Estimate_details" id="${e_no}" >
 	    						<summary>
-	    							${ member.m_name }
+	    							${ estimateMember[status.index].m_nick }
 	    						</summary>
-	    						<p id="ammo">${ member }</p>
+	    						<p>
+	    							<c:choose>
+	    								<c:when test="${estimate.e_con eq 0}">신청중</c:when>
+
+	    								
+	    							</c:choose>
+	    						</p>
 	                    	</details>
 	                    	<div class="Estimate_interval"></div> 
-                   		<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
-                   		<!-- </c:forEach> -->
+	                    </c:forEach>
                    	</div>
                    	
            			
            			
                     <%-- 훈련사 정보 --%>
                    	<div class="manager_info">
-                   		
-                   	
+                   	<h3 class="tm-text-primary">훈련사 소개</h3> 
+                    <hr class="mb-5">
                     	<form action="/amm" method="post">
                     		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     		<input type="hidden" name="m_no" value="${ managerlist[0].m_no}"/>
@@ -138,6 +144,8 @@
                    	</div>
                     
                     <!-- 활동지역 -->
+                    <h3 class="tm-text-primary">활동지역</h3> 
+                    <hr class="mb-5">
 	                    <div class="business_trip_section">
 	                    	<div>
 	                    		<fieldset>
