@@ -254,7 +254,6 @@
 							</div>
 						</div>
 					</div>
-					
 				</div>
 			</div> <!-- .tm-main -->                      
 		</div> <!-- .row -->
@@ -311,9 +310,7 @@
 		</div>
 	</div>
 	
-	
 	<!-- Modal 2-->
-	
 	<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
@@ -321,12 +318,8 @@
 					<h3 class="modal-title fs-5" id="exampleModalLabel">애견 수정</h3>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				
-				
-				
 				<div class="row" id="dogModal">
-				<!-- 
-					<div class="col-lg-5 d-none d-lg-block">
+				<!--<div class="col-lg-5 d-none d-lg-block">
 	                    <div class="p-5">
 	                    	<img class="card-img-top" src="/resources/serverImg/dog.jpg" width="222" height="180" alt="Card image cap">
 	                    	<input class="form-control" width="420" type="file" id="formFile" name="img"/>
@@ -334,8 +327,7 @@
 	                </div>
 					<div class="col-lg-7">
 						<form id="dogModfiyPro" action="/member/dogModfiyPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="dogModfiy" onsubmit="return checkField()">
-							<table>
-								<br/><br/>
+							<table><br/><br/>
 								<tr>
 									<th>이　　름　:　</th>
 									<th><input type="text" class="form-control form-control-user" name="d_name" value="${dog[i].d_name}"></th>
@@ -362,36 +354,31 @@
 					<div class="modal-footer col-lg-12" >
 						<button type="button" class="btn btn-primary" id="review" >수정</button>
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-					</div>
-				 -->
+					</div> -->
 				</div>
-				
-				
-				
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+	
+	
 	
 	
  </body>
  
   <script type="text/javascript">
   
-  
-  $(document).ready(function(){
-		 
-	  $("button[veiwDog]").on("click",function(e){
-	      e.preventDefault(); 
-	      console.log("글쓰기 확인 모달.");
-	 		
-	     	let d_noVal = $(this).val();
-	      
-			showReplyList(d_noVal); // 댓글 목록 가져와 뿌리기 호출 
-	     
-	   });
-		  
-		
-  	
+	  $(document).ready(function(){
+		  $("button[veiwDog]").on("click",function(e){
+		      e.preventDefault(); 
+		      console.log("글쓰기 확인 모달.");
+		     	let d_noVal = $(this).val();
+				showReplyList(d_noVal); // 댓글 목록 가져와 뿌리기 호출 
+		     
+		   });
 		// 댓글 목록 가져와 뿌려주기 함수 (페이징처리 X)
 		function showReplyList(d_noVal){
 			
@@ -419,29 +406,43 @@
 		// 댓글 목록 만들어서 화면에 부착 함수 
 		function makeModal(result){
 			console.log("makeModal!!!!!" + result.length);
-  		
 			// 부착할 html 목록 문자열로 만들기 
 			let str = ""; 
 				str += "<div class='col-lg-5 d-none d-lg-block'><div class='p-5'><img class='card-img-top' src='/resources/serverImg/";
 				str += result.d_img+"' width='222' height='180' alt='Card image cap'>";
 				str += "<input class='form-control' width='420' type='file' id='formFile' name='img'/></div></div><div class='col-lg-7'>";
-				str += "<form id='dogModfiyPro' action='/member/dogModfiyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModfiy' onsubmit='return checkField()'> <table><br/><br/>";
+				str += "<form id='dogModfiyPro' action='/member/dogModfiyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModfiy'> <table><br/><br/>";
 				str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"'></th></tr>";
 				str += "<tr><th>나　　이　:　</th><th><input type='text' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "살'></th></tr>";
 				str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' value='"+ result.d_gender +"'  readonly='' /></th></tr>";
 				str += "<tr><th>종　　류　:　</th><th><input type='text' class='form-control form-control-user' name='d_type' value='"+ result.d_type +"'></th></tr>";
 				str += "<tr><th>무　　게　:　</th><th><input type='text' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"kg'></th></tr>";
-				str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='review' >수정</button>";
+				str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='dogModify' >수정</button>";
 				str += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button></div>";
-				
-				dogModalrow.html(str);	// html 부착 
+				dogModalrow.html(str);	// html 부착 		
 		}
  	 });// ready 
- 	 
- 	 
+ 	
+ 	//dogInsert
+ 	$(document).ready(function(){
+		//등록 or 추가 모달 눌렀을때 띄울 
+		$("#dogInsert").on("click",function(e){
+			e.preventDefault(); 
+			console.log("등록 or 추가 확인 모달.");
+			$("#dogInsertPro").submit();
+		});
+	});
+ 	//dogModify
+ 	$(document).ready(function(){
+		//수정 모달 눌렀을때 띄울 
+		$("#dogModify").on("click",function(e){
+			e.preventDefault(); 
+			console.log("수정 확인 모달.");
+			$("#dogModfiyPro").submit();
+		});
+	});
  	 
   </script>
-
  </html>
  
  

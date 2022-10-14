@@ -74,4 +74,7 @@ public interface MemberMapper {
 	//getOneDog
 	public DogVO getOneDog(int d_no);
 	
+	//modifytDog
+	public int modifytDog(DogVO dog);
+	
 }
