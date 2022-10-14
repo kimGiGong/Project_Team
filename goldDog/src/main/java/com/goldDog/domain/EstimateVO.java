@@ -15,5 +15,5 @@ public class EstimateVO {
 	private long e_total;
 	private int e_con;
 	private String e_reject;
-	private int p_no;
+	private int d_no;
 }
