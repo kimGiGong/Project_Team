@@ -108,7 +108,8 @@ public class mypageController {
 			list.add(member);
 			list.add(addrtr.translator(address.getA_addr()));
 			list.add(area);
-			TrainerVO trainer = sungminService.getTrainer(member.getM_no());
+			TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
+			System.out.println(member.getM_no());
 			System.out.println(trainer);
 			list.add(trainer);
 			System.out.println(list);

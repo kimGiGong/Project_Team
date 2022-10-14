@@ -52,7 +52,7 @@
 					<li class="nav-item"><sec:authorize access="isAuthenticated()">
 							<form action="/logout" method="post" id="logoutForm">
 								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <a class="nav-link" href="#"
+									value="${_csrf.token}" /> <a class="nav-link" href="#" onclick="return logout_form()"
 									id="logoutBtn">로그아웃</a>
 							</form>
 						</sec:authorize> <sec:authorize access="isAnonymous()">
@@ -78,5 +78,10 @@
 			</div>
 		</nav>
 	</div>
-</header>
+<script type="text/javascript">
+function logout_form() {
+	document.getElementById('logoutForm').submit();
+}
 
+</script>
+</header>
