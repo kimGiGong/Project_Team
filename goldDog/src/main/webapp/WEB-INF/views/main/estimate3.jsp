@@ -53,7 +53,7 @@
                 <div class="card mb-3">
 	                 <div class="card-body">
 	                   <p class="card-text" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>
-	                   		원하는 예약 날짜 : ${estimate.e_date}
+	                   		수정된 예약 날짜 : ${estimate.e_date}
 	                   </p>
 	                 </div>
 	             </div>
@@ -92,7 +92,7 @@
                                   			<div class="col-12">
 	                                          <div class="form-group">
 	                                              <label for="cc-payment" class="control-label mb-1">기본금액</label>
-	                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_price}" readonly>
+	                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${estimate.e_basicprice}" readonly>
 	                                          </div>
 	                                      </div>
                                           </div>
@@ -101,13 +101,13 @@
                                            <div class="col-6">
 		                                          <div class="form-group has-success">
 		                                              <label for="cc-name" class="control-label mb-1">추가 사유</label>
-		                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_price}" >
+		                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${estimate.e_extra_reason}" readonly >
 		                                          </div>
 	                                          </div>
 	                                          <div class="col-6">
 		                                          <div class="form-group has-success">
 		                                              <label for="cc-name" class="control-label mb-1">추가 금액(원)</label>
-		                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_price}" >
+		                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${estimate.e_extraprice}" readonly >
 		                                          </div>
 	                                          </div>
                                           </div>
@@ -116,7 +116,7 @@
 	                                  		  <div class="col-12">
 		                                          <div class="form-group">
 		                                              <label for="cc-payment" class="control-label mb-1">최종 금액</label>
-		                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_license}" readonly>
+		                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${estimate.e_total_price}" readonly>
 		                                          </div>
 	                                          </div>
                                           </div>
@@ -128,7 +128,7 @@
 	                                              </button>
    		                                       </div>
 	                                          	<div class="col-lg-6">
-	                                               <button id="dogCheck"  class="btn btn-lg btn-danger btn-block">
+	                                               <button id="deleteModal"  class="btn btn-lg btn-danger btn-block">
 	                                                  <span id="payment-button-amount">견적 취소</span>
 	                                              </button>
 	                                          </div>
@@ -145,13 +145,62 @@
           	</div><!--/.row-->
           </div><!--/.con-->
 	
+	
+	
+		<form id="pagingForm" action="" method="post">
+			 	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		</form>
+		 
+		<!--삭제 눌렀을때 띄울 모달 -->
+		<div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+	    		<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h5 class="modal-title" id="myModalLabel">견적서 취소</h5>
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          			<span aria-hidden="true">&times;</span>
+		        		</button>
+		      		</div>
+	      			<div class="modal-body">
+        				견적요청을 취소하시겠습니까?
+	      			</div>
+	      			<div class="modal-footer">
+	        			</a> <button type="button" class="btn btn-secondary" id="deleteEst" >견적취소</button>
+	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	      			</div>
+	   			</div>
+	  		</div>
+		</div> <!-- end 모달 -->
 
 
  <%@ include file="../footer.jsp" %>
  
 	<script type="text/javascript">
-		$(document).ready(function(){
+	$(document).ready(function(){
 		
+		let e_no ="${estimate.e_no}"
+		let pagingForm=$("#pagingForm");
+		
+		$("#deleteEst").on("click",function(e){
+			e.preventDefault(); 
+			console.log(e_no+"e_no 확인.");
+			pagingForm.append("<input type='hidden' name='e_no' value='" + e_no+ "' />"); 
+			// pagingForm의 action 속성값을 /board/read로 변경
+			pagingForm.attr("action", "/main/deleteEstPro"); 
+			// read로 이동하기(form으로 요청) 
+			pagingForm.submit(); 				
+			
+		});
+
+		
+		$("#deleteModal").on("click",function(e){
+			e.preventDefault(); 
+			console.log("취소 확인 모달.");
+			$("#addNew").modal("show");
+		});
+		
+		
+	});
 		
 		</script>
 	

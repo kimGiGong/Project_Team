@@ -110,16 +110,13 @@
 	                                          <div class="col-6">
 		                                          <div class="form-group has-success">
 		                                              <label for="cc-name" class="control-label mb-1">추가 금액(원)</label>
-		                                              <input id="addPrice" name="e_extraprice" type="text" class="form-control" aria-required="true" aria-invalid="false"  >
+		                                              <input id="addPrice" name="e_extraprice" type="text" class="form-control" aria-required="true" aria-invalid="false" value=0 >
 		                                          </div>
 	                                          </div>
                                           </div> 
-                                          <div class="row justify-content-md-center">
-	                                          	<div class="col-lg-3">
-	                                               <button id="pulsEst"  class="btn btn-sm btn-warning btn-block">
-	                                                  <span id="payment-button-amount">+</span>
-	                                              </button>
-	                                          </div>
+                                          	<div class="col-12">
+	                                              <label for="cc-name" class="control-label mb-1">훈련 진행할 날짜</label>
+                                               <input class="form-control" type="datetime-local" name="t_date" value="2022-10-13T12:30:00" id="html5-datetime-local-input"/>
                                           </div>
                                           <br/><br/>
                                           <div class="row">
@@ -190,10 +187,7 @@
 			console.log(addPrice);
 			console.log("최종 확인.");
 			
-			if(addPrice==0) {
-				alert("추가금액을 입력해 주세요...");
-			}else{
-				$("#sendEstPro").submit(); 				
+			$("#sendEstPro").submit(); 				
 			}
 				
 				
