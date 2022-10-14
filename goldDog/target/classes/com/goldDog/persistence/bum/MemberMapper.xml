@@ -125,4 +125,9 @@
 		select * from dog where d_no =#{d_no}
 	</select>
 	
+	<update id="modifytDog">
+		update dog set d_name=#{d_name}, d_age=#{d_age}, d_img=#{d_img}, d_weight=#{d_weight}, d_type=#{d_type}
+		where d_no=#{d_no}
+	</update>
+	
 </mapper>

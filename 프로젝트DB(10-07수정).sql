@@ -1,4 +1,4 @@
--- È¸¿ø Å×ÀÌºí
+-- íšŒì› í…Œì´ë¸”
 create table member(
 	m_no number primary key,
 	m_id varchar2(20 char) not null,
@@ -15,14 +15,14 @@ create table member(
 select *from member;
 
 
---È¸¿ø ±ÇÇÑ Å×ÀÌºí
+--íšŒì› ê¶Œí•œ í…Œì´ë¸”
 create table auth(
     m_no number,
     auth varchar2(200)    
 );
--- ¸É¹ö Å×ÀÌºíÀÌ¶û ¿«±â
+-- ë§´ë²„ í…Œì´ë¸”ì´ë‘ ì—®ê¸°
 alter table auth add constraint m_no_FK foreign key(m_no) references member(m_no) ;
--- ÁÖ¼Ò Å×ÀÌºí
+-- ì£¼ì†Œ í…Œì´ë¸”
 create table address(
 	a_no number primary key,
 	u_no number,
@@ -32,7 +32,7 @@ create table address(
 	a_name varchar2(150),
 	a_addr VARCHAR2(1000)
 );
--- ¸®ºä Å×ÀÌºí
+-- ë¦¬ë·° í…Œì´ë¸”
 create table review(
 	r_no number primary key,
 	u_no number,
@@ -40,10 +40,10 @@ create table review(
 	r_score number not null,
 	r_date date default sysdate,
 	r_img varchar2(200) not null,
-    t_no number,
-    h_no number
+  	t_no number,
+   	h_no number
 );
--- °áÁ¦ Å×ÀÌºí
+-- ê²°ì œ í…Œì´ë¸”
 create table pay(
 	p_order number primary key,
 	u_no number,
@@ -54,16 +54,32 @@ create table pay(
 	p_time date default sysdate
 );
 
--- °øÁö»çÇ× Å×ÀÌºí
+-- ê³µì§€ì‚¬í•­ í…Œì´ë¸”
 create table notice(
 	n_no number primary key,
 	n_title varchar2(100) not null,
 	n_content varchar2(2000) not null,
 	n_date date default sysdate,
 	n_readcount number default 0
+	n_img varchar2(300),
+	m_id varchar2(20 char)
 );
 
--- °ßÀû¼­ Å×ÀÌºí
+- ì§ˆë¬¸ í…Œì´ë¸”
+create table QnA(
+	q_no number primary key,
+	q_img varchar2(300),
+	q_title varchar2(100) not null,
+	q_content varchar2(2000) not null,
+	q_date date default sysdate,
+	q_readcount number default 0
+	q_id varchar2(20 char)
+);
+
+
+
+
+-- ê²¬ì ì„œ í…Œì´ë¸”
 create table estimate(
 	m_no number primary key,
 	u_no_puppy number,
@@ -77,11 +93,11 @@ create table estimate(
 	e_con number,
 	e_reject varchar2(2000),
 	p_no number,
-    a_no number
+   	a_no number
 );
 
 select * from estimate;
--- ¾Ö°ß Å×ÀÌºí
+-- ì• ê²¬ í…Œì´ë¸”
 create table dog(
 	d_no number primary key,
 	m_no number,
@@ -93,23 +109,26 @@ create table dog(
 	d_gender varchar2(50) not null
 );
 
--- ÈÆ·Ã»ç Å×ÀÌºí
+-- í›ˆë ¨ì‚¬ í…Œì´ë¸”
 create table trainer(
 	t_no number primary key, 
 	m_no number,
 	a_no number,
 	t_price number,
 	t_self varchar2(2000) not null,
-    t_sel varchar2(2000) not null,
+    	t_sel varchar2(2000) not null,
 	t_license varchar2(500),
 	t_businessNo varchar2(200),
 	t_best number default 0,
 	t_career number,
 	t_salary number,
 	t_date date default sysdate
+	t_Ravg number default 0,
+	t_RTotal number default 0
+	
 );
 
--- ¹Ì¿ë»ç Å×ÀÌºí
+-- ë¯¸ìš©ì‚¬ í…Œì´ë¸”
 create table hairstylist(
 	h_no number primary key,
 	m_no number,
@@ -123,6 +142,10 @@ create table hairstylist(
 	h_career number,
 	h_salary number,
 	h_date date default sysdate
+	h_Ravg number default 0,
+	h_RTotal number default 
+	
+	
 );
 
 
@@ -130,7 +153,7 @@ create table hairstylist(
 
 
 
---½ÃÄö½º »ı¼º
+--ì‹œí€€ìŠ¤ ìƒì„±
 create sequence member_seq nocache;
 create sequence address_seq nocache;
 create sequence review_seq nocache;

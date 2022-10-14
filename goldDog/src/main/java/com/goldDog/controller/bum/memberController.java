@@ -322,7 +322,55 @@ public class memberController {
 				e.printStackTrace();
 			}
 		
-		return "redirect:/member/dogAD";
+		return "redirect:/member/mypage";
+	}
+	@PostMapping("dogModifyPro")
+	public String dogModifyPro(DogVO dog, MultipartHttpServletRequest request, Authentication auth) {
+		try {
+			CustomUser user = (CustomUser)auth.getPrincipal();
+			String m_id =user.getUsername();
+			dog.setM_no(service.getMno(user.getUsername()));
+							
+			MultipartFile mf = request.getFile("part_img");
+			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			
+			log.info(mf.getSize());
+			log.info(mf.getContentType());
+			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			
+			// 이름 중복 방지를 위한 새 파일명 생성
+			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			log.info(uuid);
+			//업로드한 파일 확장자만 가져오기
+			String orgName=mf.getOriginalFilename();
+			String ext= orgName.substring(orgName.lastIndexOf("."));
+			// 저장할 파일명
+			String newFileName= uuid + ext;
+			
+			//DB 상에도 파일명을 저장해 준다.
+			int result = 0;
+			if(mf.getOriginalFilename()==null) {
+				dog.setD_img(dog.getD_img());
+				 result = service.modifytDog(dog);	
+				 
+			}else if(mf.getOriginalFilename()!=null) {
+				dog.setD_img(newFileName);
+				 result = service.modifytDog(dog);
+			}
+			
+			log.info("***********uuid"+uuid);
+			//저장할 파일 전체 경로
+			String imgPath = path+"\\"+newFileName;
+			log.info("*****imgPath"+imgPath);
+
+			// 파일 저장
+			File copyFile = new File(imgPath);
+			mf.transferTo(copyFile);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return "redirect:/member/mypage";
 	}
 	
 	//	일반 이용자 MyPage 이동

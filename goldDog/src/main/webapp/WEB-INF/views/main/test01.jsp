@@ -15,16 +15,19 @@
 
 
 	<c:forEach var="i" begin="0" end="${eCount-1}" step="1">
+	<form action=""></form>
 	<table>
 		<tr>
-			<td>견적서 확인</td>
+			<td> <button class="btn float-right btn-info goEst">견적서 확인 </button></td>
 			<td>${estimate[i].e_no}</td>
 		</tr>
 		<tr>
 			<td>훈련사 닉</td>
+			<td>${tMember[i].m_nick}</td>
 		</tr>
 		<tr>
 			<td>훈련사 전화번호</td>
+			<td>${tMember[i].m_phone}</td>
 		</tr>
 	</table> 
 	</c:forEach>
@@ -33,4 +36,19 @@
 
 
 </body>
+<script type="text/javascript">
+		$(document).ready(function(){
+			
+			
+			$("#goEst").on("click",function(e){
+				e.preventDefault(); 
+				console.log("글쓰기 확인 모달.");
+				
+			});
+			
+			
+		});
+</script>
+
+
 </html>

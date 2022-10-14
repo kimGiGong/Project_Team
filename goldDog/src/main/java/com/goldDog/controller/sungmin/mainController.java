@@ -470,8 +470,8 @@ public class mainController {
 		//로그인한 사용자가 가지고있는 견적서의 훈련사 번호들
 		List<Integer> m_no_manager = new ArrayList<Integer>();
 		List<EstimateVO> Estimate =mainService.getEstimate(loginUser.getM_no());
-		List<MemberVO> tMember=null;
-		MemberVO member =null;
+		List<MemberVO> tMember= new ArrayList<MemberVO>();
+		MemberVO member = new MemberVO();
 		
 		for(int i = 0 ;i<Estimate.size();i++) {
 			//유저가 가지고있는 견적서넘버 정보 담기(미리 만들어놓음)
@@ -479,7 +479,8 @@ public class mainController {
 			m_no_manager.add(Estimate.get(i).getM_no_manager());
 			member=mainService.getOneMember(Estimate.get(i).getM_no_manager());
 			tMember.add(member);
-	
+		}
+		
 		
 		log.info(tMember+"맴버 리스트");
 		log.info(m_no_manager+"견적서의 훈련사 정보");
@@ -501,4 +502,3 @@ public class mainController {
 	
 	
 	
-}
