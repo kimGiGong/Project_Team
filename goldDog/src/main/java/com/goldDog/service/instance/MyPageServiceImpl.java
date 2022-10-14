@@ -1,5 +1,6 @@
 package com.goldDog.service.instance;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.goldDog.domain.AddressTranslator;
 import com.goldDog.domain.AddressVO;
+import com.goldDog.domain.EstimateVO;
 import com.goldDog.persistence.instance.MyPageMapper;
 
 @Service
@@ -33,6 +35,11 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public void updateResume(int m_no, String t_sel) {
 		Mapper.updateResume(m_no, t_sel);
+	}
+
+	@Override
+	public List<EstimateVO> getEstimate(int m_no) {
+		return Mapper.getEstimate(m_no);
 	}
 
 
