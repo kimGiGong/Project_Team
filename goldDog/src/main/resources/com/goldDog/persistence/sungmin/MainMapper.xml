@@ -226,8 +226,8 @@
 	//회원이 협의하기 눌렀을때 견적서 만들어 주는 메서드 -->
 	<!-- 견적서 넣어주는 메서드 -->
 	<insert id="insertEst">
-		insert into estimate(e_no, m_no_puppy, e_note, e_service, m_no_manager, e_con, d_no,a_no)
-		 values(estimate_seq.nextval,#{m_no_puppy},#{e_note},#{e_service},#{m_no_manager},0,#{d_no},#{a_no})
+		insert into estimate(e_no, m_no_puppy, e_note, e_service, m_no_manager, e_con, d_no,a_no,e_basicprice)
+		 values(estimate_seq.nextval,#{m_no_puppy},#{e_note},#{e_service},#{m_no_manager},0,#{d_no},#{a_no},#{e_basicprice})
 	</insert>
 		
 	<!-- 사용자의 견적서 가져오는 메서드 아직 처리안된것만 e_con =1 -->
@@ -253,10 +253,10 @@
 	</delete>
 	<!--견적서 업데이트-->
 	<update id="updateEst">
-		update estimate set e_extraprice=#{e_extraprice},e_extra_reason=#{e_extra_reason},e_con=#{e_con}  where e_no=#{e_no}
+		update estimate set e_extraprice=#{e_extraprice},e_extra_reason=#{e_extra_reason},
+		e_con=#{e_con} ,e_total_price=#{e_total_price}
+		 where e_no=#{e_no}
 	</update>
-	
-	
 	
 	
 	

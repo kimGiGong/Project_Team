@@ -16,10 +16,11 @@ public class EstimateVO {
 	private String e_trainning;
 	private int e_extraprice;
 	private String e_extra_reason;
-	private int e_total;
+	private int e_total_price;
 	private int e_con;
 	private String e_reject;
 	private int d_no;
 	private Timestamp e_date;
 	private int a_no;
+	private int e_basicprice;
 }
