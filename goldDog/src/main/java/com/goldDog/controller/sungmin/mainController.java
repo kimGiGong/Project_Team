@@ -35,6 +35,7 @@ import com.goldDog.service.sungmin.MainService;
 
 
 import lombok.extern.log4j.Log4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequestMapping("/main/*")
@@ -425,11 +426,11 @@ public class mainController {
 		
 	}
 
-	//로그인한 사용자가 누른 견적서 보여주기
-	@GetMapping("addEstimate")
-	public void addEstimate(Model model,@Param("e_no") int e_no) {
+	//견적서 보내자마자 마이페이지에서 첫번쨰로 확인하는 견적서
+	@GetMapping("estimate1")
+	public void Estimate1(Model model,@Param("e_no") int e_no) {
 		EstimateVO estimate =mainService.getEOneEstimate(e_no);
-		DogVO clientDog =mainService.getOneDog(estimate.getP_no());
+		DogVO clientDog =mainService.getOneDog(estimate.getD_no());
 		AddressVO clientAddress=mainService.getOneAddress(estimate.getA_no());
 		log.info(clientDog.getD_img());
 		
@@ -438,8 +439,86 @@ public class mainController {
 		model.addAttribute("clientDog",clientDog);
 		model.addAttribute("clientAddress",clientAddress);
 		
+	}
+	
+	//견적 취소 처리(삭제)
+	@PostMapping("deleteEstPro")
+	@PreAuthorize("isAuthenticated()") 
+	public String deleteEstPro(@Param("e_no") Integer e_no) {
+		int result = mainService.deleteEst(e_no);
+		if(result==1) {
+			log.info(result+ "견적서취소(삭제) 완료");
+		}
+		return "redirect:/member/mypage" ;
+	}
+	
+	
+	
+	//매니저가 확인하고 추가사항 적을 견적서 페이지
+	//유효성 처리해서 가져가야함
+	@GetMapping("estimate2")
+	public void Estimate2(Model model,@Param("e_no") int e_no) {
+		EstimateVO estimate =mainService.getEOneEstimate(e_no);
+		DogVO clientDog =mainService.getOneDog(estimate.getD_no());
+		AddressVO clientAddress=mainService.getOneAddress(estimate.getA_no());
+		log.info(clientDog.getD_img());
 		
 		
+		model.addAttribute("estimate",estimate);
+		model.addAttribute("clientDog",clientDog);
+		model.addAttribute("clientAddress",clientAddress);
+		
+	}
+	
+	
+	//매니저가 확인하고 추가사항 적을 견적서 넣어주는 처리 
+	@PostMapping("estimate2Pro")
+	public String Estimate2Pro(EstimateVO estimate) {
+		
+		if(estimate.getE_extra_reason().trim()==null&&estimate.getE_extra_reason().trim()=="") {
+			estimate.setE_extra_reason("추가 없음");
+		}
+		if(estimate.getE_extraprice()==0) {
+			estimate.setE_extraprice(0);
+		}
+		
+		
+		//메니저가 확인했을때 컨디션 바꿔주는 처리
+		estimate.setE_con(1);
+		log.info(estimate+"확인");
+		
+		mainService.updateEst(estimate);
+		
+		
+		
+		
+		
+		
+		
+		
+		return "redirect:/member/mypage" ;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	//매니저가 확인하고 추가사항 적을 견적서 페이지
+	@GetMapping("estimate3")
+	public void Estimate3(Model model,@Param("e_no") int e_no) {
+		EstimateVO estimate =mainService.getEOneEstimate(e_no);
+		DogVO clientDog =mainService.getOneDog(estimate.getD_no());
+		AddressVO clientAddress=mainService.getOneAddress(estimate.getA_no());
+		log.info(clientDog.getD_img());
+		
+		
+		model.addAttribute("estimate",estimate);
+		model.addAttribute("clientDog",clientDog);
+		model.addAttribute("clientAddress",clientAddress);
 		
 	}
 	
@@ -460,7 +539,7 @@ public class mainController {
 		//훈련에서 오는 페이지
 		est.setM_no_manager(t_m_no);
 		//강아지 넘버
-		est.setP_no(d_no);
+		est.setD_no(d_no);
 		//회원의 주소도 넣어 보내기
 		est.setA_no(loginUserAddress.getA_no());
 		

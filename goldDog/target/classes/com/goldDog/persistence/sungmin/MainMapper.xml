@@ -226,8 +226,8 @@
 	//회원이 협의하기 눌렀을때 견적서 만들어 주는 메서드 -->
 	<!-- 견적서 넣어주는 메서드 -->
 	<insert id="insertEst">
-		insert into estimate(e_no, m_no_puppy, e_note, e_service, m_no_manager, e_con, p_no,a_no)
-		 values(estimate_seq.nextval,#{m_no_puppy},#{e_note},#{e_service},#{m_no_manager},0,#{p_no},#{a_no})
+		insert into estimate(e_no, m_no_puppy, e_note, e_service, m_no_manager, e_con, d_no,a_no)
+		 values(estimate_seq.nextval,#{m_no_puppy},#{e_note},#{e_service},#{m_no_manager},0,#{d_no},#{a_no})
 	</insert>
 		
 	<!-- 사용자의 견적서 가져오는 메서드 아직 처리안된것만 e_con =1 -->
@@ -247,6 +247,16 @@
 	<select id="getOneAddress" resultType="com.goldDog.domain.AddressVO">
 		 select * from address where a_no=#{a_no}
 	</select>
+	<!-- e_no로 견적서 삭제 -->
+	<delete id="deleteEst">
+		delete estimate where e_no=#{e_no}
+	</delete>
+	<!--견적서 업데이트-->
+	<update id="updateEst">
+		update estimate set e_extraprice=#{e_extraprice},e_extra_reason=#{e_extra_reason},e_con=#{e_con}  where e_no=#{e_no}
+	</update>
+	
+	
 	
 	
 	

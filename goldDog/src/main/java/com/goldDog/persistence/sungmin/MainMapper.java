@@ -103,8 +103,10 @@ public interface MainMapper {
 	public List<AddressVO> getMyAddress(int user_M_no);
 	//주소 고유넘버로 주소 가져오기
 	public AddressVO getOneAddress(int a_no);
-	
-	
+	//견적서 하나 삭제하는 메서드
+	public int deleteEst(int e_no);
+	//견적서 하나 업데이트하는 메서드
+	public int updateEst(EstimateVO estimate);
 	
 	
 	//광고 ********************************************************

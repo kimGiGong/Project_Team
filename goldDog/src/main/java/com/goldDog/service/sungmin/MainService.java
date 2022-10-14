@@ -90,8 +90,10 @@ public interface MainService {
 	public List<EstimateVO> getEstimate(int m_no);
 	//견적서 하나 가져오는 메서드 
 	public EstimateVO getEOneEstimate(int e_no);
-	
-	
+	//견적서 하나 삭제하는 메서드
+	public int deleteEst(int e_no);
+	//견적서 하나 업데이트하는 메서드
+	public int updateEst(EstimateVO estimate);
 	
 	
 	// 주소 ********************************************************
