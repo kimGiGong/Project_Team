@@ -24,7 +24,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +40,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.goldDog.domain.AddressTranslator;
 import com.goldDog.domain.AddressVO;
+import com.goldDog.domain.DogVO;
 import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.TrainerVO;
@@ -66,14 +69,28 @@ public class mypageController {
 	
 	//	일반 이용자 MyPage 이동
 	@GetMapping("mypage")
+	@PreAuthorize("isAuthenticated()")
 	public String viewMypage(Authentication auth, Model model) {
 		
-		CustomUser user = (CustomUser)auth.getPrincipal();
-		String loginID = user.getUsername();
-		MemberVO member = bumService.getMember(loginID);
-		model.addAttribute("manager",member);
+		if(auth == null) {
+			return "redirect:/member/login";
+		}else {
+			
 		
-		return "mypage/mypage";
+				CustomUser user = (CustomUser)auth.getPrincipal();
+				String loginID = user.getUsername();
+				MemberVO member = bumService.getMember(loginID);
+				
+				
+				int mno = bumService.getMno(user.getUsername());
+				List<DogVO> dog = bumService.getDog(mno);
+				
+				model.addAttribute("manager",member);
+				model.addAttribute("dog", dog);
+				model.addAttribute("dogCheck", dog.size());
+				
+				return "mypage/mypage";
+		}
 	}
 	
 //	매니저 MyPage 이동
@@ -81,35 +98,38 @@ public class mypageController {
 	public String viewManager(Authentication auth, Model model) {
 		if(auth == null) {
 			return "redirect:member/login"; 
-			
 		}else {
-			CustomUser user = (CustomUser)auth.getPrincipal();
-			String loginID = user.getUsername();
-			MemberVO member = bumService.getMember(loginID);
-			AddressVO address = instanceService.getAddress(member.getM_no());
-			List<Object> list = new ArrayList<Object>();
-			AddressTranslator addrtr = new AddressTranslator();
-			List<String []> area = new ArrayList<String []>();
-			
-			area.add(addrtr.getSeoul());
-			area.add(addrtr.getGyeonggi());
-			list.add(member);
-			list.add(addrtr.translator(address.getA_addr()));
-			list.add(area);
-			TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
-			List<EstimateVO> estimate = instanceService.getEstimate(member.getM_no()); 
-			List<MemberVO> estimateMember = new ArrayList<MemberVO>();
-			for (int i = 0; i < estimate.size(); i++) {
-				estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
+			if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))) {
+				return "redirect:/mypage";
+			}else {
+				CustomUser user = (CustomUser)auth.getPrincipal();
+				String loginID = user.getUsername();
+				MemberVO member = bumService.getMember(loginID);
+				AddressVO address = instanceService.getAddress(member.getM_no());
+				List<Object> list = new ArrayList<Object>();
+				AddressTranslator addrtr = new AddressTranslator();
+				List<String []> area = new ArrayList<String []>();
+				
+				area.add(addrtr.getSeoul());
+				area.add(addrtr.getGyeonggi());
+				list.add(member);
+				list.add(addrtr.translator(address.getA_addr()));
+				list.add(area);
+				TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
+				List<EstimateVO> estimate = instanceService.getEstimate(trainer.getM_no()); 
+				List<MemberVO> estimateMember = new ArrayList<MemberVO>();
+				for (int i = 0; i < estimate.size(); i++) {
+					estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
+				}
+				list.add(trainer);
+				System.out.println(list);
+				System.out.println(estimate);
+				model.addAttribute("managerlist",list);
+				model.addAttribute("estimatelist",estimate);
+				model.addAttribute("estimateMember",estimateMember);
+				
+				return "mypage/managerpage";
 			}
-			list.add(trainer);
-			System.out.println(list);
-			System.out.println(estimate);
-			model.addAttribute("managerlist",list);
-			model.addAttribute("estimatelist",estimate);
-			model.addAttribute("estimateMember",estimateMember);
-			
-			return "mypage/managerpage";
 		}
 	}
 	
