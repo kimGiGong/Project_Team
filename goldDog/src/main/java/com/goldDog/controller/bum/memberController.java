@@ -194,7 +194,7 @@ public class memberController {
 	}
 	
 	@PostMapping("reviewPro")
-	public String reviewPro(ReviewVO review, MultipartHttpServletRequest request, Authentication auth,int t_no, int h_no) {
+	public String reviewPro(ReviewVO review, MultipartHttpServletRequest request, Authentication auth, int t_no, int h_no) {
 		try {
 			CustomUser user = (CustomUser)auth.getPrincipal();
 			String m_id =user.getUsername();
@@ -327,9 +327,9 @@ public class memberController {
 	@PostMapping("dogModifyPro")
 	public String dogModifyPro(DogVO dog, MultipartHttpServletRequest request, Authentication auth) {
 		try {
-			CustomUser user = (CustomUser)auth.getPrincipal();
-			String m_id =user.getUsername();
-			dog.setM_no(service.getMno(user.getUsername()));
+			//CustomUser user = (CustomUser)auth.getPrincipal();
+			//String m_id =user.getUsername();
+			//dog.setD_no(service.getMno(user.getUsername()));
 							
 			MultipartFile mf = request.getFile("part_img");
 			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
@@ -351,11 +351,11 @@ public class memberController {
 			int result = 0;
 			if(mf.getOriginalFilename()==null) {
 				dog.setD_img(dog.getD_img());
-				 result = service.modifytDog(dog);	
+				 result = service.modifytDog(dog.getD_no());	
 				 
 			}else if(mf.getOriginalFilename()!=null) {
 				dog.setD_img(newFileName);
-				 result = service.modifytDog(dog);
+				 result = service.modifytDog(dog.getD_no());
 			}
 			
 			log.info("***********uuid"+uuid);

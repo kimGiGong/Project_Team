@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -37,6 +38,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.goldDog.domain.AddressTranslator;
 import com.goldDog.domain.AddressVO;
+import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
@@ -61,20 +63,6 @@ public class mypageController {
 	private MyPageService instanceService;
 	
 	
-	/*
-	@RequestMapping("headers.do")
-	public String headers(Authentication auth, Model model) {
-		if(auth == null) {
-			return "header";
-		}else {
-			CustomUser user = (CustomUser)auth.getPrincipal();
-			MemberVO member =  user.getMember();
-			model.addAttribute("member",member);
-			return "header";
-		}
-	}
-	*/
-	
 	
 	//	일반 이용자 MyPage 이동
 	@GetMapping("mypage")
@@ -92,7 +80,7 @@ public class mypageController {
 	@RequestMapping("manager")
 	public String viewManager(Authentication auth, Model model) {
 		if(auth == null) {
-			return "member/login"; 
+			return "redirect:member/login"; 
 			
 		}else {
 			CustomUser user = (CustomUser)auth.getPrincipal();
@@ -109,11 +97,17 @@ public class mypageController {
 			list.add(addrtr.translator(address.getA_addr()));
 			list.add(area);
 			TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
-			System.out.println(member.getM_no());
-			System.out.println(trainer);
+			List<EstimateVO> estimate = instanceService.getEstimate(member.getM_no()); 
+			List<MemberVO> estimateMember = new ArrayList<MemberVO>();
+			for (int i = 0; i < estimate.size(); i++) {
+				estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
+			}
 			list.add(trainer);
 			System.out.println(list);
+			System.out.println(estimate);
 			model.addAttribute("managerlist",list);
+			model.addAttribute("estimatelist",estimate);
+			model.addAttribute("estimateMember",estimateMember);
 			
 			return "mypage/managerpage";
 		}
@@ -123,13 +117,14 @@ public class mypageController {
 	@RequestMapping("selUpload")
 	public String viewSelUpload(Authentication auth, Model model) {
 		if(auth == null) {
-			return "member/login"; 
+			return "redirect:member/login"; 
 			
 		}else {
 			
 			CustomUser user = (CustomUser)auth.getPrincipal();
 			String loginID = user.getUsername();
 			MemberVO member = bumService.getMember(loginID);
+			
 			model.addAttribute("manager",member);
 			
 			return "main/selUpload";

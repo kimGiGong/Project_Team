@@ -1,6 +1,8 @@
 package com.goldDog.domain;
 
+
 import java.sql.Timestamp;
+
 
 import lombok.Data;
 
