@@ -98,67 +98,82 @@
                         	</fieldset>
                         </div>
                     </section>
-                    
-                    <div>
-                    	<div class="Estimate" id="Estimate">
-		                    	<details class="Estimate_details" id="${ manager.m_no }" onclick="ondetails(this.id)">
-		    						<summary>${ manager.m_name }</summary>
-		    						<p id="ammo">${manager}</p>
-		                    	</details>
-		                    	<p>
-								  <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">훈련 견적서</a>
-								  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">미용 견적서</button>
-								  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">모두 보기</button>
+
+						<div>
+							<div class="Estimate" id="Estimate">
+								<details class="Estimate_details" id="${ manager.m_no }"
+									onclick="ondetails(this.id)">
+									<summary>${ manager.m_name }</summary>
+									<p id="ammo">${manager}</p>
+								</details>
+								<p>
+									<a class="btn btn-primary" data-bs-toggle="collapse"
+										href="#multiCollapseExample1" role="button"
+										aria-expanded="false" aria-controls="multiCollapseExample1">훈련
+										견적서</a>
+									<button class="btn btn-primary" type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#multiCollapseExample2" aria-expanded="false"
+										aria-controls="multiCollapseExample2">미용 견적서</button>
+									<button class="btn btn-primary" type="button"
+										data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+										aria-expanded="false"
+										aria-controls="multiCollapseExample1 multiCollapseExample2">모두
+										보기</button>
 								</p>
-		                    	<!-- <div class="Estimate_interval"></div>  -->
+								<!-- <div class="Estimate_interval"></div>  -->
 								<div class="row">
-								<div class="col">
-									<div class="collapse multi-collapse"
-										id="multiCollapseExample1">
-										<div class="card card-body" style="height:140">
-											<table>
-												<tr>
-													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button></th>
-													<th>홍성현 훈련매니저</th>
-												</tr>
-												<tr>
-													<th colspan="2"><br></th>
-												</tr>
-												<tr>
-													<th align="center">　진행 중입니다</th>
-													<th align="center">010-1234-1234</th>
-												</tr>
-											</table>
+									<div class="col">
+										<div class="collapse multi-collapse"
+											id="multiCollapseExample1">
+											<div class="card card-body" style="height: 140">
+												<table>
+													<tr>
+														<th><button class="btn btn-outline-primary"
+																type="button" style="width: 120px;">견적서 확인</button></th>
+														<th>홍성현 훈련매니저</th>
+													</tr>
+													<tr>
+														<th colspan="2"><br></th>
+													</tr>
+													<tr>
+														<th align="center">진행 중입니다</th>
+														<th align="center">010-1234-1234</th>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="collapse multi-collapse"
+											id="multiCollapseExample2">
+											<div class="card card-body" style="height: 140">
+												<table>
+													<tr>
+														<th>
+															<button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button>
+														</th>
+														<th>홍성현 미용매니저</th>
+													</tr>
+													<tr>
+														<th colspan="2"><br></th>
+													</tr>
+													<tr>
+														<th align="center">진행 완료</th>
+														<th><button class="btn btn-outline-primary"
+																type="button" style="width: 120px;">리뷰 작성</button></th>
+													</tr>
+												</table>
+											</div>
 										</div>
 									</div>
 								</div>
-								<div class="col">
-									<div class="collapse multi-collapse"
-										id="multiCollapseExample2">
-										<div class="card card-body" style="height:140">
-											<table>
-												<tr>
-													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button></th>
-													<th>홍성현 미용매니저</th>
-												</tr>
-												<tr>
-													<th colspan="2"><br></th>
-												</tr>
-												<tr>
-													<th align="center">　진행 완료</th>
-													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">리뷰 작성</button></th>
-												</tr>
-											</table>
-										</div>
-									</div>
-								</div>
+								<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->
+								<!-- </c:forEach> -->
 							</div>
-							<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
-                    		<!-- </c:forEach> -->
-                    	</div>
-                    </div>
-                    
-                    <div>
+						</div>
+
+						<div>
                     	<div class="gallery" >
 		                    <div id="gallery"> 
 		                    <br><br><br>
