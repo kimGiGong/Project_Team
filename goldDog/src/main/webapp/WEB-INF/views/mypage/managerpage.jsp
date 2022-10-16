@@ -39,7 +39,7 @@
 	                        </div> --%>                
 	                        <ul id="tm-main-nav">
 	                            <li class="nav-item">                                
-	                                <a href="#home" class="nav-link current">
+	                                <a href="#estimate_navbar" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-images nav-icon"></i>
 	                                    견적서
@@ -53,7 +53,7 @@
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
-	                                <a href="#about" class="nav-link">
+	                                <a href="#area_navbar" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-home nav-icon"></i>
 	                                    활동지역
@@ -102,7 +102,9 @@
 									<div class="item">휴대전화 : ${ managerlist[0].m_phone }</div>
 									<div class="item">닉네임 : ${ managerlist[0].m_nick }</div>
 									<div class="item">이메일 : ${ managerlist[0].m_email }</div>
-									<div class="item">이용서비스 : ${ managerlist[0].authList[0].auth }</div>
+									<sec:authorize access="hasRole('ROLE_TRAINER')">
+										<div class="item">이용서비스 : 매니저</div>
+									</sec:authorize>
 								</div>
                         	</fieldset>
                         </div>
@@ -110,17 +112,17 @@
 
 
 					<%-- 견적서 --%>
-					<h3 class="tm-text-primary">견적서</h3>
+					<h3 class="tm-text-primary" id="estimate_navbar">견적서</h3>
 					<hr class="mb-5">
 					<div class="Estimate" id="Estimate">
 							<c:forEach items="${ estimatelist }" var="estimate" varStatus="status">
-							<a class="btn btn-primary" data-bs-toggle="collapse"
+							<a class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample${ status.index }"
 								href="#multiCollapseExample1" role="button"
 								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 님의 견적서
 							</a>
 							<div class="row">
 								<div class="col">
-									<div class="collapse multi-collapse" id="multiCollapseExample1">
+									<div class="collapse multi-collapse" id="multiCollapseExample${ status.index }">
 										<div class="card card-body" style="height: 140">
 											<table>
 												<tr>
@@ -158,7 +160,7 @@
 					</div>
 
 
-						<%-- 훈련사 정보 --%>
+					<%-- 훈련사 정보 --%>
 
                    	<div class="manager_info">
                    	<h3 class="tm-text-primary">훈련사 소개</h3> 
@@ -172,7 +174,7 @@
                    	</div>
                     
                     <!-- 활동지역 -->
-                    <h3 class="tm-text-primary">활동지역</h3> 
+                    <h3 class="tm-text-primary" id="area_navbar">활동지역</h3> 
                     <hr class="mb-5">
 	                    <div class="business_trip_section">
 	                    	<div>

@@ -14,4 +14,6 @@ public interface MyPageService {
 
 	public List<EstimateVO> getEstimate(int m_no);
 
+	public List<EstimateVO> getMemberEstimate(int m_no);
+
 }

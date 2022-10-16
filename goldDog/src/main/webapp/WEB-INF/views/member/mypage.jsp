@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,80 +102,53 @@
                     </section>
 
 
-						<div>
-							<div class="Estimate" id="Estimate">
-								<details class="Estimate_details" id="${ manager.m_no }"
-									onclick="ondetails(this.id)">
-									<summary>${ manager.m_name }</summary>
-									<p id="ammo">${manager}</p>
-								</details>
-								<p>
-									<a class="btn btn-primary" data-bs-toggle="collapse"
-										href="#multiCollapseExample1" role="button"
-										aria-expanded="false" aria-controls="multiCollapseExample1">훈련
-										견적서</a>
-									<button class="btn btn-primary" type="button"
-										data-bs-toggle="collapse"
-										data-bs-target="#multiCollapseExample2" aria-expanded="false"
-										aria-controls="multiCollapseExample2">미용 견적서</button>
-									<button class="btn btn-primary" type="button"
-										data-bs-toggle="collapse" data-bs-target=".multi-collapse"
-										aria-expanded="false"
-										aria-controls="multiCollapseExample1 multiCollapseExample2">모두
-										보기</button>
-
-								</p>
-								<!-- <div class="Estimate_interval"></div>  -->
-								<div class="row">
-									<div class="col">
-										<div class="collapse multi-collapse"
-											id="multiCollapseExample1">
-											<div class="card card-body" style="height: 140">
-												<table>
-													<tr>
-														<th><button class="btn btn-outline-primary"
-																type="button" style="width: 120px;">견적서 확인</button></th>
-														<th>홍성현 훈련매니저</th>
-													</tr>
-													<tr>
-														<th colspan="2"><br></th>
-													</tr>
-													<tr>
-														<th align="center">진행 중입니다</th>
-														<th align="center">010-1234-1234</th>
-													</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-									<div class="col">
-										<div class="collapse multi-collapse"
-											id="multiCollapseExample2">
-											<div class="card card-body" style="height: 140">
-												<table>
-													<tr>
-														<th>
-															<button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button>
-														</th>
-														<th>홍성현 미용매니저</th>
-													</tr>
-													<tr>
-														<th colspan="2"><br></th>
-													</tr>
-													<tr>
-														<th align="center">진행 완료</th>
-														<th><button class="btn btn-outline-primary"
-																type="button" style="width: 120px;">리뷰 작성</button></th>
-													</tr>
-												</table>
-											</div>
+					<%-- 견적서 --%>
+					<h3 class="tm-text-primary" id="estimate_navbar">견적서</h3>
+					<hr class="mb-5">
+					<div class="Estimate" id="Estimate">
+							<c:forEach items="${ estimatelist }" var="estimate" varStatus="status">
+							<a class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample${ status.index }"
+								href="#multiCollapseExample1" role="button"
+								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 님의 견적서
+							</a>
+							<div class="row">
+								<div class="col">
+									<div class="collapse multi-collapse" id="multiCollapseExample${ status.index }">
+										<div class="card card-body" style="height: 140">
+											<table>
+												<tr>
+													<th><button class="btn btn-outline-primary"
+															type="button" style="width: 120px;">견적서 확인</button></th>
+													<th>${ estimateMember[status.index].m_nick }님 </th>
+												</tr>
+												<tr>
+													<th colspan="2"><br></th>
+												</tr>
+												<tr>
+													<th align="center">
+														<c:choose>
+															<c:when test="${ estimate.e_con eq '0'}">견적 신청</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">결제 대기</c:when>
+															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">방문 확인대기</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
+															<c:otherwise>취소됨</c:otherwise>
+														</c:choose>
+													</th>
+													<th align="center">010-1234-1234</th>
+												</tr>
+											</table>
 										</div>
 									</div>
 								</div>
-								<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->
-								<!-- </c:forEach> -->
 							</div>
-						</div>
+							</c:forEach>
+						<c:if test="${ empty estimatelist }">
+							<div>
+								견적서가 없습니다
+							</div>
+						</c:if>
+					</div>
 
 						<div>
                     	<div class="gallery" >
@@ -370,7 +344,7 @@
 				</div>
 				
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="dogInsert" >등록</button>
+					<button type="submit" class="btn btn-primary" form="dogInsertPro" >등록</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 				</div>
 			</div>
@@ -386,6 +360,54 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="row" id="dogModal">
+					<!-- 모달 부착 -->
+					<div class='col-lg-5 d-none d-lg-block'>
+						<div class='p-5'>
+							<img class='card-img-top' src="" width='222' height='180' alt='Card image cap' id=result_img> 
+							<input class='form-control' width='420' type='file' id='formFile' name="part_img" form="dogModifyPro"/>
+						</div>
+					</div>
+					<div class='col-lg-7'>
+						<form id='dogModifyPro' action='/member/dogModifyPro?${_csrf.parameterName}=${_csrf.token}'
+							method='post' enctype='multipart/form-data' name='dogModify'>
+							<input type='hidden' name='d_no' value=""/>
+							<table>
+								<tr>
+									<th>이 름 :</th>
+									<th><input type='text'
+										class='form-control form-control-user' name='d_name'
+										value=""></th>
+								</tr>
+								<tr>
+									<th>나이(살) :</th>
+									<th><input type='text'
+										class='form-control form-control-user' name='d_age'
+										value=""></th>
+								</tr>
+								<tr>
+									<th>성 별 :</th>
+									<th><input class='form-control form-control-user' value="" readonly='readonly' name="d_gender"/></th>
+								</tr>
+								<tr>
+									<th>종 류 :</th>
+									<th><input type='text'
+										class='form-control form-control-user' name='d_type'
+										value=""></th>
+								</tr>
+								<tr>
+									<th>무게(kg) :</th>
+									<th><input type='text'
+										class='form-control form-control-user' name='d_weight'
+										value=""></th>
+								</tr>
+							</table>
+						</form>
+					</div>
+					<div class='modal-footer col-lg-12'>
+						<button type='submit' class='btn btn-primary' form='dogModifyPro'>수정</button>
+						<button type='button' class='btn btn-secondary'	data-bs-dismiss='modal'>취소</button>
+					</div>
+					<!-- 모달 부착 END -->
 				</div>
 			</div>
 		</div>
@@ -433,41 +455,25 @@
   	
 		let dogModalrow = $("#dogModal"); // 댓글목록 담을 컨테이너 div
 		let username="${pInfo.username}"; //sec:authenticated로 저장한 로그인한 사라 정보 js로 가져오기
-  	
 		// 댓글 목록 만들어서 화면에 부착 함수 
 		function makeModal(result){
-			console.log("makeModal!!!!!" + result.length);
+			console.log("makeModal!!!!!" + result);
 			// 부착할 html 목록 문자열로 만들기 
-			let str = ""; 
-				str += "<div class='col-lg-5 d-none d-lg-block'><div class='p-5'><img class='card-img-top' src='/resources/serverImg/";
-				str += result.d_img+"' width='222' height='180' alt='Card image cap'>";
-				str += "<input class='form-control' width='420' type='file' id='formFile' name='part_img'/></div></div><div class='col-lg-7'>";
-				str += "<form id='dogModifyPro' action='/member/dogModifyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModify'><input type='hidden' name='d_no' value='"+result.d_no+"' /><table><br/><br/>";
-				str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"'></th></tr>";
-				str += "<tr><th>나이(살)　:　</th><th><input type='text' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "'></th></tr>";
-				str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' value='"+ result.d_gender +"'  readonly='' /></th></tr>";
-				str += "<tr><th>종　　류　:　</th><th><input type='text' class='form-control form-control-user' name='d_type' value='"+ result.d_type +"'></th></tr>";
-				str += "<tr><th>무게(kg)　:　</th><th><input type='text' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"'></th></tr>";
-				str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='dogModify' >수정</button>";
-				str += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button></div>";
-				dogModalrow.html(str);	// html 부착 		
+			$("#result_img").attr('src','/resources/serverImg/'+result.d_img);
+			$("input[name='d_no']").attr('value', result.d_no);
+			$("input[name='d_name']").attr('value', result.d_name);
+			$("input[name='d_age']").attr('value', result.d_age);
+			$("input[name='d_gender']").attr('value', result.d_gender);
+			$("input[name='d_type']").attr('value', result.d_type);
+			$("input[name='d_weight']").attr('value', result.d_weight);
 		}
 		
  		//dogInsert
 		//등록 or 추가 모달 눌렀을때 띄울 
-		$("#dogInsert").on("click",function(e){
+		$(document).on("click","#dogModify",function(e){
 			e.preventDefault(); 
 			console.log("등록 or 추가 확인 모달.");
 			$("#dogInsertPro").submit();
-		});
- 	
- 		//dogModify
-		//수정 모달 눌렀을때 띄울 
-		$("#dogModal").on("click","#dogModify",function(e){
-			console.log("수정 클릭.");
-			e.preventDefault(); 
-			console.log("수정 확인 모달.");	
-			$("#dogModifyPro").submit();
 		});
  	
  	

@@ -42,6 +42,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return Mapper.getEstimate(m_no);
 	}
 
+	@Override
+	public List<EstimateVO> getMemberEstimate(int m_no) {
+		return Mapper.getMemberEstimate(m_no);
+	}
+
 
 
 
