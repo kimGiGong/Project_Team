@@ -71,26 +71,34 @@ public class mypageController {
 	@GetMapping("mypage")
 	@PreAuthorize("isAuthenticated()")
 	public String viewMypage(Authentication auth, Model model) {
-		
-		if(auth == null) {
-			return "redirect:/member/login";
-		}else {
-			
-		
-				CustomUser user = (CustomUser)auth.getPrincipal();
-				String loginID = user.getUsername();
-				MemberVO member = bumService.getMember(loginID);
-				
-				
-				int mno = bumService.getMno(user.getUsername());
-				List<DogVO> dog = bumService.getDog(mno);
-				
-				model.addAttribute("manager",member);
-				model.addAttribute("dog", dog);
-				model.addAttribute("dogCheck", dog.size());
-				
-				return "mypage/mypage";
-		}
+			return "redirect:/member/mypage";
+//		if(auth == null) {
+//			return "redirect:/member/login";
+//		}else {
+//			
+//		
+//				CustomUser user = (CustomUser)auth.getPrincipal();
+//				String loginID = user.getUsername();
+//				MemberVO member = bumService.getMember(loginID);
+//				
+//				
+//				int mno = bumService.getMno(user.getUsername());
+//				List<DogVO> dog = bumService.getDog(mno);
+//				List<EstimateVO> estimate = instanceService.getMemberEstimate(member.getM_no()); 
+//				List<MemberVO> estimateMember = new ArrayList<MemberVO>();
+//				for (int i = 0; i < estimate.size(); i++) {
+//					estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
+//				}
+//				
+//				model.addAttribute("manager",member);
+//				model.addAttribute("dog", dog);
+//				model.addAttribute("dogCheck", dog.size());
+//				model.addAttribute("estimatelist",estimate);
+//				model.addAttribute("estimateMember",estimateMember);
+//				
+//				
+//				return "mypage/mypage";
+//		}
 	}
 	
 //	매니저 MyPage 이동

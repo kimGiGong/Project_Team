@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goldDog.domain.AddressVO;
@@ -325,18 +327,20 @@ public class memberController {
 		return "redirect:/member/mypage";
 	}
 	@PostMapping("dogModifyPro")
-	public String dogModifyPro(DogVO dog, MultipartHttpServletRequest request, Authentication auth) {
+	public String dogModifyPro(DogVO dog,  MultipartHttpServletRequest request, Authentication auth , MultipartFile part_img) {
 		try {
+			System.out.println(part_img);
+			System.out.println("어서와"+dog);
 			//CustomUser user = (CustomUser)auth.getPrincipal();
 			//String m_id =user.getUsername();
 			//dog.setD_no(service.getMno(user.getUsername()));
 							
-			MultipartFile mf = request.getFile("part_img");
+			MultipartFile mf = ((MultipartRequest) part_img).getFile("part_img");
 			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
 			
 			log.info(mf.getSize());
 			log.info(mf.getContentType());
-			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			String path =((ServletRequest) part_img).getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
 			
 			// 이름 중복 방지를 위한 새 파일명 생성
 			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
@@ -357,7 +361,7 @@ public class memberController {
 				dog.setD_img(newFileName);
 				 result = service.modifytDog(dog.getD_no());
 			}
-			
+			System.out.println("리 슐 트"+result);
 			log.info("***********uuid"+uuid);
 			//저장할 파일 전체 경로
 			String imgPath = path+"\\"+newFileName;

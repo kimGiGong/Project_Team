@@ -16,14 +16,6 @@
     <link rel="stylesheet" href="/resources/team.css">
     
 </head>
-<body>
-
-	<!--  헤더  -->
-	<div>
-	<jsp:include page="../header.jsp" />
-	</div>
-	<!--  헤더 END -->
-	
 <div class="bodymain"><!-- 바디메인 -->
 	<div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div><div class="parallax-mirror" style="visibility: hidden; z-index: -100; position: fixed; top: 0px; left: 0px; overflow: hidden;"><img class="parallax-slider" src=""></div>    
 	    <div class="container-fluid" >
@@ -40,7 +32,7 @@
 	                        </div> --%>                
 	                        <ul id="tm-main-nav">
 	                            <li class="nav-item">                                
-	                                <a href="#home" class="nav-link current">
+	                                <a href="#Estimate" class="nav-link current">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-home nav-icon"></i>
 	                                    견적서
@@ -57,7 +49,7 @@
 	                                <a href="#about" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-user-friends nav-icon"></i>
-	                                    결제수단
+	                                    판매정보 등록
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
@@ -68,7 +60,7 @@
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
-	                                <a href="https://paypal.me/templatemo" class="nav-link external" target="_parent" rel="sponsored">
+	                                <a href="" class="nav-link external" target="_parent" rel="sponsored">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-external-link-alt nav-icon"></i>
 	                                    External
@@ -94,84 +86,61 @@
 									<div class="item">닉네임 : ${ manager.m_nick }</div>
 									<div class="item">이메일 : ${ manager.m_email }</div>
 									<div class="item">이용서비스 : ${ manager.authList[0].auth }</div>
+									<div class="item">회원정보 수정 : ${ manager.authList[0].auth }</div>
 								</div>
                         	</fieldset>
                         </div>
                     </section>
+
                     
-                    <div>
-							<div class="Estimate" id="Estimate">
-								<details class="Estimate_details" id="${ manager.m_no }"
-									onclick="ondetails(this.id)">
-									<summary>${ manager.m_name }</summary>
-									<p id="ammo">${manager}</p>
-								</details>
-								<p>
-									<a class="btn btn-primary" data-bs-toggle="collapse"
-										href="#multiCollapseExample1" role="button"
-										aria-expanded="false" aria-controls="multiCollapseExample1">훈련
-										견적서</a>
-									<button class="btn btn-primary" type="button"
-										data-bs-toggle="collapse"
-										data-bs-target="#multiCollapseExample2" aria-expanded="false"
-										aria-controls="multiCollapseExample2">미용 견적서</button>
-									<button class="btn btn-primary" type="button"
-										data-bs-toggle="collapse" data-bs-target=".multi-collapse"
-										aria-expanded="false"
-										aria-controls="multiCollapseExample1 multiCollapseExample2">모두
-										보기</button>
-								</p>
-								<!-- <div class="Estimate_interval"></div>  -->
-								<div class="row">
-									<div class="col">
-										<div class="collapse multi-collapse"
-											id="multiCollapseExample1">
-											<div class="card card-body" style="height: 140">
-												<table>
-													<tr>
-														<th><button class="btn btn-outline-primary"
-																type="button" style="width: 120px;">견적서 확인</button></th>
-														<th>홍성현 훈련매니저</th>
-													</tr>
-													<tr>
-														<th colspan="2"><br></th>
-													</tr>
-													<tr>
-														<th align="center">진행 중입니다</th>
-														<th align="center">010-1234-1234</th>
-													</tr>
-												</table>
-											</div>
-										</div>
-									</div>
-									<div class="col">
-										<div class="collapse multi-collapse"
-											id="multiCollapseExample2">
-											<div class="card card-body" style="height: 140">
-												<table>
-													<tr>
-														<th>
-															<button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button>
-														</th>
-														<th>홍성현 미용매니저</th>
-													</tr>
-													<tr>
-														<th colspan="2"><br></th>
-													</tr>
-													<tr>
-														<th align="center">진행 완료</th>
-														<th><button class="btn btn-outline-primary"
-																type="button" style="width: 120px;">리뷰 작성</button></th>
-													</tr>
-												</table>
-											</div>
+        			<%-- 견적서 --%>
+					<h3 class="tm-text-primary" id="estimate_navbar">견적서</h3>
+					<hr class="mb-5">
+					<div class="Estimate" id="Estimate">
+							<c:forEach items="${ estimatelist }" var="estimate" varStatus="status">
+							<a class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample${ status.index }"
+								href="#multiCollapseExample1" role="button"
+								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 님의 견적서
+							</a>
+							<div class="row">
+								<div class="col">
+									<div class="collapse multi-collapse" id="multiCollapseExample${ status.index }">
+										<div class="card card-body" style="height: 140">
+											<table>
+												<tr>
+													<th><button class="btn btn-outline-primary"
+															type="button" style="width: 120px;">견적서 확인</button></th>
+													<th>${ estimateMember[status.index].m_nick }님 </th>
+												</tr>
+												<tr>
+													<th colspan="2"><br></th>
+												</tr>
+												<tr>
+													<th align="center">
+														<c:choose>
+															<c:when test="${ estimate.e_con eq '0'}">견적 신청</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">결제 대기</c:when>
+															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">방문 확인대기</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
+															<c:otherwise>취소됨</c:otherwise>
+														</c:choose>
+													</th>
+													<th align="center">010-1234-1234</th>
+												</tr>
+											</table>
 										</div>
 									</div>
 								</div>
-								<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->
-								<!-- </c:forEach> -->
 							</div>
-						</div>
+							</c:forEach>
+						<c:if test="${ empty estimatelist }">
+							<div>
+								견적서가 없습니다
+							</div>
+						</c:if>
+					</div>
+
 
 						<div>
                     	<div class="gallery" >
@@ -366,7 +335,7 @@
 				</div>
 				
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="dogInsert" >등록</button>
+					<button type="submit" class="btn btn-primary" form="dogInsertPro" >등록</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 				</div>
 			</div>
@@ -417,7 +386,7 @@
 					</div>
 				
 					<div class="modal-footer col-lg-12" >
-						<button type="button" class="btn btn-primary" id="review" >수정</button>
+						<button type="submit" class="btn btn-primary" form="dogModfiyPro" >수정</button>
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 					</div>
 				</div>

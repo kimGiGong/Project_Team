@@ -17,4 +17,6 @@ public interface MyPageMapper {
 
 	public List<EstimateVO> getEstimate(@Param ("m_no") int m_no); 
 	
+	public List<EstimateVO> getMemberEstimate(@Param ("m_no") int  m_no);
+	
 }
