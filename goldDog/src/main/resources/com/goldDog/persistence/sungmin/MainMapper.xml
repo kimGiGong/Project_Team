@@ -125,7 +125,7 @@
 	
 	<!-- 이름으로 검색한 훈련사 가져오기 페이징 처리 -->
 	<select id="countSearchTrainer" resultType="int">
-		select t.* from member m, trainer t where m.m_no = t.m_no and  m.m_nick like '%'||#{keyword}||'%'
+		select count(*) from member m, trainer t where m.m_no = t.m_no and  m.m_nick like '%'||#{keyword}||'%'
 	</select>
 	
 	<!--훈련사 판매등록 업데이트하기 -->
@@ -145,19 +145,74 @@
 	<select id="getHairstylist" resultType="com.goldDog.domain.HairstylistVO">
 		select * from hairstylist where h_no=#{t_no}
 	</select>	
-	
-	<!-- 모든 미용사 가져오기 -->
+	<!-- 훈련사 한명의 정보 가져오기m_no -->
+	<select id="getMhairstylist" resultType="com.goldDog.domain.HairstylistVO">
+		select * from hairstylist where m_no=#{m_no}
+	</select>
+	<!-- 모든 미용사 가져오기 페이징 처리 -->
 	<select id="getAllHairstylist" resultType="com.goldDog.domain.HairstylistVO">
-		select * from hairstylist 
-	</select>
-	<!-- 모든 미용사 가져오기 t_no 순서대로 -->
-	<select id="getAllHairstylistH_no" resultType="com.goldDog.domain.HairstylistVO">
-		select * from hairstylist where h_no in
-		<foreach collection="list" item="item" open="(" close=")" separator=",">
-			#{item}
-		</foreach>  
+	<![CDATA[ 
+		select B.* from (select rownum r, A.* from 
+		(select * from hairstylist order by h_price desc) A order by h_ravg desc) B 
+		where ]]>
+	 <![CDATA[  
+		 r > (#{pageNum} - 1) * #{listQty} and r <= #{pageNum} * #{listQty}
+	 	]]>
 	</select>
 	
+	<!-- 모든 미용사 가져오기 h_no 순서대로 -->
+	<select id="getAllhairstylistCount" resultType="int">
+		select count(*) from hairstylist 
+	</select>
+	
+	<!-- 미용사 추가정보 등록하기 -->
+	<insert id="addHinfo">
+	insert into hairstylist(h_no,m_no,a_no,h_self,h_sel,h_license,h_price,h_career,h_date) 
+			values(hairstylist_seq.nextval,#{m_no},#{a_no},#{h_self},#{h_sel},#{h_license},#{h_price},#{h_career},sysdate)
+	</insert>
+			
+	<!-- 검색한 미용사 가져오기 페이징 처리 -->
+	<select id="searchHairstylist" resultType="com.goldDog.domain.HairstylistVO">
+		select h.* from member m, hairstylist h where m.m_no = h.m_no and  m.m_nick like '%'||#{keyword}||'%'
+	</select>
+	
+	<!--미용사 정렬기능 분기처리 -->
+	<select id="sortHairstylist" resultType="com.goldDog.domain.HairstylistVO">
+		<![CDATA[ 
+		select B.* from (select rownum r, A.* from 
+		(select * from hairstylist ]]>
+		<choose>
+			<when test="sort=='R'.toString()">
+				order by h_ravg desc
+			</when>
+			<when test="sort=='RH'.toString()">
+				order by h_RTotal desc
+			</when>
+			<when test="sort=='L'.toString()">
+				order by h_price 
+			</when>
+			<when test="sort=='H'.toString()">
+				order by h_price desc
+			</when>
+		</choose>
+		 <![CDATA[ 	 
+		) A ) B where 
+		 r > (#{pageNum} - 1) * #{listQty} and r <= #{pageNum} * #{listQty}
+	 	]]>
+	</select>
+	
+	<!-- 이름으로 검색한 미용사 가져오기 카운팅 -->
+	<select id="countSearchHairstylist" resultType="int">
+		select count(*) from member m, hairstylist h where m.m_no = h.m_no and  m.m_nick like '%'||#{keyword}||'%'
+	</select>
+	
+	<!--미용사 판매등록 업데이트하기 -->
+	<update id="updateHinfo">
+		update hairstylist set h_self=#{h_self} ,h_sel=#{h_sel},h_license=#{h_license},h_price=#{h_price}, h_career= #{h_career}, h_date=sysdate
+		where m_no=#{m_no} 
+	</update>
+	
+
 	
 	
 	
@@ -197,6 +252,14 @@
 	<update id="updateRHAvg">
 		update hairstylist set h_ravg =#{ravg} ,h_Rtotal=#{total} where h_no=#{h_no}
 	</update>
+	<!-- 메인에 띄워줄 훈련사의 모든리뷰 가져오기 -->
+	<select id="getAllTReview" resultType="com.goldDog.domain.ReviewVO">
+		select A.* from(select * from review where h_no=0 order by r_date)A order by R_score desc
+	</select>
+	<!-- 메인에 띄워줄 미용사의 모든리뷰 가져오기 -->
+	<select id="getAllHReview" resultType="com.goldDog.domain.ReviewVO">
+		select A.* from(select * from review where t_no=0 order by r_date)A order by R_score desc
+	</select>
 
 
 
@@ -226,8 +289,8 @@
 	//회원이 협의하기 눌렀을때 견적서 만들어 주는 메서드 -->
 	<!-- 견적서 넣어주는 메서드 -->
 	<insert id="insertEst">
-		insert into estimate(e_no, m_no_puppy, e_note, e_service, m_no_manager, e_con, d_no,a_no,e_basicprice)
-		 values(estimate_seq.nextval,#{m_no_puppy},#{e_note},#{e_service},#{m_no_manager},0,#{d_no},#{a_no},#{e_basicprice})
+		insert into estimate(e_no, m_no_puppy, e_note, e_service, m_no_manager, e_con, d_no,a_no,e_basicprice,e_date)
+		 values(estimate_seq.nextval,#{m_no_puppy},#{e_note},#{e_service},#{m_no_manager},0,#{d_no},#{a_no},#{e_basicprice},TO_DATE(#{e_date},'YYYY-MM-DD HH24:MI'))
 	</insert>
 		
 	<!-- 사용자의 견적서 가져오는 메서드 아직 처리안된것만 e_con =1 -->
@@ -254,7 +317,7 @@
 	<!--견적서 업데이트-->
 	<update id="updateEst">
 		update estimate set e_extraprice=#{e_extraprice},e_extra_reason=#{e_extra_reason},
-		e_con=#{e_con} ,e_total_price=#{e_total_price}
+		e_con=#{e_con} ,e_total_price=#{e_total_price}, e_date=(TO_DATE(#{e_date},'YYYY-MM-DD HH24:MI'))
 		 where e_no=#{e_no}
 	</update>
 	

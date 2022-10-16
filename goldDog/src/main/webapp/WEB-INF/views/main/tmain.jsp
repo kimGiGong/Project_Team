@@ -253,22 +253,22 @@
       <div class="carousel-wrap row ">
         <div class="owl-carousel client_owl-carousel">
         
-	      <c:forEach var="i" begin="0" end="5" step="1">
+	      <c:forEach var="i" begin="0" end="4" step="1">
           <div class="item">
             <div class="box">
               <div class="detail-box">
                 <p>
-                  ${review[i].r_text}
+                  ${bestReview[i].r_text}
                 </p>
                 <h6>
                 	리뷰 등록한사람 이름
                 </h6>
                 <p>
-                  ${review[i].r_date}
+                  ${bestReview[i].r_date}
                 </p>
               </div>
               <div class="img-box">
-                <img src="/resources/feane/images/client1.jpg"  class="box-img">
+                <img src="/resources/serverImg/${bestReview[i].r_img}"  class="box-img">
               </div>
             </div>
           </div>
@@ -303,6 +303,9 @@
 			// read로 이동하기(form으로 요청) 
 			pagingForm.submit(); 
 		});
+		
+		
+		
 			//소트 처리
 			let selectForm=$("#selectForm");
 			

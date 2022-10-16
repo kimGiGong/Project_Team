@@ -14,12 +14,10 @@
 	}
 	.fa-vcard:before, .fa-address-card:before {
     color: #6b6b6b;
-}
+	}
 
-</style>
+	</style>
 </head>
-	
-	
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
@@ -35,7 +33,7 @@
                  <div class="card mb-3 border border-primary mb-3">
                    <div class="row g-0">
                      <div class="col-md-4">
-                      <img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/>
+                      <img src="/resources/severImg/${member.m_img}" width="185px" height="185px" style="border-radius:1.5rem;"/>
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
@@ -63,7 +61,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title " style="text-align: left;">훈련사의 BEST 리뷰</h5>
-                   <p class="card-text" style="text-align: right;" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>(${Ravg})${review[i].r_score}</p>
+                   <p class="card-text" style="text-align: right;" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>(${trainer.t_RAvg})${trainer.t_RTotal}</p>
                  </div>
                </div>
              </div>
@@ -73,11 +71,11 @@
                  <div class="card mb-3">
                    <div class="row g-0">
                      <div class="col-md-4">
-                      <img src="/resources/feane/images/${r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
+                      <img src="/resources/serverImg/${r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
-                         <h5 class="card-title">${member.m_nick}
+                         <h5 class="card-title">${member.m_nick} 교체 준비
                          <c:forEach  begin="1" end="${review[i].r_score}" step="1" >
                          	<i class="fa fa-star fa-lg " aria-hidden="true"></i>
                          </c:forEach>
@@ -124,7 +122,7 @@
                                               <label for="cc-name" class="control-label mb-1">원하는 날짜</label>
                                               
 		                                        <div class="mb-3 row">
-													<input class="form-control" type="datetime-local" name="date" value="2022-10-13T12:30:00" id="html5-datetime-local-input"/>						                          
+													<input class="form-control newDate" type="datetime-local" name="e_date" value="2022-10-13T12:30:00" id="html5-datetime-local-input" />						                          
 						                      	</div>       
 						                      
                                               <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
@@ -201,7 +199,7 @@
 	       				<input type="radio" name="e_service" value="문제행동교육" class="radio-val1" />문제행동 교육(분리불안, 짖음, 공격) <br/>
 	       				<input type="radio" name="e_service" value="배변교육" class="radio-val1" />배변교육 <br/>
 	       				<input type="radio" name="e_service" value="사회성교육" class="radio-val1" />사회성교육 <br/>
-	       				<input type="radio" name="e_service" value="원하는 훈련 :" class="radio-val" />기타 <br/>
+	       				<input type="radio" name="e_service" value="기타 교육" class="radio-val" />기타 <br/>
 	       				<input type="text" name="e_service"  class="radio-value-detail" placeholder="기타사항을 입력해주세요" disabled="true" /> <br/>
       				<p>--------------------------------</p>
       				<p>4.출장시 주의사항을 적어주세요</p>
@@ -322,8 +320,9 @@
 			let	addDogInfo = $("#addDogInfo")
 			$("#addDogInfoSubmit").on("click",function(e){
 				console.log("정보를 보낸다 .");
+				let newDate=$(".newDate").val();
+				addDogInfo.append("<input type='hidden' name='e_date' value='" + newDate+ "' />");
 				addDogInfo.attr("action","/main/insertEst");
-				
 				addDogInfo.submit();
 			});
 		
@@ -332,7 +331,7 @@
 			 $('.radio-val').on('click',function () {
 		           var check = $('.radio-val').val();
 
-					if(check=='원하는 훈련 :'){
+					if(check=='기타 교육'){
 						 $('.radio-value-detail').attr('disabled', false);
 					}
 		        });
@@ -340,7 +339,7 @@
 			//버튼 클릭했을 때 기타가 아니면 초기화
 			 $('.radio-val1').on('click',function () {
 		           var check = $('.radio-val1').val();
-					 if(check!='원하는 훈련 :'){
+					 if(check!='기타 교육'){
 						$('.radio-value-detail').val("");
 						$('.radio-value-detail').attr('disabled', true);
 					}

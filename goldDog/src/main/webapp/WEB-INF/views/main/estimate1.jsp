@@ -53,7 +53,7 @@
                 <div class="card mb-3">
 	                 <div class="card-body">
 	                   <p class="card-text" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>
-	                   		원하는 예약 날짜 : ${estimate.e_date}
+	                   		원하는 예약 날짜 : ${estimate.e_date} 
 	                   </p>
 	                 </div>
 	             </div>

@@ -14,7 +14,7 @@
 	<!--  헤더 END -->
     
 		<div class="container">
-			<h1>광고 수정.</h1>
+			<h1>훈련사 페이지 광고 수정.</h1>
 			<div class="box" style="border: solid 2px #008294; border-radius : 1.5rem;">
 			<div class="filters-content">
 			<div class="row">
@@ -72,7 +72,7 @@
 		
 		
 		<div class="container">
-			<h1>베스트 회원 선정 수정중</h1>
+			<h1>미용사 페이지 광고 수정</h1>
 			<div class="box" style="border: solid 2px #008294;">
 			<div class="filters-content">
 			<div class="row">
@@ -121,6 +121,8 @@
 			</div>
 			<br/><br/><br/><br/>
 		</div>
+
+
 
  <%@ include file="../footer.jsp" %>
 	<script type="text/javascript">

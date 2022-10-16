@@ -83,7 +83,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title"><td>훈련시작금액</td></h5>
-                   	<input type="text" name="t_price">원
+                   	<input type="number" name="t_price">원
                  </div>
                </div>
              </div>
@@ -91,7 +91,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title"><td>경력</td></h5>
-                   	<input type="text" name="t_career">년
+                   	<input type="number" name="t_career">년
                  </div>
                </div>
              </div>

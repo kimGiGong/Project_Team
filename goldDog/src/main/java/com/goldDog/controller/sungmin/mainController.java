@@ -74,36 +74,48 @@ public class mainController {
 		log.info(cri.getSort()+"정렬기준 가져오는거야??");
 		log.info(cri.getKeyword()+"훈련사 이름 이거 맞아 ?");
 		
-		List<TrainerVO> Tlist =null;
+		//담을 그릇 생성
+		List<TrainerVO> Tlist = new ArrayList<TrainerVO>();
 		int Ttotal=4;
 		
-		if((cri.getKeyword()==null && cri.getSort()==null)||cri.getSort().equals("S")){
+		
+		log.info(cri);
+		
+		
+		
+		
+		if( cri.getKeyword()==null && cri.getSort()==null ||cri.getSort().equals("S")){
 			//기본 훈련사 정렬
 			log.info("기본를 탄다구");
-			Tlist=mainService.getAllTrainer(cri);
+			Tlist= mainService.getAllTrainer(cri);
 			Ttotal = mainService.getAllTrainerCount();
 			
+			log.info(Tlist+"2번쨰!!");
 		}
 		
-		if(cri.getSort()!=null && !cri.getSort().equals("S")) {
+		if(cri.getKeyword()!=null&&cri.getSort()==null) {
+			log.info("검색을 탄다구");
+			Tlist=mainService.searchTrainer(cri);
+			Ttotal=mainService.countSearchTrainer(cri);
+			
+			log.info(Tlist+"1번쨰!!");
+		}
+		
+		if(cri.getKeyword()==null && cri.getSort()!=null && !cri.getSort().equals("S")) {
 			// 정렬로 검색
 			log.info("getSort!!!!!!!!!!!!!!!");
 			Tlist=mainService.sortTrainer(cri);
 			log.info(Tlist);
 			Ttotal = mainService.getAllTrainerCount();
-			cri.setSort("kk");
+			cri.setSort(null);
+			log.info(Tlist+"3번쨰!!");
 		}
 		
-		if(cri.getKeyword()!=null) {
-			log.info("검색을 탄다구");
-			Tlist=mainService.searchTrainer(cri);
-			Ttotal=mainService.countSearchTrainer(cri);
-			
-		}
+		
+		
+		log.info(Tlist+"최종!!");
 		
 		//초기화
-		cri.setSort(null);
-		
 		// 페이징 처리해서 가져오기
 		List<Integer> t_no_list = new ArrayList<Integer>(); 
 		List<Integer> t_m_no_list = new ArrayList<Integer>(); 
@@ -127,14 +139,18 @@ public class mainController {
 			model.addAttribute("pager", new PageDTO(cri, Ttotal)); // total count로 수정    
 
 		//리뷰 추가해야함 베스트 5개 뽑기
-		
+			List<ReviewVO> BestReview=mainService.getAllTReview();
+			
+			model.addAttribute("bestReview",BestReview);
+			model.addAttribute("bestReviewUser",BestReview);
+			
 		
 		
 	}
 	
 	//*************************************미용사 메인**********************************************
 	
-	//메인올때 훈련사도 가져온다.
+	//메인올때 미용사 가져온다.
 		@RequestMapping("hmain")
 		public void hmain(Model model,Criteria cri) {
 			//광고 가져오기 for 문 돌리기 귀찬...
@@ -144,11 +160,46 @@ public class mainController {
 			model.addAttribute("ad1",ad1);
 			model.addAttribute("ad2",ad2);
 			model.addAttribute("ad3",ad3);
-			
+			log.info(cri.getSort()+"정렬기준 가져오는거야??");
+			log.info(cri.getKeyword()+"미용사 이름 이거 맞아 ?");
 			
 			// m_no 만 뽑아오기
-			List<HairstylistVO> Hlist = mainService.getAllHairstylist();
+			List<HairstylistVO> Hlist = new ArrayList<HairstylistVO>(); 
+			int Htotal=4;		
+			log.info(cri);
 			
+			if( cri.getKeyword()==null && cri.getSort()==null ||cri.getSort().equals("S")){
+				//기본 훈련사 정렬
+				log.info("기본를 탄다구");
+				Hlist= mainService.getAllHairstylist(cri);
+				Htotal = mainService.getAllhairstylistCount();
+				
+				log.info(Hlist+"2번쨰!!");
+			}
+			
+			if(cri.getKeyword()!=null&&cri.getSort()==null) {
+				log.info("검색을 탄다구");
+				Hlist=mainService.searchHairstylist(cri);
+				Htotal=mainService.countSearchHairstylist(cri);
+				
+				log.info(Hlist+"1번쨰!!");
+			}
+			
+			if(cri.getKeyword()==null && cri.getSort()!=null && !cri.getSort().equals("S")) {
+				// 정렬로 검색
+				log.info("getSort!!!!!!!!!!!!!!!");
+				Hlist=mainService.sortHairstylist(cri);
+				log.info(Hlist);
+				Htotal = mainService.getAllhairstylistCount();
+				cri.setSort(null);
+				log.info(Hlist+"3번쨰!!");
+			}
+			
+			
+			
+			log.info(Hlist+"최종!!");
+					
+					
 			List<Integer> h_no_list = new ArrayList<Integer>(); 
 			List<Integer> h_m_no_list = new ArrayList<Integer>(); 
 			
@@ -162,35 +213,25 @@ public class mainController {
 			model.addAttribute("h_no",h_no_list);
 			
 			
-			List<Double> total = new ArrayList<Double>(); 
-			List<Integer> rTotal = new ArrayList<Integer>();
 			
-			//t_no를 받아서 훈련사 당 리뷰 평점 구하기
-			for(int i =0 ;i<h_no_list.size() ;i++) {
-				List<ReviewVO> re =mainService.getHReview(h_no_list.get(i));
-					rTotal.add(re.size());
-					int t_review_total = 0;
-					for(int j=0 ;j<re.size() ;j++) {
-						t_review_total += re.get(j).getR_score();
-					}
-					if(re.size()==0) {
-						total.add(0.0);	
-					}else {
-						total.add((double)t_review_total/re.size());
-					}
-			}
 			
 			// 등록된훈련사가 없을경우레
 			if(h_m_no_list.size()!=0) {
+				//이거
 				model.addAttribute("member", mainService.getMember(h_m_no_list));
-				model.addAttribute("hairstylist",mainService.getAllHairstylistH_no(h_no_list));
+				model.addAttribute("hairstylist",Hlist);
 			}
-				model.addAttribute("hairstylistcheck",h_no_list.size()); //리뷰 평점
-				model.addAttribute("rAvg", total); //리뷰 평점
-				model.addAttribute("rTotal", rTotal); //리뷰 총 갯수
-				model.addAttribute("pager", new PageDTO(cri, Hlist.size()));  
-			//리뷰 추가해야함 베스트 5개 뽑기
 			
+				model.addAttribute("hairstylistcheck",h_no_list.size()); //미용사 숫자 체크
+				model.addAttribute("pager", new PageDTO(cri, Htotal));  // total count로 수정 
+			//리뷰 추가해야함 베스트 5개 뽑기
+				List<ReviewVO> BestReview=mainService.getAllHReview();
+				
+				model.addAttribute("bestReview",BestReview);
+				model.addAttribute("bestReviewUser",BestReview);
+				
+				
+				
 		}
 	
 	
@@ -345,6 +386,11 @@ public class mainController {
 	}
 	
 	
+	
+	
+	
+	
+	
 	@GetMapping("selUpload")
 	public void selUpload(int m_no,Model model) {
 		model.addAttribute("m_no",m_no);
@@ -476,8 +522,8 @@ public class mainController {
 	@PostMapping("estimate2Pro")
 	public String Estimate2Pro(EstimateVO addEstimate,String t_date) {
 		//원래 견적서 불러오는 메서드.
-		log.info(t_date+"어떻게 생겼나요!!!");
-		
+		String newDate=t_date.replace("T", " ");
+		log.info(newDate+"어떻게 생겼나요!!!");
 		
 		
 		EstimateVO estimate =mainService.getEOneEstimate(addEstimate.getE_no());
@@ -498,11 +544,12 @@ public class mainController {
 		}
 		
 		//메니저가 확인했을때 컨디션 바꿔주는 처리
+		
+		estimate.setE_date(newDate);
 		estimate.setE_con(1);
 		log.info(estimate+"확인");
 		
 		mainService.updateEst(estimate);
-		
 		return "redirect:/member/mypage";
 		
 	}
@@ -523,12 +570,16 @@ public class mainController {
 		
 	}
 	
+	
+	//*************************************훈련사 견적서 추가**********************************************
 	@PostMapping("insertEst")
 	public String insertEst(DogVO dog, EstimateVO est, Model model,@Param("t_m_no") int t_m_no,Authentication auth ) {
 		
 		String userId=((CustomUser)auth.getPrincipal()).getUsername();
 		MemberVO loginUser=memberService.getMember(userId);
 		AddressVO loginUserAddress=memberService.getAddress(loginUser.getM_no());
+		
+		
 		
 		//훈련사 정보 불러오기
 		TrainerVO trainer =mainService.getMTrainer(t_m_no);
@@ -547,6 +598,14 @@ public class mainController {
 		est.setA_no(loginUserAddress.getA_no());
 		//훈련사의 기본가격 넣어 보내기
 		est.setE_basicprice(trainer.getT_price());
+		//예약원하는 시간 셋팅
+		String newDate=est.getE_date().replace("T", " ");
+		log.info(newDate);
+		est.setE_date(newDate);
+		log.info(est+"넘어오는 셋팅정보!!");
+		//원하는 서비스 , 빼고 다시 넣기
+		est.setE_service(est.getE_service().replace(",", " "));
+		
 		
 		
 		// 견적서 생성
@@ -554,9 +613,59 @@ public class mainController {
 		log.info("생성 완료");
 		
 		
-		return "redirect:/main/test01" ;
+		return "redirect:/main/tmain" ;
 		
 	}
+	
+	
+	
+	//*************************************미용사 견적서 추가**********************************************
+	@PostMapping("insertHEst")
+	public String insertHEst(DogVO dog, EstimateVO est, Model model,@Param("h_m_no") int h_m_no,Authentication auth ) {
+		
+		String userId=((CustomUser)auth.getPrincipal()).getUsername();
+		MemberVO loginUser=memberService.getMember(userId);
+		AddressVO loginUserAddress=memberService.getAddress(loginUser.getM_no());
+		
+		
+		
+		//훈련사 정보 불러오기
+		HairstylistVO hairstylist =mainService.getMhairstylist(h_m_no);
+		
+		//강아지 정보 불러오기
+		int d_no = dog.getD_no();
+		DogVO dogInfo = mainService.getOneDog(d_no);
+		
+		//견주 m_no , 훈련사 m_no, 강아지 고유넘 d_no 사용해서 견적서 추가 셋팅   
+		est.setM_no_puppy(dogInfo.getM_no());
+		//훈련에서 오는 페이지
+		est.setM_no_manager(h_m_no);
+		//강아지 넘버
+		est.setD_no(d_no);
+		//회원의 주소도 넣어 보내기
+		est.setA_no(loginUserAddress.getA_no());
+		//훈련사의 기본가격 넣어 보내기
+		est.setE_basicprice(hairstylist.getH_price());
+		//예약원하는 시간 셋팅
+		String newDate=est.getE_date().replace("T", " ");
+		log.info(newDate);
+		est.setE_date(newDate);
+		log.info(est+"넘어오는 셋팅정보!!");
+		//원하는 서비스 , 빼고 다시 넣기
+		est.setE_service(est.getE_service().replace(",", " "));
+		
+		
+		
+		// 견적서 생성
+		mainService.insertEst(est);
+		log.info("생성 완료");
+		
+		
+		return "redirect:/main/tmain" ;
+		
+	}
+	
+	
 	
 	
 	@GetMapping("test01")

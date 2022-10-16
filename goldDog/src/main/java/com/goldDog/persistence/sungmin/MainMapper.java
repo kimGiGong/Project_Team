@@ -36,6 +36,7 @@ public interface MainMapper {
 	public TrainerVO getTrainer(int t_no);
 	//M_no훈련사 정보 하나 가져오기 
 	public TrainerVO getMTrainer(int m_no);
+	
 	//전체 훈련사 리스트 가져오기
 	public List<TrainerVO> getAllTrainer(Criteria cri);
 	//전체 훈련사 T_no 가져오기
@@ -55,10 +56,27 @@ public interface MainMapper {
 	//미용사 *********************************************************
 	//미용사 한명 가져오기
 	public HairstylistVO getHairstylist(int h_no);
-	//모든 미용사 가져오기
-	public List<HairstylistVO> getAllHairstylist();
-	//모든 미용사 가져오기 h_no순으로 뽑기위함
-	public List<HairstylistVO> getAllHairstylistH_no(List<Integer> h_no_list);
+	//미용사 정보 하나 가져오기 
+	public HairstylistVO getMhairstylist(int m_no);
+	//전체 미용사 리스트 가져오기
+	public List<HairstylistVO> getAllHairstylist(Criteria cri);
+	//전체 미용사 T_no 가져오기
+	public int getAllhairstylistCount();
+	//미용사 판매정보 등록
+	public int addHinfo(HairstylistVO hairstylist);
+	//검색한 미용사 가져오기
+	public List<HairstylistVO> searchHairstylist(Criteria cri);	
+	//정렬 검색한 미용리턴하기
+	public List<HairstylistVO> sortHairstylist(Criteria cri); 
+	//이름으로 검색했을때 나오는 미용사 카운팅
+	public int countSearchHairstylist(Criteria cri);
+	//미용사 판매등록 업데이트하기
+	public int updateHinfo(HairstylistVO hairstylist);
+	
+	
+	
+	
+	
 	
 	
 	
@@ -76,7 +94,10 @@ public interface MainMapper {
 	public int updateRAvg(int t_no,double ravg,int total);
 	//미용사 한명의 총 리뷰평점&갯수 업데이트
 	public int updateRHAvg(int h_no,double ravg,int total);
-
+	//메인에 띄워줄 훈련사의 모든리뷰 가져오기
+	public List<ReviewVO> getAllTReview();
+	//메인에 띄워줄 미용사의 모든리뷰 가져오기
+	public List<ReviewVO> getAllHReview();
 
 	
 	

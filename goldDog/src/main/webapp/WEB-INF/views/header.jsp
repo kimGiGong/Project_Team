@@ -30,7 +30,7 @@
 <header class="header_section">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg custom_nav-container ">
-			<a class="navbar-brand" href="index.html">
+			<a class="navbar-brand" href="/main/tmain">
 				<h3>금댕이</h3>
 			</a>
 			<div style="width: 300px;"></div>
@@ -43,21 +43,23 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav  mx-auto ">
-					<li class="nav-item "><a class="nav-link" href="/manager">Home
+					<li class="nav-item "><a class="nav-link" href="/main/premain">Home
 					</a></li>
-					<li class="nav-item" id="t"><a class="nav-link"
+					<li class="nav-item active" id="t"><a class="nav-link"
 						href="/main/tmain">훈련<span class="sr-only">(current)</span></a></li>
-					<li class="nav-item active" id="h"><a class="nav-link"
+						
+					<li class="nav-item " id="h"><a class="nav-link"
 						href="/main/hmain">미용</a></li>
+						
 					<li class="nav-item"><sec:authorize access="isAuthenticated()">
-							<form action="/logout" method="post" id="logoutForm">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <a class="nav-link" href="#" onclick="return logout_form()"
-									id="logoutBtn">로그아웃</a>
-							</form>
-						</sec:authorize> <sec:authorize access="isAnonymous()">
-							<a class="nav-link" href="/member/login">로그인</a>
-						</sec:authorize></li>
+					<form action="/logout" method="post" id="logoutForm">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" /> <a class="nav-link" href="#" onclick="return logout_form()"
+							id="logoutBtn">로그아웃</a>
+					</form>
+					</sec:authorize> <sec:authorize access="isAnonymous()">
+						<a class="nav-link" href="/member/login">로그인</a>
+					</sec:authorize></li>
 				</ul>
 				<div class="user_option">
 					<form class="form-inline">
@@ -68,11 +70,17 @@
 					<sec:authorize access="isAuthenticated()">
 						<a href="/mypage" class="order_online"> 마이페이지 </a>
 					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<a href="/admin/QnA" class="order_online"> QnA임시 </a>
+					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_TRAINER')">
 						<a href="/manager" class="order_online"> 훈련 마이페이지 </a>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_HAIR')">
 						<a href="/manager" class="order_online"> 헤어 마이페이지 </a>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<a href="/admin/addAD" class="order_online"> 관리자 페이지 </a>
 					</sec:authorize>
 				</div>
 			</div>

@@ -57,7 +57,7 @@
 	                                <a href="#about" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-user-friends nav-icon"></i>
-	                                    결제수단
+	                                    판매정보 등록
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
@@ -68,7 +68,7 @@
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
-	                                <a href="https://paypal.me/templatemo" class="nav-link external" target="_parent" rel="sponsored">
+	                                <a href="" class="nav-link external" target="_parent" rel="sponsored">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-external-link-alt nav-icon"></i>
 	                                    External
@@ -94,6 +94,7 @@
 									<div class="item">닉네임 : ${ manager.m_nick }</div>
 									<div class="item">이메일 : ${ manager.m_email }</div>
 									<div class="item">이용서비스 : ${ manager.authList[0].auth }</div>
+									<div class="item">회원정보 수정 : ${ manager.authList[0].auth }</div>
 								</div>
                         	</fieldset>
                         </div>
@@ -101,6 +102,7 @@
                     
                     <div>
                     	<div class="Estimate" id="Estimate">
+                    	<h2 class="tm-text-primary">나의 요청</h2>
 		                    	<details class="Estimate_details" id="${ manager.m_no }" onclick="ondetails(this.id)">
 		    						<summary>${ manager.m_name }</summary>
 		    						<p id="ammo">${manager}</p>
@@ -305,6 +307,8 @@
 			</div> <!-- .tm-main -->                      
 		</div> <!-- .row -->
 	</div> <!-- .container-fluid -->
+	
+	
 </div><!-- 바디메인 END -->
 	<script type="text/javascript" src="../../../resources/mypage.js"></script>
 	

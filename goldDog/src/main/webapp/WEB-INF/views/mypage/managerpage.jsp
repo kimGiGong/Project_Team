@@ -118,10 +118,8 @@
 	    							${ estimateMember[status.index].m_nick }
 	    						</summary>
 	    						<p>
-	    							<c:choose>
 
 	    								
-	    							</c:choose>
 	    						</p>
 	                    	</details>
 	                    	<div class="Estimate_interval"></div> 

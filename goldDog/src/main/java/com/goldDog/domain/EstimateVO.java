@@ -20,7 +20,7 @@ public class EstimateVO {
 	private int e_con;
 	private String e_reject;
 	private int d_no;
-	private Timestamp e_date;
 	private int a_no;
 	private int e_basicprice;
+	private String e_date;
 }

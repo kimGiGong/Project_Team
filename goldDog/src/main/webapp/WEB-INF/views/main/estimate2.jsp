@@ -94,7 +94,7 @@
                                   			<div class="col-12">
 	                                          <div class="form-group">
 	                                              <label for="cc-payment" class="control-label mb-1">기본금액</label>
-	                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${trainer.t_price}" readonly>
+	                                              <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${estimate.e_basicprice}" readonly>
 	                                          </div>
 	                                      </div>
                                           </div>
@@ -110,7 +110,7 @@
 	                                          <div class="col-6">
 		                                          <div class="form-group has-success">
 		                                              <label for="cc-name" class="control-label mb-1">추가 금액(원)</label>
-		                                              <input id="addPrice" name="e_extraprice" type="text" class="form-control" aria-required="true" aria-invalid="false" value=0 >
+		                                              <input id="addPrice" name="e_extraprice" type="number" class="form-control" aria-required="true" aria-invalid="false" value=0 >
 		                                          </div>
 	                                          </div>
                                           </div> 
@@ -188,7 +188,6 @@
 			console.log("최종 확인.");
 			
 			$("#sendEstPro").submit(); 				
-			}
 				
 				
 		});
