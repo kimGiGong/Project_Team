@@ -121,7 +121,7 @@
 				 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="훈련사 검색">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="미용사 검색">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
@@ -129,14 +129,18 @@
                     </form>
 		   		</div>
 		   		
-		   		<div class="col-2 all pizza">
-		   			<form id="selectForm" action="/board/list" method="get">
-		   			<select name="sel" >
-		   				<option value=""> 정   렬 </option>
-		   				<option value="W"> 리뷰 평점순</option>
-		   				<option value="C"> 리뷰 많은순</option>
-		   				<option value="T"> 낮은 가격순</option>
-		   				<option value="T"> 높은 가격순</option>
+		   <div class="col-2 all pizza">
+		   			<form id="selectForm" action="/main/hmain" method="get">
+		   			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+	   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+		   			<select id="select" name="sort" >
+		   				<option value=" "> 정렬 </option>
+		   				<option value="S"> 기본 정렬 </option>
+		   				<option value="R"> 리뷰 평점순</option>
+		   				<option value="RH"> 리뷰 많은순</option>
+		   				<option value="L"> 낮은 가격순</option>
+		   				<option value="H"> 높은 가격순</option>
 		   			</select>
 		   			</form>
 		   		</div>	
@@ -158,14 +162,14 @@
 	                <div class="detail-box" >
 		                  <h5 style="height: 35px;">${member[i].m_nick}</h5>
 		                  <p style="font-size:17px;">소개 : ${hairstylist[i].h_self}</p>
-		                  <c:if test="${rTotal[i]==0}">
-		                  	<p><i class="fa fa-star " aria-hidden="true"></i>가장먼저 리뷰를 남겨주세요!</p>
+		                  <c:if test="${hairstylist[i].h_RTotal==0}">
+		                  	<p><i class="fa fa-star fa-lg " aria-hidden="true"></i>가장먼저 리뷰를 남겨주세요!</p>
 		                  </c:if>
-		                   <c:if test="${rTotal[i]!=0}">
-			                  <p><i class="fa fa-star " aria-hidden="true"></i> : ${rAvg[i]}점 (${rTotal[i]})</p>
+		                   <c:if test="${hairstylist[i].h_RTotal!=0}">
+			                   <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${hairstylist[i].t_RAvg}점 (${hairstylist[i].t_RTotal})</p>
 		                  </c:if>
 		                  <p>미용 가격 : ${hairstylist[i].h_price}~ 원</p>
-		                  <p>보유 자격증 : ${hairstylist[i].h_license}</p>
+		                  <p>자격증<i class="fa fa-address-card" aria-hidden="true"></i> : ${hairstylist[i].h_license}</p>
 	                </div>
 	                </div>
 	            </div>
@@ -219,7 +223,6 @@
 				<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
 				<input type="hidden" name="sel" value="${pager.cri.sel}" />
-				<input type="hidden" name="keyword" value="${pager.cri.keyword}" />
 			</form>
 			
 			
@@ -246,17 +249,17 @@
             <div class="box">
               <div class="detail-box">
                 <p>
-                  ${review[i].r_text}
+                  ${bestReview[i].r_text}
                 </p>
                 <h6>
                 	리뷰 등록한사람 이름
                 </h6>
                 <p>
-                  ${review[i].r_date}
+                   ${bestReview[i].r_date}
                 </p>
               </div>
               <div class="img-box">
-                <img src="/resources/feane/images/client1.jpg" alt="" class="box-img">
+                 <img src="/resources/serverImg/${bestReview[i].r_img}"  class="box-img">
               </div>
             </div>
           </div>
@@ -273,8 +276,9 @@
   <!-- end client section -->
 	<script type="text/javascript">
 		$(document).ready(function(){
-			
-		let pagingForm = $("#pagingForm"); // 숨긴 폼태그 가져오기 	
+		let token =$("meta[name='_csrf']").attr("content");		
+		let header=$("meta[name='_csrf_header']").attr("content");		
+		let pagingForm = $("#pagingForm"); // 숨긴 폼태그 가져오기 		
 		
 		// 제목클릭시 detailForm로 넘어가는 처리
 		$(".move").on("click", function(e){
@@ -290,6 +294,34 @@
 			// read로 이동하기(form으로 요청) 
 			pagingForm.submit(); 
 		});
+		
+		//소트 처리
+		let selectForm=$("#selectForm");
+		
+	    $("#select").change(function() {
+	      let sort = $("#select").val();
+	      selectForm.submit();
+	    });
+	    
+		
+		//검색 폼 처리
+		let searchForm=$("#searchForm");
+		$("#searchIdBtn").on("click",function(e){
+			let searchForm1 = searchForm.find("input[name='keyword']").val();
+			console.log(searchForm1);
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("키워드를 입력하세요..")
+				return false;	//submit 이동 막기
+			}
+			e.preventDefault();
+				searchForm.find("input[name='pageNum']").val("1");
+				searchForm.submit();
+		    });
+		
+		
+		
+		
+		
 		
 		
 		

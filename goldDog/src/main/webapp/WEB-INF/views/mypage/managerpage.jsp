@@ -108,6 +108,7 @@
                         </div>
                     </section>
 
+
 					<%-- 견적서 --%>
 					<h3 class="tm-text-primary">견적서</h3>
 					<hr class="mb-5">
@@ -158,6 +159,7 @@
 
 
 						<%-- 훈련사 정보 --%>
+
                    	<div class="manager_info">
                    	<h3 class="tm-text-primary">훈련사 소개</h3> 
                     <hr class="mb-5">

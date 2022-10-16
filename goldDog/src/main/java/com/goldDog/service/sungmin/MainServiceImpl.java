@@ -99,22 +99,63 @@ public class MainServiceImpl implements MainService {
 	
 	
 	//미용사 *********************************************************
-	//모든 미용사 가져오기
-	@Override
-	public List<HairstylistVO> getAllHairstylist() {
-		return mapper.getAllHairstylist();
-	}
-	//모든 미용사 가져오기 h_no순으로 뽑기위함
-	@Override
-	public List<HairstylistVO> getAllHairstylistH_no(List<Integer> h_no_list) {
-		return mapper.getAllHairstylistH_no(h_no_list);
-	}  
 	//미용사 한명의 정보 가져오기
 	@Override
 	public HairstylistVO getHairstylist(int h_no) {
 		return mapper.getHairstylist(h_no);
 	}
-		
+	//m_no 로 미용사 한명 가져오기
+	@Override
+	public HairstylistVO getMhairstylist(int m_no) {
+		return mapper.getMhairstylist(m_no);
+	}
+	//전체 미용사 리스트 가져오기
+	@Override
+	public List<HairstylistVO> getAllHairstylist(Criteria cri) {
+		return mapper.getAllHairstylist(cri);
+	}
+	//전체 미용사 T_no 가져오기
+	@Override
+	public int getAllhairstylistCount() {
+		return mapper.getAllhairstylistCount();
+	}
+	//미용사 판매정보 등록
+	@Override
+	public int addHinfo(HairstylistVO hairstylist) {
+		return mapper.addHinfo(hairstylist);
+	}
+	//검색한 미용사 가져오기
+	@Override
+	public List<HairstylistVO> searchHairstylist(Criteria cri) {
+		return mapper.searchHairstylist(cri);
+	}
+	//정렬 검색한 미용리턴하기
+	@Override
+	public List<HairstylistVO> sortHairstylist(Criteria cri) {
+		return mapper.sortHairstylist(cri);
+	}
+	//이름으로 검색했을때 나오는 미용사 카운팅
+	@Override
+	public int countSearchHairstylist(Criteria cri) {
+		return mapper.countSearchHairstylist(cri);
+	}
+	//미용사 판매등록 업데이트하기
+	@Override
+	public int updateHinfo(HairstylistVO hairstylist) {
+		return mapper.updateHinfo(hairstylist);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
 	//리뷰 **********************************************************
@@ -150,7 +191,16 @@ public class MainServiceImpl implements MainService {
 	public int updateRHAvg(int h_no,double ravg,int total) {
 		return mapper.updateRHAvg(h_no, ravg,total);
 	}
-
+	//메인에 띄워줄 훈련사의 모든리뷰 가져오기
+	@Override
+	public List<ReviewVO> getAllTReview() {
+		return mapper.getAllTReview();
+	}
+	//메인에 띄워줄 미용사의 모든리뷰 가져오기
+	@Override
+	public List<ReviewVO> getAllHReview() {
+		return mapper.getAllHReview();
+	}
 	
 	
 		
@@ -307,6 +357,8 @@ public class MainServiceImpl implements MainService {
 	public int modifyQnA(QnAVO QnA) {
 		return mapper.modifyQnA(QnA);
 	}
+	
+	
 
 
 	

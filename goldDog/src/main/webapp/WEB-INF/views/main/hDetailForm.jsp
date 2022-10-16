@@ -6,6 +6,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
     <meta charset="UTF-8">
+    
+     <style>
+	.fa-star:before {
+    content: "\f005";
+    color: #48c1bd;
+	}
+	.fa-vcard:before, .fa-address-card:before {
+    color: #6b6b6b;
+	}
+
+	</style>
+    
+    
+    
+    
 </head>
 <body>
 		<div>
@@ -16,73 +31,137 @@
 	
 	
 	
-  <div class="hero_area">
-	 <div class="container">
-	<table width="680" height="500">
-		<tr>
-			<td>사진</td>
-			<td>이름</td>
-			<td>${member.m_nick}</td>
-		</tr>
-		<tr>
-			<td>
-				<a>판매자 소개 </a>		
-			</td>
-			<td>
-				<a>특이사항</a>		
-			</td>
-			<td>
-				<a>리뷰</a>		
-			</td>
-		</tr>
-		<tr>
-			<td >자기소개</td>			
-			<td >${hairstylist.h_self}</td>
-		</tr>
-		<tr>
-			<td> 판매정보</td>	
-			<td> ${hairstylist.h_sel}</td>	
-		</tr>
-		<tr>
-			<td> 리뷰(${Ravg})</td>
-			<td> ${review[i].r_score}</td>
-		</tr>
-		<tr>
-			<td> 리뷰(${Ravg})</td>	
-			<c:forEach var="i" begin="0" end="5" step="1" >
-			<td> ${review[i].r_text}</td>
-			</c:forEach>
-		</tr>
-		
-		
-	</table> 
-	
-	<table width="680" height="500">
-		<tr>
-			<td>완료</td>
-		</tr>
-		<tr>
-			<td>기본금액</td>
-			<td>${hairstylist.h_price}</td>
-		</tr>
-		<tr>
-			<td>가능한 날짜</td>
-			<td>달력api 올 곳</td>
-		</tr>
-		<tr>
-			<td>보유 자격증</td>
-			<td>${hairstylist.h_license}</td>
-		</tr>
-		<tr>
-			<td>경력</td>
-			<td>${hairstylist.h_career}</td>
-		</tr>
-		<tr>
-			<td> <button id="dogCheck">협의하기</button>  </td>
-		</tr>
-		
-	</table>
-	</div>
+	 < <div class="container">
+	  <div class="row">
+	  <div class="col-lg-8 ">
+               <div class="col-md ">
+                 <div class="card mb-3 border border-primary mb-3">
+                   <div class="row g-0">
+                     <div class="col-md-4">
+                      <img src="/resources/serverImg/${member.m_img}" width="185px" height="185px" style="border-radius:1.5rem;"/>
+                     </div>
+                     <div class="col-md-8">
+                       <div class="card-body">
+                         <h5 class="card-title">${member.m_nick}</h5>
+                         <p class="card-text">
+                          	${hairstylist.h_self}
+                         </p> 
+                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>    
+             
+              <div class="col-lg-12">
+               <div class="card shadow-none bg-transparent border border-primary mb-3">
+                 <div class="card-body">
+                   <h5 class="card-title">판매정보</h5>
+                   <p class="card-text">${hairstylist.h_sel}</p>
+                 </div>
+               </div>
+             </div>
+             
+              <div class="col-lg-12">
+               <div class="card shadow-none bg-transparent border border-primary mb-3">
+                 <div class="card-body">
+                   <h5 class="card-title " style="text-align: left;">미용사의 BEST 리뷰</h5>
+                   <p class="card-text" style="text-align: right;" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>(${hairstylist.h_RAvg})${hairstylist.h_RTotal}</p>
+                 </div>
+               </div>
+             </div>
+             
+             <c:forEach var="i" begin="0" end="2" step="1" >
+             <div class="col-lg-12 ">
+                 <div class="card mb-3">
+                   <div class="row g-0">
+                     <div class="col-md-4">
+                      <img src="/resources/serverImg/${r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
+                     </div>
+                     <div class="col-md-8">
+                       <div class="card-body">
+                         <h5 class="card-title">${member.m_nick}
+                         <c:forEach  begin="1" end="${review[i].r_score}" step="1" >
+                         	<i class="fa fa-star fa-lg " aria-hidden="true"></i>
+                         </c:forEach>
+                         <fmt:formatDate pattern="yy-MM-dd" value="${review[i].r_date}"/>
+						</h5>
+                         <p class="card-text">${review[i].r_text} </p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>   
+             	</c:forEach>
+             	<br/><br/><br/>
+               </div>   
+             
+	  
+                  <div class="col-lg-4 ">
+                     <div class="card">
+                         <div class="card-header">
+                             <strong class="card-title">미용사 정보</strong>
+                         </div>
+                         <div class="card-body">
+                             <!-- Credit Card -->
+                             <div id="pay-invoice">
+                                 <div class="card-body">
+                                     <div class="card-title">
+                                         <h3 class="text-center">Pay Invoice</h3>
+                                     </div>
+                                     <hr>
+                                     <form action="#" method="post" novalidate="novalidate">
+                                         <div class="form-group text-center">
+                                             <ul class="list-inline">
+                                                 <li class="list-inline-item"><i class="text-muted fa fa-cc-visa fa-2x"></i></li>
+                                                 <li class="list-inline-item"><i class="fa fa-cc-mastercard fa-2x"></i></li>
+                                                 <li class="list-inline-item"><i class="fa fa-cc-amex fa-2x"></i></li>
+                                                 <li class="list-inline-item"><i class="fa fa-cc-discover fa-2x"></i></li>
+                                             </ul>
+                                         </div>
+                                         <div class="form-group">
+                                             <label for="cc-payment" class="control-label mb-1">기본금액</label>
+                                             <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${hairstylist.h_price}" readonly>
+                                         </div>
+                                         <div class="form-group has-success">
+                                             <label for="cc-name" class="control-label mb-1">원하는 날짜</label>
+                                             
+	                                        <div class="mb-3 row">
+												<input class="form-control newDate" type="datetime-local" name="e_date" value="2022-10-13T12:30:00" id="html5-datetime-local-input" />						                          
+					                      	</div>       
+					                      
+                                             <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                         </div>
+                                         <div class="form-group">
+                                             <label for="cc-payment" class="control-label mb-1">보유자격증</label>
+                                             <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${hairstylist.h_license}" readonly>
+                                         </div>
+                                         <div class="form-group">
+                                             <label for="cc-payment" class="control-label mb-1">경력</label>
+                                             <input id="cc-payment" name="cc-payment" type="text" class="form-control" aria-required="true" aria-invalid="false" value="${hairstylist.h_career}년" readonly>
+                                         </div>
+                                         <div>
+                                              <button id="dogCheck" type="submit" class="btn btn-lg btn-danger btn-block">
+                                                 <i class="fa fa-bell" aria-hidden="true"></i></i>&nbsp;
+                                                 <span id="payment-button-amount">협의하기</span>
+                                                 <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                             </button>
+                                             <div class="col-12 col-md-9"><small class="form-text text-muted">협의는 결제가 되지 않습니다.</small></div>
+                                         </div>
+                                     </form>
+                                 </div>
+                             </div>
+
+                         </div>
+                     </div> <!-- .card -->
+                 </div><!--/.col-->
+                 
+                 </div><!--/.row-->
+                 </div><!--/.con-->
+                 
+                  
+                  
+                  
 	<!-- 펫 등록 되어있을시 띄울 모달 -->
 	<div class="modal fade" id="yesPet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -96,8 +175,8 @@
       			<div class="modal-body">
       				<form id="addDogInfo" action="/main/tmain" method="post" >
       				 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-      				  	<input type="hidden" name="t_m_no" value="${hairstylist.m_no}"/>
-   					  	<input type="hidden" name="t_no" value="${hairstylist.h_no}" />
+      				  	<input type="hidden" name="h_m_no" value="${hairstylist.m_no}"/>
+   					  	<input type="hidden" name="h_no" value="${hairstylist.h_no}" />
      					<input type="hidden" name="m_no" value="${m_no}"/>
      					
       				<p>1.내주소를 선택해 주세요</p>
@@ -122,7 +201,7 @@
 	       				<input type="radio" name="e_service" value="전체미용" class="radio-val1" />전체미용<br/>
 	       				<input type="radio" name="e_service" value="부분미용" class="radio-val1" />부분미용 <br/>
 	       				<input type="radio" name="e_service" value="위생 미용" class="radio-val1" />위생 미용 <br/>
-	       				<input type="radio" name="e_service" value="원하는 미용 :" class="radio-val" />기타 <br/>
+	       				<input type="radio" name="e_service" value="기타 교육" class="radio-val" />기타 <br/>
 	       				<input type="text" name="e_service"  class="radio-value-detail" placeholder="기타사항을 입력해주세요" disabled="true" /> <br/>
       				<p>--------------------------------</p>
       				<p>4.출장시 주의사항을 적어주세요</p>
@@ -281,7 +360,9 @@
 			let	addDogInfo = $("#addDogInfo")
 			$("#addDogInfoSubmit").on("click",function(e){
 				console.log("정보를 보낸다 .");
-				addDogInfo.attr("action","/main/insertEst");
+				let newDate=$(".newDate").val();
+				addDogInfo.append("<input type='hidden' name='e_date' value='" + newDate+ "' />");
+				addDogInfo.attr("action","/main/insertHEst");
 				
 				addDogInfo.submit();
 			});
@@ -291,7 +372,7 @@
 			 $('.radio-val').on('click',function () {
 		           var check = $('.radio-val').val();
 
-					if(check=='원하는 미용 :'){
+					if(check=='기타 교육'){
 						 $('.radio-value-detail').attr('disabled', false);
 					}
 		        });
@@ -299,7 +380,7 @@
 			//버튼 클릭했을 때 기타가 아니면 초기화
 			 $('.radio-val1').on('click',function () {
 		           var check = $('.radio-val1').val();
-					 if(check!='원하는 미용 :'){
+					 if(check!='기타 교육'){
 						$('.radio-value-detail').val("");
 						$('.radio-value-detail').attr('disabled', true);
 					}
