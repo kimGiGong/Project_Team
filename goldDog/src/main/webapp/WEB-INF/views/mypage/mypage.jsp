@@ -100,18 +100,80 @@
                     </section>
                     
                     <div>
-                    	<div class="Estimate">
-		                    	<details class="Estimate_details" id="${ manager.m_no }" onclick="ondetails(this.id)">
-		    						<summary>${ manager.m_name }</summary>
-		    						<p id="ammo">${manager}</p>
-		                    	</details>
-		                    	<div class="Estimate_interval"></div> 
-                    		<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->	
-                    		<!-- </c:forEach> -->
-                    	</div>
-                    </div>
-                    
-                    <div>
+							<div class="Estimate" id="Estimate">
+								<details class="Estimate_details" id="${ manager.m_no }"
+									onclick="ondetails(this.id)">
+									<summary>${ manager.m_name }</summary>
+									<p id="ammo">${manager}</p>
+								</details>
+								<p>
+									<a class="btn btn-primary" data-bs-toggle="collapse"
+										href="#multiCollapseExample1" role="button"
+										aria-expanded="false" aria-controls="multiCollapseExample1">훈련
+										견적서</a>
+									<button class="btn btn-primary" type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#multiCollapseExample2" aria-expanded="false"
+										aria-controls="multiCollapseExample2">미용 견적서</button>
+									<button class="btn btn-primary" type="button"
+										data-bs-toggle="collapse" data-bs-target=".multi-collapse"
+										aria-expanded="false"
+										aria-controls="multiCollapseExample1 multiCollapseExample2">모두
+										보기</button>
+								</p>
+								<!-- <div class="Estimate_interval"></div>  -->
+								<div class="row">
+									<div class="col">
+										<div class="collapse multi-collapse"
+											id="multiCollapseExample1">
+											<div class="card card-body" style="height: 140">
+												<table>
+													<tr>
+														<th><button class="btn btn-outline-primary"
+																type="button" style="width: 120px;">견적서 확인</button></th>
+														<th>홍성현 훈련매니저</th>
+													</tr>
+													<tr>
+														<th colspan="2"><br></th>
+													</tr>
+													<tr>
+														<th align="center">진행 중입니다</th>
+														<th align="center">010-1234-1234</th>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="col">
+										<div class="collapse multi-collapse"
+											id="multiCollapseExample2">
+											<div class="card card-body" style="height: 140">
+												<table>
+													<tr>
+														<th>
+															<button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button>
+														</th>
+														<th>홍성현 미용매니저</th>
+													</tr>
+													<tr>
+														<th colspan="2"><br></th>
+													</tr>
+													<tr>
+														<th align="center">진행 완료</th>
+														<th><button class="btn btn-outline-primary"
+																type="button" style="width: 120px;">리뷰 작성</button></th>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- <c:forEach var="manager" items="${ managers }" end="${ managers.size }">  -->
+								<!-- </c:forEach> -->
+							</div>
+						</div>
+
+						<div>
                     	<div class="gallery" >
 		                    <div id="gallery"> 
 		                    <br><br><br>
@@ -143,40 +205,41 @@
 										</tr>
 									</table>
 								</div>
-								
-								<div class="collapse" id="collapseExample">
-									<div class="card card-body">
-										<table>
-											<tr>
-												<th>가을이</th>
-												<th style="width:70px">
-													<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-														보기
-													</button>
-												</th>
-												<th style="width:70px">	
-													<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-														삭제
-													</button>
-												</th>
-											</tr>
-											<tr>
-												<th>쥬디</th>
-												<th style="width:70px">
-													<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-														보기
-													</button>
-												</th>
-												<th style="width:70px">	
-													<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-														삭제
-													</button>
-												</th>
-											</tr>
-										</table>
+								<c:if test="${dogCheck == 0 }">
+									<div class="collapse" id="collapseExample">
+										<div class="card card-body">
+											<table>
+												<tr>
+													<th>등록된 반려견이 없습니다.</th>
+												</tr>
+											</table>
+										</div>
 									</div>
-								</div>
-								
+								</c:if>
+								<c:if test="${dogCheck != 0}">
+									<c:forEach var="i" begin="0" end="${dogCheck-1}" step="1">
+										<div class="collapse" id="collapseExample">
+											<div class="card card-body">
+												<table>
+													<tr>
+														<th>${dog[i].d_name}</th>
+														<th style="width:70px">
+															<button type="button"  value="${dog[i].d_no}" class="btn btn-primary" veiwDog="${dog[i].d_name}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+																보기
+															</button>
+														</th>
+														<th style="width:70px">	
+															<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+																삭제
+															</button>
+														</th>
+													</tr>
+													
+												</table>
+											</div>
+										</div>
+									</c:forEach>
+								</c:if>
 		                    </div>
                     	</div>
                     </div>

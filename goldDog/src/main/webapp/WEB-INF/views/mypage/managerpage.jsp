@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en"><head>
     <meta charset="UTF-8">
@@ -107,28 +107,59 @@
                         	</fieldset>
                         </div>
                     </section>
-                    
-                    <%-- 견적서 --%>
-                    <h3 class="tm-text-primary">견적서</h3> 
-                    <hr class="mb-5">
-                   	<div class="Estimate">
-                   		<c:forEach var="estimate" items="${ estimatelist }" varStatus="status">	
-	                    	<details class="Estimate_details" id="${e_no}" >
-	    						<summary>
-	    							${ estimateMember[status.index].m_nick }
-	    						</summary>
-	    						<p>
 
-	    								
-	    						</p>
-	                    	</details>
-	                    	<div class="Estimate_interval"></div> 
-	                    </c:forEach>
-                   	</div>
-                   	
-           			
-           			
-                    <%-- 훈련사 정보 --%>
+
+					<%-- 견적서 --%>
+					<h3 class="tm-text-primary">견적서</h3>
+					<hr class="mb-5">
+					<div class="Estimate" id="Estimate">
+							<c:forEach items="${ estimatelist }" var="estimate" varStatus="status">
+							<a class="btn btn-primary" data-bs-toggle="collapse"
+								href="#multiCollapseExample1" role="button"
+								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 님의 견적서
+							</a>
+							<div class="row">
+								<div class="col">
+									<div class="collapse multi-collapse" id="multiCollapseExample1">
+										<div class="card card-body" style="height: 140">
+											<table>
+												<tr>
+													<th><button class="btn btn-outline-primary"
+															type="button" style="width: 120px;">견적서 확인</button></th>
+													<th>${ estimateMember[status.index].m_nick }님 </th>
+												</tr>
+												<tr>
+													<th colspan="2"><br></th>
+												</tr>
+												<tr>
+													<th align="center">
+														<c:choose>
+															<c:when test="${ estimate.e_con eq '0'}">견적 신청</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">결제 대기</c:when>
+															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">방문 확인대기</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
+															<c:otherwise>취소됨</c:otherwise>
+														</c:choose>
+													</th>
+													<th align="center">010-1234-1234</th>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							</c:forEach>
+						<c:if test="${ empty estimatelist }">
+							<div>
+								견적서가 없습니다
+							</div>
+						</c:if>
+					</div>
+
+
+						<%-- 훈련사 정보 --%>
+
                    	<div class="manager_info">
                    	<h3 class="tm-text-primary">훈련사 소개</h3> 
                     <hr class="mb-5">
