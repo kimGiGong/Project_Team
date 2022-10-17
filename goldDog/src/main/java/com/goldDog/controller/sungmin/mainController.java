@@ -84,7 +84,7 @@ public class mainController {
 		
 		
 		
-		if( cri.getKeyword()==null && cri.getSort()==null ||cri.getSort().equals("S")){
+		if( cri.getKeyword()==null && cri.getSort()==null){
 			//기본 훈련사 정렬
 			log.info("기본를 탄다구");
 			Tlist= mainService.getAllTrainer(cri);
@@ -101,7 +101,7 @@ public class mainController {
 			log.info(Tlist+"1번쨰!!");
 		}
 		
-		if(cri.getKeyword()==null && cri.getSort()!=null && !cri.getSort().equals("S")) {
+		if(cri.getKeyword()==null && cri.getSort()!=null ) {
 			// 정렬로 검색
 			log.info("getSort!!!!!!!!!!!!!!!");
 			Tlist=mainService.sortTrainer(cri);
@@ -168,7 +168,7 @@ public class mainController {
 			int Htotal=4;		
 			log.info(cri);
 			
-			if( cri.getKeyword()==null && cri.getSort()==null ||cri.getSort().equals("S")){
+			if( cri.getKeyword()==null && cri.getSort()==null ){
 				//기본 훈련사 정렬
 				log.info("기본를 탄다구");
 				Hlist= mainService.getAllHairstylist(cri);
@@ -185,7 +185,7 @@ public class mainController {
 				log.info(Hlist+"1번쨰!!");
 			}
 			
-			if(cri.getKeyword()==null && cri.getSort()!=null && !cri.getSort().equals("S")) {
+			if(cri.getKeyword()==null && cri.getSort()!=null) {
 				// 정렬로 검색
 				log.info("getSort!!!!!!!!!!!!!!!");
 				Hlist=mainService.sortHairstylist(cri);

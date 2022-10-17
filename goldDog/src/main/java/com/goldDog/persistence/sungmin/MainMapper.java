@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.goldDog.domain.ADVO;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.Criteria2;
 import com.goldDog.domain.DogVO;
 import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.HairstylistVO;
@@ -138,7 +139,7 @@ public interface MainMapper {
 	//공지사항 추가
 	public int addNotice(NoticeVO notice);
 	//공지사항 모두 가져오기
-	public List<NoticeVO> getAllNotice();
+	public int getAllNotice();
 	//공지사항 조회수 올려주기
 	public void addViewPoint(int n_no);
 	//n_no에 해당하는 공지사항 가져오기
@@ -147,13 +148,16 @@ public interface MainMapper {
 	public int deleteNotice(int n_no);
 	//n_no에 해당하는 공지사항 수정하기
 	public int modifyNotice(NoticeVO notice);;
-	  
+	//공지사항 모두 가져오기(최신순으로)페이징처리
+	public List<NoticeVO> getAllNoticeCri(Criteria2 cri);   
+	
+	
 	
 	//QnA********************************************************
 	//QnA 추가
 	public int addQnA(QnAVO QnA);
 	//QnA 모두 가져오기
-	public List<QnAVO> getAllQnA();
+	public int getAllQnA();
 	//공지사항 조회수 올려주기
 	public void addQViewPoint(int q_no);
 	//q_no에 해당하는 공지사항 가져오기
@@ -162,7 +166,8 @@ public interface MainMapper {
 	public int deleteQnA(int q_no); 
 	//q_no에 해당하는 공지사항 수정하기
 	public int modifyQnA(QnAVO QnA);
-	
+	//QnA 모두 가져오기
+	public List<QnAVO> getAllQnACri(Criteria cri);
 	
 	
 	

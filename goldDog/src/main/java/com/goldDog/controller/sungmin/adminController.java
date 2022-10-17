@@ -17,7 +17,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.goldDog.domain.ADVO;
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.Criteria2;
 import com.goldDog.domain.NoticeVO;
+import com.goldDog.domain.PageDTO;
+import com.goldDog.domain.PageDTO2;
 import com.goldDog.domain.QnAVO;
 import com.goldDog.service.bum.domain.CustomUser;
 import com.goldDog.service.sungmin.MainService;
@@ -93,18 +96,34 @@ public class adminController {
 	
 	
 	@GetMapping("QnA")
-	public void QnA(Model model,Criteria cri) {
+	public void QnA(Model model,Criteria cri,Integer pageNumber) {
 		
+		Criteria2 cri2 = new Criteria2();
+		if(pageNumber!=null) {
+			cri2.setPageNumber(pageNumber);
+		}else {
+			cri2.setPageNumber(1);
+		}
 		//공지사항 가져와서 뿌려주기
-		List<NoticeVO> notice =mainService.getAllNotice();
+		log.info(cri2+"페이지 이동할때 정보");
+		List<NoticeVO> notice =mainService.getAllNoticeCri(cri2);
+		int countNotice = mainService.getAllNotice();
 		log.info(notice+"dhdhdhdhdhdhdh");
 		log.info(notice.size()+"성민확인");
 		
+		
+		model.addAttribute("noticeCheck",notice.size());
 		model.addAttribute("notice",notice);
+		model.addAttribute("npager", new PageDTO2(cri2, countNotice)); 
+		 
 		
 		//QnA 가져와서 뿌려주기
-		List<QnAVO> QnA = mainService.getAllQnA();
+		log.info(cri+"페이지 이동할때 정보 QnA");
+		List<QnAVO> QnA = mainService.getAllQnACri(cri);
+		int countQna = mainService.getAllQnA();
+		model.addAttribute("QnACheck",QnA.size());
 		model.addAttribute("QnA",QnA);
+		model.addAttribute("pager", new PageDTO(cri, countQna)); 
 	
 		
 	}
