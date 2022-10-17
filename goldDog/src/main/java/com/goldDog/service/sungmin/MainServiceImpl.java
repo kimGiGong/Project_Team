@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.goldDog.domain.ADVO;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.Criteria;
+import com.goldDog.domain.Criteria2;
 import com.goldDog.domain.DogVO;
 import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.HairstylistVO;
@@ -298,7 +299,7 @@ public class MainServiceImpl implements MainService {
 	
 	//공지사항 모두 가져오기	
 	@Override
-	public List<NoticeVO> getAllNotice() {
+	public int getAllNotice() {
 		return mapper.getAllNotice();
 	}
 	
@@ -321,8 +322,12 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public int modifyNotice(NoticeVO notice) { 
 		return mapper.modifyNotice(notice);
-	} 
-	
+	}
+	//공지사항 모두 가져오기(최신순으로)페이징처리
+	@Override
+	public List<NoticeVO> getAllNoticeCri(Criteria2 cri) {
+		return mapper.getAllNoticeCri(cri);
+	}
 	 
 	
 	
@@ -334,7 +339,7 @@ public class MainServiceImpl implements MainService {
 	}
 	//공지사항 모두 가져오기
 	@Override
-	public List<QnAVO> getAllQnA() {
+	public int getAllQnA() {
 		return mapper.getAllQnA();
 	}
 	//공지사항 조회수 올려주기
@@ -356,6 +361,11 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public int modifyQnA(QnAVO QnA) {
 		return mapper.modifyQnA(QnA);
+	}
+	//QnA 모두 가져오기
+	@Override
+	public List<QnAVO> getAllQnACri(Criteria cri) {
+		return mapper.getAllQnACri(cri);
 	}
 	
 	
