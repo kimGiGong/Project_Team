@@ -14,7 +14,13 @@
     <!--<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>  -->
    	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <style type="text/css">
+		.star-rating { display: flex; flex-direction: row-reverse; font-size: 2.25rem; line-height: 2.5rem; justify-content: space-around; padding: 0 0.2em; text-align: center; width: 5em;}
+		.star-rating input {display: none;}
+		.star-rating label {-webkit-text-fill-color: transparent;/* Will override color (regardless of order) */-webkit-text-stroke-width: 2.3px;-webkit-text-stroke-color: #2b2a29;cursor: pointer;}
+		.star-rating :checked ~ label {-webkit-text-fill-color: gold;}
+		.star-rating label:hover, .star-rating label:hover ~ label {-webkit-text-fill-color: #fff58c;}
+	</style>
 </head>
 <body>
 
@@ -108,7 +114,7 @@
 							<c:forEach items="${ estimatelist }" var="estimate" varStatus="status">
 							<a class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample${ status.index }"
 								href="#multiCollapseExample1" role="button"
-								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 님의 견적서
+								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 매니저 견적서
 							</a>
 							<div class="row">
 								<div class="col">
@@ -118,7 +124,7 @@
 												<tr>
 													<th></a><button class="btn btn-outline-primary"
 															type="button" style="width: 120px;">견적서 확인</button></th>
-													<th>${ estimateMember[status.index].m_nick } 님 </th>
+													<th>${ estimateMember[status.index].m_nick } 매니저 </th>
 												</tr>
 												<tr>
 													<th colspan="2"><br></th>
@@ -126,21 +132,31 @@
 												<tr>
 													<th align="center">
 														<c:choose>
-															<c:when test="${ estimate.e_con eq '0'}">견적 신청</c:when>
-															<c:when test="${ estimate.e_con eq '1'}">결제 대기</c:when>
-															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
-															<c:when test="${ estimate.e_con eq '3'}">방문 확인대기</c:when>
-															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
+															<c:when test="${ estimate.e_con eq '0'}">　견적 신청</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">　결제 대기</c:when>
+															<c:when test="${ estimate.e_con eq '2'}">　방문 예정</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">　방문 확인대기</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">　의뢰 종료</c:when>
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>
 													</th>
 													<th align="center">
 														<c:choose>
 															<c:when test="${ estimate.e_con eq '0'}">${ estimateMember[status.index].m_phone }</c:when>
-															<c:when test="${ estimate.e_con eq '1'}">${ estimateMember[status.index].m_phone }</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">
+																<!-- Modal -->
+																<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+																	리뷰 작성
+																</button>
+															</c:when>
 															<c:when test="${ estimate.e_con eq '2'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">${ estimateMember[status.index].m_phone }</c:when>
-															<c:when test="${ estimate.e_con eq '4'}">리뷰작성</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">
+																<!-- Modal -->
+																<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+																	리뷰 작성
+																</button>
+															</c:when>
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>
 													</th>
@@ -369,6 +385,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="row" id="dogModal">
+				
 				</div>
 			</div>
 		</div>
@@ -399,6 +416,56 @@
 			 	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		 
 		 </form>
+		 
+		 <!-- review Modal -->
+		<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title fs-5" id="reviewModalLabel">리뷰 작성</h3>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div>
+							<h5 align="center">서비스에 만족하시나요 ?</h5>
+						</div>
+						<form id="reviewPro" action="/member/reviewPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="review" onsubmit="return checkField()">
+							<table>
+								<div class="star-rating space-x-4 mx-auto">
+									<input type="radio" id="5-stars" name="r_score" value="5" v-model="ratings" /> 
+									<label for="5-stars" class="star pr-4">★</label>
+									<input type="radio" id="4-stars" name="r_score" value="4" v-model="ratings" /> 
+									<label for="4-stars" class="star">★</label> 
+									<input type="radio" id="3-stars" name="r_score" value="3" v-model="ratings" />
+									<label for="3-stars" class="star">★</label> 
+									<input type="radio" id="2-stars" name="r_score" value="2" v-model="ratings" /> 
+									<label for="2-stars" class="star">★</label> 
+									<input type="radio" id="1-star" name="r_score" value="1" v-model="ratings" /> 
+									<label for="1-star" class="star">★</label>
+								</div>
+								<hr />
+								<tr>
+									<th>훈련사 이름　:　홍성현<br></th>
+								</tr>
+								<tr>
+									<th>
+										<textarea rows="7" cols="52" name="r_text" placeholder="리뷰 작성"></textarea><br>
+									</th>
+								</tr>
+								<tr>
+							    	<th class="text-center" colspan="2"><input class="form-control" type="file" id="formFile" name="part_img"/></th>
+							    </tr>
+							</table>
+						</form>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" id="review" >저장</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	
  </body>
  
@@ -442,7 +509,7 @@
 			// 부착할 html 목록 문자열로 만들기 
 		   	let str = ""; 
             str += "<div class='col-lg-5 d-none d-lg-block'><div class='p-5'><img class='card-img-top' src='/resources/serverImg/";
-            str += result.d_img+"' width='222' height='180' alt='Card image cap'>";
+            str += result.d_img+"' width='222' height='220' alt='Card image cap'>";
             str += "</div></div><div class='col-lg-7'>";
             str += "<form id='dogModifyPro' action='/member/dogModifyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModify'><input type='hidden' name='d_no' value='"+result.d_no+"' /><table><br/><br/>";
             str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"'></th></tr>";
@@ -450,7 +517,7 @@
             str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' name='d_gender' value='"+ result.d_gender +"'  readonly='' /></th></tr>";
             str += "<tr><th>종　　류　:　</th><th><input type='text' class='form-control form-control-user' name='d_type' value='"+ result.d_type +"'></th></tr>";
             str += "<tr><th>무게(kg)　:　</th><th><input type='number' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"'></th></tr>";
-            str += "<tr><th>사    진　:　</th><th><input class='form-control' width='420' type='file' id='formFile' name='part_img'/></th></tr>";
+            str += "<tr><th>사　　진　:　</th><th><input class='form-control' width='420' type='file' id='formFile' name='part_img'/></th></tr>";
             str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='dogModify' >수정</button>";
             str += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button></div>";
             dogModalrow.html(str);   // html 부착    
@@ -495,7 +562,27 @@
 			$("#addNew").modal("show");
 		});
 		
-		
+		//리뷰****
+		$(document).ready(function(){
+			//review 모달 글쓰기 눌렀을때 띄울 
+			$("#review").on("click",function(e){
+				e.preventDefault(); 
+				console.log("리뷰 확인 모달.");
+				$("#reviewPro").submit();
+			});
+		});
+		//유효성 검사
+    	function checkField() {
+    		let inputs = document.review;
+    		if(! inputs.r_score.value) {
+    			alert("평점을 입력해주세요.")
+    			return false;
+    		}
+    		if(! inputs.r_text.value) {
+    			alert("리뷰를 입력해주세요.")
+    			return false;
+    		}
+    	}
 		
 		
 		
