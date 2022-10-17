@@ -44,6 +44,7 @@ import com.goldDog.service.instance.MyPageService;
 import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequestMapping("/member/*")
@@ -420,5 +421,18 @@ public class memberController {
 	}
 	
 	
+	 @PostMapping("payment/members.get")
+	 public String paymentsReturn(Authentication auth){
+		 
+		CustomUser user = (CustomUser)auth.getPrincipal();
+		String loginID = user.getUsername();
+		MemberVO member = service.getMember(loginID);
+		
+			
+		String result = ""+member.getM_no();
+		System.out.println("요청됨"+result);
+		 
+		return result;
+	 }
 	
 }

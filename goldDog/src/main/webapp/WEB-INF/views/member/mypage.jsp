@@ -117,7 +117,7 @@
 										<div class="card card-body" style="height: 140">
 											<table>
 												<tr>
-													<th><button class="btn btn-outline-primary"
+													<th></a><button class="btn btn-outline-primary"
 															type="button" style="width: 120px;">견적서 확인</button></th>
 													<th>${ estimateMember[status.index].m_nick }님 </th>
 												</tr>

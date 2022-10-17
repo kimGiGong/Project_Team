@@ -127,7 +127,7 @@
 											<table>
 												<tr>
 													<th><button class="btn btn-outline-primary"
-															type="button" style="width: 120px;">견적서 확인</button></th>
+															type="button" style="width: 120px;" onclick="window.location.href='managerEstimate?e_no=${estimate.e_no}'">견적서 확인</button></th>
 													<th>${ estimateMember[status.index].m_nick }님 </th>
 												</tr>
 												<tr>
@@ -136,10 +136,10 @@
 												<tr>
 													<th align="center">
 														<c:choose>
-															<c:when test="${ estimate.e_con eq '0'}">견적 신청</c:when>
-															<c:when test="${ estimate.e_con eq '1'}">결제 대기</c:when>
+															<c:when test="${ estimate.e_con eq '0'}">협의 대기중</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">협의 완료</c:when>
 															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
-															<c:when test="${ estimate.e_con eq '3'}">방문 확인대기</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">의뢰 완료</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>

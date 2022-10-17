@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -286,6 +287,54 @@ public class mypageController {
     	System.out.println(gyeonggi);
     	return "redirect:/manager";
     }
+    
+    
+    
+    @GetMapping("memberEstimate")
+    public String memberEstimateMapping(int e_no) {
+    	int mappingNumber = sungminService.getEOneEstimate(e_no).getE_con();
+		if(mappingNumber == 0) {
+			return "redirect:/main/estimate1?e_no="+e_no;
+		}else {
+			return "redirect:/main/estimate3?e_no="+e_no;
+		}
+    }
+    
+    @GetMapping("managerEstimate")
+    public String managerEstimateMapping(int e_no) {
+    	int mappingNumber = sungminService.getEOneEstimate(e_no).getE_con();
+    	if(mappingNumber == 0) {
+    		return "redirect:/main/estimate2?e_no="+e_no;
+    	}else {
+    		return "redirect:/main/estimate3?e_no="+e_no;
+    	}
+    }
+    
+    
+    
+	 @PostMapping("payment/members")
+	 @ResponseBody
+	 public Map<String,String> paymentsReturn(Authentication auth) {
+		 
+		CustomUser user = (CustomUser)auth.getPrincipal();
+		String loginID = user.getUsername();
+		MemberVO member = bumService.getMember(loginID);
+		
+		Map<String,String> result = new HashMap<String,String>();
+		result.put("m_no",""+member.getM_no());
+		result.put("t_m_no",""+member.getM_no());
+		result.put("t_name",""+member.getM_no());
+		result.put("m_name",""+member.getM_no());
+		
+		System.out.println("요청됨"+result);
+		 
+		return result;
+	 }
+    
+    
+    
+    
+    
     
 
 }
