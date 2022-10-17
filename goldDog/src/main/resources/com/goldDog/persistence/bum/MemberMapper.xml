@@ -126,8 +126,12 @@
 	</select>
 	
 	<update id="modifytDog">
-		update dog set d_name=#{d_name}, d_age=#{d_age}, d_img=#{d_img}, d_weight=#{d_weight}, d_type=#{d_type}
+		update dog set d_name=#{d_name}, d_age=#{d_age}, d_img=#{d_img}, d_weight=#{d_weight}, d_type=#{d_type}, d_gender=#{d_gender}
 		where d_no=#{d_no}
 	</update>
+	
+	<delete id="deleteDog">
+		delete dog where d_no=#{d_no}
+	</delete>
 	
 </mapper>
