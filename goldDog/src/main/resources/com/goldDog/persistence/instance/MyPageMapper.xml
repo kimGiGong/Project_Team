@@ -18,7 +18,7 @@
 	
 	<select id="getEstimate" resultType="com.goldDog.domain.EstimateVO" parameterType="int">
 		select * from
-			(SELECT a.*,rownum r FROM estimate a where m_no_manager=#{m_no} order by e_no desc) 
+			(SELECT a.*,rownum r FROM estimate a where m_no_manager=1 order by e_no desc) 
 		<![CDATA[
 		where r<=5
 		 ]]> 

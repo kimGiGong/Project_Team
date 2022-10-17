@@ -46,6 +46,7 @@ import com.goldDog.service.instance.MyPageService;
 import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
+import oracle.jdbc.proxy.annotation.Post;
 
 @Controller
 @RequestMapping("/member/*")
@@ -444,6 +445,7 @@ public class memberController {
 		 return new ResponseEntity<DogVO>(dog, HttpStatus.OK);
 	}
 	
+
 	//견적 취소 처리(삭제)
 	@PostMapping("deleteDogPro")
 	@PreAuthorize("isAuthenticated()") 
@@ -455,5 +457,5 @@ public class memberController {
 		}
 		return "redirect:/member/mypage" ;
 	}
-	 
+
 }
