@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -293,40 +295,51 @@ public class memberController {
 			dog.setM_no(service.getMno(user.getUsername()));
 							
 			MultipartFile mf = request.getFile("part_img");
-			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
-			
-			log.info(mf.getSize());
-			log.info(mf.getContentType());
-			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
-			
-			// 이름 중복 방지를 위한 새 파일명 생성
-			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-			log.info(uuid);
-			//업로드한 파일 확장자만 가져오기
-			String orgName=mf.getOriginalFilename();
-			String ext= orgName.substring(orgName.lastIndexOf("."));
-			// 저장할 파일명
-			String newFileName= uuid + ext;
+			String newFileName=null;
+			String path=null;
+			String uuid=null;
+			String orgName = null;
+			String ext=null;
+			if(mf.getSize() != 0) {
+				
+				log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+				
+				log.info(mf.getSize());
+				log.info(mf.getContentType());
+				path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+				
+				// 이름 중복 방지를 위한 새 파일명 생성
+				uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+				log.info(uuid);
+				//업로드한 파일 확장자만 가져오기
+				orgName=mf.getOriginalFilename();
+				ext= orgName.substring(orgName.lastIndexOf("."));
+				// 저장할 파일명
+				newFileName= uuid + ext;
+			}
 			
 			//DB 상에도 파일명을 저장해 준다.
 			int result = 0;
-			if(mf.getOriginalFilename()==null) {
+			if(mf.getSize() == 0) {
 				dog.setD_img("dog.jpg");
-				 result = service.insertDog(dog);	
+				log.info("나랏말이?************************************");
+				result = service.insertDog(dog);	
 				 
-			}else if(mf.getOriginalFilename()!=null) {
+			}else if(mf.getSize() != 0) {
 				dog.setD_img(newFileName);
-				 result = service.insertDog(dog);
+				log.info("이게 되는건가 ***************************");
+				result = service.insertDog(dog);
+				
+				log.info("***********uuid"+uuid);
+				//저장할 파일 전체 경로
+				String imgPath = path+"\\"+newFileName;
+				log.info("*****imgPath"+imgPath);
+				
+				// 파일 저장
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
 			}
 			
-			log.info("***********uuid"+uuid);
-			//저장할 파일 전체 경로
-			String imgPath = path+"\\"+newFileName;
-			log.info("*****imgPath"+imgPath);
-
-			// 파일 저장
-			File copyFile = new File(imgPath);
-			mf.transferTo(copyFile);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -334,53 +347,65 @@ public class memberController {
 		return "redirect:/member/mypage";
 	}
 	@PostMapping("dogModifyPro")
-	public String dogModifyPro(DogVO dog,  MultipartHttpServletRequest request, Authentication auth , MultipartFile part_img) {
+	public String dogModifyPro(DogVO dog, MultipartHttpServletRequest request, Authentication auth ) {
 		try {
-			System.out.println(part_img);
 			System.out.println("어서와"+dog);
 			//CustomUser user = (CustomUser)auth.getPrincipal();
 			//String m_id =user.getUsername();
-			//dog.setD_no(service.getMno(user.getUsername()));
-							
-			MultipartFile mf = ((MultipartRequest) part_img).getFile("part_img");
-			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+			//dog.setM_no(service.getMno(user.getUsername()));
+			DogVO O_img=mainService.getOneDog(dog.getD_no());
+			MultipartFile mf = request.getFile("part_img");
+			String newFileName=null;
+			String path=null;
+			String uuid=null;
+			String orgName = null;
+			String ext=null;
 			
-			log.info(mf.getSize());
-			log.info(mf.getContentType());
-			String path =((ServletRequest) part_img).getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			if(mf.getSize() != 0) {
 			
-			// 이름 중복 방지를 위한 새 파일명 생성
-			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-			log.info(uuid);
-			//업로드한 파일 확장자만 가져오기
-			String orgName=mf.getOriginalFilename();
-			String ext= orgName.substring(orgName.lastIndexOf("."));
-			// 저장할 파일명
-			String newFileName= uuid + ext;
+				log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+				
+				log.info(mf.getSize());
+				log.info(mf.getContentType());
+				path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+				
+				// 이름 중복 방지를 위한 새 파일명 생성
+				uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+				log.info(uuid);
+				log.info(mf.getOriginalFilename()+"*******************************************");
+				
+				//업로드한 파일 확장자만 가져오기
+				orgName=mf.getOriginalFilename();
+				ext= orgName.substring(orgName.lastIndexOf("."));
+				// 저장할 파일명
+				newFileName= uuid + ext;
+			}
 			
 			//DB 상에도 파일명을 저장해 준다.
 			int result = 0;
-			if(mf.getOriginalFilename()==null) {
-				dog.setD_img(dog.getD_img());
-				 result = service.modifytDog(dog.getD_no());	
+			if(mf.getSize() == 0) {
+				dog.setD_img(O_img.getD_img());
+				log.info("나랏말이?************************************");
+				result = service.modifytDog(dog);	
 				 
-			}else if(mf.getOriginalFilename()!=null) {
+			}else if(mf.getSize() != 0) {
 				dog.setD_img(newFileName);
-				 result = service.modifytDog(dog.getD_no());
+				log.info("이게 되는건가 ***************************");
+				 result = service.modifytDog(dog);
+				 System.out.println("리 슐 트"+result);
+				 log.info("***********uuid"+uuid);
+				 //저장할 파일 전체 경로
+				 String imgPath = path+"\\"+newFileName;
+				 log.info("*****imgPath"+imgPath);
+				 
+				 // 파일 저장
+				 File copyFile = new File(imgPath);
+				 mf.transferTo(copyFile);
 			}
-			System.out.println("리 슐 트"+result);
-			log.info("***********uuid"+uuid);
-			//저장할 파일 전체 경로
-			String imgPath = path+"\\"+newFileName;
-			log.info("*****imgPath"+imgPath);
-
-			// 파일 저장
-			File copyFile = new File(imgPath);
-			mf.transferTo(copyFile);
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
 		return "redirect:/member/mypage";
 	}
 	
@@ -420,19 +445,17 @@ public class memberController {
 		 return new ResponseEntity<DogVO>(dog, HttpStatus.OK);
 	}
 	
-	
-	 @PostMapping("payment/members.get")
-	 public String paymentsReturn(Authentication auth){
-		 
-		CustomUser user = (CustomUser)auth.getPrincipal();
-		String loginID = user.getUsername();
-		MemberVO member = service.getMember(loginID);
-		
-			
-		String result = ""+member.getM_no();
-		System.out.println("요청됨"+result);
-		 
-		return result;
-	 }
-	
+
+	//견적 취소 처리(삭제)
+	@PostMapping("deleteDogPro")
+	@PreAuthorize("isAuthenticated()") 
+	public String deleteEstPro(@Param("d_no") Integer d_no) {
+		int result = service.deleteDog(d_no);
+		if(result==1) {
+			log.info(result+ "강아지 등록 삭제 완료");
+
+		}
+		return "redirect:/member/mypage" ;
+	}
+
 }

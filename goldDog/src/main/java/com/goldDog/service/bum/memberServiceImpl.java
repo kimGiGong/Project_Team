@@ -337,14 +337,13 @@ public class memberServiceImpl implements memberService{
 		return mapper.getOneDog(d_no);
 	}
 	@Override
-	public int modifytDog(int d_no) {
-		return mapper.modifytDog(d_no);
+	public int modifytDog(DogVO dog) {
+		return mapper.modifytDog(dog);
 	}
-	
-
-
-	
-
+	@Override
+	public int deleteDog(int d_no) {
+		return mapper.deleteDog(d_no);
+	}
 	
 
 	

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +12,7 @@
     <link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
     <link rel="stylesheet" href="/resources/team.css">
     <!--<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>  -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+   	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     
 </head>
@@ -100,9 +99,9 @@
                         	</fieldset>
                         </div>
                     </section>
-
-
-					<%-- 견적서 --%>
+                    
+                 
+                    <%-- 견적서 --%>
 					<h3 class="tm-text-primary" id="estimate_navbar">견적서</h3>
 					<hr class="mb-5">
 					<div class="Estimate" id="Estimate">
@@ -119,7 +118,7 @@
 												<tr>
 													<th></a><button class="btn btn-outline-primary"
 															type="button" style="width: 120px;">견적서 확인</button></th>
-													<th>${ estimateMember[status.index].m_nick }님 </th>
+													<th>${ estimateMember[status.index].m_nick } 님 </th>
 												</tr>
 												<tr>
 													<th colspan="2"><br></th>
@@ -135,7 +134,16 @@
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>
 													</th>
-													<th align="center">010-1234-1234</th>
+													<th align="center">
+														<c:choose>
+															<c:when test="${ estimate.e_con eq '0'}">${ estimateMember[status.index].m_phone }</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">${ estimateMember[status.index].m_phone }</c:when>
+															<c:when test="${ estimate.e_con eq '2'}">${ estimateMember[status.index].m_phone }</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">${ estimateMember[status.index].m_phone }</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">리뷰작성</c:when>
+															<c:otherwise>취소됨</c:otherwise>
+														</c:choose>
+													</th>
 												</tr>
 											</table>
 										</div>
@@ -149,8 +157,8 @@
 							</div>
 						</c:if>
 					</div>
-
-						<div>
+                    
+                    <div>
                     	<div class="gallery" >
 		                    <div id="gallery"> 
 		                    <br><br><br>
@@ -197,6 +205,7 @@
 									<c:forEach var="i" begin="0" end="${dogCheck-1}" step="1">
 										<div class="collapse" id="collapseExample">
 											<div class="card card-body">
+												<input type="hidden" name="d_no" value="${dog[i].d_no}"  />
 												<table>
 													<tr>
 														<th>${dog[i].d_name}</th>
@@ -206,7 +215,7 @@
 															</button>
 														</th>
 														<th style="width:70px">	
-															<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+															<button type="button" value="${dog[i].d_no}" deleteDog="${dog[i].d_no}" class="btn btn-danger ">
 																삭제
 															</button>
 														</th>
@@ -319,7 +328,7 @@
 							</tr>
 							<tr>
 								<th>나　　이 : </th>
-								<th><input type="text" class="form-control form-control-user" name="d_age" placeholder="예) 4 (살, 숫자만 입력)"></th>
+								<th><input type="number" class="form-control form-control-user" name="d_age" placeholder="예) 4 (살, 숫자만 입력)"></th>
 							</tr>
 							<tr>
 								<th>성　　별 : </th>
@@ -334,7 +343,7 @@
 							</tr>
 							<tr>
 								<th>무　　게 : </th>
-								<th><input type="text" class="form-control form-control-user" name="d_weight" placeholder="예) 5 (kg, 숫자만 입력)"></th>
+								<th><input type="number" class="form-control form-control-user" name="d_weight" placeholder="예) 5 (kg, 숫자만 입력)"></th>
 							</tr>
 							<tr>
 						    	<th class="text-center" colspan="2"><input class="form-control" type="file" id="formFile" name="part_img"/></th>
@@ -344,7 +353,7 @@
 				</div>
 				
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary" form="dogInsertPro" >등록</button>
+					<button type="button" class="btn btn-primary" id="dogInsert" >등록</button>
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 				</div>
 			</div>
@@ -360,65 +369,36 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="row" id="dogModal">
-					<!-- 모달 부착 -->
-					<div class='col-lg-5 d-none d-lg-block'>
-						<div class='p-5'>
-							<img class='card-img-top' src="" width='222' height='180' alt='Card image cap' id=result_img> 
-							<input class='form-control' width='420' type='file' id='formFile' name="part_img" form="dogModifyPro"/>
-						</div>
-					</div>
-					<div class='col-lg-7'>
-						<form id='dogModifyPro' action='/member/dogModifyPro?${_csrf.parameterName}=${_csrf.token}'
-							method='post' enctype='multipart/form-data' name='dogModify'>
-							<input type='hidden' name='d_no' value=""/>
-							<table>
-								<tr>
-									<th>이 름 :</th>
-									<th><input type='text'
-										class='form-control form-control-user' name='d_name'
-										value=""></th>
-								</tr>
-								<tr>
-									<th>나이(살) :</th>
-									<th><input type='text'
-										class='form-control form-control-user' name='d_age'
-										value=""></th>
-								</tr>
-								<tr>
-									<th>성 별 :</th>
-									<th><input class='form-control form-control-user' value="" readonly='readonly' name="d_gender"/></th>
-								</tr>
-								<tr>
-									<th>종 류 :</th>
-									<th><input type='text'
-										class='form-control form-control-user' name='d_type'
-										value=""></th>
-								</tr>
-								<tr>
-									<th>무게(kg) :</th>
-									<th><input type='text'
-										class='form-control form-control-user' name='d_weight'
-										value=""></th>
-								</tr>
-							</table>
-						</form>
-					</div>
-					<div class='modal-footer col-lg-12'>
-						<button type='submit' class='btn btn-primary' form='dogModifyPro'>수정</button>
-						<button type='button' class='btn btn-secondary'	data-bs-dismiss='modal'>취소</button>
-					</div>
-					<!-- 모달 부착 END -->
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	
-	
-	
-	
-	
-	
+	<!--삭제 눌렀을때 띄울 모달 -->
+		<div class="modal fade" id="addNew" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+	    		<div class="modal-content">
+		      		<div class="modal-header">
+		        		<h5 class="modal-title" id="myModalLabel">애견 삭제</h5>
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          			<span aria-hidden="true">&times;</span>
+		        		</button>
+		      		</div>
+	      			<div class="modal-body">
+        				등록된 애견을 삭제하시겠습니까?
+	      			</div>
+	      			<div class="modal-footer">
+	        			<button type="button" class="btn btn-secondary" id="deleteDogPro" >삭제</button>
+	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	      			</div>
+	   			</div>
+	  		</div>
+		</div> <!-- end 모달 -->
+		
+		 <form id="pagingForm" action="" method="post">
+			 	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		 
+		 </form>
 	
  </body>
  
@@ -455,27 +435,73 @@
   	
 		let dogModalrow = $("#dogModal"); // 댓글목록 담을 컨테이너 div
 		let username="${pInfo.username}"; //sec:authenticated로 저장한 로그인한 사라 정보 js로 가져오기
+  	
 		// 댓글 목록 만들어서 화면에 부착 함수 
 		function makeModal(result){
-			console.log("makeModal!!!!!" + result);
+			console.log("makeModal!!!!!" + result.length);
 			// 부착할 html 목록 문자열로 만들기 
-			$("#result_img").attr('src','/resources/serverImg/'+result.d_img);
-			$("input[name='d_no']").attr('value', result.d_no);
-			$("input[name='d_name']").attr('value', result.d_name);
-			$("input[name='d_age']").attr('value', result.d_age);
-			$("input[name='d_gender']").attr('value', result.d_gender);
-			$("input[name='d_type']").attr('value', result.d_type);
-			$("input[name='d_weight']").attr('value', result.d_weight);
+		   	let str = ""; 
+            str += "<div class='col-lg-5 d-none d-lg-block'><div class='p-5'><img class='card-img-top' src='/resources/serverImg/";
+            str += result.d_img+"' width='222' height='180' alt='Card image cap'>";
+            str += "</div></div><div class='col-lg-7'>";
+            str += "<form id='dogModifyPro' action='/member/dogModifyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModify'><input type='hidden' name='d_no' value='"+result.d_no+"' /><table><br/><br/>";
+            str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"'></th></tr>";
+            str += "<tr><th>나이(살)　:　</th><th><input type='number'' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "'></th></tr>";
+            str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' name='d_gender' value='"+ result.d_gender +"'  readonly='' /></th></tr>";
+            str += "<tr><th>종　　류　:　</th><th><input type='text' class='form-control form-control-user' name='d_type' value='"+ result.d_type +"'></th></tr>";
+            str += "<tr><th>무게(kg)　:　</th><th><input type='number' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"'></th></tr>";
+            str += "<tr><th>사    진　:　</th><th><input class='form-control' width='420' type='file' id='formFile' name='part_img'/></th></tr>";
+            str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='dogModify' >수정</button>";
+            str += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button></div>";
+            dogModalrow.html(str);   // html 부착    
 		}
 		
  		//dogInsert
 		//등록 or 추가 모달 눌렀을때 띄울 
-		$(document).on("click","#dogModify",function(e){
+		$("#dogInsert").on("click",function(e){
 			e.preventDefault(); 
 			console.log("등록 or 추가 확인 모달.");
 			$("#dogInsertPro").submit();
 		});
  	
+ 		//dogModify
+		//수정 모달 눌렀을때 띄울 
+		$("#dogModal").on("click","#dogModify",function(e){
+			console.log("수정 클릭.");
+			e.preventDefault(); 
+			console.log("수정 확인 모달.");	
+			$("#dogModifyPro").submit();
+		});
+ 		
+ 		//Dog 삭제 눌렀을때 띄울 모달
+		let pagingForm=$("#pagingForm");
+		
+		$("#deleteDogPro").on("click",function(e){
+			
+			
+			e.preventDefault(); 
+			// pagingForm의 action 속성값을 삭제할 컨트롤러로 변경
+			pagingForm.attr("action", "/member/deleteDogPro"); 
+			// read로 이동하기(form으로 요청) 
+			pagingForm.submit(); 				
+			
+		});
+		
+		$("button[deleteDog]").on("click",function(e){
+			let d_no =$(this).val();
+			pagingForm.append("<input type='hidden' name='d_no' value='" + d_no+ "' />");
+			e.preventDefault(); 
+			console.log(d_no+"취소 확인 모달.");
+			$("#addNew").modal("show");
+		});
+		
+		
+		
+		
+		
+			
+ 		
+ 		
  	
  	 });// ready 
  	

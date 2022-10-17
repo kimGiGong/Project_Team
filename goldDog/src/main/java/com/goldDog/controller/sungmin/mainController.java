@@ -703,6 +703,24 @@ public class mainController {
 		model.addAttribute("estimate",Estimate);
 		model.addAttribute("eCount",Estimate.size());
 		}
+	
+	
+	
+
+		
+	@GetMapping("/main") 
+	public String address() {
+		System.out.println("카카오 API 테스트");
+		
+		return "address";
+	}
+	
+	@GetMapping("address")
+	public void address1() {
+		log.info("********************** 카카오 API 테스트 *********************");
+	}
+	
+	
 		
 		
 	}
