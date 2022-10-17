@@ -16,7 +16,7 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="/resources/feane/images/roto.jpg" alt="" >
+      <img src="/resources/feane/images/back1.png" alt="" >
     </div>
     
     <section class="slider_section ">

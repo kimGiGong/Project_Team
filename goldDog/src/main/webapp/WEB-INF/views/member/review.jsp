@@ -76,22 +76,22 @@
 <body>
 
 	
-	<!-- Modal -->
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	<!-- review Modal -->
+	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
 		리뷰 작성
 	</button>
 	
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<!-- review Modal -->
+	<div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title fs-5" id="exampleModalLabel">리뷰 작성</h3>
+					<h3 class="modal-title fs-5" id="reviewModalLabel">리뷰 작성</h3>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
 					<div>
-						<h5 align="center">서비스에 만족하시나요 ?${review.m_no}</h5>
+						<h5 align="center">서비스에 만족하시나요 ?</h5>
 					</div>
 					<form id="reviewPro" action="/member/reviewPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="review" onsubmit="return checkField()">
 						<table>
@@ -144,12 +144,12 @@
 		<label for="1-star" class="star">★</label>
 	</div>
 	
-	<!-- Modal -->
+	<!-- Modal
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
 		견적서 확인
-	</button>
+	</button>  -->
 
-	<!-- Modal -->
+	<!-- Modal
 	<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-fullscreen">
 			<div class="modal-content">
@@ -201,7 +201,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>  -->
 
 </body>
 </html>
