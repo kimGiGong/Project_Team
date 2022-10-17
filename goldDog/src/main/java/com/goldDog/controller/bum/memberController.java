@@ -1,6 +1,7 @@
 package com.goldDog.controller.bum;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,12 +33,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.DogVO;
+import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.NoticeVO;
 import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
 import com.goldDog.service.bum.domain.CustomUser;
+import com.goldDog.service.instance.MyPageService;
 import com.goldDog.service.sungmin.MainService;
 
 import lombok.extern.log4j.Log4j;
@@ -52,6 +55,9 @@ public class memberController {
 	
 	@Autowired
 	private MainService mainService;
+	
+	@Autowired
+	private MyPageService mypageService;
 	
 	@RequestMapping("mypage")
 	public String a123444() {
@@ -387,10 +393,18 @@ public class memberController {
 		
 		int mno = service.getMno(user.getUsername());
 		List<DogVO> dog = service.getDog(mno);
+		List<EstimateVO> estimate = mypageService.getMemberEstimate(member.getM_no()); 
+		List<MemberVO> estimateMember = new ArrayList<MemberVO>();
+		for (int i = 0; i < estimate.size(); i++) {
+			estimateMember.add(mainService.getOneMember(estimate.get(i).getM_no_manager()));
+		}
+		
 		
 		model.addAttribute("manager",member);
 		model.addAttribute("dog", dog);
 		model.addAttribute("dogCheck", dog.size());
+		model.addAttribute("estimatelist",estimate);
+		model.addAttribute("estimateMember",estimateMember);
 		
 		return "/member/mypage";
 	}
