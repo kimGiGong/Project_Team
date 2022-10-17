@@ -49,6 +49,8 @@ import com.goldDog.service.bum.memberService;
 import com.goldDog.service.bum.domain.CustomUser;
 import com.goldDog.service.instance.MyPageService;
 import com.goldDog.service.sungmin.MainService;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import lombok.extern.log4j.Log4j;
 
@@ -312,23 +314,35 @@ public class mypageController {
     
     
     
-	 @PostMapping("payment/members")
-	 @ResponseBody
-	 public Map<String,String> paymentsReturn(Authentication auth) {
-		 
+	@PostMapping("payment/members")
+	@ResponseBody
+	public String paymentsReturn(Authentication auth , String e_no) {
+		
+		System.out.println(e_no+"이노다");
 		CustomUser user = (CustomUser)auth.getPrincipal();
 		String loginID = user.getUsername();
 		MemberVO member = bumService.getMember(loginID);
 		
 		Map<String,String> result = new HashMap<String,String>();
-		result.put("m_no",""+member.getM_no());
-		result.put("t_m_no",""+member.getM_no());
-		result.put("t_name",""+member.getM_no());
-		result.put("m_name",""+member.getM_no());
+		JsonObject jsonObject = new JsonObject();
+
+		// Gson 객체 생성
+		Gson gson = new Gson();
 		
-		System.out.println("요청됨"+result);
+		EstimateVO estimate = sungminService.getEOneEstimate(Integer.parseInt(e_no));
+		MemberVO manager = sungminService.getOneMember(estimate.getM_no_manager());
+		result.put("e_no", ""+e_no);
+		result.put("m_no",""+estimate.getM_no_puppy());
+		result.put("t_m_no",""+estimate.getM_no_manager());
+		result.put("t_name",""+manager.getM_nick());
+		result.put("m_name",""+member.getM_nick());
+		
+		// 맵을 JSON Object 문자열로 바꿈
+		String jsonString = gson.toJson(result);
+		
+		System.out.println("요청됨"+jsonString);
 		 
-		return result;
+		return jsonString;
 	 }
     
     

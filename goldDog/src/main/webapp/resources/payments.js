@@ -1,5 +1,5 @@
 
-
+let eno = $("#dogCheck").val();
 let m_no = "";
 let t_m_no = "";
 let t_name = "";
@@ -11,22 +11,13 @@ $(document).ready(function(){
 		url : "/payment/members" ,
 		method : "POST",
 		beforeSend: function(xhr){ xhr.setRequestHeader(header,token); },
+		data : { e_no : eno },
 		success: function(result){
-			try {
-		        serializer = new XMLSerializer();                                                                                              
-		        serialized = serializer.serializeToString(result);                                                                               
-		    }                                                                                                                                  
-		    catch (e) {
-		        // Internet Explorer has a different approach to serializing XML                                                               
-		        serialized = result.xml;                                                                                                         
-		    }
-		    console.log(serialized);   
-		    console.log(result); 
-		    console.log(result); 
-			console.log(m_no+"너얼굴");
+		var obj = JSON.parse(result);
+		    console.log(obj.m_no); 
 		},
 		error: function(e){
-		console.log(e);
+			console.log(e);
 		}
 	});
 

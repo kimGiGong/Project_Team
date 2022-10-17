@@ -135,7 +135,7 @@
 
 								<div class="row">
 									<div class="col-lg-6">
-										<button id="dogCheck" type="button" onclick="requestPay()"
+										<button id="dogCheck" type="button" value ="${ estimate.e_no }"
 											class="btn btn-lg btn-info btn-block">
 											<span id="payment-button-amount">결제</span>
 										</button>
