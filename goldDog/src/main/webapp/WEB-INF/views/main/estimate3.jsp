@@ -41,10 +41,10 @@
                         <div class="card-body">
                           <h5 class="card-title">견적서</h5>
                           <p class="card-text">이 름 : ${clientDog.d_name} </p> 
-                          <p class="card-text">나 이 : ${clientDog.d_age} </p> 
+                          <p class="card-text">나 이 : ${clientDog.d_age}살 </p> 
                           <p class="card-text">성 별 : ${clientDog.d_gender} </p> 
                           <p class="card-text">종 류 : ${clientDog.d_type} </p> 
-                          <p class="card-text">무 게 : ${clientDog.d_weight} </p> 
+                          <p class="card-text">무 게 : ${clientDog.d_weight}kg </p> 
                         </div>
                       </div>
                     </div>
@@ -132,7 +132,15 @@
 										</div>
 									</div>
 								</div>
-
+								
+								<sec:authorize access="hasAnyRole('ROLE_HAIR','ROLE_TRAINER')">
+								<div class="col-lg-12">
+									<button  type="button" class="btn btn-lg btn-Danger btn-block">
+										<span id="payment-button-amount">고객님의 결제를 기다리고 있습니다.</span>
+									</button>
+								</div>
+								</sec:authorize>
+								<sec:authorize access="hasRole('ROLE_MEMBER')">
 								<div class="row">
 									<div class="col-lg-6">
 										<button id="dogCheck" type="button" value ="${ estimate.e_no }" onclick="requestPay()" class="btn btn-lg btn-info btn-block">
@@ -146,6 +154,7 @@
 										</button>
 									</div>
 								</div>
+								</sec:authorize>
 							</div>
 						</div>
 					</div>
