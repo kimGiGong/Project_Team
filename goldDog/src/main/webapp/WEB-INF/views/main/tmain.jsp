@@ -184,6 +184,19 @@
 		                  </c:if>
 	 	                  <p>훈련 가격 : ${trainer[i].t_price}~ 원</p>
 		                  <p>자격증<i class="fa fa-address-card" aria-hidden="true"></i> : ${trainer[i].t_license}</p>
+		                  <p>활동지역<i class="fa fa-address-card" aria-hidden="true"></i>
+		                  
+		                  	<c:if test="${ !empty ActArea[i] }">
+								<c:forEach items="${ ActArea[i] }" var="addr">
+									<div class='business_item'>
+										<button type="text" name="${ addr.area }" data-ico='X' value='${ addr.field }' disabled="disabled">
+											<c:out value="${addr.areaKO}"/> <c:out value="${addr.field}"/> 
+										</button>
+									</div>
+								</c:forEach>
+							</c:if>
+							
+		                  </p>
 	                </div>
 	                </div>
 	            </div>

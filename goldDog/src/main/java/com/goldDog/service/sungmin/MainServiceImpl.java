@@ -96,6 +96,13 @@ public class MainServiceImpl implements MainService {
 	public int updateTinfo(TrainerVO trainer) {
 		return mapper.updateTinfo(trainer);
 	}
+	//활동지역으로 훈련사 찾기
+	@Override
+	public List<TrainerVO> getAreaTrainer(String addr) {
+		
+		return mapper.getAreaTrainer(addr);
+	}
+
 	
 	
 	
@@ -145,7 +152,12 @@ public class MainServiceImpl implements MainService {
 	public int updateHinfo(HairstylistVO hairstylist) {
 		return mapper.updateHinfo(hairstylist);
 	}
-
+	//활동지역으로 미용사 찾기
+	@Override
+	public List<HairstylistVO> getAreaHairstylist(String addr) {
+		return mapper.getAreaHairstylist(addr);
+	}
+	
 	
 	
 	
@@ -367,8 +379,7 @@ public class MainServiceImpl implements MainService {
 	public List<QnAVO> getAllQnACri(Criteria cri) {
 		return mapper.getAllQnACri(cri);
 	}
-	
-	
+
 
 
 	

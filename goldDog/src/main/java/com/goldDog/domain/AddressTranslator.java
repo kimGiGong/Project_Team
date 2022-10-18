@@ -89,7 +89,7 @@ public class AddressTranslator {
 	
 	
 	
-	
+
 	
 	
 	
@@ -118,7 +118,6 @@ public class AddressTranslator {
 					list.add(vo);
 				}
 			}
-			
 			return list;
 		}else {
 			return null;

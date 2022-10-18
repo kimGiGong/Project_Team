@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goldDog.domain.ADVO;
+import com.goldDog.domain.AddressTranslator;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.AuthVO;
 import com.goldDog.domain.Criteria;
@@ -34,6 +35,7 @@ import com.goldDog.domain.ReviewVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.persistence.bum.MemberMapper;
 import com.goldDog.service.bum.domain.CustomUser;
+import com.goldDog.service.instance.MyPageService;
 import com.goldDog.service.sungmin.MainService;
 
 
@@ -51,7 +53,8 @@ public class mainController {
 	private MainService mainService;
 	@Autowired
 	private MemberMapper memberService;
-	
+	@Autowired
+	private MyPageService instanceService;
 	
 	@GetMapping("premain")
 	public void premain() {
@@ -80,11 +83,9 @@ public class mainController {
 		//담을 그릇 생성
 		List<TrainerVO> Tlist = new ArrayList<TrainerVO>();
 		int Ttotal=4;
-		
-		
 		log.info(cri);
 		
-		
+		//훈련사 활동지역 추가해주기
 		
 		
 		if( cri.getKeyword()==null && cri.getSort()==null){
@@ -123,12 +124,13 @@ public class mainController {
 		List<Integer> t_no_list = new ArrayList<Integer>(); 
 		List<Integer> t_m_no_list = new ArrayList<Integer>(); 
 		List<MemberVO> member = new ArrayList<MemberVO>(); 
-		
+		//활동지역 처리하기
+		List<AddressVO> address = new ArrayList<AddressVO>(); 
 		
 		for(int i = 0; i < Tlist.size(); i++) {
 			t_no_list.add(Tlist.get(i).getT_no()); 
 			t_m_no_list.add(Tlist.get(i).getM_no());
-
+			
 		}
 		
 		
@@ -144,11 +146,25 @@ public class mainController {
 		
 		for(int i=0 ;i<Tlist.size() ;i++) {
 			member.add(mainService.getOneMember(t_m_no_list.get(i)));
+			//활동지역 처리하기
+			address.add(instanceService.getAddress(t_m_no_list.get(i)));
 		}
-		model.addAttribute("member", member);
+			model.addAttribute("member", member);
 			model.addAttribute("trainercheck",t_no_list.size()); //트레이너 숫자 체크
 			model.addAttribute("pager", new PageDTO(cri, Ttotal)); // total count로 수정    
 
+			
+			//활동지역 처리하기
+			List<Object> list = new ArrayList<Object>();
+			AddressTranslator addrtr = new AddressTranslator();
+			for(int i=0 ;i<address.size() ;i++) {
+				
+				list.add(addrtr.translator(address.get(i).getA_addr()));
+				
+			}
+			
+			model.addAttribute("ActArea",list);
+			
 		//리뷰 추가해야함 베스트 5개 뽑기
 			List<ReviewVO> BestReview=mainService.getAllTReview();
 			model.addAttribute("bestReview",BestReview);
