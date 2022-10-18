@@ -126,7 +126,7 @@
 											<table>
 												<tr>
 													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;" onclick="window.location.href='/memberEstimate?e_no=${estimate.e_no}'">견적서 확인</button></th>
-													<th>${ estimateMember[status.index].m_nick } 매니저 </th>
+													<th>${estimateMember[status.index].m_nick} 매니저 </th>
 												</tr>
 												<tr>
 													<th colspan="2"><br></th>
@@ -147,15 +147,17 @@
 															<c:when test="${ estimate.e_con eq '0'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '1'}">
 																<!-- Modal -->
-																<button type="button" value="${estimateMember[status.index].m_no }" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
-																	리뷰 작성
-																</button>
+																	<button type="button" class="btn btn-primary addReviewT" data-bs-toggle="modal" 
+																	data-bs-target="#reviewModal" 
+																	onclick="buttonclick('${estimateMember[status.index].m_nick}','${estimateMember[status.index].m_no}')">
+																		리뷰 작성
+																	</button>
 															</c:when>
 															<c:when test="${ estimate.e_con eq '2'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">
 																<!-- Modal -->
-																<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+																<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" >
 																	리뷰 작성
 																</button>
 															</c:when>
@@ -429,7 +431,7 @@
 						<div>
 							<h5 align="center">서비스에 만족하시나요 ?</h5>
 						</div>
-						<form id="reviewPro" action="/member/reviewPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="review" onsubmit="return checkField()">
+						<form id="reviewPro" action="/member/reviewPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="review" >
 							<table>
 								<div class="star-rating space-x-4 mx-auto">
 									<input type="radio" id="5-stars" name="r_score" value="5" v-model="ratings" /> 
@@ -445,7 +447,7 @@
 								</div>
 								<hr />
 								<tr>
-									<th>훈련사 이름　:　홍성현<br></th>
+									<th id="manager_name"><br></th>
 								</tr>
 								<tr>
 									<th>
@@ -562,15 +564,23 @@
 			$("#addNew").modal("show");
 		});
 		
+		
+		
+		
+		
+		
+		
 		//리뷰****
 		$(document).ready(function(){
 			//review 모달 글쓰기 눌렀을때 띄울 
 			$("#review").on("click",function(e){
 				e.preventDefault(); 
 				console.log("리뷰 확인 모달.");
-				$("#reviewPro").submit();
+				reviewPro.submit();
 			});
 		});
+		
+		
 		//유효성 검사
     	function checkField() {
     		let inputs = document.review;
@@ -585,13 +595,21 @@
     	}
 		
 		
+ 	 });// ready 
 		
 			
  		
  		
- 	
- 	 });// ready 
- 	
+ //리뷰 쓰기 버튼 눌렀을 때 훈련사용	
+function buttonclick (a, b){
+	console.log(a);
+	console.log(b);
+	
+	$("#manager_name").text(a);
+	$("#reviewPro").append("<input type='hidden' name='m_no_manager' value='"+b+"' />");
+	console.log(b+"리뷰 등록 확인 모달.");
+	$("#reviewModal").modal("show");
+}
 	
 	
   </script>
