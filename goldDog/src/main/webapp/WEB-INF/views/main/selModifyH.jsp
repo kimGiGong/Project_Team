@@ -51,33 +51,35 @@
                  </div>
                </div>    
                
-             <form id="updatetrainer" action="selModifyPro" method="post">
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-             <input type="hidden" name="m_no" value="${trainer.m_no}"/>
+             <form id="updateStylist" action="selModifyProH?${_csrf.parameterName}=${_csrf.token}" method="post">
+             <input type="hidden" name="m_no" value="${stylist.m_no}"/>
               <div class="col-lg-12">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">자기소개</h5>
-                   	<textarea class="form-control" rows="3" name="t_self" >${trainer.t_self}</textarea>
+                   	<textarea class="form-control" rows="3" name="h_self" >${stylist.h_self}</textarea>
                  </div>
                </div>
              </div>
              
-              <div class="col-lg-12">
+               <div class="col-lg-12">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">판매 추가정보(꾸미기용)</h5>
-                   	<textarea class="form-control" rows="3" id="WriteEditor" name="t_sel" ></textarea>
-                   	<div class="col-12 col-md-9"><small class="form-text text-muted">ex)훈련의 추가가격(강아지 입질훈련은 +50000)</small></div>
+                   	<textarea class="form-control" rows="3" id="WriteEditor" name="h_sel" ></textarea>
+                   	<div class="col-12 col-md-9"><small class="form-text text-muted">ex)미용 추가가격(5kg 이상의 강아지는 + 10000)</small></div>
+                   	<div class="col-12 col-md-9"><small class="form-text text-muted">ex)미용 추가가격(장모종 강아지는 + 20000)</small></div>
                  </div>
                </div>
              </div>
+             
+             
              
               <div class="col-lg-12">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">자격증</h5>
-                   	<input type="text" name="t_license" value="${trainer.t_license}">
+                   	<input type="text" name="h_license" value="${stylist.h_license}">
                  </div>
                </div>
              </div>
@@ -87,7 +89,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title"><td>훈련시작금액</td></h5>
-                   	<input type="number" name="t_price" value="${trainer.t_price}">원
+                   	<input type="number" name="h_price" value="${stylist.h_price}">원
                  </div>
                </div>
              </div>
@@ -95,7 +97,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title"><td>경력</td></h5>
-                   	<input type="number" name="t_career" value="${trainer.t_career}">년
+                   	<input type="number" name="h_career" value="${stylist.h_career}">년
                  </div>
                </div>
              </div>
@@ -122,8 +124,9 @@
 			e.preventDefault(); 
 			console.log("글쓰기 확인");
 			
-			$("#updatetrainer").submit();
+			$("#updateStylist").submit();
 		});	
+		
 		
 		
 		CKEDITOR.replace('WriteEditor',
@@ -135,9 +138,6 @@
 		$('.area').click(function() {
 		
 		})
-		
-		
-		
 	});
 			
 		

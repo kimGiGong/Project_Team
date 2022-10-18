@@ -28,8 +28,8 @@
 	<!--  헤더 END -->
 
   <div class="hero_area">
-    <div class="bg-box">
-      <img src="/resources/feane/images/roto.jpg" >
+    <div class="bg-box" style="border-radius:0rem">
+      <img src="/resources/feane/images/roto.jpg"  >
     </div>
     <!-- slider section -->
     <section class="slider_section ">
@@ -40,7 +40,6 @@
               <div class="row">
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
-                  
                     <h1>
                       쉽다쉬워
                     </h1>
@@ -48,11 +47,11 @@
                       우리 금댕이를 위해서라면 모든지 할 수 있어!
                     </p>
                     <div class="btn-box">
-                      <a class="btn1">
+                      <a class="btn1" style="z-index:5;">
                         구매하기
                       </a>
                     <div class="bg-box">
-      					<img src="/resources/serverImg/${ad1}" width="350" height="300"/>
+      					<img src="/resources/serverImg/${ad1}" width="350" height="300" style="border-radius: 2.5rem;"/>
     				</div>
                     </div>
                   </div>
@@ -76,7 +75,7 @@
                         구매하기
                       </a>
                        <div class="bg-box">
-      					<img src="/resources/serverImg/${ad2}" width="350" height="300"/>
+      					<img src="/resources/serverImg/${ad2}" width="350" height="300" style="border-radius: 2.5rem;"/>
     				</div>
                     </div>
                   </div>
@@ -100,7 +99,7 @@
                         구매하기
                       </a>
                        <div class="bg-box">
-      					<img src="/resources/serverImg/${ad3}" width="350" height="300"/>
+      					<img src="/resources/serverImg/${ad3}" width="350" height="300" style="border-radius: 2.5rem;"/>
     				</div>
                     </div>
                   </div>
@@ -135,7 +134,7 @@
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
-                        <div class="input-group">
+                        <div class="input-group" >
                         <input type="text" class="form-control bg-light border-0 small"  name="keyword"  placeholder="훈련사 검색">
                             <div class="input-group-append">
                                <button class="btn btn-primary" id=searchIdBtn  type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -172,7 +171,7 @@
 	                <span class="border-top"></span>
 	            <div class="box" style="border: solid 2px #008294;">
 	                <div class="img-box" style="padding: 25px;">
-	                  <a class="move" href="${trainer[i].m_no}" id="${trainer[i].t_no}"  ><img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
+	                  <a class="move" href="${trainer[i].m_no}" id="${trainer[i].t_no}"  ><img src="/resources/serverImg/${member[i].m_img }" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
 	                </div>
 	                <div class="detail-box" >
 		                  <h5 style="height: 35px;">${member[i].m_nick}</h5>
@@ -261,7 +260,7 @@
                   ${bestReview[i].r_text}
                 </p>
                 <h6>
-                	리뷰 등록한사람 이름
+                	${bestReviewUser[i].m_nick} 
                 </h6>
                 <p>
                   ${bestReview[i].r_date}

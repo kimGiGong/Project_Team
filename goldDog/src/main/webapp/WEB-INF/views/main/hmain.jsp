@@ -8,6 +8,15 @@
     <meta charset="UTF-8">
 </head>
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<style>
+	.fa-star:before {
+    content: "\f005";
+    color: #dc3545;
+	}
+	.fa-vcard:before, .fa-address-card:before {
+    color: #dc3545;
+}
+</style>
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
@@ -27,9 +36,6 @@
               <div class="row">
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
-                    <h1>
-                      쉽다쉬워
-                    </h1>
                     <p>
                       우리 금댕이를 위해서라면 모든지 할 수 있어!
                     </p>
@@ -38,14 +44,17 @@
                         구매하기
                       </a>
                     <div class="bg-box">
-      					<img src="/resources/serverImg/${ad1}" width="350" height="300"/>
+      					<img src="/resources/serverImg/${ad1}" width="350" height="300" style="border-radius: 2.5rem;"/>
     				</div>
                     </div>
                   </div>
                 </div>
+                  
               </div>
             </div>
           </div>
+          
+          
           <div class="carousel-item ">
             <div class="container ">
               <div class="row">
@@ -62,7 +71,7 @@
                         구매하기
                       </a>
                        <div class="bg-box">
-      					<img src="/resources/serverImg/${ad2}" width="350" height="300"/>
+      					<img src="/resources/serverImg/${ad2}" width="350" height="300" style="border-radius: 2.5rem;"/>
     				</div>
                     </div>
                   </div>
@@ -82,11 +91,11 @@
                       세번째 광고입니다.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="" class="btn1" style="z-index: 3">
                         구매하기
                       </a>
                        <div class="bg-box">
-      					<img src="/resources/serverImg/${ad3}" width="350" height="300"/>
+      					<img src="/resources/serverImg/${ad3}" width="350" height="300" style="border-radius: 2.5rem;"/>
     				</div>
                     </div>
                   </div>
@@ -157,7 +166,7 @@
 	                <span class="border-top"></span>
 	            <div class="box" style="border: solid 2px #008294;">
 	                <div class="img-box" style="padding: 25px;">
-	                  <a class="move" href="${hairstylist[i].m_no}" id="${hairstylist[i].h_no}"  ><img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
+	                  <a class="move" href="${hairstylist[i].m_no}" id="${hairstylist[i].h_no}"  ><img src="/resources/serverImg/${member[i].m_img }" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
 	                </div>
 	                <div class="detail-box" >
 		                  <h5 style="height: 35px;">${member[i].m_nick}</h5>
@@ -252,7 +261,7 @@
                   ${bestReview[i].r_text}
                 </p>
                 <h6>
-                	리뷰 등록한사람 이름
+                	${bestReviewUser[i].m_nick} 
                 </h6>
                 <p>
                    ${bestReview[i].r_date}
@@ -264,6 +273,7 @@
             </div>
           </div>
           </c:forEach>
+          
           
         </div>
       </div>

@@ -78,12 +78,13 @@
 			<div class="row">
 			  <div class="col-sm-4">
 			    <div class="card">
-			    	<a class="move" ><img class="card-img-top" src="/resources/serverImg/${add1.ad_img}"   width="350" height="300" alt="Card image cap"></a>
+			    	<a class="move" ><img class="card-img-top" src="/resources/serverImg/${add4.ad_img}"   width="350" height="300" alt="Card image cap"></a>
 			      <div class="card-body">
 			        	<h5 class="card-title">첫번째 광고</h5>
 						<p class="card-text">현재 등록 되어있는 첫번째 광고</p>
 						<form action="/admin/uploadPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 							<input class="form-control" type="file" id="formFile" name="img"/><br>
+							<input type="hidden" id="formFile" name="ad_no" value="4"/><br>
 							<input type="submit" class="btn btn-primary" value="변경"/> <br>
 						</form>
 			      </div>
@@ -91,12 +92,13 @@
 			  </div>
 			  <div class="col-sm-4">
 			    <div class="card">
-			    	<a class="move" ><img class="card-img-top" src="/resources/serverImg/${add2.ad_img}"  width="350" height="300"  alt="Card image cap"></a>
+			    	<a class="move" ><img class="card-img-top" src="/resources/serverImg/${add5.ad_img}"  width="350" height="300"  alt="Card image cap"></a>
 			      <div class="card-body">
-			        	<h5 class="card-title">첫번째 광고</h5>
-						<p class="card-text">현재 등록 되어있는 첫번째 광고</p>
+			        	<h5 class="card-title">두번째 광고</h5>
+						<p class="card-text">현재 등록 되어있는 두번째 광고</p>
 						<form action="/admin/uploadPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 							<input class="form-control" type="file" id="formFile" name="img"/><br>
+							<input type="hidden" id="formFile" name="ad_no" value="5"/><br>
 							<input type="submit" class="btn btn-primary" value="변경"/> <br> 
 						</form>
 			      </div>
@@ -104,12 +106,13 @@
 			  </div>
 			  <div class="col-sm-4">
 			    <div class="card">
-			    	<a class="move" ><img class="card-img-top" src="/resources/serverImg/${add3.ad_img}"  width="350" height="300"  alt="Card image cap"></a>
+			    	<a class="move" ><img class="card-img-top" src="/resources/serverImg/${add6.ad_img}"  width="350" height="300"  alt="Card image cap"></a>
 			      <div class="card-body">
-				       	<h5 class="card-title">첫번째 광고</h5>
-						<p class="card-text">현재 등록 되어있는 첫번째 광고</p>
+				       	<h5 class="card-title">세번째 광고</h5>
+						<p class="card-text">현재 등록 되어있는 세번째 광고</p>
 						<form action="/admin/uploadPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 							<input class="form-control" type="file" id="formFile" name="img"/><br>
+							<input type="hidden" id="formFile" name="ad_no" value="6"/><br>
 							<input type="submit" class="btn btn-primary" value="변경"/> <br>
 						</form>
 			    </div>

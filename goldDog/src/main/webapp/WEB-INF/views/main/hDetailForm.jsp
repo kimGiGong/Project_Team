@@ -7,16 +7,16 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     
-     <style>
+<style>
 	.fa-star:before {
     content: "\f005";
-    color: #48c1bd;
+    color: #dc3545;
 	}
 	.fa-vcard:before, .fa-address-card:before {
-    color: #6b6b6b;
-	}
+    color: #dc3545;
+}
 
-	</style>
+</style>
     
     
     
@@ -71,7 +71,33 @@
                </div>
              </div>
              
-             <c:forEach var="i" begin="0" end="2" step="1" >
+             
+             
+             
+             
+             
+            <c:if test="${reviewCount==0}">
+             <c:forEach var="i" begin="0" end="0" step="1" >
+             <div class="col-lg-12 ">
+                 <div class="card mb-3">
+                   <div class="row g-0">
+                     <div class="col-md-12">
+                       <div class="card-body">
+                         <h5 class="card-title">
+                         <p><i class="fa fa-star fa-lg " aria-hidden="true"></i>가장먼저 리뷰를 남겨주세요!</p>
+						</h5>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>   
+             	</c:forEach>
+             	</c:if>
+             	
+             	
+             	
+             <c:if test="${reviewCount<3&&reviewCount>0}">
+             <c:forEach var="i" begin="0" end="${reviewCount-1}" step="1" >
              <div class="col-lg-12 ">
                  <div class="card mb-3">
                    <div class="row g-0">
@@ -80,7 +106,7 @@
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
-                         <h5 class="card-title">${member.m_nick}
+                         <h5 class="card-title">${bestReviewUser[i].m_nick}
                          <c:forEach  begin="1" end="${review[i].r_score}" step="1" >
                          	<i class="fa fa-star fa-lg " aria-hidden="true"></i>
                          </c:forEach>
@@ -93,6 +119,32 @@
                  </div>
                </div>   
              	</c:forEach>
+             	</c:if>
+             	
+           <c:if test="${reviewCount>=3}">
+             <c:forEach var="i" begin="0" end="2" step="1" >
+             <div class="col-lg-12 ">
+                 <div class="card mb-3">
+                   <div class="row g-0">
+                     <div class="col-md-4">
+                      <img src="/resources/serverImg/${r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
+                     </div>
+                     <div class="col-md-8">
+                       <div class="card-body">
+                         <h5 class="card-title">${bestReviewUser[i].m_nick}
+                         <c:forEach  begin="1" end="${review[i].r_score}" step="1" >
+                         	<i class="fa fa-star fa-lg " aria-hidden="true"></i>
+                         </c:forEach>
+                         <fmt:formatDate pattern="yy-MM-dd" value="${review[i].r_date}"/>
+						</h5>
+                         <p class="card-text">${review[i].r_text} </p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>   
+             	</c:forEach>
+             	</c:if>
              	<br/><br/><br/>
                </div>   
              
