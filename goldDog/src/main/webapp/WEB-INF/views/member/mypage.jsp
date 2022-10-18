@@ -77,7 +77,7 @@
 	                                <a href="" class="nav-link external" target="_parent" rel="sponsored">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-external-link-alt nav-icon"></i>
-	                                    External
+	                                    맨 위로
 	                                </a>
 	                            </li>
 	                        </ul>
