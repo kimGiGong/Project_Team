@@ -85,7 +85,7 @@
 			<div class="tm-main">
                 <!-- Home section -->
                 <div class="tm-section-wrap">
-                    <section id="mypage" class="tm-section">
+                <!--    <section id="mypage" class="tm-section">
                     	<h3 class="tm-text-primary">프로필</h3> 
                         <hr class="mb-5">
                         <div class="row">
@@ -102,7 +102,28 @@
 								</div>
                         	</fieldset>
                         </div>
+                    </section>  -->
+					
+					<section id="mypage" class="tm-section">
+                        <h3 class="tm-text-primary">프로필</h3>
+                        <hr class="mb-5">
+                        <div class="row">
+                        	<fieldset id="mapage_container">
+                        		<div class="item"> <img class="card-img-top" src="/resources/serverImg/${ managerlist[0].m_img }" style="width: 200px; height: 150px"></div>
+                        		<div class="grid">
+									<div class="item">이　　름　 :　${ managerlist[0].m_name } </div>
+									<div class="item">닉네임　:　${ managerlist[0].m_nick } </div>
+									<div class="item">휴대전화　 :　${ managerlist[0].m_phone } </div>
+									<div class="item">이메일　:　${ managerlist[0].m_email }</div>
+									<div class="item">이용서비스 :　매니저</div>
+									<div class="item">
+										<button class="btn btn-primary btn-user" type="button" onclick="window.location.href='/member/modify'"> 회원정보 수정</button>
+									</div>
+								</div>
+                        	</fieldset>
+                        </div>
                     </section>
+					
 
 
 					<%-- 견적서 --%>
@@ -170,7 +191,7 @@
            					</div>
                     	</c:if>
                    	</div>
-                    
+                    <br><br><br><br>
                     <!-- 활동지역 -->
                     <h3 class="tm-text-primary" id="area_navbar">활동지역</h3> 
                     <hr class="mb-5">
