@@ -17,6 +17,7 @@
 }
 
 </style>
+<script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 </head>
 	
 <body>
@@ -35,21 +36,20 @@
                  <div class="card mb-3 border border-primary mb-3">
                    <div class="row g-0">
                      <div class="col-md-4">
-                      <img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/>
+                      <img src="/resources/serverImg/${member.m_img}" width="185px" height="185px" style="border-radius:1.5rem;"/>
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
-                         <h5 class="card-title">훈련정보</h5>
-                         <p class="card-text">
-                         </p> 
+                         <h5 class="card-title">훈련사 정보등록 페이지</h5>
+                         <p class="card-text">이름 : ${member.m_name}</p> 
+                         <p class="card-text">정보 : ${member.m_phone}</p> 
                        </div>
                      </div>
                    </div>
                  </div>
                </div>    
                
-             <form id="addtrainer" action="selUpload" method="post">
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+             <form id="addtrainer" action="selUpload?${_csrf.parameterName}=${_csrf.token}" method="post">
              <input type="hidden" name="m_no" value="${m_no}">
               <div class="col-lg-12">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
@@ -63,8 +63,9 @@
               <div class="col-lg-12">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
-                   <h5 class="card-title">판매 추가정보</h5>
-                   	<textarea class="form-control" rows="3" name="t_sel" placeholder="ex)훈련의 추가가격(강아지 입질훈련은 +50000)" ></textarea>
+                   <h5 class="card-title">판매 추가정보(꾸미기용)</h5>
+                   	<textarea class="form-control" rows="3" id="WriteEditor" name="t_sel" ></textarea>
+                   	<div class="col-12 col-md-9"><small class="form-text text-muted">ex)훈련의 추가가격(강아지 입질훈련은 +50000)</small></div>
                  </div>
                </div>
              </div>
@@ -121,6 +122,17 @@
 			
 			$("#addtrainer").submit();
 		});	
+		
+		
+		CKEDITOR.replace('WriteEditor',
+				{filebrowserUploadUrl:"/ImgUpLoad/imageUpload.do?${_csrf.parameterName}=${_csrf.token}"
+				});
+		CKEDITOR.config.width = '100%';
+		CKEDITOR.config.height = 400;
+		
+		$('.area').click(function() {
+		
+		})
 		
 	});
 			

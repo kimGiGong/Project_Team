@@ -19,7 +19,7 @@
 </style>
 <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 </head>
-	 
+	
 <body>
 		<div>
 		<jsp:include page="../header.jsp"/>
@@ -40,25 +40,22 @@
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
-                         <h5 class="card-title">훈련사 정보수정 페이지</h5>
+                         <h5 class="card-title">미용사 정보등록 페이지</h5>
                          <p class="card-text">이름 : ${member.m_name}</p> 
                          <p class="card-text">정보 : ${member.m_phone}</p> 
-                         <p class="card-text">
-                         </p> 
                        </div>
                      </div>
                    </div>
                  </div>
                </div>    
                
-             <form id="updatetrainer" action="selModifyPro" method="post">
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-             <input type="hidden" name="m_no" value="${trainer.m_no}"/>
+             <form id="addtrainer" action="selUploadH?${_csrf.parameterName}=${_csrf.token}" method="post">
+             <input type="hidden" name="m_no" value="${m_no}">
               <div class="col-lg-12">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">자기소개</h5>
-                   	<textarea class="form-control" rows="3" name="t_self" >${trainer.t_self}</textarea>
+                   	<textarea class="form-control" rows="3" name="h_self" placeholder="ex)항상 강아지에게 편안한 미용을 제공하는 미용사입니다. " ></textarea>
                  </div>
                </div>
              </div>
@@ -67,8 +64,9 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">판매 추가정보(꾸미기용)</h5>
-                   	<textarea class="form-control" rows="3" id="WriteEditor" name="t_sel" ></textarea>
-                   	<div class="col-12 col-md-9"><small class="form-text text-muted">ex)훈련의 추가가격(강아지 입질훈련은 +50000)</small></div>
+                   	<textarea class="form-control" rows="3" id="WriteEditor" name="h_sel" ></textarea>
+                   	<div class="col-12 col-md-9"><small class="form-text text-muted">ex)미용 추가가격(5kg 이상의 강아지는 + 10000)</small></div>
+                   	<div class="col-12 col-md-9"><small class="form-text text-muted">ex)미용 추가가격(장모종 강아지는 + 20000)</small></div>
                  </div>
                </div>
              </div>
@@ -77,7 +75,7 @@
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">자격증</h5>
-                   	<input type="text" name="t_license" value="${trainer.t_license}">
+                   	<input type="text" name="h_license">
                  </div>
                </div>
              </div>
@@ -86,23 +84,23 @@
               <div class="col-lg-6">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
-                   <h5 class="card-title"><td>훈련시작금액</td></h5>
-                   	<input type="number" name="t_price" value="${trainer.t_price}">원
+                   <h5 class="card-title"><td>미용시작금액</td></h5>
+                   	<input type="number" name="h_price">원
                  </div>
                </div>
              </div>
               <div class="col-lg-6">
                <div class="card shadow-none bg-transparent border border-primary mb-3">
                  <div class="card-body">
-                   <h5 class="card-title"><td>경력</td></h5>
-                   	<input type="number" name="t_career" value="${trainer.t_career}">년
+                   <h5 class="card-title"><td>미용 경력</td></h5>
+                   	<input type="number" name="h_career">년
                  </div>
                </div>
              </div>
 	         </div><!--/.row-->
 	         <div class="row justify-content-md-center">
     	          <div class="col-lg-12">
-	    	         <input type="button" class="btn float-right btn-info" id="newBoard" value="수정하기">
+	    	         <input type="button" class="btn float-right btn-info" id="newBoard" value="글쓰기">
 		         </div><!--/.row-->
 	         </div><!--/.row-->
              </form>
@@ -111,6 +109,7 @@
          </div><!--/.row-->
          </div><!--/.con-->
 	 
+
 
 
  <%@ include file="../footer.jsp" %>
@@ -122,7 +121,7 @@
 			e.preventDefault(); 
 			console.log("글쓰기 확인");
 			
-			$("#updatetrainer").submit();
+			$("#addtrainer").submit();
 		});	
 		
 		
@@ -136,15 +135,10 @@
 		
 		})
 		
-		
-		
 	});
 			
 		
 		</script>
-	
-
-
 
 
 

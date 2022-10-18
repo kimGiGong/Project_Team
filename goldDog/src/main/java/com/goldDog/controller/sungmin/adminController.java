@@ -39,13 +39,20 @@ public class adminController {
 	@RequestMapping("addAD")
 	public void addAD(Model model) {
 		
-		//현재 등록된 광고3개 이름 가져오는 메서드
+		//현재 등록된 광고3개 이름 가져오는 메서드 훈련
 		ADVO ad1=mainService.getAdName(1);
 		ADVO ad2=mainService.getAdName(2);
 		ADVO ad3=mainService.getAdName(3);
 		model.addAttribute("add1",ad1);
 		model.addAttribute("add2",ad2);
 		model.addAttribute("add3",ad3);
+		//미용
+		ADVO ad4=mainService.getAdName(4);
+		ADVO ad5=mainService.getAdName(5);
+		ADVO ad6=mainService.getAdName(6);
+		model.addAttribute("add4",ad4);
+		model.addAttribute("add5",ad5);
+		model.addAttribute("add6",ad6);
 		
 	}
 	//메인 광고 수정파일 등록하는 컨트롤러

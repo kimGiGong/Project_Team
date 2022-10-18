@@ -15,21 +15,25 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 <!-- nice select  -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
 	integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
 	crossorigin="anonymous" />
 <!-- font awesome style -->
 <link href="/resources/feane/css/font-awesome.min.css" rel="stylesheet" />
-
 <!-- Custom styles for this template -->
 <link href="/resources/feane/css/style.css" rel="stylesheet" />
 <!-- responsive style -->
 <link href="/resources/feane/css/responsive.css" rel="stylesheet" />
+
+
+<!-- 커스텀 css -->
 <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans&amp;display=swap" rel="stylesheet"> <!-- https://fonts.google.com/specimen/Kumbh+Sans -->
-<!--<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>  
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script> 
-    
+<link rel="stylesheet" href="/resources/Upright/css/magnific-popup.css">       <!-- https://dimsemenov.com/plugins/magnific-popup/ -->
+<link rel="stylesheet" href="/resources/Upright/slick/slick.min.css">          <!-- https://kenwheeler.github.io/slick/ -->
+<link rel="stylesheet" href="/resources/Upright/slick/slick-theme.css">
+<link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 
 

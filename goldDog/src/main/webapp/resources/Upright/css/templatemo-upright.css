@@ -18,8 +18,8 @@ https://templatemo.com/tm-555-upright
 */
 
 html, body { overflow-x: hidden; }
-body { font-family: 'Kumbh Sans', sans-serif; }
-div, a, p { color: #666666; }
+body { font-family: "Kumbh Sans", sans-serif; }
+a { color: #666666; }
 p, address { line-height: 1.8; }
 a {	transition: all 0.3s ease; }
 a:hover {
@@ -28,7 +28,6 @@ a:hover {
 }
 .bodymain {
 	margin-top: 35px;
-	
 }
 
 .container-fluid { margin-left: 0; }

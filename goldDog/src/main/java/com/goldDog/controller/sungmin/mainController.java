@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -140,9 +141,18 @@ public class mainController {
 
 		//리뷰 추가해야함 베스트 5개 뽑기
 			List<ReviewVO> BestReview=mainService.getAllTReview();
-			
 			model.addAttribute("bestReview",BestReview);
-			model.addAttribute("bestReviewUser",BestReview);
+			
+		//베스트 리뷰에 해당하는 맴버의 이름 가져오기위한 처리
+			List<Integer> r_m_no_list = new ArrayList<Integer>();
+			List<MemberVO> bestReviewUser= new ArrayList<MemberVO>(); 
+			
+			for(int i =0 ;i<BestReview.size() ;i++) {
+				r_m_no_list.add(BestReview.get(i).getM_no());
+				bestReviewUser.add(mainService.getOneMember(r_m_no_list.get(i)));
+			}
+			
+			model.addAttribute("bestReviewUser",bestReviewUser);
 			
 		
 		
@@ -154,9 +164,9 @@ public class mainController {
 		@RequestMapping("hmain")
 		public void hmain(Model model,Criteria cri) {
 			//광고 가져오기 for 문 돌리기 귀찬...
-			String ad1 = mainService.getAdName(1).getAd_img();
-			String ad2 = mainService.getAdName(2).getAd_img();
-			String ad3 = mainService.getAdName(3).getAd_img();
+			String ad1 = mainService.getAdName(4).getAd_img();
+			String ad2 = mainService.getAdName(5).getAd_img();
+			String ad3 = mainService.getAdName(6).getAd_img();
 			model.addAttribute("ad1",ad1);
 			model.addAttribute("ad2",ad2);
 			model.addAttribute("ad3",ad3);
@@ -228,7 +238,17 @@ public class mainController {
 				List<ReviewVO> BestReview=mainService.getAllHReview();
 				
 				model.addAttribute("bestReview",BestReview);
-				model.addAttribute("bestReviewUser",BestReview);
+				
+			//베스트 리뷰에 해당하는 맴버의 이름 가져오기위한 처리
+				List<Integer> r_m_no_list = new ArrayList<Integer>();
+				List<MemberVO> bestReviewUser= new ArrayList<MemberVO>(); 
+				
+				for(int i =0 ;i<BestReview.size() ;i++) {
+					r_m_no_list.add(BestReview.get(i).getM_no());
+					bestReviewUser.add(mainService.getOneMember(r_m_no_list.get(i)));
+				}
+				
+				model.addAttribute("bestReviewUser",bestReviewUser);	
 				
 				
 				
@@ -257,8 +277,20 @@ public class mainController {
 		
 		String Ravg1 =String.format("%.2f", Ravg); // 리뷰 뒤에 끊어주기
 		model.addAttribute("review",mainService.getTReview(t_no));
-		
+		//리뷰갯수 분기처리위해 뽑기
+		model.addAttribute("reviewCount",mainService.getTReview(t_no).size());
 		model.addAttribute("Ravg",Ravg1);
+		// 리뷰에 해당하는 맴버의 이름 가져오기위한 처리
+		List<Integer> r_m_no_list = new ArrayList<Integer>();
+		List<MemberVO> bestReviewUser= new ArrayList<MemberVO>(); 
+		
+		for(int i =0 ;i<re.size() ;i++) {
+			r_m_no_list.add(re.get(i).getM_no());
+			bestReviewUser.add(mainService.getOneMember(r_m_no_list.get(i)));
+		}
+		
+		model.addAttribute("bestReviewUser",bestReviewUser);
+		
 		
 		
 		System.out.println("auth : " + auth);
@@ -334,8 +366,26 @@ public class mainController {
 		
 		String Ravg1 =String.format("%.2f", Ravg); // 리뷰 뒤에 끊어주기
 		model.addAttribute("review",mainService.getHReview(h_no));
+		model.addAttribute("reviewCount",mainService.getHReview(h_no).size());
 		model.addAttribute("Ravg",Ravg1);
 		System.out.println("auth : " + auth);
+		
+		
+		
+		// 리뷰에 해당하는 맴버의 이름 가져오기위한 처리
+		List<Integer> r_m_no_list = new ArrayList<Integer>();
+		List<MemberVO> bestReviewUser= new ArrayList<MemberVO>(); 
+		
+		for(int i =0 ;i<re.size() ;i++) {
+			r_m_no_list.add(re.get(i).getM_no());
+			bestReviewUser.add(mainService.getOneMember(r_m_no_list.get(i)));
+		}
+		
+		model.addAttribute("bestReviewUser",bestReviewUser);	
+		
+		
+		
+		
 		
 		//사용자가 로그인이 되어있다면 강아지 정보와 주소 보내주는 처리 
 		// 여기서 로그인 안했을때 오류가 뜸
@@ -387,17 +437,18 @@ public class mainController {
 	
 	
 	
-	
-	
-	
-	
+	//훈련사용 자기정보 수정
 	@GetMapping("selUpload")
 	public void selUpload(int m_no,Model model) {
+		MemberVO member =mainService.getOneMember(m_no);
+		
 		model.addAttribute("m_no",m_no);
-		log.info(m_no+"가져왔니??");
+		model.addAttribute("member",member);
 		
 	}
+
 	
+	//훈련사용
 	@GetMapping("selModify")
 	@PreAuthorize("isAuthenticated()") 
 	public void selModify(Model model,Authentication auth) {
@@ -405,13 +456,15 @@ public class mainController {
 		MemberVO loginUser=memberService.getMember(userId);
 		
 		TrainerVO trainer =mainService.getMTrainer(loginUser.getM_no());
-		
-		
+		MemberVO member =mainService.getOneMember(loginUser.getM_no());
 		model.addAttribute("trainer",trainer);
 		log.info(trainer+"가져왔니??");
+		model.addAttribute("member",member);
 		
 		
 	}
+	
+	
 	
 	// 정보 수정 업데이트
 	@PostMapping("selModifyPro")
@@ -452,6 +505,80 @@ public class mainController {
 		
 		return "redirect:/member/login";
 	}
+	
+	
+	
+	
+	//미용사용
+	@GetMapping("selUploadH")
+	public void selUploadH(int m_no,Model model) {
+		MemberVO member =mainService.getOneMember(m_no);
+		
+		model.addAttribute("m_no",m_no);
+		model.addAttribute("member",member);
+		
+	}
+	
+	//미용사 업로드
+	@PostMapping("selUploadH")
+	public String selUploadHPro(HairstylistVO hairstylist,Authentication auth) {
+		
+		String userId= ((CustomUser)auth.getPrincipal()).getUsername();
+		MemberVO loginMember=memberService.getMember(userId);
+		
+		if(hairstylist.getM_no()==loginMember.getM_no()) {
+			log.info(hairstylist);
+			int result=mainService.addHinfo(hairstylist);
+			log.info(result+"추가정보 등록 결과");
+			
+			return "redirect:/main/tmain";
+		}
+		
+		return "redirect:/member/login";
+	}
+	
+	
+	
+	//미용사 정보수정
+	@GetMapping("selModifyH")
+	@PreAuthorize("isAuthenticated()") 
+	public void selModifyH(Model model,Authentication auth) {
+		String userId= ((CustomUser)auth.getPrincipal()).getUsername();
+		MemberVO loginUser=memberService.getMember(userId);
+		
+		HairstylistVO stylist =mainService.getMhairstylist(loginUser.getM_no());
+		MemberVO member =mainService.getOneMember(loginUser.getM_no());
+		model.addAttribute("stylist",stylist);
+		log.info(stylist+"가져왔니??");
+		model.addAttribute("member",member);
+		
+		
+	}
+	
+	
+	
+	// 정보 수정 업데이트
+	@PostMapping("selModifyProH")
+	@PreAuthorize("isAuthenticated()") 
+	public String selModifyProH(Model model,Authentication auth,HairstylistVO stylist) {
+		String userId= ((CustomUser)auth.getPrincipal()).getUsername();
+		
+		MemberVO loginUser=memberService.getMember(userId);
+		
+		
+		if(stylist.getM_no()==loginUser.getM_no()) {
+		int result = mainService.updateHinfo(stylist);
+		
+		log.info(result+"성공했니??");
+		return "redirect:/mypage";
+		}
+		
+		
+		return "redirect:/member/login";
+	}
+	
+	
+	
 	
 	
 	

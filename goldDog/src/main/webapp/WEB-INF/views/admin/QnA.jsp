@@ -57,7 +57,7 @@
 					    </tr>
 					  </thead>
 					  <tbody >
-					  	<c:forEach var="i" begin="0" end="4" step="1" >
+					  	<c:forEach var="i" begin="0" end="${noticeCheck-1}" step="1" >
 						    <tr >
 						      <th scope="row">${notice[i].n_no}</th>
 						      <td colspan="3" width="350"><a href="noticeForm?n_no=${notice[i].n_no}" > ${notice[i].n_title}</a></td>
@@ -74,17 +74,17 @@
 							<ul class="pagination justify-content-md-center">
 								<c:if test="${pager.prev}">
 									<li class="page-item">
-										<a class="page-link" href="${pager.startPage-1}" tabindex="-1">Previous</a>
+										<a class="page-link" href="${npager.startPage-1}" tabindex="-1">Previous</a>
 									</li>
 								</c:if>
-								<c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" >
-									<li class="page-item ${pager.cri.pageNum == num ? "active":""}">
-										<a class="page-link" href="${num}">${num}</a>
+								<c:forEach var="num1" begin="${npager.startPage}" end="${npager.endPage}" >
+									<li class="page-item ${npager.cri.pageNumber == num1 ? "active":""}">
+										<a class="page-link notice"  href="/admin/QnA?pageNumber=${num1}">${num1}</a>
 									</li>
 								</c:forEach>
-								<c:if test="${pager.next}">
+								<c:if test="${npager.next}">
 									<li class="page-item">
-										<a class="page-link" href="${pager.endPage+1}">Next</a>
+										<a class="page-link" href="${npager.endPage+1}">Next</a>
 									</li>
 								</c:if>
 							</ul>
@@ -100,7 +100,7 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					  	<c:forEach var="i" begin="0" end="4" step="1" >
+					  	<c:forEach var="i" begin="0" end="${QnACheck-1}" step="1" >
 						   <tr >
 						      <th scope="row">${QnA[i].q_no}</th>
 						      <td colspan="3" width="350"><a href="QnAForm?q_no=${QnA[i].q_no}" >${QnA[i].q_title}</a> </td>
@@ -122,7 +122,7 @@
 								</c:if>
 								<c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" >
 									<li class="page-item ${pager.cri.pageNum == num ? "active":""}">
-										<a class="page-link" href="${num}">${num}</a>
+										<a class="page-link qna" href="/admin/QnA?pageNum=${num}">${num}</a>
 									</li>
 								</c:forEach>
 								<c:if test="${pager.next}">
@@ -135,9 +135,9 @@
 				  </div>
 				</div>
 				
-				
-				
-				<!-- 공지사항 글쓰기 눌렀을때 띄울 모달 -->
+				 
+				 
+				<!-- 공지사항 글쓰기 눌렀을때 띄울 모달 --> 
 					<div class="modal fade" id="addNew1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 				    		<div class="modal-content">
@@ -218,8 +218,9 @@
 		<br/><br/><br/><br/><br/><br/><br/><br/>
 		</body>
 
-		<form id="pagingForm" action="/admin/QnAForm">
-         	<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+		<form id="pagingForm" action="/admin/QnA">
+         	<input type="hidden" name="Num1" value="${pager.cri.pageNum}" />
+         	<input type="hidden" name="Number1" value="${npager.cri.pageNumber}" />
          </form>
          
          
@@ -230,7 +231,7 @@
 
 			// 모달 띄우는 매서드
 		
-			
+			let pagingForm = $("#pagingForm");
 			//공지사항 글쓰기 눌렀을때 띄울 모달
 			//let result ="${result}";
 			$("#newBoard1").on("click",function(e){
@@ -248,7 +249,9 @@
 				
 				$("#addNoticePro").submit();
 			});
-
+			
+			
+		
 			
 			
 			
