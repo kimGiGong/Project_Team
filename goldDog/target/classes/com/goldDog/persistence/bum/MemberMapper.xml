@@ -114,7 +114,7 @@
 	
 	<insert id="insertDog">
 		insert into dog values 
-		(dog_seq.nextval+8, #{m_no}, #{d_name}, #{d_age}, #{d_img}, #{d_weight}, #{d_type}, #{d_gender})
+		(dog_seq.nextval, #{m_no}, #{d_name}, #{d_age}, #{d_img}, #{d_weight}, #{d_type}, #{d_gender})
 	</insert>
 	
 	<select id="getDog" resultType="com.goldDog.domain.DogVO">

@@ -33,7 +33,9 @@
 <link rel="stylesheet" href="/resources/Upright/slick/slick.min.css">          <!-- https://kenwheeler.github.io/slick/ -->
 <link rel="stylesheet" href="/resources/Upright/slick/slick-theme.css">
 
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 
 
 
