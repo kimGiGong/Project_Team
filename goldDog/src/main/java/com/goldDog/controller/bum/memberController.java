@@ -259,10 +259,25 @@ public class memberController {
 	}
 	
 	@PostMapping("reviewPro")
-	public String reviewPro(ReviewVO review, MultipartHttpServletRequest request, Authentication auth) {
+	public String reviewPro(ReviewVO review, MultipartHttpServletRequest request, Authentication auth ,int m_no_manager) {
 		try {
-			int t_no = review.getT_no();
-			int h_no = review.getH_no();
+			boolean tCheck = true;
+			//훈련사인지 체크
+			if(mainService.getTrainer(m_no_manager)!=null) {
+				 tCheck = true; 
+			}else {
+				 tCheck = false; 
+			}
+			
+			//훈련사일때
+			if(tCheck) {
+				review.setT_no(m_no_manager);
+			}else {
+			//미용사일때
+				review.setH_no(m_no_manager);
+			}
+			
+			
 			CustomUser user = (CustomUser)auth.getPrincipal();
 			String m_id =user.getUsername();
 			review.setM_no(service.getMno(user.getUsername()));
@@ -296,30 +311,30 @@ public class memberController {
 			}
 			if(result == 1) {
 				//조건문 추가해야함 임시로 오류날것임
-				if(t_no>1) {
+				if(tCheck) {
 					log.info("훈련사 리뷰추가들어옴");
 					
 					double rTotal = 0.0;
-		            List<ReviewVO> re =mainService.getTReview(t_no);
+		            List<ReviewVO> re =mainService.getTReview(m_no_manager);
 		            int t_review_total = 0;
 	                for(int i=0 ;i<re.size() ;i++) {
 	                        t_review_total += re.get(i).getR_score();
 	                }
 		                rTotal = (double)(t_review_total / re.size());
-		                mainService.updateRAvg(t_no, rTotal,re.size());
+		                mainService.updateRAvg(m_no_manager, rTotal,re.size());
 		                log.info("훈련사 리뷰추가완료");
 		                
 					}
-					else if(h_no>1){ 
+					else if(!tCheck){ 
 					log.info("미용사 리뷰추가들어옴");	
 	                double rTotal = 0.0;
-	                List<ReviewVO> re =mainService.getHReview(t_no);
+	                List<ReviewVO> re =mainService.getHReview(m_no_manager);
 	                int h_review_total = 0;
 	                for(int i=0 ;i<re.size() ;i++) {
 	                	h_review_total += re.get(i).getR_score();
 	                }
 		                rTotal = (double)(h_review_total / re.size());
-		                mainService.updateRHAvg(h_no, rTotal,re.size());
+		                mainService.updateRHAvg(m_no_manager, rTotal,re.size());
 		                log.info("미용사 리뷰추가완료");
 					}
 	    	}
