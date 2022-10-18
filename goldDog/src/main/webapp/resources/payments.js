@@ -1,22 +1,24 @@
 
-let eno = $("#dogCheck").val();
+let eno = "${estimate.e_no}";
 var obj = "";
 let token =$("meta[name='_csrf']").attr("content");                
 let header=$("meta[name='_csrf_header']").attr("content");
 $(document).ready(function(){
-	$.ajax({
-		url : "/payment/members" ,
-		method : "POST",
-		beforeSend: function(xhr){ xhr.setRequestHeader(header,token); },
-		data : { e_no : eno },
-		success: function(result){
-			obj = JSON.parse(result);
-			console.log(obj); 
-		},
-		error: function(e){
-			console.log(e);
-		}
-	});
+	if("${estimate.e_con}" == 1){
+		$.ajax({
+			url : "/payment/members" ,
+			method : "POST",
+			beforeSend: function(xhr){ xhr.setRequestHeader(header,token); },
+			data : { e_no : eno },
+			success: function(result){
+				obj = JSON.parse(result);
+				console.log(obj); 
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+	}
 
 })
 
