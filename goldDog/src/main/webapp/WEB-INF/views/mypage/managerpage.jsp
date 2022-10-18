@@ -49,7 +49,7 @@
 	                                <a href="/main/selUpload?m_no=${ managerlist[0].m_no }" class="nav-link">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-user-friends nav-icon"></i>
-	                                    매니저 등록 정보
+	                                    매니저 등록& 수정 
 	                                </a>
 	                            </li>
 	                            <li class="nav-item">
@@ -81,7 +81,7 @@
                         <hr class="mb-5">
                         <div class="row">
                         	<fieldset id="mapage_container">
-                        		<div class="item"> <img class="mapageIMG" src=""></div>
+                        		<div class="item"> <img class="mapageIMG" src="/resources/serverImg/${memberlist[0].m_img}"></div>
                         		<div class="grid">
 									<div class="item">이름 : ${ managerlist[0].m_name }</div>
 									<div class="item">휴대전화 : ${ managerlist[0].m_phone }</div>

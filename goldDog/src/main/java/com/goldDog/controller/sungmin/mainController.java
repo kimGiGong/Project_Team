@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goldDog.domain.ADVO;
 import com.goldDog.domain.AddressVO;
@@ -120,22 +122,30 @@ public class mainController {
 		// 페이징 처리해서 가져오기
 		List<Integer> t_no_list = new ArrayList<Integer>(); 
 		List<Integer> t_m_no_list = new ArrayList<Integer>(); 
+		List<MemberVO> member = new ArrayList<MemberVO>(); 
 		
 		
 		for(int i = 0; i < Tlist.size(); i++) {
 			t_no_list.add(Tlist.get(i).getT_no()); 
 			t_m_no_list.add(Tlist.get(i).getM_no());
+
 		}
+		
 		
 		// t_no 를 받아서 그에 맞게 띄워주기
 		log.info(t_no_list+"입니다잇"); 
+		log.info(t_m_no_list+"입니다잇"); 
 		model.addAttribute("t_no",t_no_list);
 		
 			
 		if(t_m_no_list.size()!=0) {
-			model.addAttribute("member", mainService.getMember(t_m_no_list));
 			model.addAttribute("trainer",Tlist);
 		}
+		
+		for(int i=0 ;i<Tlist.size() ;i++) {
+			member.add(mainService.getOneMember(t_m_no_list.get(i)));
+		}
+		model.addAttribute("member", member);
 			model.addAttribute("trainercheck",t_no_list.size()); //트레이너 숫자 체크
 			model.addAttribute("pager", new PageDTO(cri, Ttotal)); // total count로 수정    
 
@@ -212,6 +222,7 @@ public class mainController {
 					
 			List<Integer> h_no_list = new ArrayList<Integer>(); 
 			List<Integer> h_m_no_list = new ArrayList<Integer>(); 
+			List<MemberVO> member = new ArrayList<MemberVO>();
 			
 			for(int i = 0; i < Hlist.size(); i++) {
 				h_no_list.add(Hlist.get(i).getH_no()); 
@@ -228,10 +239,14 @@ public class mainController {
 			// 등록된훈련사가 없을경우레
 			if(h_m_no_list.size()!=0) {
 				//이거
-				model.addAttribute("member", mainService.getMember(h_m_no_list));
 				model.addAttribute("hairstylist",Hlist);
 			}
 			
+			for(int i=0 ;i<Hlist.size() ;i++) {
+				member.add(mainService.getOneMember(h_no_list.get(i)));
+			}
+			
+				model.addAttribute("member", member);
 				model.addAttribute("hairstylistcheck",h_no_list.size()); //미용사 숫자 체크
 				model.addAttribute("pager", new PageDTO(cri, Htotal));  // total count로 수정 
 			//리뷰 추가해야함 베스트 5개 뽑기
@@ -435,21 +450,63 @@ public class mainController {
 		
 	}
 	
+	@GetMapping("selUpload")
+	@PreAuthorize("isAuthenticated()")
+	public String selUpload(int m_no, Authentication auth,RedirectAttributes redirect) {
+		MemberVO member =mainService.getOneMember(m_no);
+		
+		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))) {
+			//훈련사 분기처리
+			if(mainService.getMTrainer(m_no) != null) {
+				redirect.addAttribute("m_no",m_no);
+				return "redirect:/main/selModifyT";
+			}else {
+				redirect.addAttribute("m_no",m_no);
+				return "redirect:/main/selUploadT";
+			}
+		
+		}else if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_HAIR"))) {
+			//미용사 분기처리
+			
+			if(mainService.getMhairstylist(m_no) != null) {
+				redirect.addAttribute("m_no",m_no);
+				return "redirect:/main/selModifyH";
+			}else {
+				redirect.addAttribute("m_no",m_no);
+				return "redirect:/main/selUploadH";
+			}
+			
+		}
+		return "redirect:/main/tmain";
+		
+	}
+	
+	
 	
 	
 	//훈련사용 자기정보 수정
-	@GetMapping("selUpload")
-	public void selUpload(int m_no,Model model) {
+	@GetMapping("selUploadT")
+	public String selUploadTrainer(int m_no,Model model) {
 		MemberVO member =mainService.getOneMember(m_no);
+		if(mainService.getMTrainer(m_no) != null) {
 		
-		model.addAttribute("m_no",m_no);
-		model.addAttribute("member",member);
+		//훈련사 맨첨 등록할때 가야할 페이지
+			model.addAttribute("m_no",m_no);
+			model.addAttribute("member",member);
+			
+			return "redirect:/main/selUploadPro";
+			
+		}else {
+			
+			return "redirect:/main/selUpload";
+		
+		}
 		
 	}
 
 	
 	//훈련사용
-	@GetMapping("selModify")
+	@GetMapping("selModifyT")
 	@PreAuthorize("isAuthenticated()") 
 	public void selModify(Model model,Authentication auth) {
 		String userId= ((CustomUser)auth.getPrincipal()).getUsername();
