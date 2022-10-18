@@ -447,7 +447,7 @@
 								</div>
 								<hr />
 								<tr>
-									<th id="manager_name"><br></th>
+									<th id="manager_name"><br/></th>
 								</tr>
 								<tr>
 									<th>
