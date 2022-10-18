@@ -259,8 +259,10 @@ public class memberController {
 	}
 	
 	@PostMapping("reviewPro")
-	public String reviewPro(ReviewVO review, MultipartHttpServletRequest request, Authentication auth, int t_no, int h_no) {
+	public String reviewPro(ReviewVO review, MultipartHttpServletRequest request, Authentication auth) {
 		try {
+			int t_no = review.getT_no();
+			int h_no = review.getH_no();
 			CustomUser user = (CustomUser)auth.getPrincipal();
 			String m_id =user.getUsername();
 			review.setM_no(service.getMno(user.getUsername()));
@@ -478,8 +480,10 @@ public class memberController {
 		
 		List<EstimateVO> estimate = mypageService.getMemberEstimate(member.getM_no()); 
 		List<MemberVO> estimateMember = new ArrayList<MemberVO>();
+		
 		for (int i = 0; i < estimate.size(); i++) {
 			estimateMember.add(mainService.getOneMember(estimate.get(i).getM_no_manager()));
+			
 		}
 		
 		
