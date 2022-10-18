@@ -43,6 +43,7 @@ import com.goldDog.domain.AddressTranslator;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.DogVO;
 import com.goldDog.domain.EstimateVO;
+import com.goldDog.domain.HairstylistVO;
 import com.goldDog.domain.MemberVO;
 import com.goldDog.domain.PayVO;
 import com.goldDog.domain.TrainerVO;
@@ -111,7 +112,12 @@ public class mypageController {
 		if(auth == null) {
 			return "redirect:member/login"; 
 		}else {
-			if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))) {
+			Boolean trainerCheck = auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"));
+			Boolean hairCheck = auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_HAIR"));
+			if (!auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))
+					&& !auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_HAIR"))) {
+				System.out.println(!hairCheck+"헤어아님");
+				System.out.println(!trainerCheck+"트레이너 아님");
 				return "redirect:/mypage";
 			}else {
 				CustomUser user = (CustomUser)auth.getPrincipal();
@@ -128,12 +134,22 @@ public class mypageController {
 				list.add(member);
 				list.add(addrtr.translator(address.getA_addr()));
 				list.add(area);
-				TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
-				System.out.println(trainer);
-				if(trainer != null) {
-					estimate= instanceService.getEstimate(trainer.getM_no()); 
+				//트레이너가 왔을때
+				if(trainerCheck == true) {
+					TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
+					System.out.println(trainer);
+					if(trainer != null) {
+						estimate= instanceService.getEstimate(trainer.getM_no()); 
+					}
+					list.add(trainer);
+				}else if(hairCheck == true){
+					HairstylistVO hair = sungminService.getMhairstylist(member.getM_no());
+					System.out.println(hair);
+					if(hair != null) {
+						estimate= instanceService.getEstimate(hair.getM_no()); 
+					}
+					list.add(hair);
 				}
-				
 				List<MemberVO> estimateMember = new ArrayList<MemberVO>();
 				
 				if(estimate != null) {
@@ -141,7 +157,6 @@ public class mypageController {
 						estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
 					}
 				}
-				list.add(trainer);
 				System.out.println(list);
 				System.out.println(estimate);
 				model.addAttribute("managerlist",list);

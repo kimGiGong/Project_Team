@@ -57,6 +57,12 @@
 					    </tr>
 					  </thead>
 					  <tbody >
+					  <c:if test="${noticeCheck==0}">
+						    <tr >
+						      <td>조회수 : 등록된 글이 없습니다.</td>
+						    </tr>
+					  	</c:if>
+					  <c:if test="${noticeCheck>0}">
 					  	<c:forEach var="i" begin="0" end="${noticeCheck-1}" step="1" >
 						    <tr >
 						      <th scope="row">${notice[i].n_no}</th>
@@ -65,6 +71,7 @@
 						      <td>조회수 : ${notice[i].n_readcount}</td>
 						    </tr>
 					  	</c:forEach>
+					  	</c:if>
 					  </tbody>
 					</table>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -100,6 +107,12 @@
 					    </tr>
 					  </thead>
 					  <tbody>
+					  <c:if test="${QnACheck==0}">
+						   <tr >
+						      <td>등록된 글이 없습니다.</td>
+						    </tr>
+					  	</c:if>
+					  <c:if test="${QnACheck>0}">
 					  	<c:forEach var="i" begin="0" end="${QnACheck-1}" step="1" >
 						   <tr >
 						      <th scope="row">${QnA[i].q_no}</th>
@@ -108,6 +121,7 @@
 						      <td>조회수 : ${QnA[i].q_readcount}</td>
 						    </tr>
 					  	</c:forEach>
+					  	</c:if>
 					  </tbody>
 					</table>
 					<sec:authorize access="isAuthenticated()">
