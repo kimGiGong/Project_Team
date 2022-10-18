@@ -22,7 +22,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler {
 				log.info("****************logout success handler*****************");
 				
 				// 보던 페이지로 돌어가는 처리(loginSuccessHandler 와 동일)
-				response.sendRedirect(request.getHeader("referer"));
+				response.sendRedirect("/main/premain");
 				
 				
 			}
