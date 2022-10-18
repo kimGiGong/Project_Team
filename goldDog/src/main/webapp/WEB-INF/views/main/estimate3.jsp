@@ -135,15 +135,14 @@
 
 								<div class="row">
 									<div class="col-lg-6">
-										<button id="dogCheck" type="button" value ="${ estimate.e_no }"
-											class="btn btn-lg btn-info btn-block">
+										<button id="dogCheck" type="button" value ="${ estimate.e_no }" onclick="requestPay()" class="btn btn-lg btn-info btn-block">
 											<span id="payment-button-amount">결제</span>
 										</button>
 									</div>
 									<div class="col-lg-6">
 										<button id="deleteModal"
 											class="btn btn-lg btn-danger btn-block">
-											<span id="payment-button-amount">견적 취소</span>
+											<span>견적 취소</span>
 										</button>
 									</div>
 								</div>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.goldDog.domain.AddressTranslator;
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.EstimateVO;
+import com.goldDog.domain.PayVO;
 import com.goldDog.persistence.instance.MyPageMapper;
 
 @Service
@@ -45,6 +46,16 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public List<EstimateVO> getMemberEstimate(int m_no) {
 		return Mapper.getMemberEstimate(m_no);
+	}
+
+	@Override
+	public int insertPay(PayVO pay ){
+		return Mapper.insertPay(pay);
+	}
+
+	@Override
+	public int updateE_con(int e_no) {
+		return Mapper.updateE_con(e_no);
 	}
 
 

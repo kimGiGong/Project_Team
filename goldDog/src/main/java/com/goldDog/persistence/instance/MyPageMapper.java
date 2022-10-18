@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.EstimateVO;
+import com.goldDog.domain.PayVO;
 
 public interface MyPageMapper {
 	
@@ -18,5 +19,10 @@ public interface MyPageMapper {
 	public List<EstimateVO> getEstimate(@Param ("m_no") int m_no); 
 	
 	public List<EstimateVO> getMemberEstimate(@Param ("m_no") int  m_no);
+
+	public int insertPay(PayVO pay);
+	
+	public int updateE_con( int e_no);
+	
 	
 }
