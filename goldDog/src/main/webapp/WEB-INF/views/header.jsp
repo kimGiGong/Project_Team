@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="/resources/Upright/css/magnific-popup.css">       <!-- https://dimsemenov.com/plugins/magnific-popup/ -->
 <link rel="stylesheet" href="/resources/Upright/slick/slick.min.css">          <!-- https://kenwheeler.github.io/slick/ -->
 <link rel="stylesheet" href="/resources/Upright/slick/slick-theme.css">
-<link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 
@@ -77,7 +77,7 @@
 							<i class="fa fa-search" aria-hidden="false"></i>
 						</button>
 					</form>
-					<sec:authorize access="isAuthenticated()">
+					<sec:authorize access="hasRole('ROLE_MEMBER')">
 						<a href="/mypage" class="order_online"> 마이페이지 </a>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">

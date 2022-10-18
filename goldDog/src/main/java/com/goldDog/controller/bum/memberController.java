@@ -400,6 +400,8 @@ public class memberController {
 		
 		return "redirect:/member/mypage";
 	}
+	
+	
 	@PostMapping("dogModifyPro")
 	public String dogModifyPro(DogVO dog, MultipartHttpServletRequest request, Authentication auth ) {
 		try {
@@ -473,6 +475,7 @@ public class memberController {
 		
 		int mno = service.getMno(user.getUsername());
 		List<DogVO> dog = service.getDog(mno);
+		
 		List<EstimateVO> estimate = mypageService.getMemberEstimate(member.getM_no()); 
 		List<MemberVO> estimateMember = new ArrayList<MemberVO>();
 		for (int i = 0; i < estimate.size(); i++) {

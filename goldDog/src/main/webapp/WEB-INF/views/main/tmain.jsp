@@ -195,7 +195,7 @@
 	                <span class="border-top"></span>
 	            <div class="box" style="border: solid 2px #008294;">
 	                <div class="img-box" style="padding: 25px;">
-	                  <img src="/resources/feane/images/Michaela.png" width="185px" height="185px" style="border-radius:1.5rem;"/> 
+	                  <img src="/resources/serverImg/default.png" width="185px" height="185px" style="border-radius:1.5rem;"/> 
 	                </div>
 	                <div class="detail-box" >
 	                	  <br/><br/>
