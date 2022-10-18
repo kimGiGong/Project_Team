@@ -32,8 +32,6 @@
 <link rel="stylesheet" href="/resources/Upright/css/magnific-popup.css">       <!-- https://dimsemenov.com/plugins/magnific-popup/ -->
 <link rel="stylesheet" href="/resources/Upright/slick/slick.min.css">          <!-- https://kenwheeler.github.io/slick/ -->
 <link rel="stylesheet" href="/resources/Upright/slick/slick-theme.css">
-<link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 
 
