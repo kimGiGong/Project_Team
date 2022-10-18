@@ -99,6 +99,7 @@ public class memberController {
 	public String signup(MemberVO member, AddressVO address, @Param("auth") String auth,RedirectAttributes rttr) {
 		log.info("********************** signupPro MemberVO : " + member);
 		log.info("********************** signupPro AddressVO : " + address);
+		member.setM_img("default.png");
 		
 		int result = service.addMember(member); 		//회원 추가
 		int mno = service.getMno(member.getM_id());
@@ -177,24 +178,77 @@ public class memberController {
 		model.addAttribute("address", address);
 	}
 	@PostMapping("modify")
-	public String modifyPro(MemberVO member, AddressVO address, Authentication auth, Model model) {
-		log.info("******* modify Pro *******");
-		log.info("******* modify Pro customUser : "+((CustomUser)auth.getPrincipal()).getUsername());
-		
-		member.setM_id(((CustomUser)auth.getPrincipal()).getUsername()); //auth에서 username == id 꺼내 vo에 채우기
-		int result = service.modifyMember(member);
-		log.info("******* modify Pro result : " + result);
-		
-		int mno = service.getMno(((CustomUser)auth.getPrincipal()).getUsername());
-		log.info("******* modify mno : " + mno);
-		
-		address.setM_no(mno);
-		int result2 = service.modifyAddress(address);
-		log.info("******* modify Address result : " + result2);
-		
-		model.addAttribute("result", result);
-		model.addAttribute("result2", result2);
-		
+	public String modifyPro(MemberVO member, AddressVO address, Authentication auth, Model model, MultipartHttpServletRequest request) {
+		try {
+			log.info("******* modify Pro *******");
+			log.info("******* modify Pro customUser : "+((CustomUser)auth.getPrincipal()).getUsername());
+			MemberVO M_img=service.getMember(((CustomUser)auth.getPrincipal()).getUsername());
+			
+			member.setM_id(((CustomUser)auth.getPrincipal()).getUsername()); //auth에서 username == id 꺼내 vo에 채우기
+			
+			int mno = service.getMno(((CustomUser)auth.getPrincipal()).getUsername());
+			log.info("******* modify mno : " + mno);
+			address.setM_no(mno);
+							
+			MultipartFile mf = request.getFile("part_img");
+			
+			String newFileName=null;
+			String path=null;
+			String uuid=null;
+			String orgName = null;
+			String ext=null;
+			if(mf.getSize() != 0) {
+				log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+				log.info(mf.getSize());
+				log.info(mf.getContentType());
+				path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+				
+				// 이름 중복 방지를 위한 새 파일명 생성
+				uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+				log.info(uuid);
+				//업로드한 파일 확장자만 가져오기
+				orgName=mf.getOriginalFilename();
+				ext= orgName.substring(orgName.lastIndexOf("."));
+				// 저장할 파일명
+				newFileName= uuid + ext;
+			}
+			//DB 상에도 파일명을 저장해 준다.
+			int result = 0;
+			int result2 = 0;
+			if(mf.getSize() == 0) {
+				member.setM_img(M_img.getM_img());
+				log.info("나랏말이?************************************");
+				result = service.modifyMember(member);
+				log.info("******* modify Pro result : " + result);
+				result2 = service.modifyAddress(address);
+				log.info("******* modify Address result : " + result2);
+				
+				model.addAttribute("result", result);
+				model.addAttribute("result2", result2);
+				 
+			}else if(mf.getSize() != 0) {
+				member.setM_img(newFileName);
+				log.info("이게 되는건가 ***************************");
+				result = service.modifyMember(member);
+				log.info("******* modify Pro result : " + result);
+				result2 = service.modifyAddress(address);
+				log.info("******* modify Address result : " + result2);
+				
+				log.info("***********uuid"+uuid);
+				//저장할 파일 전체 경로
+				String imgPath = path+"\\"+newFileName;
+				log.info("*****imgPath"+imgPath);
+				
+				// 파일 저장
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+				
+				model.addAttribute("result", result);
+				model.addAttribute("result2", result2);
+			}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		return "member/modifyPro";
 	}
 	
@@ -230,7 +284,7 @@ public class memberController {
 			//DB 상에도 파일명을 저장해 준다.
 			int result = 0;
 			if(mf.getOriginalFilename()==null) {
-				review.setR_img("dog.jpg");
+				review.setR_img("default.png");
 				 result = service.addReview(review);	
 				 
 			}else if(mf.getOriginalFilename()!=null) {
@@ -321,7 +375,7 @@ public class memberController {
 			//DB 상에도 파일명을 저장해 준다.
 			int result = 0;
 			if(mf.getSize() == 0) {
-				dog.setD_img("dog.jpg");
+				dog.setD_img("default.png");
 				log.info("나랏말이?************************************");
 				result = service.insertDog(dog);	
 				 
