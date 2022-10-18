@@ -66,14 +66,10 @@ function requestPay() {
 					t_no : obj.t_no,
 				    p_name_manager : obj.t_m_no,
 				    e_no : obj.e_no
-				},
-				success: function(){
-					var form = document.createElement("form");
-					form.method = "GET";
-					form.action = "/myapge";
-					form.submit();
 				}
 			})
+			location.href="/mypage";
+			
 		} else {
 			alert("결제에 실패하였습니다. 에러 내용: " + rsp.error_msg);
 		}
