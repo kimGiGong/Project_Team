@@ -15,8 +15,8 @@
 	.fa-vcard:before, .fa-address-card:before {
     color: #6b6b6b;
 	}
-
 	</style>
+	
 </head>
 	
 	 
@@ -38,15 +38,16 @@
 	                        <img class="card-img card-img-left" src="/resources/serverImg/${clientDog.d_img}" width="180" height="240"/>
                       	</div>
                       </div>
+                      
                       <div class="col-md-4">
                         <div class="card-body">
                           <!-- <h5 class="card-title">견적서</h5>  -->
                           <br >
-                          <p class="card-text">이 름 : ${clientDog.d_name} </p> 
-                          <p class="card-text">나 이 : ${clientDog.d_age}살 </p> 
-                          <p class="card-text">성 별 : ${clientDog.d_gender} </p> 
-                          <p class="card-text">종 류 : ${clientDog.d_type} </p> 
-                          <p class="card-text">무 게 : ${clientDog.d_weight}kg </p> 
+                          <p class="card-text">이　름　:　${clientDog.d_name} </p> 
+                          <p class="card-text">나　이　:　${clientDog.d_age}살 </p> 
+                          <p class="card-text">성　별　:　${clientDog.d_gender} </p> 
+                          <p class="card-text">종　류　:　${clientDog.d_type} </p> 
+                          <p class="card-text">무　게　:　${clientDog.d_weight}kg </p> 
                         </div>
                       </div>
                         <div class="col-md-4" id="map" style="width:200px; height:280px;">
@@ -55,7 +56,7 @@
                         	<!-- <div id="map" style="width:200px; height:200px;"></div>  -->
                         </div>
                     </div>
-                  </div>
+                 </div>
                   
 	             
                 <div class="card mb-3">
@@ -235,7 +236,7 @@
 		
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        var infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:150px;text-align:center;padding:6px 0;">고객 위치</div>'
+		            content: '<div style="width:150px;text-align:center;padding:6px 0;">${clientDog.d_name} 위치</div>'
 		        });
 		        infowindow.open(map, marker);
 		

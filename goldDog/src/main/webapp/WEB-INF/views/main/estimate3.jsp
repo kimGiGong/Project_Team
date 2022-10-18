@@ -35,18 +35,25 @@
                   <div class="card mb-3">
                     <div class="row g-0">
                       <div class="col-md-4">
-                        <img class="card-img card-img-left" src="/resources/serverImg/${clientDog.d_img}" width="150" height="150"/>
+                      <div class="card-body">
+                        <img class="card-img card-img-left" src="/resources/serverImg/${clientDog.d_img}" width="180" height="240"/>
                       </div>
-                      <div class="col-md-8">
+                      </div>
+                      <div class="col-md-4">
                         <div class="card-body">
-                          <h5 class="card-title">견적서</h5>
-                          <p class="card-text">이 름 : ${clientDog.d_name} </p> 
-                          <p class="card-text">나 이 : ${clientDog.d_age}살 </p> 
-                          <p class="card-text">성 별 : ${clientDog.d_gender} </p> 
-                          <p class="card-text">종 류 : ${clientDog.d_type} </p> 
-                          <p class="card-text">무 게 : ${clientDog.d_weight}kg </p> 
+                        <br >
+                          <p class="card-text">이　름　:　${clientDog.d_name} </p> 
+                          <p class="card-text">나　이　:　${clientDog.d_age}살 </p> 
+                          <p class="card-text">성　별　:　${clientDog.d_gender} </p> 
+                          <p class="card-text">종　류　:　${clientDog.d_type} </p> 
+                          <p class="card-text">무　게　:　${clientDog.d_weight}kg </p> 
                         </div>
                       </div>
+                      	 <div class="col-md-4" id="map" style="width:200px; height:280px;">
+                        	<h5 class="card-title">위치</h5>
+                        	<!-- <input type="text" value="${clientAddress.a_road}" />  -->
+                        	<!-- <div id="map" style="width:200px; height:200px;"></div>  -->
+                        </div>
                     </div>
                   </div>
                   
@@ -194,8 +201,9 @@
 
 
  <%@ include file="../footer.jsp" %>
-<script type="text/javascript" src="/resources/payments.js"/>  
-	<script type="text/javascript">
+<script type="text/javascript" src="/resources/payments.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57677f6ef3181c4bc8be716fbdc8870e&libraries=services"></script>
+<script type="text/javascript">
 	$(document).ready(function(){
 		
 		let e_no ="${estimate.e_no}"
@@ -212,7 +220,6 @@
 			
 		});
 
-		
 		$("#deleteModal").on("click",function(e){
 			e.preventDefault(); 
 			console.log("취소 확인 모달.");
@@ -222,7 +229,45 @@
 		
 	});
 		
-		</script>
+</script>
+<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+	        level: 5 // 지도의 확대 레벨
+	    };  
+	
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch("${clientAddress.a_road}", function(result, status) {
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">${clientDog.d_name} 위치</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+</script>
 	
 
 </body>
