@@ -89,28 +89,31 @@
                 <!-- Home section -->
                 <div class="tm-section-wrap">
                     <section id="mypage" class="tm-section">
-                        <h3 class="tm-text-primary">${member.m_name}</h3>
+                        <h3 class="tm-text-primary">회원 정보</h3>
                         <hr class="mb-5">
                         <div class="row">
                         	<fieldset id="mapage_container">
-                        		<div class="item"> <img class="mapageIMG" src=""></div>
+                        		<div class="item"> <img class="card-img-top" src="/resources/serverImg/${manager.m_img }" style="width: 200px; height: 150px"></div>
                         		<div class="grid">
-									<div class="item">이름 : ${ manager.m_name }</div>
-									<div class="item">휴대전화 : ${ manager.m_phone }</div>
-									<div class="item">닉네임 : ${ manager.m_nick }</div>
-									<div class="item">이메일 : ${ manager.m_email }</div>
-									<div class="item">이용서비스 : ${ manager.authList[0].auth }</div>
-									<div class="item">회원정보 수정 : ${ manager.authList[0].auth }</div>
+									<div class="item">이　　름　:　${ manager.m_name }</div>
+									<div class="item">닉네임　:　${ manager.m_nick }</div>
+									<div class="item">휴대전화　:　${ manager.m_phone }</div>
+									<div class="item">이메일　:　${ manager.m_email }</div>
+									<div class="item"></div>
+									<div class="item">
+										<button class="btn btn-primary btn-user" type="button" onclick="window.location.href='modify'"> 회원정보 수정</button>
+									</div>
 								</div>
                         	</fieldset>
                         </div>
                     </section>
                     
-                 
+                 	<br><br><br><br><br><br><br><br><br><br><br><br><br>
                     <%-- 견적서 --%>
-					<h3 class="tm-text-primary" id="estimate_navbar">견적서</h3>
-					<hr class="mb-5">
 					<div class="Estimate" id="Estimate">
+					<br><br><br>
+						<h3 class="tm-text-primary">견적서</h3>
+						<hr class="mb-5">
 							<c:forEach items="${ estimatelist }" var="estimate" varStatus="status">
 							<a class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample${ status.index }"
 								href="#multiCollapseExample1" role="button"
@@ -122,8 +125,7 @@
 										<div class="card card-body" style="height: 140">
 											<table>
 												<tr>
-													<th></a><button class="btn btn-outline-primary"
-															type="button" style="width: 120px;">견적서 확인</button></th>
+													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button></th>
 													<th>${ estimateMember[status.index].m_nick } 매니저 </th>
 												</tr>
 												<tr>
@@ -145,7 +147,7 @@
 															<c:when test="${ estimate.e_con eq '0'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '1'}">
 																<!-- Modal -->
-																<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
+																<button type="button" value="${estimateMember[status.index].m_no }" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal">
 																	리뷰 작성
 																</button>
 															</c:when>
@@ -226,7 +228,7 @@
 													<tr>
 														<th>${dog[i].d_name}</th>
 														<th style="width:70px">
-															<button type="button"  value="${dog[i].d_no}" class="btn btn-primary" veiwDog="${dog[i].d_name}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+															<button type="button" value="${dog[i].d_no}" class="btn btn-primary" veiwDog="${dog[i].d_name}" data-bs-toggle="modal" data-bs-target="#exampleModal2">
 																보기
 															</button>
 														</th>
@@ -397,16 +399,14 @@
 	    		<div class="modal-content">
 		      		<div class="modal-header">
 		        		<h5 class="modal-title" id="myModalLabel">애견 삭제</h5>
-		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          			<span aria-hidden="true">&times;</span>
-		        		</button>
+		        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      		</div>
 	      			<div class="modal-body">
         				등록된 애견을 삭제하시겠습니까?
 	      			</div>
 	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" id="deleteDogPro" >삭제</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	        			<button type="button" class="btn btn-danger" id="deleteDogPro" >삭제</button>
+	        			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 	      			</div>
 	   			</div>
 	  		</div>
@@ -512,11 +512,11 @@
             str += result.d_img+"' width='222' height='220' alt='Card image cap'>";
             str += "</div></div><div class='col-lg-7'>";
             str += "<form id='dogModifyPro' action='/member/dogModifyPro?${_csrf.parameterName}=${_csrf.token}' method='post' enctype='multipart/form-data' name='dogModify'><input type='hidden' name='d_no' value='"+result.d_no+"' /><table><br/><br/>";
-            str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"'></th></tr>";
-            str += "<tr><th>나이(살)　:　</th><th><input type='number'' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "'></th></tr>";
-            str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' name='d_gender' value='"+ result.d_gender +"'  readonly='' /></th></tr>";
+            str += "<tr><th>이　　름　:　</th><th><input type='text' class='form-control form-control-user' name='d_name' value='"+result.d_name+"' readonly=''></th></tr>";
+            str += "<tr><th>나이 (살)　:　</th><th><input type='number'' class='form-control form-control-user' name='d_age' value='" +result.d_age+ "'></th></tr>";
+            str += "<tr><th>성　　별　:　</th><th><input class='form-control form-control-user' name='d_gender' value='"+ result.d_gender +"' readonly='' /></th></tr>";
             str += "<tr><th>종　　류　:　</th><th><input type='text' class='form-control form-control-user' name='d_type' value='"+ result.d_type +"'></th></tr>";
-            str += "<tr><th>무게(kg)　:　</th><th><input type='number' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"'></th></tr>";
+            str += "<tr><th>무게 (kg)　:　</th><th><input type='number' class='form-control form-control-user' name='d_weight' value='"+ result.d_weight +"'></th></tr>";
             str += "<tr><th>사　　진　:　</th><th><input class='form-control' width='420' type='file' id='formFile' name='part_img'/></th></tr>";
             str += "</table></form></div><div class='modal-footer col-lg-12' ><button type='button' class='btn btn-primary' id='dogModify' >수정</button>";
             str += "<button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>취소</button></div>";

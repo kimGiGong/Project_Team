@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -240,8 +240,8 @@
 
 <body class="bg-gradient-primary">
 
-	<form action="/member/modify" method="post" name="modify" onsubmit="return checkField()">
-	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> <%-- 보완 --%>
+	<form action="/member/modify?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="modify" onsubmit="return checkField()">
+	<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />  --> <%-- 보완 --%> 
 	    <div class="container">
 	
 	        <div class="card o-hidden border-0 shadow-lg my-5">
@@ -250,14 +250,14 @@
 	                <div class="row">
 	                    <div class="col-lg-5 d-none d-lg-block">
 		                    <div class="p-5">
-		                    	<img class="card-img-top" src="/resources/serverImg/dog.jpg" width="420" height="500" alt="Card image cap">
-		                    	<input class="form-control" width="420" type="file" id="formFile" name="img"/>
+		                    	<img class="card-img-top" src="/resources/serverImg/${member.m_img}" width="420" height="500" alt="Card image cap">
+		                    	<input class="form-control" width="420" type="file" id="formFile" name="part_img"/>
 		                    </div>
 	                   	</div>
 	                    <div class="col-lg-7">
 	                        <div class="p-5">
 	                            <div class="text-center">
-	                                <h1 class="h4 text-gray-900 mb-4">Modify !</h1>
+	                                <h1 class="h4 text-gray-900 mb-4">회원 정보 수정</h1>
 	                            </div>
 	                            <form class="user">
                                     <div class="form-group">
