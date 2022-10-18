@@ -125,7 +125,7 @@
 										<div class="card card-body" style="height: 140">
 											<table>
 												<tr>
-													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;">견적서 확인</button></th>
+													<th><button class="btn btn-outline-primary" type="button" style="width: 120px;" onclick="window.location.href='/memberEstimate?e_no=${estimate.e_no}'">견적서 확인</button></th>
 													<th>${ estimateMember[status.index].m_nick } 매니저 </th>
 												</tr>
 												<tr>
