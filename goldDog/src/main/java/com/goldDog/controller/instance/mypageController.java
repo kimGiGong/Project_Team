@@ -129,14 +129,14 @@ public class mypageController {
 				list.add(addrtr.translator(address.getA_addr()));
 				list.add(area);
 				TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
-				
-				if(trainer!=null) {
-				estimate= instanceService.getEstimate(trainer.getM_no()); 
+				System.out.println(trainer);
+				if(trainer != null) {
+					estimate= instanceService.getEstimate(trainer.getM_no()); 
 				}
 				
 				List<MemberVO> estimateMember = new ArrayList<MemberVO>();
 				
-				if(estimate!=null) {
+				if(estimate != null) {
 					for (int i = 0; i < estimate.size(); i++) {
 						estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
 					}
