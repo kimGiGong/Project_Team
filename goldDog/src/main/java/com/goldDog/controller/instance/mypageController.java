@@ -121,6 +121,7 @@ public class mypageController {
 				List<Object> list = new ArrayList<Object>();
 				AddressTranslator addrtr = new AddressTranslator();
 				List<String []> area = new ArrayList<String []>();
+				List<EstimateVO> estimate =new ArrayList<EstimateVO>();
 				
 				area.add(addrtr.getSeoul());
 				area.add(addrtr.getGyeonggi());
@@ -128,10 +129,17 @@ public class mypageController {
 				list.add(addrtr.translator(address.getA_addr()));
 				list.add(area);
 				TrainerVO trainer = sungminService.getMTrainer(member.getM_no());
-				List<EstimateVO> estimate = instanceService.getEstimate(trainer.getM_no()); 
+				
+				if(trainer!=null) {
+				estimate= instanceService.getEstimate(trainer.getM_no()); 
+				}
+				
 				List<MemberVO> estimateMember = new ArrayList<MemberVO>();
-				for (int i = 0; i < estimate.size(); i++) {
-					estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
+				
+				if(estimate!=null) {
+					for (int i = 0; i < estimate.size(); i++) {
+						estimateMember.add(sungminService.getOneMember(estimate.get(i).getM_no_puppy()));
+					}
 				}
 				list.add(trainer);
 				System.out.println(list);

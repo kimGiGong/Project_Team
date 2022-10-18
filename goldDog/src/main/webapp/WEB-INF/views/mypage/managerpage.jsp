@@ -59,21 +59,6 @@
 	                                    활동지역
 	                                </a>
 	                            </li>
-	                            <li class="nav-item">
-	                                <a href="#contact" class="nav-link">
-	                                    <div class="triangle-right"></div>
-	                                    <i class="fas fa-envelope nav-icon"></i>
-	                                    Contact
-	                                </a>
-	                            </li>
-	                            <li class="nav-item">
-	                                <a href="https://paypal.me/templatemo" class="nav-link external" target="_parent" rel="sponsored">
-	                                    <div class="triangle-right"></div>
-	                                    <i class="fas fa-external-link-alt nav-icon"></i>
-	                                    External
-
-	                                </a>
-	                            </li>
 	                            <li class="nav-item" id="stackmoney">
 	                            	<div class="input-block">
 									  <input type="text" name="input-text" id="input-text" 
@@ -103,7 +88,7 @@
 									<div class="item">닉네임 : ${ managerlist[0].m_nick }</div>
 									<div class="item">이메일 : ${ managerlist[0].m_email }</div>
 									<sec:authorize access="hasRole('ROLE_TRAINER')">
-										<div class="item">이용서비스 : 매니저</div>
+										<div class="item">이용서비스 : 훈련매니저</div>
 									</sec:authorize>
 								</div>
                         	</fieldset>
@@ -163,14 +148,18 @@
 					<%-- 훈련사 정보 --%>
 
                    	<div class="manager_info">
-                   	<h3 class="tm-text-primary">훈련사 소개</h3> 
+                   	<h3 class="tm-text-primary">내가 등록한 훈련사 소개</h3> 
                     <hr class="mb-5">
-                    	<form action="/amm" method="post">
-                    		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                    		<input type="hidden" name="m_no" value="${ managerlist[0].m_no}"/>
-								<textarea id="WriteEditor" name="t_sel"></textarea>
-							<input type="submit" value="저장!">
-                    	</form>
+                    	<c:if test="${empty managerlist[3].t_sel }">
+                    		<div>
+          						등록된 소개가 없습니다.
+           					</div>
+                    	</c:if>
+                    	<c:if test="${not empty managerlist[3].t_sel }">
+                    		<div>
+          						${ managerlist[3].t_sel }
+           					</div>
+                    	</c:if>
                    	</div>
                     
                     <!-- 활동지역 -->
@@ -225,80 +214,6 @@
                     			</div>
 	                    	</div>	
 	                    </div>
-                    
-                    
-                    <div>
-          				${ managerlist[3].t_sel }
-           			</div>
-                	<!-- Contact section -->
-	                <div class="tm-section-wrap" id = "contact">
-	                    <div id="contact" class="tm-section">
-	                        <h2 class="tm-text-primary">Contact Upright</h2>
-	                        <hr class="mb-5">
-							<div class="row">
-	                            <div class="col-xl-6 tm-contact-col-l mb-4">
-	                                    <div class="form-group">
-	                                        <input type="text" name="name" class="form-control rounded-0" placeholder="Name" required="">
-	                                    </div>
-	                                    <div class="form-group">
-	                                        <input type="email" name="email" class="form-control rounded-0" placeholder="Email" required="">
-	                                    </div>
-	                                    <div class="form-group">
-	                                        <select class="form-control" id="contact-select" name="inquiry">
-	                                            <option value="-">Subject</option>
-	                                            <option value="sales">Sales &amp; Marketing</option>
-	                                            <option value="creative">Creative Design</option>
-	                                            <option value="uiux">UI / UX</option>
-	                                        </select>
-	                                    </div>
-	                                    <div class="form-group">
-	                                        <textarea rows="8" name="message" class="form-control rounded-0" placeholder="Message" required=""></textarea>
-	                                    </div>
-	            
-	                                    <div class="form-group tm-text-right">
-	                                        <button type="submit" class="btn btn-primary">Send</button>
-	                                    </div>
-	                            </div>
-	                            <div class="col-xl-6 tm-contact-col-r">
-	                                <!-- Map -->
-	                                <div class="mapouter mb-4">
-	                                    <div class="gmap_canvas">
-	                                        <iframe width="100%" height="520" id="gmap_canvas" src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-	                                    </div>
-	                                </div>
-	            
-	                                <!-- Address -->
-	                                <address class="mb-4">
-	                                    120-240 eget purus luctus sodales. Sed<br>
-	                                    auctor odio quis ligula dignissim efficitur<br>
-	                                    vitae vitae quam 16502
-	                                </address>
-	            
-	                                <!-- Links -->
-	                                <ul class="tm-contact-links mb-4">
-	                                    <li class="mb-2">
-	                                        <a href="tel:0100200340">
-	                                            <i class="fas fa-phone mr-2 tm-contact-link-icon"></i>
-	                                            Tel: 010-020-0340
-	                                        </a>
-	                                    </li>
-	                                    <li>
-	                                        <a href="mailto:info@company.com">
-	                                            <i class="fas fa-at mr-2 tm-contact-link-icon"></i>
-	                                            Email: info@company.com
-	                                        </a>
-	                                    </li>
-	                                </ul>
-	                                <ul class="tm-contact-social">
-	                                    <li><a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook"></i></a></li>
-	                                    <li><a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter"></i></a></li>
-	                                    <li><a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram"></i></a></li>
-	                                    <li><a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube"></i></a></li>
-	                                </ul>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div> <!-- .tm-main -->                      
 		</div> <!-- .row -->

@@ -34,6 +34,10 @@
 <link rel="stylesheet" href="/resources/Upright/slick/slick-theme.css">
 
 
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+
+
 
 
 <header class="header_section">
@@ -75,7 +79,7 @@
 							<i class="fa fa-search" aria-hidden="false"></i>
 						</button>
 					</form>
-					<sec:authorize access="isAuthenticated()">
+					<sec:authorize access="hasRole('ROLE_MEMBER')">
 						<a href="/mypage" class="order_online"> 마이페이지 </a>
 					</sec:authorize>
 					<sec:authorize access="isAuthenticated()">
