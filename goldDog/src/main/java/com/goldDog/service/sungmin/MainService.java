@@ -45,6 +45,10 @@ public interface MainService {
 	public int countSearchTrainer(Criteria cri);
 	//훈련사 판매등록 업데이트하기
 	public int updateTinfo(TrainerVO trainer);
+	//활동지역으로 훈련사 찾기
+	public List<TrainerVO> getAreaTrainer(String addr);
+	
+	
 	
 	
 	//미용사 *********************************************************
@@ -66,7 +70,8 @@ public interface MainService {
 	public int countSearchHairstylist(Criteria cri);
 	//미용사 판매등록 업데이트하기
 	public int updateHinfo(HairstylistVO hairstylist);
-	
+	//활동지역으로 미용사 찾기
+	public List<HairstylistVO> getAreaHairstylist(String addr);
 	
 	
 	

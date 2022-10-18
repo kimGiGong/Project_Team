@@ -229,6 +229,7 @@
 				        			<form action="area.go" method="post" id="addressSave">
 				        				<input type="hidden" value="${ managerlist[0].m_no }" name="m_no">
                    						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                   						
 	                   					<ul class="area_container" id="seoul">
 	                   						<c:forEach items="${ managerlist[2][0] }" var="area" varStatus="vs">
 	                   							<li> <input type="checkbox" name="seoul" value="${ area }">${ area }</li>
