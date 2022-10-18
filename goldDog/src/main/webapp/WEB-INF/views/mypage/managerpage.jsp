@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/resources/Upright/css/templatemo-upright.css">
     <link rel="stylesheet" href="/resources/team.css">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body>
@@ -59,6 +60,14 @@
 	                                    활동지역
 	                                </a>
 	                            </li>
+	                            <li class="nav-item">
+	                                <a href="/admin/QnA" class="nav-link">
+	                                    <div class="triangle-right"></div>
+	                                    <i class="fas fa-heart nav-icon"></i>
+	                                    공지사항 & QnA
+	                                </a>
+	                            </li>
+	                            
 	                            <li class="nav-item" id="stackmoney">
 	                            	<div class="input-block">
 									  <input type="text" name="input-text" id="input-text" 

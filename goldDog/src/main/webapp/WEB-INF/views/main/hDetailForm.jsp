@@ -389,14 +389,14 @@
 			let	addPet = $("#addPet")
 			$("#go").on("click",function(e){
 				console.log("펫등록하러간다.");
-				addPet.attr("action","/main/mypage");
+				addPet.attr("action","/mypage");
 				addPet.submit();
 			});
 			
 			// 주소 없을때 등록하러가는 버튼 활성화
 			$("#addAddress").on("click",function(e){
 				console.log("주소 등록하러간다잇.");
-				addPet.attr("action","/main/mypage");
+				addPet.attr("action","/mypage");
 				addPet.submit();
 			});
 			
