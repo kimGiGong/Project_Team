@@ -31,7 +31,14 @@
 		where r<=5
 		 ]]> 
 	</select>
-
+	
+	<insert id="insertPay">
+		INSERT INTO pay(p_order,m_no,t_no,p_name_user,p_status,p_time,t_no_name,p_amount) 
+					VALUES(#{p_order},#{m_no},#{t_no},#{p_name_user},#{p_status},sysdate,#{t_no_name},#{p_amount}) 
+	</insert>
+	<update id="updateE_con">
+		update estimate set e_con=2 where e_no = #{e_no}
+	</update>
 
 
 

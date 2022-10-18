@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.EstimateVO;
+import com.goldDog.domain.PayVO;
 
 public interface MyPageService {
 	public AddressVO getAddress(int m_no);
@@ -15,5 +16,9 @@ public interface MyPageService {
 	public List<EstimateVO> getEstimate(int m_no);
 
 	public List<EstimateVO> getMemberEstimate(int m_no);
+
+	public int insertPay(PayVO pay);
+
+	public int updateE_con(int eno);
 
 }

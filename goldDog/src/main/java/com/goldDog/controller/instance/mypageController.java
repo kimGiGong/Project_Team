@@ -44,6 +44,7 @@ import com.goldDog.domain.AddressVO;
 import com.goldDog.domain.DogVO;
 import com.goldDog.domain.EstimateVO;
 import com.goldDog.domain.MemberVO;
+import com.goldDog.domain.PayVO;
 import com.goldDog.domain.TrainerVO;
 import com.goldDog.service.bum.memberService;
 import com.goldDog.service.bum.domain.CustomUser;
@@ -314,7 +315,7 @@ public class mypageController {
     
     
     
-	@PostMapping("payment/members")
+	@PostMapping(value = "payment/members", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String paymentsReturn(Authentication auth , String e_no) {
 		
@@ -331,22 +332,40 @@ public class mypageController {
 		
 		EstimateVO estimate = sungminService.getEOneEstimate(Integer.parseInt(e_no));
 		MemberVO manager = sungminService.getOneMember(estimate.getM_no_manager());
+		TrainerVO trainer = sungminService.getMTrainer(manager.getM_no());
 		result.put("e_no", ""+e_no);
 		result.put("m_no",""+estimate.getM_no_puppy());
 		result.put("t_m_no",""+estimate.getM_no_manager());
+		result.put("t_no",""+trainer.getT_no());
 		result.put("t_name",""+manager.getM_nick());
 		result.put("m_name",""+member.getM_nick());
 		
 		// 맵을 JSON Object 문자열로 바꿈
 		String jsonString = gson.toJson(result);
-		
+		System.out.println(manager);
 		System.out.println("요청됨"+jsonString);
 		 
 		return jsonString;
 	 }
     
     
-    
+    @PostMapping("payment")
+    public void paymentsInsert(String p_order, String p_name_user, 
+    	String t_no_name,int p_amount,String m_no, String t_m_no, String e_no , String t_no , Authentication auth) {
+    	PayVO pay = new PayVO();
+    	int eno = Integer.parseInt(e_no);
+    	pay.setM_no(Integer.parseInt(m_no));
+    	pay.setP_order(p_order); 
+    	pay.setP_name_user((p_name_user));
+    	pay.setT_no_name((t_no_name));
+    	pay.setP_status(0);
+    	pay.setP_amount(p_amount);
+    	pay.setT_no(Integer.parseInt(t_no));
+    	
+    	int result = instanceService.insertPay(pay);
+    	result += instanceService.updateE_con(eno);
+    	System.out.println(result);
+    }
     
     
     
