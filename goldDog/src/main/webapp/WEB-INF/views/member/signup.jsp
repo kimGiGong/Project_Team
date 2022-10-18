@@ -326,7 +326,7 @@
 										<span class="email_already">중복된 이메일입니다.</span>
 	                                </div>
 	                                <div class="form-group">
-	                                    <input type="text" class="form-control form-control-user" name="m_phone" placeholder="전화번호">
+	                                    <input type="number" class="form-control form-control-user" name="m_phone" placeholder="전화번호">
 	                                </div>
 	                                
 	                               <!-- <form action="/member/address" method="post"> address -->
@@ -366,9 +366,6 @@
 								    
 								      <input type="radio" class="btn-check" name="auth" id="btnradio3" autocomplete="off" value="hairstylist">
 								      <label class="btn btn-outline-primary" for="btnradio3">미용매니저</label>
-								      
-								      <input type="radio" class="btn-check" name="auth" id="btnradio4" autocomplete="off" value="manager">
-								      <label class="btn btn-outline-primary" for="btnradio4">통합매니저</label>
 								    </div>
 										                           
 	                                <div class="form-check form-switch" style="padding: 10">
