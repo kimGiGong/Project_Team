@@ -239,7 +239,7 @@
       				</c:if>
       				<c:if test="${(addrSize-1)<0}">
       					<p>등록된 주소가 없습니다.</p>
-	        			<button type="button" class="btn btn-secondary" id="addAddress" >추가하러가기</button>
+	        			<button type="button" class="btn btn-info" id="addAddress" >추가하러가기</button>
       				</c:if>
       				
       				<p>--------------------------------</p>
@@ -260,7 +260,7 @@
 					</form>
       			</div>
       			<div class="modal-footer">
-        			<button type="button" class="btn btn-primary" id="addDogInfoSubmit" >제출</button>
+        			<button type="button" class="btn btn-info" id="addDogInfoSubmit" >제출</button>
       			</div>
    			</div>
   		</div>
@@ -281,8 +281,8 @@
         			등록된 펫이 없습니다. 등록하러 가시겠습니까?
       			</div>
       			<div class="modal-footer">
-        			<button type="button" class="btn btn-secondary" id="go" >등록하러가기</button>
-        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-info" id="go" >등록하러가기</button>
+        			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       			</div>
    			</div>
   		</div>
@@ -302,8 +302,8 @@
         			로그인 후 이용해 주세요
       			</div>
       			<div class="modal-footer">
-        			<button type="button" class="btn btn-secondary" id="goLogin" >확인</button>
-        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-info" id="goLogin" >확인</button>
+        			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
       			</div>
    			</div>
   		</div>
