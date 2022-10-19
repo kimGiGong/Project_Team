@@ -276,12 +276,14 @@ public class memberController {
 				review.setT_no(m_no_manager);
 				review.setH_no(0);
 				newEstimate.setE_con(5);
+				newEstimate.setE_no(review.getE_no());
 				mainService.updateEstEcon(newEstimate);
 			}else {
 			//미용사일때
 				review.setT_no(0);
 				review.setH_no(m_no_manager);
 				newEstimate.setE_con(5);
+				newEstimate.setE_no(review.getE_no());
 				mainService.updateEstEcon(newEstimate);
 			}
 			

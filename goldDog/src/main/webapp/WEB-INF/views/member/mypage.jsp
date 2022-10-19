@@ -485,7 +485,10 @@
 				e.preventDefault(); 
 				console.log("리뷰 확인 모달.");
 				reviewPro.submit();
+				
 			});
+			
+			
 		});
 		
 		
