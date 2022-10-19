@@ -500,10 +500,13 @@ public class mainController {
 	}
 	
 	@GetMapping("selUpload")
-	public String selUpload(Integer m_no, Authentication auth,RedirectAttributes redirect) {
+	@PreAuthorize("isAuthenticated()") 
+	public String selUpload(Authentication auth,RedirectAttributes redirect) {
 		
-		if(m_no!=null) {
-		
+			String userId= ((CustomUser)auth.getPrincipal()).getUsername();
+			MemberVO loginUser=memberService.getMember(userId);
+			int m_no = loginUser.getM_no();
+			
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))) {
 			//훈련사 분기처리
 			if(mainService.getMTrainer(m_no) != null) {
@@ -527,7 +530,6 @@ public class mainController {
 			
 		}
 		
-		}
 		return "redirect:/main/tmain";
 		
 	}
@@ -535,26 +537,7 @@ public class mainController {
 	
 	
 	
-	//훈련사용 자기정보 수정
-	@GetMapping("selUploadT")
-	@PreAuthorize("isAuthenticated()") 
-	public String selUploadTrainer(int m_no,Model model) {
-		MemberVO member =mainService.getOneMember(m_no);
-		if(mainService.getMTrainer(m_no) != null) {
-		
-		//훈련사 맨첨 등록할때 가야할 페이지
-			model.addAttribute("m_no",m_no);
-			model.addAttribute("member",member);
-			
-			return "redirect:/main/selUploadPro";
-			
-		}else {
-			
-			return "redirect:/main/selUpload";
-		
-		}
-		
-	}
+	
 
 	
 	//훈련사용
@@ -596,7 +579,7 @@ public class mainController {
 	}
 	
 	
-	
+	//훈련사용 자기정보 추가
 	@PostMapping("selUpload")
 	public String selUploadPro(TrainerVO trainer,Authentication auth) {
 		
@@ -615,6 +598,19 @@ public class mainController {
 		return "redirect:/member/login";
 	}
 	
+	//훈련사용 자기정보 추가
+	@GetMapping("selUploadT")
+	@PreAuthorize("isAuthenticated()") 
+	public void selUploadTrainer(int m_no,Model model) {
+		MemberVO member =mainService.getOneMember(m_no);
+		
+		//훈련사 맨첨 등록할때 가야할 페이지
+			model.addAttribute("m_no",m_no);
+			model.addAttribute("member",member);
+		
+		
+	}
+
 	
 	
 	
