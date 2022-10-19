@@ -326,7 +326,8 @@ public class memberController {
 					log.info("훈련사 리뷰추가들어옴");
 					
 					double rTotal = 0.0;
-		            List<ReviewVO> re =mainService.getTReview(m_no_manager);
+					//리뷰 가져오는 메서드
+		            List<ReviewVO> re =mainService.getTReview(mainService.getMTrainer(m_no_manager).getT_no());
 		            int t_review_total = 0;
 	                for(int i=0 ;i<re.size() ;i++) {
 	                        t_review_total += re.get(i).getR_score();
@@ -343,7 +344,7 @@ public class memberController {
 					else if(!tCheck){ 
 					log.info("미용사 리뷰추가들어옴");	
 	                double rTotal = 0.0;
-	                List<ReviewVO> re =mainService.getHReview(m_no_manager);
+	                List<ReviewVO> re =mainService.getHReview(mainService.getMhairstylist(m_no_manager).getH_no());
 	                int h_review_total = 0;
 	                for(int i=0 ;i<re.size() ;i++) {
 	                	h_review_total += re.get(i).getR_score();
