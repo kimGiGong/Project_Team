@@ -795,7 +795,7 @@ public class mainController {
 		log.info(estimate+"확인");
 		
 		mainService.updateEst(estimate);
-		return "redirect:/mypage";
+		return "redirect:/manager";
 		
 	}
 	
