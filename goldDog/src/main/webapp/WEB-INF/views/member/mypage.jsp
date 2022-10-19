@@ -46,7 +46,7 @@
 	                        </div> --%>                
 	                        <ul id="tm-main-nav">
 	                            <li class="nav-item">                                
-	                                <a href="#Estimate" class="nav-link current">
+	                                <a href="#Estimate" class="nav-link ">
 	                                    <div class="triangle-right"></div>
 	                                    <i class="fas fa-home nav-icon"></i>
 	                                    견적서
