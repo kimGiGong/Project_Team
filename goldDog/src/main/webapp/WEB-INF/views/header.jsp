@@ -43,7 +43,7 @@
 <header class="header_section">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg custom_nav-container ">
-			<a class="navbar-brand" href="/main/session?useType=${ useType }">
+			<a class="navbar-brand" href="/main/session?useType=${ useType }" style="color: #666666;">
 				<h3>금댕이</h3>
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -81,9 +81,6 @@
 					</form>
 					<sec:authorize access="hasRole('ROLE_MEMBER')">
 						<a href="/mypage" class="order_online"> 마이페이지 </a>
-					</sec:authorize>
-					<sec:authorize access="isAuthenticated()">
-						<a href="/admin/QnA" class="order_online"> QnA임시 </a>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_TRAINER')">
 						<a href="/manager" class="order_online"> 훈련 마이페이지 </a>
