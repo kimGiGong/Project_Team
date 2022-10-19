@@ -99,7 +99,7 @@
 									<div class="col-12">
 										<div class="form-group">
 											<label for="cc-payment" class="control-label mb-1">기본금액</label>
-											<input id="cc-payment" name="cc-payment" type="text"
+											<input name="cc-payment" type="text"
 												class="form-control" aria-required="true"
 												aria-invalid="false" value="${estimate.e_basicprice}"
 												readonly>
@@ -111,7 +111,7 @@
 									<div class="col-6">
 										<div class="form-group has-success">
 											<label for="cc-name" class="control-label mb-1">추가 사유</label>
-											<input id="cc-payment" name="cc-payment" type="text"
+											<input name="cc-payment" type="text"
 												class="form-control" aria-required="true"
 												aria-invalid="false" value="${estimate.e_extra_reason}"
 												readonly>
@@ -120,7 +120,7 @@
 									<div class="col-6">
 										<div class="form-group has-success">
 											<label for="cc-name" class="control-label mb-1">추가
-												금액(원)</label> <input id="cc-payment" name="cc-payment" type="text"
+												금액(원)</label> <input name="cc-payment" type="text"
 												class="form-control" aria-required="true"
 												aria-invalid="false" value="${estimate.e_extraprice}"
 												readonly>
@@ -293,12 +293,13 @@
 
 
  <%@ include file="../footer.jsp" %>
-<script type="text/javascript" src="/resources/payments.js"></script>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57677f6ef3181c4bc8be716fbdc8870e&libraries=services"></script>
 <script type="text/javascript">
+
 	$(document).ready(function(){
 		
-		let e_no ="${estimate.e_no}"
+		
 		let pagingForm=$("#pagingForm");
 		
 		$("#deleteEst").on("click",function(e){
@@ -358,6 +359,7 @@
 		
 </script>
 <script>
+
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -396,7 +398,12 @@
 	});    
 </script>
 	
+<script type="text/javascript" src="/resources/payments.js"></script>
 
+<script type="text/javascript">
+let eno = "${estimate.e_no}";
+let econ = "${estimate.e_con}";
+</script>
 </body>
 </html>
 
