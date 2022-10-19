@@ -98,7 +98,8 @@ public interface MainService {
 	public List<ReviewVO> getAllTReview();
 	//메인에 띄워줄 미용사의 모든리뷰 가져오기
 	public List<ReviewVO> getAllHReview();
-	
+	//견적서 e_no 으로 리뷰 체크 하는 메서드
+	public int reviewCheck(int e_no);
 	
 	
 	
@@ -123,6 +124,8 @@ public interface MainService {
 	public int updateEst(EstimateVO estimate);
 	//견적서 e_con 업데이트 하는 메서드
 	public int updateEstEcon(EstimateVO estimate);
+
+	
 	
 	// 주소 ********************************************************
 	//지역정보 가져오기

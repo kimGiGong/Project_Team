@@ -94,14 +94,15 @@ public interface MainMapper {
 	//훈련사 한명에 해당하는 리뷰 갯수 가져오기
 	public int getReviewCount(int t_no);
 	//훈련사 한명의 총 리뷰평점&갯수 업데이트
-	public int updateRAvg(int t_no,double ravg,int total);
+	public int updateRAvg(@Param("t_no")int t_no, @Param("t_RAvg")double t_RAvg,@Param("total")int total);
 	//미용사 한명의 총 리뷰평점&갯수 업데이트
-	public int updateRHAvg(int h_no,double ravg,int total);
+	public int updateRHAvg(@Param("h_no")int h_no, @Param("h_RAvg")double h_RAvg, @Param("total")int total);
 	//메인에 띄워줄 훈련사의 모든리뷰 가져오기
 	public List<ReviewVO> getAllTReview();
 	//메인에 띄워줄 미용사의 모든리뷰 가져오기
 	public List<ReviewVO> getAllHReview();
-
+	//견적서 e_no 으로 리뷰 체크 하는 메서드
+	public int reviewCheck(int e_no);
 	
 	
 	

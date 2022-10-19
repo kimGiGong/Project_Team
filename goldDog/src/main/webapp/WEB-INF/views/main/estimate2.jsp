@@ -125,7 +125,7 @@
                                           </div> 
                                           	<div class="col-12">
 	                                              <label for="cc-name" class="control-label mb-1">훈련 진행할 날짜</label>
-                                               <input class="form-control" type="datetime-local" name="t_date" value="2022-10-13T12:30:00" id="html5-datetime-local-input"/>
+                                               <input class="form-control" type="datetime-local" name="t_date" value="${today}" id="html5-datetime-local-input"/>
                                           </div>
                                           <br/><br/>
                                           <div class="row">

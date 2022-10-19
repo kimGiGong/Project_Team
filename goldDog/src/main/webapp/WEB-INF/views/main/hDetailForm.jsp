@@ -179,7 +179,7 @@
                                              <label for="cc-name" class="control-label mb-1">원하는 날짜</label>
                                              
 	                                        <div class="mb-3 row">
-												<input class="form-control newDate" type="datetime-local" name="e_date" value="2022-10-13T12:30:00" id="html5-datetime-local-input" />						                          
+												<input class="form-control newDate" type="datetime-local" name="e_date" value="${today}" id="html5-datetime-local-input" />						                          
 					                      	</div>       
 					                      
                                              <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>

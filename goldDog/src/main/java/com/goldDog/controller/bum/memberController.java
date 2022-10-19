@@ -264,17 +264,29 @@ public class memberController {
 			boolean tCheck = true;
 			//훈련사인지 체크
 			if(mainService.getTrainer(m_no_manager)!=null) {
+				log.info("훈련사로 들어옵니다"+m_no_manager);
 				 tCheck = true; 
 			}else {
+				log.info("미용사로 들어옵니다"+m_no_manager);
 				 tCheck = false; 
 			}
-			
+			EstimateVO newEstimate = new EstimateVO();
 			//훈련사일때
 			if(tCheck) {
 				review.setT_no(m_no_manager);
+				review.setH_no(0);
+				review.setE_no(review.getE_no());
+				newEstimate.setE_con(5);
+				newEstimate.setE_no(review.getE_no());
+				mainService.updateEstEcon(newEstimate);
 			}else {
 			//미용사일때
+				review.setT_no(0);
 				review.setH_no(m_no_manager);
+				review.setE_no(review.getE_no());
+				newEstimate.setE_con(5);
+				newEstimate.setE_no(review.getE_no());
+				mainService.updateEstEcon(newEstimate);
 			}
 			
 			
@@ -320,7 +332,9 @@ public class memberController {
 	                for(int i=0 ;i<re.size() ;i++) {
 	                        t_review_total += re.get(i).getR_score();
 	                }
-		                rTotal = (double)(t_review_total / re.size());
+	                	log.info(t_review_total+"t_review_total!!!");
+		                rTotal = (double)t_review_total / re.size();
+		                log.info(rTotal+"rTotal!!");
 		                mainService.updateRAvg(m_no_manager, rTotal,re.size());
 		                log.info("훈련사 리뷰추가완료");
 		                
@@ -333,7 +347,7 @@ public class memberController {
 	                for(int i=0 ;i<re.size() ;i++) {
 	                	h_review_total += re.get(i).getR_score();
 	                }
-		                rTotal = (double)(h_review_total / re.size());
+		                rTotal = (double)h_review_total / re.size();
 		                mainService.updateRHAvg(m_no_manager, rTotal,re.size());
 		                log.info("미용사 리뷰추가완료");
 					}

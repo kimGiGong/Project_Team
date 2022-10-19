@@ -197,7 +197,7 @@ public class MainServiceImpl implements MainService {
 	//훈련사 한명의 총 리뷰평점&갯수 업데이트
 	@Override
 	public int updateRAvg(int t_no,double ravg,int total) {
-		return mapper.updateRHAvg(t_no, ravg,total);
+		return mapper.updateRAvg(t_no, ravg,total);
 	}
 	//미용사 한명의 총 리뷰평점&갯수 업데이트
 	@Override
@@ -213,6 +213,11 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public List<ReviewVO> getAllHReview() {
 		return mapper.getAllHReview();
+	}
+	//견적서 e_no 으로 리뷰 체크 하는 메서드
+	@Override
+	public int reviewCheck(int e_no) {
+		return mapper.reviewCheck(e_no);
 	}
 	
 	
@@ -384,7 +389,7 @@ public class MainServiceImpl implements MainService {
 	public List<QnAVO> getAllQnACri(Criteria cri) {
 		return mapper.getAllQnACri(cri);
 	}
-	
+
 
 
 	
