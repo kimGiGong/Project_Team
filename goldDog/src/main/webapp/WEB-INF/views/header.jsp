@@ -43,7 +43,7 @@
 <header class="header_section">
 	<div class="container">
 		<nav class="navbar navbar-expand-lg custom_nav-container ">
-			<a class="navbar-brand" href="/main/tmain">
+			<a class="navbar-brand" href="/main/session?useType=${ useType }">
 				<h3>금댕이</h3>
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -57,11 +57,11 @@
 				<ul class="navbar-nav  mx-auto ">
 					<li class="nav-item "><a class="nav-link" href="/main/premain">Home
 					</a></li>
-					<li class="nav-item active" id="t"><a class="nav-link"
-						href="/main/tmain">훈련<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item" id="t"><a class="nav-link"
+						href="/main/session?useType=trainer">훈련<span class="sr-only">(current)</span></a></li>
 						
 					<li class="nav-item " id="h"><a class="nav-link"
-						href="/main/hmain">미용</a></li>
+						href="/main/session?useType=hair">미용</a></li>
 						
 					<li class="nav-item"><sec:authorize access="isAuthenticated()">
 					<form action="/logout" method="post" id="logoutForm">
@@ -102,6 +102,7 @@
 function logout_form() {
 	document.getElementById('logoutForm').submit();
 }
-
+let useType = "${ useType }";
 </script>
+<script type="text/javascript" src="/resources/redirectController.js"></script>
 </header>
