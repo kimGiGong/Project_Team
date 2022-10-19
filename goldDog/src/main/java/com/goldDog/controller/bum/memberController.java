@@ -351,7 +351,7 @@ public class memberController {
 				e.printStackTrace();
 			}
 		
-		return "redirect:/member/review";
+		return "redirect:/member/mypage";
 	}
 	
 	@GetMapping("dogAD")

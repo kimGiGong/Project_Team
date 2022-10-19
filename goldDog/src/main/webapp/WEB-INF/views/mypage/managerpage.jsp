@@ -170,7 +170,7 @@
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>
 													</th>
-													<th align="center">010-1234-1234</th>
+													<th align="center">고객님의 전화번호</th>
 												</tr>
 											</table>
 										</div>

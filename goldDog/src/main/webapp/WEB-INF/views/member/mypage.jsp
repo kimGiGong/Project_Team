@@ -121,7 +121,7 @@
 													<th align="center">
 														<c:choose>
 															<c:when test="${ estimate.e_con eq '0'}">　견적 신청</c:when>
-															<c:when test="${ estimate.e_con eq '1'}">　결제 대기</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">　고객결제 대기</c:when>
 															<c:when test="${ estimate.e_con eq '2'}">　방문 예정</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">　방문 확인대기</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">　의뢰 종료</c:when>
@@ -131,14 +131,8 @@
 													<th align="center">
 														<c:choose>
 															<c:when test="${ estimate.e_con eq '0'}">${ estimateMember[status.index].m_phone }</c:when>
-															<c:when test="${ estimate.e_con eq '1'}">
-																<!-- Modal -->
-																	<button type="button" class="btn btn-primary addReviewT" data-bs-toggle="modal" 
-																	data-bs-target="#reviewModal" 
-																	onclick="buttonclick('${estimateMember[status.index].m_nick}','${estimateMember[status.index].m_no}')">
-																		리뷰 작성
-																	</button>
-															</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">${ estimateMember[status.index].m_phone }</c:when>
+															
 															<c:when test="${ estimate.e_con eq '2'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">

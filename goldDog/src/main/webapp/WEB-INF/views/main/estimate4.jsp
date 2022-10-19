@@ -85,7 +85,7 @@
                 </div>
 
 
-			
+
 			<div class="col-md-4">
 				<div class="card" style="height: 602px;">
 					<div class="card-header">
@@ -139,8 +139,7 @@
 										</div>
 									</div>
 								</div>
-								<!-- 결제 전일때 보이는 -->
-								<c:if test="${estimate.e_con==1}">
+								
 								<sec:authorize access="hasAnyRole('ROLE_HAIR','ROLE_TRAINER')">
 								<div class="col-lg-12">
 									<button  type="button" class="btn btn-lg btn-Danger btn-block">
@@ -163,59 +162,12 @@
 									</div>
 								</div>
 								</sec:authorize>
-								</c:if>
-								<!-- 결제 후 일때 보이는 -->
-								<c:if test="${estimate.e_con==2}">
-								<sec:authorize access="hasAnyRole('ROLE_HAIR','ROLE_TRAINER')">
-								<div class="col-lg-12">
-									<button  type="button" class="btn btn-lg btn-info btn-block" id="endEst">
-										<span id="payment-button-amount">방문 완료시 눌러주세요</span>
-									</button>
-								</div>
-								</sec:authorize>
-								<sec:authorize access="hasRole('ROLE_MEMBER')">
-								<div class="col-lg-12">
-									<button  type="button" class="btn btn-lg btn-info btn-block">
-										<span id="payment-button-amount">방문을 기다리고 있습니다.</span>
-									</button>
-								</div>
-								</sec:authorize>
-								</c:if>
-								<!-- 방문 후 일때 보이는 -->
-								<c:if test="${estimate.e_con==3}">
-								<sec:authorize access="hasAnyRole('ROLE_HAIR','ROLE_TRAINER')">
-								<div class="col-lg-12">
-									<button  type="button" class="btn btn-lg btn-info btn-block" >
-										<span id="payment-button-amount">방문 완료</span>
-									</button>
-								</div>
-								</sec:authorize>
-								<sec:authorize access="hasRole('ROLE_MEMBER')">
-								<div class="col-lg-12">
-									<button  type="button" class="btn btn-lg btn-info btn-block" id="endEstMember">
-										<span id="payment-button-amount">방문 완료 확인</span>
-									</button>
-									<div class="col-12 col-md-9"><small class="form-text text-muted">매니저 방문 완료시 확인을 눌러주세요</small></div>
-								</div>
-								</sec:authorize>
-								</c:if>
-								<!-- 방문 최종 완료 일때 보이는 -->
-								<c:if test="${estimate.e_con==4}">
-								<sec:authorize access="hasAnyRole('ROLE_HAIR','ROLE_TRAINER')">
-								<div class="col-lg-12">
-										<span id="payment-button-amount">의뢰 완료</span>
-								</div>
-								</sec:authorize>
-								<sec:authorize access="hasRole('ROLE_MEMBER')">
-										<span id="payment-button-amount">의뢰 완료</span>
-								</sec:authorize>
-								</c:if>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
+
 
           	</div><!--/.row-->
           </div><!--/.con-->
@@ -241,50 +193,6 @@
 	      			</div>
 	      			<div class="modal-footer">
 	        			</a> <button type="button" class="btn btn-secondary" id="deleteEst" >견적취소</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-	      			</div>
-	   			</div>
-	  		</div>
-		</div> <!-- end 모달 -->
-		
-		
-		<!--견적 완료 눌렀을때 띄울 모달 -->
-		<div class="modal fade" id="endEstModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-	    		<div class="modal-content">
-		      		<div class="modal-header">
-		        		<h5 class="modal-title" id="myModalLabel">고객 방문 완료</h5>
-		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          			<span aria-hidden="true">&times;</span>
-		        		</button>
-		      		</div>
-	      			<div class="modal-body">
-        				견적요청을 완료하시겠습니까?
-	      			</div>
-	      			<div class="modal-footer">
-	        			</a> <button type="button" class="btn btn-secondary" id="endEstPro" >방문완료</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-	      			</div>
-	   			</div>
-	  		</div>
-		</div> <!-- end 모달 -->
-		
-		<!--매니저 방문완료 눌렀을때 띄울 모달(맴버용) -->
-		<div class="modal fade" id="endEstModalMember" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-	    		<div class="modal-content">
-		      		<div class="modal-header">
-		        		<h5 class="modal-title" id="myModalLabel">매니저 방문 완료</h5>
-		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          			<span aria-hidden="true">&times;</span>
-		        		</button>
-		      		</div>
-	      			<div class="modal-body">
-        				매니저 방문을 완료처리 하시겠습니까?
-        				서비스가 마음에 안드셨다면 완료를 누르지 마시고 고객센터에 문의해주세요..
-	      			</div>
-	      			<div class="modal-footer">
-	        			</a> <button type="button" class="btn btn-secondary" id="endEstPro" >방문완료</button>
 	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
@@ -318,41 +226,6 @@
 			$("#addNew").modal("show");
 		});
 		
-		//매니저가 훈련 완료시(훈련사용)
-		$("#endEst").on("click",function(e){
-			e.preventDefault(); 
-			console.log("취소 확인 모달.");
-			$("#endEstModal").modal("show");
-		});
-		
-		$("#endEstPro").on("click",function(e){
-			e.preventDefault(); 
-			console.log(e_no+"e_no 확인.");
-			pagingForm.append("<input type='hidden' name='e_no' value='" + e_no+ "' />"); 
-			// pagingForm의 action 속성값을 /board/read로 변경
-			pagingForm.attr("action", "/main/endEstPro"); 
-			// read로 이동하기(form으로 요청) 
-			pagingForm.submit(); 				
-			
-		});
-		
-		//매니저 방문 완료시(고객용)
-		$("#endEstMember").on("click",function(e){
-			e.preventDefault(); 
-			console.log("취소 확인 모달.");
-			$("#endEstModalMember").modal("show");
-		});
-		
-		$("#endEstModalMember").on("click",function(e){
-			e.preventDefault(); 
-			console.log(e_no+"e_no 확인.");
-			pagingForm.append("<input type='hidden' name='e_no' value='" + e_no+ "' />"); 
-			// pagingForm의 action 속성값을 /board/read로 변경
-			pagingForm.attr("action", "/main/endEstModalMember"); 
-			// read로 이동하기(form으로 요청) 
-			pagingForm.submit(); 				
-			
-		});
 		
 	});
 		

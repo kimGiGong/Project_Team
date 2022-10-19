@@ -14,8 +14,8 @@
     content: "\f005";
     color: #48c1bd;
 	}
-	.fa-vcard:before, .fa-address-card:before {
-    color: #6b6b6b;
+	.fa-vcard:before, .fa-address-card:before,.fa-location-arrow:before {
+    color: #48c1bd;
 }
 
 </style>
@@ -183,9 +183,9 @@
 			                  <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${trainer[i].t_RAvg}점 (${trainer[i].t_RTotal})</p>
 		                  </c:if>
 	 	                  <p>훈련 가격 : ${trainer[i].t_price}~ 원</p>
-		                  <p><i class="fa fa-address-card" aria-hidden="true"></i>자격증 : ${trainer[i].t_license} 
+		                  <p><i class="fa fa-address-card" aria-hidden="true"></i> : ${trainer[i].t_license} 
 		                  	<c:if test="${ !empty ActArea[i] }">
-							<i class="fa fa-location-arrow" aria-hidden="true"></i>	활동지역 :                  
+							<i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>	활동지역 :                  
 							<c:forEach items="${ ActArea[i] }" var="addr" varStatus="status">
 									<c:out value="${addr.areaKO}"/> <c:out value="${addr.field}"/>
 									<c:if test="${ not status.last }">

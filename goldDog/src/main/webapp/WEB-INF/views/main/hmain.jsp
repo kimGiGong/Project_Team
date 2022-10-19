@@ -13,9 +13,11 @@
     content: "\f005";
     color: #dc3545;
 	}
-	.fa-vcard:before, .fa-address-card:before {
+	.fa-vcard:before, .fa-address-card:before, .fa-location-arrow:before {
     color: #dc3545;
 }
+
+
 </style>
 <body>
 		<div>
@@ -178,9 +180,9 @@
 			                   <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${hairstylist[i].t_RAvg}점 (${hairstylist[i].t_RTotal})</p>
 		                  </c:if>
 		                  <p>미용 가격 : ${hairstylist[i].h_price}~ 원</p>
-		                  <p>자격증<i class="fa fa-address-card" aria-hidden="true"></i> : ${hairstylist[i].h_license}
+		                  <p><i class="fa fa-address-card" aria-hidden="true"></i> : ${hairstylist[i].h_license}
 			                  <c:if test="${ !empty ActArea[i] }">
-								<i class="fa fa-location-arrow" aria-hidden="true"></i>	활동지역 :                  
+								<i class="fa fa-location-arrow fa-lg" aria-hidden="true"></i>	활동지역 :                  
 								<c:forEach items="${ ActArea[i] }" var="addr" varStatus="status">
 										<c:out value="${addr.areaKO}"/> <c:out value="${addr.field}"/>
 										<c:if test="${ not status.last }">
