@@ -240,7 +240,7 @@
         				견적요청을 취소하시겠습니까?
 	      			</div>
 	      			<div class="modal-footer">
-	        			</a> <button type="button" class="btn btn-secondary" id="deleteEst" >견적취소</button>
+	        			<button type="button" class="btn btn-secondary" id="deleteEst" >견적취소</button>
 	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
@@ -262,7 +262,7 @@
         				견적요청을 완료하시겠습니까?
 	      			</div>
 	      			<div class="modal-footer">
-	        			</a> <button type="button" class="btn btn-secondary" id="endEstPro" >방문완료</button>
+	        			<button type="button" class="btn btn-secondary" id="endEstPro" >방문완료</button>
 	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
@@ -284,7 +284,7 @@
         				서비스가 마음에 안드셨다면 완료를 누르지 마시고 고객센터에 문의해주세요..
 	      			</div>
 	      			<div class="modal-footer">
-	        			</a> <button type="button" class="btn btn-secondary" id="endEstPro" >방문완료</button>
+	        			<button type="button" class="btn btn-secondary" id="endEstPro1" >방문완료</button>
 	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
@@ -343,7 +343,7 @@
 			$("#endEstModalMember").modal("show");
 		});
 		
-		$("#endEstModalMember").on("click",function(e){
+		$("#endEstPro1").on("click",function(e){
 			e.preventDefault(); 
 			console.log(e_no+"e_no 확인.");
 			pagingForm.append("<input type='hidden' name='e_no' value='" + e_no+ "' />"); 

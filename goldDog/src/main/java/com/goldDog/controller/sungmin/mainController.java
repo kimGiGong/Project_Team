@@ -807,7 +807,6 @@ public class mainController {
 	@PostMapping("endEstModalMember")
 	public String endEstModalMember(@Param("e_no") int e_no) {
 		EstimateVO newEstimate = new EstimateVO();
-		EstimateVO estimate =mainService.getEOneEstimate(e_no);
 		//훈련 방문 완료
 		newEstimate.setE_con(4);
 		newEstimate.setE_no(e_no);

@@ -136,10 +136,11 @@
 															<c:when test="${ estimate.e_con eq '2'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">
-																<!-- Modal -->
-																<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#reviewModal" >
-																	리뷰 작성
-																</button>
+																<button type="button" class="btn btn-primary addReviewT" data-bs-toggle="modal" 
+																	data-bs-target="#reviewModal" 
+																	onclick="buttonclick('${estimateMember[status.index].m_nick}','${estimateMember[status.index].m_no}')">
+																		리뷰 작성
+																	</button>
 															</c:when>
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>
