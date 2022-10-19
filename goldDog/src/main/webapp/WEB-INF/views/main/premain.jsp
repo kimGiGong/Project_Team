@@ -33,8 +33,8 @@
                         <hr class="divider" />
                     </div>
                     <div class="col-lg-8 align-self-baseline">
-                        <a class="btn btn-primary btn-xl" href="tmain">훈련</a>
-                        <a class="btn btn-primary btn-xl" href="hmain">미용</a>
+                        <a class="btn btn-primary btn-xl" href="/main/session?useType=trainer">훈련</a>
+                        <a class="btn btn-primary btn-xl" href="/main/session?useType=hair">미용</a>
                     </div>
                 </div>
             </div>

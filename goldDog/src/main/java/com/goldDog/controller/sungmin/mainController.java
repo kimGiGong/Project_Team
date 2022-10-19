@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -923,11 +926,45 @@ public class mainController {
 	
 		
 		
+	
+	
+	
+	
+	@GetMapping("session") 
+	public String Session(HttpServletRequest request, String useType) {
+		
+		HttpSession session = request.getSession();
+		String sessionType = (String) session.getAttribute("useType");
+		System.out.println(sessionType);
+		System.out.println(useType);
+		if(sessionType == null) {
+			session.setAttribute("useType", useType);
+			System.out.println(session.getAttribute("useType")); 
+		}else if(!sessionType.equals(useType)) {
+			request.removeAttribute("useType");
+			session.setAttribute("useType", useType);
+		}
+		
+		if(session.getAttribute("useType").equals("trainer")) {
+			return "redirect:/main/tmain";
+		}else if(session.getAttribute("useType").equals("hair")) {
+			return "redirect:/main/hmain";
+		}else {
+			return "redirect:/main/premain";
+		}
 	}
 	
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+}
 	
 	
 	
