@@ -27,7 +27,7 @@
 						  </thead>
 						  <tbody>
 							   	<tr >
-							      <th class="text-left">작성자 : "${QnA.m_id}" </th>
+							      <th class="text-left">작성자 : "관리자" </th>
 							      <th class="text-right">(<fmt:formatDate pattern="yy-MM-dd" value="${notice.n_date}"/>)  조회수 : ${notice.n_readcount}</th>
 							    </tr>
 							   	<tr>

@@ -168,44 +168,55 @@ public class adminController {
 			NoticeVO ad = new NoticeVO();	
 				
 			MultipartFile mf = request.getFile("part_img");
+			 String newFileName=null;
+	         String path=null;
+	         String uuid=null;
+	         String orgName = null;
+	         String ext=null;
+	         
+	         if(mf.getSize() != 0) {
+	         
 			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
 			
 			log.info(mf.getSize());
 			log.info(mf.getContentType());
-			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+			 path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
 			
 			
 			// 이름 중복 방지를 위한 새 파일명 생성
-			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+			 uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
 			log.info(uuid);
 			//업로드한 파일 확장자만 가져오기
-			String orgName=mf.getOriginalFilename();
-			String ext= orgName.substring(orgName.lastIndexOf("."));
+			 orgName=mf.getOriginalFilename();
+			 ext= orgName.substring(orgName.lastIndexOf("."));
 			// 저장할 파일명
-			String newFileName= uuid + ext;
-			
+			 newFileName= uuid + ext;
+	         }
 			//DB 상에도 파일명을 저장해 준다.
 					
 			int result = 0;
-			if(mf.getOriginalFilename()==null) {
-				notice.setN_img("dog.jpg");
+			if(mf.getSize() == 0) {
+				notice.setN_img("default.png");
 				 result = mainService.addNotice(notice);	
-			}else if(mf.getOriginalFilename()!=null) {
+			}else if(mf.getSize() != 0) {
 				notice.setN_img(newFileName);
 				 result = mainService.addNotice(notice);
+				log.info("***********uuid"+uuid);
+				//저장할 파일 전체 경로
+				String imgPath = path+"\\"+newFileName;
+				log.info("*****imgPath"+imgPath);
+
+				// 파일 저장
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+				 
+				 
 			}
 			if(result == 1) {
 				log.info("글추가완료");
 			}
 			 
-			log.info("***********uuid"+uuid);
-			//저장할 파일 전체 경로
-			String imgPath = path+"\\"+newFileName;
-			log.info("*****imgPath"+imgPath);
-
-			// 파일 저장
-			File copyFile = new File(imgPath);
-			mf.transferTo(copyFile);
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -219,48 +230,54 @@ public class adminController {
 			CustomUser user = (CustomUser)auth.getPrincipal();
 			String m_id =user.getUsername();
 			qna.setM_id(m_id);
-				
 			MultipartFile mf = request.getFile("part_img");
-			log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+	        String newFileName=null;
+	        String path=null;
+	        String uuid=null;
+	        String orgName = null;
+	        String ext=null;
+	        if(mf.getSize() != 0) {
 			
-			log.info(mf.getSize());
-			log.info(mf.getContentType());
-			String path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
+	        	log.info(mf.getOriginalFilename()+"지금 들어온 파일 이름");
+	        	
+	        	log.info(mf.getSize());
+	        	log.info(mf.getContentType());
+	        	 path =request.getRealPath("/resources/serverImg");  // 서버에 저장할 폴더 위치
 			
-			
-			// 이름 중복 방지를 위한 새 파일명 생성
-			String uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
-			log.info(uuid);
-			//업로드한 파일 확장자만 가져오기
-			String orgName=mf.getOriginalFilename();
-			String ext= orgName.substring(orgName.lastIndexOf("."));
-			// 저장할 파일명
-			String newFileName= uuid + ext;
-			
+				// 이름 중복 방지를 위한 새 파일명 생성
+				 uuid=UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+				log.info(uuid);
+				//업로드한 파일 확장자만 가져오기
+				 orgName=mf.getOriginalFilename();
+				 ext= orgName.substring(orgName.lastIndexOf("."));
+				// 저장할 파일명
+				 newFileName= uuid + ext;
+	        }
 			//DB 상에도 파일명을 저장해 준다.
 
 			int result = 0;
-			if(mf.getOriginalFilename()==null) {
-				qna.setQ_img("dog.jpg");
+			if(mf.getSize() == 0) {
+				qna.setQ_img("default.png");
 				 result = mainService.addQnA(qna);	
-			}else if(mf.getOriginalFilename()!=null) {
+			}else if(mf.getSize() != 0) {
 				qna.setQ_img(newFileName);
 				
 				 result = mainService.addQnA(qna);
+				 
+				log.info("***********uuid"+uuid);
+				//저장할 파일 전체 경로
+				String imgPath = path+"\\"+newFileName;
+				log.info("*****imgPath"+imgPath);
+
+				// 파일 저장
+				File copyFile = new File(imgPath);
+				mf.transferTo(copyFile);
+				 
 			}
 			if(result == 1) {
 				log.info("수정완료");
 			}
-			
-			
-			log.info("***********uuid"+uuid);
-			//저장할 파일 전체 경로
-			String imgPath = path+"\\"+newFileName;
-			log.info("*****imgPath"+imgPath);
-
-			// 파일 저장
-			File copyFile = new File(imgPath);
-			mf.transferTo(copyFile);
+		
 						
 			
 			} catch (Exception e) {
