@@ -1,10 +1,9 @@
 
-let eno = "${estimate.e_no}";
 var obj = "";
 let token =$("meta[name='_csrf']").attr("content");                
 let header=$("meta[name='_csrf_header']").attr("content");
 $(document).ready(function(){
-	if("${estimate.e_con}" == 1){
+	if(econ == 1){
 		$.ajax({
 			url : "/payment/members" ,
 			method : "POST",
@@ -33,7 +32,7 @@ const seconds = ('0' + date.getSeconds()).slice(-2);
 
 
 
-let setAmount = 100;
+let setAmount = $("#cc-payment").val();
 
 
 

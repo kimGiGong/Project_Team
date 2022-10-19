@@ -71,6 +71,13 @@ public class mypageController {
 	private MyPageService instanceService;
 	
 	
+	//	에러 페이지
+	@RequestMapping("error")
+	public String errorPage() {
+		
+		return "/error";
+	}
+	
 	
 	//	일반 이용자 MyPage 이동
 	@GetMapping("mypage")
