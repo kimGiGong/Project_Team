@@ -31,9 +31,7 @@ const minutes = ('0' + date.getMinutes()).slice(-2);
 const seconds = ('0' + date.getSeconds()).slice(-2);
 
 
-
-let setAmount = 100;
-
+let setAmount = $("#cc-payment").val();
 
 
 const IMP = window.IMP;

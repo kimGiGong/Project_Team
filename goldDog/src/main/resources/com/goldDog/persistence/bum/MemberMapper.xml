@@ -109,7 +109,7 @@
 	
 	<insert id="addReview">
 		insert into review values 
-		(review_seq.nextval, #{m_no}, #{r_text}, #{r_score}, sysdate, #{r_img},#{t_no},#{h_no},#{e_no})
+		(review_seq.nextval, #{m_no}, #{r_text}, #{r_score}, sysdate, #{r_img},#{t_no},#{h_no})
 	</insert>
 	
 	<insert id="insertDog">
