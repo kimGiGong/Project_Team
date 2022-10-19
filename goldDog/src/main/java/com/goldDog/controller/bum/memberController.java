@@ -263,7 +263,7 @@ public class memberController {
 		try {
 			boolean tCheck = true;
 			//훈련사인지 체크
-			if(mainService.getTrainer(m_no_manager)!=null) {
+			if(mainService.getMTrainer(m_no_manager)!=null) {
 				log.info("훈련사로 들어옵니다"+m_no_manager);
 				 tCheck = true; 
 			}else {

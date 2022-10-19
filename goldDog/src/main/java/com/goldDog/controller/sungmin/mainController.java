@@ -500,9 +500,9 @@ public class mainController {
 	}
 	
 	@GetMapping("selUpload")
-	@PreAuthorize("isAuthenticated()")
-	public String selUpload(int m_no, Authentication auth,RedirectAttributes redirect) {
-		MemberVO member =mainService.getOneMember(m_no);
+	public String selUpload(Integer m_no, Authentication auth,RedirectAttributes redirect) {
+		
+		if(m_no!=null) {
 		
 		if (auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))) {
 			//훈련사 분기처리
@@ -525,6 +525,8 @@ public class mainController {
 				return "redirect:/main/selUploadH";
 			}
 			
+		}
+		
 		}
 		return "redirect:/main/tmain";
 		

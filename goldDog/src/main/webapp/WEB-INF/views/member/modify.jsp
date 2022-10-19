@@ -1,5 +1,7 @@
 	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -320,7 +322,18 @@
 	                                
 	                                <input type="submit" class="btn btn-primary btn-user btn-block" value="수정하기" /> 
 	                               
-	                                <input type="button" class="btn btn-primary btn-user btn-block" value="마이페이지" onclick="window.location='/mypage'"/> 
+			                        <sec:authorize access="hasRole('ROLE_MEMBER')">
+	                              	  <input type="button" class="btn btn-primary btn-user btn-block" value="마이페이지" onclick="window.location='/mypage'"/> 
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_TRAINER')">
+										<input type="button" class="btn btn-primary btn-user btn-block" value="마이페이지" onclick="window.location='/manager'"/> 
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_HAIR')">
+										<input type="button" class="btn btn-primary btn-user btn-block" value="마이페이지" onclick="window.location='/manager'"/> 
+									</sec:authorize>
+									<sec:authorize access="hasRole('ROLE_ADMIN')">
+										<input type="button" class="btn btn-primary btn-user btn-block" value="마이페이지" onclick="window.location='/mypage'"/> 
+									</sec:authorize>
 	                                
 	                            </form>
 	                        </div>
