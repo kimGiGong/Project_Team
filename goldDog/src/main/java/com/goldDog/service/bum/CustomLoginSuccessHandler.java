@@ -42,7 +42,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			String redirectURL = (String)session.getAttribute("prevPage"); // 담아놓고
 			if(redirectURL !=null) {
 				session.removeAttribute("PrevPage");					// 삭제 딱하고
-				response.sendRedirect(redirectURL);
+				response.sendRedirect("/main/tmain");
 			}else {
 				response.sendRedirect("/main/tmain");
 			}

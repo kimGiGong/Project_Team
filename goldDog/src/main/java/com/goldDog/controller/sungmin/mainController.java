@@ -535,6 +535,7 @@ public class mainController {
 	
 	//훈련사용 자기정보 수정
 	@GetMapping("selUploadT")
+	@PreAuthorize("isAuthenticated()") 
 	public String selUploadTrainer(int m_no,Model model) {
 		MemberVO member =mainService.getOneMember(m_no);
 		if(mainService.getMTrainer(m_no) != null) {
@@ -617,6 +618,7 @@ public class mainController {
 	
 	//미용사용
 	@GetMapping("selUploadH")
+	@PreAuthorize("isAuthenticated()") 
 	public void selUploadH(int m_no,Model model) {
 		MemberVO member =mainService.getOneMember(m_no);
 		
@@ -708,7 +710,10 @@ public class mainController {
 
 	//견적서 보내자마자 마이페이지에서 첫번쨰로 확인하는 견적서
 	@GetMapping("estimate1")
+	@PreAuthorize("isAuthenticated()") 
 	public void Estimate1(Model model,@Param("e_no") int e_no) {
+		
+		
 		EstimateVO estimate =mainService.getEOneEstimate(e_no);
 		DogVO clientDog =mainService.getOneDog(estimate.getD_no());
 		AddressVO clientAddress=mainService.getOneAddress(estimate.getA_no());
@@ -737,6 +742,7 @@ public class mainController {
 	//매니저가 확인하고 추가사항 적을 견적서 페이지
 	//유효성 처리해서 가져가야함
 	@GetMapping("estimate2")
+	@PreAuthorize("isAuthenticated()") 
 	public void Estimate2(Model model,@Param("e_no") int e_no) {
 		//오늘 날짜 구하기
 		 LocalDate now = LocalDate.now();
@@ -789,12 +795,13 @@ public class mainController {
 		log.info(estimate+"확인");
 		
 		mainService.updateEst(estimate);
-		return "redirect:/member/mypage";
+		return "redirect:/mypage";
 		
 	}
 	
 	//매니저가 확인하고 추가사항 적을 견적서 페이지
 	@GetMapping("estimate3")
+	@PreAuthorize("isAuthenticated()") 
 	public void Estimate3(Model model,@Param("e_no") int e_no) {
 		
 		EstimateVO estimate =mainService.getEOneEstimate(e_no);

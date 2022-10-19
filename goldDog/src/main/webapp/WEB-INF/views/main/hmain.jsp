@@ -27,7 +27,7 @@
 
   <div class="hero_area">
     <div class="bg-box">
-      <img src="/resources/feane/images/back1.png" alt="" >
+      <img src="/resources/serverImg/back.png"  >
     </div>
     
     <section class="slider_section ">
@@ -134,7 +134,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control bg-light border-0 small" name="keyword" placeholder="미용사 검색">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                <button class="btn btn-secondary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </form>
@@ -166,7 +166,7 @@
 	         <c:forEach var="i" begin="0" end="${hairstylistcheck-1}" step="1">
 	          <div class="col-sm-12 col-lg-12 all pizza">
 	                <span class="border-top"></span>
-	            <div class="box" style="border: solid 2px #008294;">
+	            <div class="box" style="border: solid 2px #eb9db0;">
 	                <div class="img-box" style="padding: 25px;">
 	                  <a class="move" href="${hairstylist[i].m_no}" id="${hairstylist[i].h_no}"  ><img src="/resources/serverImg/${member[i].m_img }" width="185px" height="185px" style="border-radius:1.5rem;"/></a> 
 	                </div>
