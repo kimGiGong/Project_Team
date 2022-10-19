@@ -131,7 +131,8 @@ public interface MainMapper {
 	public int deleteEst(int e_no);
 	//견적서 하나 업데이트하는 메서드
 	public int updateEst(EstimateVO estimate);
-	
+	//견적서 e_con 업데이트 하는 메서드
+	public int updateEstEcon(EstimateVO estimate);
 	
 	//광고 ********************************************************
 	public int addAD(ADVO ad);

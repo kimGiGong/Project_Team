@@ -242,10 +242,13 @@ public class mainController {
 			List<Integer> h_no_list = new ArrayList<Integer>(); 
 			List<Integer> h_m_no_list = new ArrayList<Integer>(); 
 			List<MemberVO> member = new ArrayList<MemberVO>();
+			//활동지역 처리하기
+			List<AddressVO> address = new ArrayList<AddressVO>(); 
 			
 			for(int i = 0; i < Hlist.size(); i++) {
 				h_no_list.add(Hlist.get(i).getH_no()); 
 				h_m_no_list.add(Hlist.get(i).getM_no());
+				
 			}
 			
 			// t_no 를 받아서 그에 맞게 띄워주기
@@ -262,12 +265,27 @@ public class mainController {
 			}
 			
 			for(int i=0 ;i<Hlist.size() ;i++) {
-				member.add(mainService.getOneMember(h_no_list.get(i)));
+				member.add(mainService.getOneMember(h_m_no_list.get(i)));
+				//활동지역 처리하기
+				address.add(instanceService.getAddress(h_m_no_list.get(i)));
 			}
 			
 				model.addAttribute("member", member);
 				model.addAttribute("hairstylistcheck",h_no_list.size()); //미용사 숫자 체크
-				model.addAttribute("pager", new PageDTO(cri, Htotal));  // total count로 수정 
+				model.addAttribute("pager", new PageDTO(cri, Htotal));  // total count로 수정
+				
+			//활동지역 처리하기
+			List<Object> list = new ArrayList<Object>();
+			AddressTranslator addrtr = new AddressTranslator();
+			for(int i=0 ;i<address.size() ;i++) {
+				
+				list.add(addrtr.translator(address.get(i).getA_addr()));
+				
+			}
+			
+			model.addAttribute("ActArea",list);	
+			
+				
 			//리뷰 추가해야함 베스트 5개 뽑기
 				List<ReviewVO> BestReview=mainService.getAllHReview();
 				
@@ -771,6 +789,31 @@ public class mainController {
 		model.addAttribute("clientDog",clientDog);
 		model.addAttribute("clientAddress",clientAddress);
 		
+	}
+	//견적서 e_con 3으로 업데이트 견적완료시
+	@PostMapping("endEstPro")
+	public String endEstPro(@Param("e_no") int e_no) {
+		EstimateVO newEstimate = new EstimateVO();
+		EstimateVO estimate =mainService.getEOneEstimate(e_no);
+		//훈련 방문 완료
+		newEstimate.setE_con(3);
+		newEstimate.setE_no(e_no);
+		mainService.updateEstEcon(newEstimate);
+		
+		return "redirect:/manager";
+	}
+	
+	//견적서 e_con 4으로 업데이트 고객이 방문 완료 눌렀을때
+	@PostMapping("endEstModalMember")
+	public String endEstModalMember(@Param("e_no") int e_no) {
+		EstimateVO newEstimate = new EstimateVO();
+		EstimateVO estimate =mainService.getEOneEstimate(e_no);
+		//훈련 방문 완료
+		newEstimate.setE_con(4);
+		newEstimate.setE_no(e_no);
+		mainService.updateEstEcon(newEstimate);
+		
+		return "redirect:/member/mypage";
 	}
 	
 	

@@ -262,7 +262,12 @@ public class MainServiceImpl implements MainService {
 	public int updateEst(EstimateVO estimate) {
 		return mapper.updateEst(estimate);
 	}
-	
+	//견적서 e_con 업데이트 하는 메서드
+	@Override
+	public int updateEstEcon(EstimateVO estimate) {
+		return mapper.updateEstEcon(estimate);
+	}
+
 	
 	
 	
@@ -379,7 +384,7 @@ public class MainServiceImpl implements MainService {
 	public List<QnAVO> getAllQnACri(Criteria cri) {
 		return mapper.getAllQnACri(cri);
 	}
-
+	
 
 
 	

@@ -318,6 +318,10 @@
 		e_con=#{e_con} ,e_total_price=#{e_total_price}, e_date=(TO_DATE(#{e_date},'YYYY-MM-DD HH24:MI'))
 		 where e_no=#{e_no}
 	</update>
+	<!--견적서 업데이트-->
+	<update id="updateEstEcon">
+		update estimate set e_con=#{e_con} where e_no=#{e_no}
+	</update>
 	
 	
 	
