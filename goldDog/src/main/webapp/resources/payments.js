@@ -32,7 +32,7 @@ const seconds = ('0' + date.getSeconds()).slice(-2);
 
 
 
-let setAmount = $("#cc-payment").val();
+let setAmount = 100;
 
 
 
