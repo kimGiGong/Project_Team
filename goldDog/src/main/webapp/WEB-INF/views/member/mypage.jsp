@@ -359,7 +359,7 @@
 								</tr>
 								<tr>
 									<th>
-										<textarea rows="7" cols="52" name="r_text" placeholder="리뷰 작성"></textarea><br>
+										<textarea rows="7" cols="50" name="r_text" placeholder="리뷰 작성"></textarea><br>
 									</th>
 								</tr>
 								<tr>
@@ -471,48 +471,45 @@
 			console.log(d_no+"취소 확인 모달.");
 			$("#addNew").modal("show");
 		});
-		
-		
-		
-		
-		
-		
-		
-		//리뷰****
+	
 		$(document).ready(function(){
 			//review 모달 글쓰기 눌렀을때 띄울 
 			$("#review").on("click",function(e){
 				e.preventDefault(); 
 				console.log("리뷰 확인 모달.");
-				reviewPro.submit();
 				
+				if(checkField()){
+					reviewPro.submit();
+				}
+
 			});
 			
 			
 		});
 		
-		
-		//유효성 검사
-    	function checkField() {
-    		let inputs = document.review;
-    		if(! inputs.r_score.value) {
-    			alert("평점을 입력해주세요.")
-    			return false;
-    		}
-    		if(! inputs.r_text.value) {
-    			alert("리뷰를 입력해주세요.")
-    			return false;
-    		}
-    		if(! inputs.part_img.value) {
-    			alert("리뷰를 입력해주세요.")
-    			return false;
-    		}
-    	}
+	
 		
 		
  	 });// ready 
-		
-			
+ 	 
+ 	function checkField() {
+		let inputs = document.review;
+		if(! inputs.r_score.value) {
+			alert("평점을 입력해주세요.")
+			return false;
+		}
+		else if(! inputs.r_text.value) {
+			alert("리뷰를 입력해주세요.")
+			return false;
+		}
+		else if(! inputs.part_img.value) {
+			alert("리뷰 사진을 등록해주세요.")
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
  		
  		
  //리뷰 쓰기 버튼 눌렀을 때 훈련사용	
