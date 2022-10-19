@@ -362,7 +362,24 @@ public class mypageController {
 		
 		EstimateVO estimate = sungminService.getEOneEstimate(Integer.parseInt(e_no));
 		MemberVO manager = sungminService.getOneMember(estimate.getM_no_manager());
-		if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))) {
+		
+		
+		
+		boolean tCheck = true;
+		//훈련사인지 체크
+		if(sungminService.getTrainer(member.getM_no())!=null) {
+			log.info("훈련사로 들어옵니다"+member.getM_no());
+			 tCheck = true; 
+		}else {
+			log.info("미용사로 들어옵니다"+member.getM_no());
+			 tCheck = false; 
+		}
+		
+		
+		
+		
+		
+		if(tCheck) {
 			TrainerVO trainer = sungminService.getMTrainer(manager.getM_no());
 			result.put("t_no",""+trainer.getT_no());
 		}else {
