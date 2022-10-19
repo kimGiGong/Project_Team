@@ -154,7 +154,7 @@
 				<!-- 공지사항 글쓰기 눌렀을때 띄울 모달 --> 
 					<div class="modal fade" id="addNew1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
-				    		<div class="modal-content">
+				    		<div class="modal-content" style="height: 690px; width: 535px;">
 					      		<div class="modal-header">
 					        		<h5 class="modal-title" id="myModalLabel">금댕이</h5>
 					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -191,7 +191,7 @@
 				<!-- QnA 글쓰기 눌렀을때 띄울 모달 -->
 					<div class="modal fade" id="addNew2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
-				    		<div class="modal-content">
+				    		<div class="modal-content"style="height: 690px; width: 535px;">
 					      		<div class="modal-header">
 					        		<h5 class="modal-title" id="myModalLabel">금댕이</h5>
 					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">

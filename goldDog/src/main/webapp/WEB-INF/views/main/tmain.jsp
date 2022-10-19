@@ -29,7 +29,7 @@
 
   <div class="hero_area">
     <div class="bg-box" style="border-radius:0rem">
-      <img src="/resources/feane/images/roto.jpg"  >
+      <img src="/resources/serverImg/back.png"  >
     </div>
     <!-- slider section -->
     <section class="slider_section ">

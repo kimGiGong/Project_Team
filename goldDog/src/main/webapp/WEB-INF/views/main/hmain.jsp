@@ -32,17 +32,20 @@
     
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
+         <div class="carousel-inner">
           <div class="carousel-item active">
             <div class="container ">
               <div class="row">
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
+                    <h1>
+                      쉽다쉬워
+                    </h1>
                     <p>
                       우리 금댕이를 위해서라면 모든지 할 수 있어!
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1"></a>
+                      <a class="btn1" style="z-index:5;">
                         구매하기
                       </a>
                     <div class="bg-box">
@@ -51,12 +54,9 @@
                     </div>
                   </div>
                 </div>
-                  
               </div>
             </div>
           </div>
-          
-          
           <div class="carousel-item ">
             <div class="container ">
               <div class="row">
