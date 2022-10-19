@@ -356,36 +356,39 @@ public class mypageController {
 		
 		Map<String,String> result = new HashMap<String,String>();
 		JsonObject jsonObject = new JsonObject();
-
+		MemberVO manager = new MemberVO();
 		// Gson 객체 생성
 		Gson gson = new Gson();
 		
 		EstimateVO estimate = sungminService.getEOneEstimate(Integer.parseInt(e_no));
-		MemberVO manager = sungminService.getOneMember(estimate.getM_no_manager());
 		
 		
-		
+		int T_no=0;
+		int H_no=0;
 		boolean tCheck = true;
 		//훈련사인지 체크
-		if(sungminService.getTrainer(manager.getM_no())!=null) {
-			log.info("훈련사로 들어옵니다"+manager.getM_no());
+		if(sungminService.getMTrainer(estimate.getM_no_manager())!=null) {
+			 T_no =sungminService.getMTrainer(estimate.getM_no_manager()).getT_no();
+			log.info("훈련사로 들어옵니다"+T_no);
 			 tCheck = true; 
 		}else {
-			log.info("미용사로 들어옵니다"+manager.getM_no());
+			
+			 H_no =sungminService.getMhairstylist(estimate.getM_no_manager()).getH_no();
+			log.info("미용사로 들어옵니다"+H_no);
 			 tCheck = false; 
 		}
 		
 		
 		
 		
-		
 		if(tCheck) {
-			TrainerVO trainer = sungminService.getMTrainer(manager.getM_no());
-			
+			TrainerVO trainer = sungminService.getTrainer(T_no);
+			 manager= sungminService.getOneMember(trainer.getM_no());
 			result.put("t_no",""+trainer.getT_no());
 			
 		}else {
-			HairstylistVO hair = sungminService.getMhairstylist(manager.getM_no());
+			HairstylistVO hair = sungminService.getHairstylist(H_no);
+			 manager =sungminService.getOneMember(hair.getM_no());
 			result.put("t_no",""+hair.getH_no());
 					
 		}
