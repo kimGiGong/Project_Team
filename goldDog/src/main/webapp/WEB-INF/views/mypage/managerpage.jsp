@@ -167,6 +167,7 @@
 															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">의뢰 완료</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
+															<c:when test="${ estimate.e_con eq '5'}">의뢰 종료</c:when>
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>
 													</th>

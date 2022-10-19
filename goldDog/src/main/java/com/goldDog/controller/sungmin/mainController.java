@@ -3,6 +3,7 @@ package com.goldDog.controller.sungmin;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -315,6 +316,12 @@ public class mainController {
 		log.info("디테일폼으로 왔다!");
 		log.info(t_no);
 		log.info(m_no);
+		//오늘 날짜 구하기
+		 LocalDate now = LocalDate.now();
+		 String today = now+"T12:30:00";
+		log.info(now+"오늘의 날짜 !!");
+		model.addAttribute("today",today);
+		
 		model.addAttribute("trainer",mainService.getTrainer(t_no));
 		model.addAttribute("member",mainService.getOneMember(m_no));
 		
@@ -404,6 +411,11 @@ public class mainController {
 		log.info("디테일폼으로 왔다!");
 		log.info(h_no);
 		log.info(m_no);
+		//오늘 날짜 구하기
+		 LocalDate now = LocalDate.now();
+		 String today = now+"T12:30:00";
+		log.info(now+"오늘의 날짜 !!");
+		model.addAttribute("today",today);
 		model.addAttribute("hairstylist",mainService.getHairstylist(h_no));
 		model.addAttribute("member",mainService.getOneMember(m_no));
 		
@@ -726,6 +738,12 @@ public class mainController {
 	//유효성 처리해서 가져가야함
 	@GetMapping("estimate2")
 	public void Estimate2(Model model,@Param("e_no") int e_no) {
+		//오늘 날짜 구하기
+		 LocalDate now = LocalDate.now();
+		 String today = now+"T12:30:00";
+		log.info(now+"오늘의 날짜 !!");
+		model.addAttribute("today",today);
+		
 		EstimateVO estimate =mainService.getEOneEstimate(e_no);
 		DogVO clientDog =mainService.getOneDog(estimate.getD_no());
 		AddressVO clientAddress=mainService.getOneAddress(estimate.getA_no());
@@ -814,6 +832,7 @@ public class mainController {
 		
 		return "redirect:/member/mypage";
 	}
+	
 	
 	
 	//*************************************훈련사 견적서 추가**********************************************

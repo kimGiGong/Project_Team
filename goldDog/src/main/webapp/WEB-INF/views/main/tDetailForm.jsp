@@ -33,7 +33,7 @@
                  <div class="card mb-3 border border-primary mb-3">
                    <div class="row g-0">
                      <div class="col-md-4">
-                      <img src="/resources/severImg/${member.m_img}" width="185px" height="185px" style="border-radius:1.5rem;"/>
+                      <img src="/resources/serverImg/${member.m_img}" width="185px" height="185px" style="border-radius:1.5rem;"/>
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
@@ -172,7 +172,7 @@
                                               <label for="cc-name" class="control-label mb-1">원하는 날짜</label>
                                               
 		                                        <div class="mb-3 row">
-													<input class="form-control newDate" type="datetime-local" name="e_date" value="2022-10-13T12:30:00" id="html5-datetime-local-input" />						                          
+													<input class="form-control newDate" type="datetime-local" name="e_date" value="${today}" id="html5-datetime-local-input" />						                          
 						                      	</div>       
 						                      
                                               <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>

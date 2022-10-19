@@ -125,24 +125,23 @@
 															<c:when test="${ estimate.e_con eq '2'}">　방문 예정</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">　방문 확인대기</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">　의뢰 종료</c:when>
-															<c:otherwise>취소됨</c:otherwise>
+															<c:when test="${ estimate.e_con eq '5'}">　의뢰 종료</c:when>
 														</c:choose>
 													</th>
 													<th align="center">
 														<c:choose>
 															<c:when test="${ estimate.e_con eq '0'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '1'}">${ estimateMember[status.index].m_phone }</c:when>
-															
 															<c:when test="${ estimate.e_con eq '2'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '3'}">${ estimateMember[status.index].m_phone }</c:when>
 															<c:when test="${ estimate.e_con eq '4'}">
-																<button type="button" class="btn btn-primary addReviewT" data-bs-toggle="modal" 
-																	data-bs-target="#reviewModal" 
-																	onclick="buttonclick('${estimateMember[status.index].m_nick}','${estimateMember[status.index].m_no}')">
-																		리뷰 작성
+																	<button type="button" class="btn btn-primary addReviewT" data-bs-toggle="modal" 
+																		data-bs-target="#reviewModal" 
+																		onclick="buttonclick('${estimateMember[status.index].m_nick}','${estimateMember[status.index].m_no}','${estimate.e_no}')">
+																			리뷰 작성
 																	</button>
-															</c:when>
-															<c:otherwise>취소됨</c:otherwise>
+															</c:when>		
+															<c:when test="${ estimate.e_con eq '5'}">리뷰 작성 완료</c:when>
 														</c:choose>
 													</th>
 												</tr>
@@ -510,12 +509,14 @@
  		
  		
  //리뷰 쓰기 버튼 눌렀을 때 훈련사용	
-function buttonclick (a, b){
+function buttonclick (a, b,c){
 	console.log(a);
 	console.log(b);
+	console.log(c);
 	
 	$("#manager_name").text(a);
 	$("#reviewPro").append("<input type='hidden' name='m_no_manager' value='"+b+"' />");
+	$("#reviewPro").append("<input type='hidden' name='e_no' value='"+c+"' />");
 	console.log(b+"리뷰 등록 확인 모달.");
 	$("#reviewModal").modal("show");
 }
