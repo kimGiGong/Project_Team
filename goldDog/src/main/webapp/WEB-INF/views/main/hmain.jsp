@@ -177,7 +177,7 @@
 		                  	<p><i class="fa fa-star fa-lg " aria-hidden="true"></i>가장먼저 리뷰를 남겨주세요!</p>
 		                  </c:if>
 		                   <c:if test="${hairstylist[i].h_RTotal!=0}">
-			                   <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${hairstylist[i].t_RAvg}점 (${hairstylist[i].t_RTotal})</p>
+			                   <p><i class="fa fa-star fa-lg" aria-hidden="true"></i> : ${hairstylist[i].h_RAvg}점 (${hairstylist[i].h_RTotal})</p>
 		                  </c:if>
 		                  <p>미용 가격 : ${hairstylist[i].h_price}~ 원</p>
 		                  <p><i class="fa fa-address-card" aria-hidden="true"></i> : ${hairstylist[i].h_license}
