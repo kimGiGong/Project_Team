@@ -301,7 +301,7 @@
 		
 		
 		let pagingForm=$("#pagingForm");
-		
+		let e_no ="${estimate.e_no}"
 		$("#deleteEst").on("click",function(e){
 			e.preventDefault(); 
 			console.log(e_no+"e_no 확인.");
