@@ -273,7 +273,8 @@ public class memberController {
 			EstimateVO newEstimate = new EstimateVO();
 			//훈련사일때
 			if(tCheck) {
-				review.setT_no(m_no_manager);
+				
+				review.setT_no(mainService.getMTrainer(m_no_manager).getT_no());
 				review.setH_no(0);
 				newEstimate.setE_con(5);
 				newEstimate.setE_no(review.getE_no());
@@ -281,7 +282,7 @@ public class memberController {
 			}else {
 			//미용사일때
 				review.setT_no(0);
-				review.setH_no(m_no_manager);
+				review.setH_no(mainService.getMhairstylist(m_no_manager).getH_no());
 				newEstimate.setE_con(5);
 				newEstimate.setE_no(review.getE_no());
 				mainService.updateEstEcon(newEstimate);
