@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,11 +71,21 @@
 	                            
 	                            <li class="nav-item" id="stackmoney">
 	                            	<div class="input-block">
-									  <input type="text" name="input-text" id="input-text" 
-									  required spellcheck="false" value="${ managerlist[3].t_salary != null ? managerlist[3].t_salary : '0' } 원" >
-									  <span class="placeholder">
-									    정산 예정 금액
-									  </span>
+		                            	<sec:authorize access="hasRole('ROLE_TRAINER')">
+										  <input type="text" name="input-text" id="input-text"  required spellcheck="false" 
+										  	value="${ managerlist[3].t_salary != null ? managerlist[3].t_salary : '0' } 원" >
+										  <span class="placeholder">
+										    정산 예정 금액
+										  </span>
+		                            	</sec:authorize>
+		                            	<sec:authorize access="hasRole('ROLE_HAIR')">
+										  <input type="text" name="input-text" id="input-text"  required spellcheck="false" 
+										  	value="${ managerlist[3].h_salary != null ? managerlist[3].h_salary : '0' } 원" >
+										  <span class="placeholder">
+										    정산 예정 금액
+										  </span>
+		                            	</sec:authorize>
+									  
 									</div>
 	                            </li>
 	                        </ul>
@@ -180,16 +191,30 @@
                    	<div class="manager_info">
                    	<h3 class="tm-text-primary">내가 등록한 훈련사 소개</h3> 
                     <hr class="mb-5">
-                    	<c:if test="${empty managerlist[3].t_sel }">
-                    		<div>
-          						등록된 소개가 없습니다.
-           					</div>
-                    	</c:if>
-                    	<c:if test="${not empty managerlist[3].t_sel }">
-                    		<div>
-          						${ managerlist[3].t_sel }
-           					</div>
-                    	</c:if>
+                    	<sec:authorize access="hasRole('ROLE_TRAINER')">
+	                    	<c:if test="${empty managerlist[3].t_sel }">
+	                    		<div>
+	          						등록된 소개가 없습니다.
+	           					</div>
+	                    	</c:if>
+	                    	<c:if test="${not empty managerlist[3].t_sel }">
+	                    		<div>
+	          						${ managerlist[3].t_sel }
+	           					</div>
+	                    	</c:if>
+	                    </sec:authorize>	
+                    	<sec:authorize access="hasRole('ROLE_HAIR')">
+	                    	<c:if test="${empty managerlist[3].h_sel }">
+	                    		<div>
+	          						등록된 소개가 없습니다.
+	           					</div>
+	                    	</c:if>
+	                    	<c:if test="${not empty managerlist[3].h_sel }">
+	                    		<div>
+	          						${ managerlist[3].h_sel }
+	           					</div>
+	                    	</c:if>
+	                    </sec:authorize>	
                    	</div>
                     <br><br><br><br>
                     <!-- 활동지역 -->
