@@ -186,8 +186,11 @@
 		                  <p><i class="fa fa-address-card" aria-hidden="true"></i>자격증 : ${trainer[i].t_license} 
 		                  	<c:if test="${ !empty ActArea[i] }">
 							<i class="fa fa-location-arrow" aria-hidden="true"></i>	활동지역 :                  
-							<c:forEach items="${ ActArea[i] }" var="addr">
-									<c:out value="${addr.areaKO}"/> <c:out value="${addr.field}"/>, 
+							<c:forEach items="${ ActArea[i] }" var="addr" varStatus="status">
+									<c:out value="${addr.areaKO}"/> <c:out value="${addr.field}"/>
+									<c:if test="${ not status.last }">
+									,
+									</c:if>
 							</c:forEach>
 							</c:if>
 		                  </p>
