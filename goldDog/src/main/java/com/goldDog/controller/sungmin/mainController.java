@@ -781,6 +781,9 @@ public class mainController {
 		
 		if(addEstimate.getE_extraprice()==0) {
 			estimate.setE_extraprice(0);
+			//견적서 최종가격에 더해서 추가
+			int e_total_price = addEstimate.getE_extraprice()+estimate.getE_basicprice();
+			estimate.setE_total_price(e_total_price);
 		}else if(addEstimate.getE_extraprice()!=0){
 			estimate.setE_extraprice(addEstimate.getE_extraprice());
 			//견적서 최종가격에 더해서 추가
