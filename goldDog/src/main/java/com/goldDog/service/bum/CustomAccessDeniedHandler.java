@@ -28,7 +28,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		//접근 제한시 처리할 것 있으면 처리해주기 
 		
 		//접근 제한 에러 페이지로 이동
-			response.sendRedirect("/common/accessError");
+			response.sendRedirect("/error");
 		
 		
 	}

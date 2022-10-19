@@ -334,8 +334,10 @@ public class memberController {
 	                }
 	                	log.info(t_review_total+"t_review_total!!!");
 		                rTotal = (double)t_review_total / re.size();
+		                rTotal = Math.round(rTotal*100);
+		                rTotal = rTotal/100; 
 		                log.info(rTotal+"rTotal!!");
-		                mainService.updateRAvg(m_no_manager, rTotal,re.size());
+		                mainService.updateRAvg(mainService.getMTrainer(m_no_manager).getT_no(), rTotal,re.size());
 		                log.info("훈련사 리뷰추가완료");
 		                
 					}
@@ -348,7 +350,7 @@ public class memberController {
 	                	h_review_total += re.get(i).getR_score();
 	                }
 		                rTotal = (double)h_review_total / re.size();
-		                mainService.updateRHAvg(m_no_manager, rTotal,re.size());
+		                mainService.updateRHAvg(mainService.getMhairstylist(m_no_manager).getH_no(), rTotal,re.size());
 		                log.info("미용사 리뷰추가완료");
 					}
 	    	}
