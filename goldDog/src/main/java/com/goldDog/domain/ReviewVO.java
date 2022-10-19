@@ -15,6 +15,5 @@ public class ReviewVO {
 	private String r_img;
 	private int t_no;
 	private int h_no;
-	private int e_no;
 	
 }
