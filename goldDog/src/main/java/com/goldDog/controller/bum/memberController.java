@@ -346,6 +346,9 @@ public class memberController {
 	                	h_review_total += re.get(i).getR_score();
 	                }
 		                rTotal = (double)h_review_total / re.size();
+		                rTotal = Math.round(rTotal*100);
+		                rTotal = rTotal/100; 
+		                log.info(rTotal+"rTotal!!");
 		                mainService.updateRHAvg(mainService.getMhairstylist(m_no_manager).getH_no(), rTotal,re.size());
 		                log.info("미용사 리뷰추가완료");
 					}
