@@ -128,11 +128,11 @@
       	<!-- 사용자 검색 -->  
         <div class="row justify-content-between">
 	          	<div class="col-3 all pizza">
-				 	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="/board/list" method="get">
+				 	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" id="searchForm"  action="/main/hmain" method="get">
 				 		<input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
 		   				<input type="hidden" name="listQty" value="${pager.cri.listQty}" />
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="미용사 검색">
+                            <input type="text" class="form-control bg-light border-0 small" name="keyword" placeholder="미용사 검색">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
