@@ -30,7 +30,7 @@
 	  <div class="row">
 	  <div class="col-lg-8 ">
                <div class="col-md ">
-                 <div class="card mb-3 border border-primary mb-3">
+                 <div class="card mb-3 border border-secondary mb-3">
                    <div class="row g-0">
                      <div class="col-md-4">
                       <img src="/resources/serverImg/${member.m_img}" width="185px" height="185px" style="border-radius:1.5rem;"/>
@@ -48,7 +48,7 @@
                </div>    
              
               <div class="col-lg-12">
-               <div class="card shadow-none bg-transparent border border-primary mb-3">
+               <div class="card shadow-none bg-transparent border border-secondary mb-3">
                  <div class="card-body">
                    <h5 class="card-title">판매정보</h5>
                    <p class="card-text">${trainer.t_sel}</p>
@@ -57,7 +57,7 @@
              </div>
              
               <div class="col-lg-12">
-               <div class="card shadow-none bg-transparent border border-primary mb-3">
+               <div class="card shadow-none bg-transparent border border-secondary mb-3">
                  <div class="card-body">
                    <h5 class="card-title " style="text-align: left;">훈련사의 BEST 리뷰</h5>
                    <p class="card-text" style="text-align: right;" ><i class="fa fa-star fa-lg " aria-hidden="true"></i>(${trainer.t_RAvg})${trainer.t_RTotal}</p>

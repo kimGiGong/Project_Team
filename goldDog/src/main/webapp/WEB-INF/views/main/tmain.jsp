@@ -18,6 +18,13 @@
     color: #48c1bd;
 }
 
+	.btn-primary{
+	background-color: #e999b1;
+    border-color: #e79bb3;
+	
+	}
+
+
 </style>
   
 
@@ -29,7 +36,7 @@
 
   <div class="hero_area">
     <div class="bg-box" style="border-radius:0rem">
-      <img src="/resources/serverImg/back.png"  >
+      <img src="/resources/serverImg/back1.png" alt="" >
     </div>
     <!-- slider section -->
     <section class="slider_section ">
@@ -137,7 +144,7 @@
                         <div class="input-group" >
                         <input type="text" class="form-control bg-light border-0 small"  name="keyword"  placeholder="훈련사 검색">
                             <div class="input-group-append">
-                               <button class="btn btn-primary" id=searchIdBtn  type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                               <button class="btn btn-light" id=searchIdBtn  type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </form>
