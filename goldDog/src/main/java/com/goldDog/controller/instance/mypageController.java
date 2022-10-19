@@ -367,11 +367,11 @@ public class mypageController {
 		
 		boolean tCheck = true;
 		//훈련사인지 체크
-		if(sungminService.getTrainer(member.getM_no())!=null) {
-			log.info("훈련사로 들어옵니다"+member.getM_no());
+		if(sungminService.getTrainer(manager.getM_no())!=null) {
+			log.info("훈련사로 들어옵니다"+manager.getM_no());
 			 tCheck = true; 
 		}else {
-			log.info("미용사로 들어옵니다"+member.getM_no());
+			log.info("미용사로 들어옵니다"+manager.getM_no());
 			 tCheck = false; 
 		}
 		
@@ -381,10 +381,12 @@ public class mypageController {
 		
 		if(tCheck) {
 			TrainerVO trainer = sungminService.getMTrainer(manager.getM_no());
+			
 			result.put("t_no",""+trainer.getT_no());
+			
 		}else {
 			HairstylistVO hair = sungminService.getMhairstylist(manager.getM_no());
-			result.put("t_no",""+hair.getA_no());
+			result.put("t_no",""+hair.getH_no());
 					
 		}
 		result.put("e_no", ""+e_no);
