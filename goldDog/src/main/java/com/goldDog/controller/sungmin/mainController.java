@@ -586,7 +586,7 @@ public class mainController {
 		int result = mainService.updateTinfo(trainer);
 		
 		log.info(result+"성공했니??");
-		return "redirect:/mypage";
+		return "redirect:/manager";
 		}
 		
 		
@@ -678,7 +678,7 @@ public class mainController {
 		int result = mainService.updateHinfo(stylist);
 		
 		log.info(result+"성공했니??");
-		return "redirect:/mypage";
+		return "redirect:/manager";
 		}
 		
 		
