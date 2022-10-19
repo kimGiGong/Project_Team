@@ -101,7 +101,7 @@
                  <div class="card mb-3">
                    <div class="row g-0">
                      <div class="col-md-4">
-                      <img src="/resources/serverImg/${r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
+                      <img src="/resources/serverImg/${review[i].r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
@@ -126,7 +126,7 @@
                  <div class="card mb-3">
                    <div class="row g-0">
                      <div class="col-md-4">
-                      <img src="/resources/serverImg/${r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
+                      <img src="/resources/serverImg/${review[i].r_img}" width="120px" height="120px" style="border-radius:1.5rem;"/>
                      </div>
                      <div class="col-md-8">
                        <div class="card-body">
