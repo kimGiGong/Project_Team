@@ -403,6 +403,8 @@
 <script type="text/javascript">
 let eno = "${estimate.e_no}";
 let econ = "${estimate.e_con}";
+console.log(eno);
+console.log(econ);
 </script>
 </body>
 </html>

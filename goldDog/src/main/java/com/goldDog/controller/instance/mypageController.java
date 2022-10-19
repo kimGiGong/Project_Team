@@ -362,11 +362,17 @@ public class mypageController {
 		
 		EstimateVO estimate = sungminService.getEOneEstimate(Integer.parseInt(e_no));
 		MemberVO manager = sungminService.getOneMember(estimate.getM_no_manager());
-		TrainerVO trainer = sungminService.getMTrainer(manager.getM_no());
+		if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_TRAINER"))) {
+			TrainerVO trainer = sungminService.getMTrainer(manager.getM_no());
+			result.put("t_no",""+trainer.getT_no());
+		}else {
+			HairstylistVO hair = sungminService.getMhairstylist(manager.getM_no());
+			result.put("t_no",""+hair.getA_no());
+					
+		}
 		result.put("e_no", ""+e_no);
 		result.put("m_no",""+estimate.getM_no_puppy());
 		result.put("t_m_no",""+estimate.getM_no_manager());
-		result.put("t_no",""+trainer.getT_no());
 		result.put("t_name",""+manager.getM_nick());
 		result.put("m_name",""+member.getM_nick());
 		
@@ -387,9 +393,9 @@ public class mypageController {
     	pay.setM_no(Integer.parseInt(m_no));
     	pay.setP_order(p_order); 
     	pay.setP_name_user((p_name_user));
-    	pay.setT_no_name((t_no_name));
     	pay.setP_status(0);
     	pay.setP_amount(p_amount);
+    	pay.setT_no_name((t_no_name));
     	pay.setT_no(Integer.parseInt(t_no));
     	
     	int result = instanceService.insertPay(pay);
