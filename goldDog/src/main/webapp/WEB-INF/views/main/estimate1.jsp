@@ -148,8 +148,8 @@
         				견적요청을 취소하시겠습니까?
 	      			</div>
 	      			<div class="modal-footer">
-	        			</a> <button type="button" class="btn btn-secondary" id="deleteEst" >견적취소</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	        			</a> <button type="button" class="btn btn-info" id="deleteEst" >견적취소</button>
+	        			<button type="button" class="btn btn-dander" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
 	  		</div>

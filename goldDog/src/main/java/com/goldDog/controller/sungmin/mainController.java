@@ -840,6 +840,18 @@ public class mainController {
 		return "redirect:/member/mypage";
 	}
 	
+	@GetMapping("successPay")
+	public String successPay(@Param("e_no") int e_no) {
+		EstimateVO newEstimate = new EstimateVO();
+		//결제 완료
+		newEstimate.setE_con(2);
+		newEstimate.setE_no(e_no);
+		mainService.updateEstEcon(newEstimate);
+		
+		
+		return "redirect:/member/mypage";
+	}
+	
 	
 	
 	//*************************************훈련사 견적서 추가**********************************************

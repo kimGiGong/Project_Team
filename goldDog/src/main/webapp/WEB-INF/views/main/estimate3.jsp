@@ -240,8 +240,8 @@
         				견적요청을 취소하시겠습니까?
 	      			</div>
 	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" id="deleteEst" >견적취소</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	        			<button type="button" class="btn btn-info" id="deleteEst" >견적취소</button>
+	        			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
 	  		</div>
@@ -262,8 +262,8 @@
         				견적요청을 완료하시겠습니까?
 	      			</div>
 	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" id="endEstPro" >방문완료</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	        			<button type="button" class="btn btn-info" id="endEstPro" >방문완료</button>
+	        			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
 	  		</div>
@@ -284,8 +284,8 @@
         				서비스가 마음에 안드셨다면 완료를 누르지 마시고 고객센터에 문의해주세요..
 	      			</div>
 	      			<div class="modal-footer">
-	        			<button type="button" class="btn btn-secondary" id="endEstPro1" >방문완료</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	        			<button type="button" class="btn btn-info" id="endEstPro1" >방문완료</button>
+	        			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
 	  		</div>

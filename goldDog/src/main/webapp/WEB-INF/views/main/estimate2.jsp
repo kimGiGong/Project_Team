@@ -163,8 +163,8 @@
         				견적요청 보내시겠습니까?
 	      			</div>
 	      			<div class="modal-footer">
-	        			</a> <button type="button" class="btn btn-secondary" id="sendEst" >보내기</button>
-	        			<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+	        			</a> <button type="button" class="btn btn-info" id="sendEst" >보내기</button>
+	        			<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 	      			</div>
 	   			</div>
 	  		</div>
