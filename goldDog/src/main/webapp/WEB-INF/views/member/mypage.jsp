@@ -339,7 +339,7 @@
 						<div>
 							<h5 align="center">서비스에 만족하시나요 ?</h5>
 						</div>
-						<form id="reviewPro" action="/member/reviewPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="review" >
+						<form id="reviewPro" action="/member/reviewPro?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data" name="review" onsubmit="return checkField()">
 							<table>
 								<div class="star-rating space-x-4 mx-auto">
 									<input type="radio" id="5-stars" name="r_score" value="5" v-model="ratings" /> 
@@ -497,6 +497,10 @@
     			return false;
     		}
     		if(! inputs.r_text.value) {
+    			alert("리뷰를 입력해주세요.")
+    			return false;
+    		}
+    		if(! inputs.part_img.value) {
     			alert("리뷰를 입력해주세요.")
     			return false;
     		}
