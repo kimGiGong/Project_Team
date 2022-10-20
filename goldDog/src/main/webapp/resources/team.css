@@ -114,7 +114,7 @@ div.input-block input:focus + span.placeholder {
 	    top: 15vmin;
 	}
 }
-@media (min-height: 950px) {
+@media (min-height: 900px) {
 	
 	#stackmoney {
 	    top: 38vmin;
