@@ -48,7 +48,7 @@
 	                            <li class="nav-item">                                
 	                                <a href="#Estimate" class="nav-link ">
 	                                    <div class="triangle-right"></div>
-	                                    <i class="fas fa-home nav-icon"></i>
+	                                    <i class="fas fa-file-text nav-icon"></i>
 	                                    견적서
 	                                </a>
 	                            </li>

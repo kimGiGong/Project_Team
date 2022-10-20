@@ -43,7 +43,7 @@
 	                            <li class="nav-item">                                
 	                                <a href="#estimate_navbar" class="nav-link">
 	                                    <div class="triangle-right"></div>
-	                                    <i class="fas fa-images nav-icon"></i>
+	                                    <i class="fas fa-file-text nav-icon"></i>
 	                                    견적서
 	                                </a>
 	                            </li>
@@ -57,7 +57,7 @@
 	                            <li class="nav-item">
 	                                <a href="#area_navbar" class="nav-link">
 	                                    <div class="triangle-right"></div>
-	                                    <i class="fas fa-home nav-icon"></i>
+	                                   <i class="fas fa-location-arrow nav-icon" aria-hidden="true"></i>
 	                                    활동지역
 	                                </a>
 	                            </li>
