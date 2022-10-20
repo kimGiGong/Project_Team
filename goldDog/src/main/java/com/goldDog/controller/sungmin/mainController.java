@@ -832,8 +832,42 @@ public class mainController {
 	//견적서 e_con 4으로 업데이트 고객이 방문 완료 눌렀을때
 	@PostMapping("endEstModalMember")
 	public String endEstModalMember(@Param("e_no") int e_no) {
+		
 		EstimateVO newEstimate = new EstimateVO();
-		//훈련 방문 완료
+		int M_no_manager=mainService.getEOneEstimate(e_no).getM_no_manager();
+		
+		
+		//지금 견적서의 최종금액
+		int price =mainService.getEOneEstimate(e_no).getE_total_price();
+		boolean tCheck = true;
+		
+		
+		
+		//훈련사인지 체크
+		TrainerVO trainer =  mainService.getMTrainer(M_no_manager);
+		if(trainer !=null) {
+			log.info("훈련사로 들어옵니다"+M_no_manager);
+			 tCheck = true;
+			 int totalPrice = price+trainer.getT_salary();
+			 
+			 mainService.updateStackMoneyT(totalPrice,trainer.getT_no());
+			  
+			 
+		}else {
+			HairstylistVO hair=  mainService.getMhairstylist(M_no_manager);
+			int totalPrice = price+ hair.getH_salary();
+			log.info("미용사로 들어옵니다"+M_no_manager);
+			
+			mainService.updateStackMoneyH(totalPrice,hair.getH_no());
+			 tCheck = false;
+			 
+		}
+		
+	
+		
+		
+		
+		
 		newEstimate.setE_con(4);
 		newEstimate.setE_no(e_no);
 		mainService.updateEstEcon(newEstimate);

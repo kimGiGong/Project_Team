@@ -54,6 +54,10 @@ public interface MainMapper {
 	public int updateTinfo(TrainerVO trainer);
 	//활동지역으로 훈련사 찾기
 	public List<TrainerVO> getAreaTrainer(String addr);
+	//고객 결제시 훈련사 최종금액 업데이트
+	public int updateStackMoneyT(@Param("totalPrice") int totalPrice,@Param("t_no") int t_no);
+	
+	
 	
 	//미용사 *********************************************************
 	//미용사 한명 가져오기
@@ -76,7 +80,8 @@ public interface MainMapper {
 	public int updateHinfo(HairstylistVO hairstylist);
 	//활동지역으로 미용사 찾기
 	public List<HairstylistVO> getAreaHairstylist(String addr);
-	
+	//고객 결제시 미용사 최종금액 업데이트
+	public int updateStackMoneyH(@Param("totalPrice")int totalPrice,@Param("h_no") int h_no);
 	
 	
 	
