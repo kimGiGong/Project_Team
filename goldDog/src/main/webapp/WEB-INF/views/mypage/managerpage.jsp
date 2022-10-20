@@ -145,6 +145,15 @@
 							<a class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample${ status.index }"
 								href="#multiCollapseExample1" role="button"
 								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 님의 견적서
+														(<c:choose>
+															<c:when test="${ estimate.e_con eq '0'}">협의 대기중</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">협의 완료</c:when>
+															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">의뢰 완료</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
+															<c:when test="${ estimate.e_con eq '5'}">의뢰 종료</c:when>
+															<c:otherwise>취소됨</c:otherwise>
+														</c:choose>)
 							</a>
 							<div class="row">
 								<div class="col">
@@ -171,7 +180,7 @@
 															<c:otherwise>취소됨</c:otherwise>
 														</c:choose>
 													</th>
-													<th align="center">고객님의 전화번호</th>
+													<th align="center">고객님 번호:${ estimateMember[status.index].m_phone }</th>
 												</tr>
 											</table>
 										</div>
