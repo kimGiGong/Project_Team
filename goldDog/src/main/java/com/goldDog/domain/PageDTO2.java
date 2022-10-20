@@ -19,8 +19,8 @@ public class PageDTO2 { // 페이지 번호등 페이징 처리시 필요한 정
 		this.total = total; 
 		
 		// 한페이지에 페이지번호 10개 띄우는 기준으로 계산 
-		this.endPage = (int)(Math.ceil(cri.getPageNumber() / 10.0)) * 10; 
-		this.startPage = this.endPage - 9; 
+		this.endPage = (int)(Math.ceil(cri.getPageNumber() / 5.0)) * 5; 
+		this.startPage = this.endPage - 4; 
 		
 		int realEnd = (int)(Math.ceil((total * 1.0) / cri.getListQty())); // 전체 페이지수
 		if(realEnd < this.endPage) { // 전체페이지수보다 endPage가 크면 

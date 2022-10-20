@@ -81,7 +81,7 @@
 							<ul class="pagination justify-content-md-center">
 								<c:if test="${pager.prev}">
 									<li class="page-item">
-										<a class="page-link" href="${npager.startPage-1}" tabindex="-1">Previous</a>
+										<a class="page-link" href="/admin/QnA?pageNumber=${npager.startPage-1}" tabindex="-1">Previous</a>
 									</li>
 								</c:if>
 								<c:forEach var="num1" begin="${npager.startPage}" end="${npager.endPage}" >
@@ -91,7 +91,7 @@
 								</c:forEach>
 								<c:if test="${npager.next}">
 									<li class="page-item">
-										<a class="page-link" href="${npager.endPage+1}">Next</a>
+										<a class="page-link" href="/admin/QnA?pageNumber=${npager.endPage+1}">Next</a>
 									</li>
 								</c:if>
 							</ul>
@@ -131,7 +131,7 @@
 							<ul class="pagination justify-content-md-center">
 								<c:if test="${pager.prev}">
 									<li class="page-item">
-										<a class="page-link" href="${pager.startPage-1}" tabindex="-1">Previous</a>
+										<a class="page-link" href="/admin/QnA?pageNum=${pager.startPage-1}" tabindex="-1">Previous</a>
 									</li>
 								</c:if>
 								<c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" >
@@ -141,7 +141,7 @@
 								</c:forEach>
 								<c:if test="${pager.next}">
 									<li class="page-item">
-										<a class="page-link" href="${pager.endPage+1}">Next</a>
+										<a class="page-link" href="/admin/QnA?pageNum=${pager.endPage+1}">Next</a>
 									</li>
 								</c:if>
 							</ul>
