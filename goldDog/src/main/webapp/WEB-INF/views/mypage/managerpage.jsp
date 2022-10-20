@@ -77,13 +77,16 @@
 										  <span class="placeholder">
 										    정산 예정 금액
 										  </span>
+										  <h6>　매월 25일날 정산됩니다.</h6>
 		                            	</sec:authorize>
+		                            	
 		                            	<sec:authorize access="hasRole('ROLE_HAIR')">
 										  <input type="text" name="input-text" id="input-text"  required spellcheck="false" 
 										  	value="${ managerlist[3].h_salary != null ? managerlist[3].h_salary : '0' } 원" >
 										  <span class="placeholder">
 										    정산 예정 금액
 										  </span>
+										  <h6>　매월 25일날 정산됩니다.</h6>
 		                            	</sec:authorize>
 									  
 									</div>
