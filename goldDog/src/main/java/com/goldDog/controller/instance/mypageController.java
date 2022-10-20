@@ -318,7 +318,7 @@ public class mypageController {
     	instanceService.updateAddr( seoul,gyeonggi , m_no, "");
     	System.out.println(seoul);
     	System.out.println(gyeonggi);
-    	return "redirect:/manager";
+    	return "redirect:/manager#area_navbar";
     }
     
     
