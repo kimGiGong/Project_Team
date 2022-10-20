@@ -16,7 +16,7 @@ public class TrainerVO {
 	private String t_businessNo;
 	private int t_best;
 	private int t_career;
-	private long t_salary;
+	private int t_salary;
 	private Timestamp t_date;
 	private double t_RAvg; 
 	private int t_RTotal;

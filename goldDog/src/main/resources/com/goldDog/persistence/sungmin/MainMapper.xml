@@ -133,6 +133,11 @@
 		where m_no=#{m_no} 
 	</update>
 	
+	<!--고객 결제시 훈련사 최종금액 업데이트 -->
+	<update id="updateStackMoneyT">
+		update trainer set t_salary=#{totalPrice} where t_no=#{t_no} 
+	</update>
+	
 	
 	
 	
@@ -211,7 +216,10 @@
 		where m_no=#{m_no} 
 	</update>
 	
-
+	<!--고객 결제시 훈련사 최종금액 업데이트 -->
+	<update id="updateStackMoneyH">
+		update Hairstylist set h_salary=#{totalPrice} where h_no=#{h_no} 
+	</update>
 	
 	
 	

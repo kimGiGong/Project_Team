@@ -103,6 +103,14 @@ public class MainServiceImpl implements MainService {
 		return mapper.getAreaTrainer(addr);
 	}
 
+	@Override
+	public int updateStackMoneyT(int totalPrice, int t_no) {
+		return mapper.updateStackMoneyT(totalPrice,t_no);
+	}
+	
+
+	
+	
 	
 	
 	
@@ -159,7 +167,10 @@ public class MainServiceImpl implements MainService {
 	}
 	
 	
-	
+	@Override
+	public int updateStackMoneyH(int totalPrice, int h_no) {
+		return mapper.updateStackMoneyH(totalPrice, h_no); 
+	}
 	
 	
 	

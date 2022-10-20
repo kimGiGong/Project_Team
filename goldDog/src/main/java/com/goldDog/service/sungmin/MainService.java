@@ -48,7 +48,10 @@ public interface MainService {
 	//활동지역으로 훈련사 찾기
 	public List<TrainerVO> getAreaTrainer(String addr);
 	
+	//고객 결제시 훈련사 최종금액 업데이트
+	public int updateStackMoneyT(int totalPrice, int t_no);
 	
+
 	
 	
 	//미용사 *********************************************************
@@ -73,6 +76,9 @@ public interface MainService {
 	//활동지역으로 미용사 찾기
 	public List<HairstylistVO> getAreaHairstylist(String addr);
 	
+	//고객 결제시 훈련사 최종금액 업데이트
+	public int updateStackMoneyH(int totalPrice, int h_no);
+
 	
 	
 	
