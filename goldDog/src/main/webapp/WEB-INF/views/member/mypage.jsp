@@ -104,6 +104,15 @@
 							<a class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#multiCollapseExample${ status.index }"
 								href="#multiCollapseExample1" role="button"
 								aria-expanded="false" aria-controls="multiCollapseExample1">${ estimateMember[status.index].m_nick } 매니저 견적서
+														(<c:choose>
+															<c:when test="${ estimate.e_con eq '0'}">견적 신청</c:when>
+															<c:when test="${ estimate.e_con eq '1'}">고객결제 대기</c:when>
+															<c:when test="${ estimate.e_con eq '2'}">방문 예정</c:when>
+															<c:when test="${ estimate.e_con eq '3'}">방문 확인대기</c:when>
+															<c:when test="${ estimate.e_con eq '4'}">의뢰 종료</c:when>
+															<c:when test="${ estimate.e_con eq '5'}">의뢰 종료</c:when>
+														</c:choose>)
+								
 							</a>
 							<div class="row">
 								<div class="col">
